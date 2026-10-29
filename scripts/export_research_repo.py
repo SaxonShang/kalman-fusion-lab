@@ -171,7 +171,7 @@ def export(output):
     (provenance / "workspace.json").write_text(json.dumps(details, indent=2, ensure_ascii=False) + "\n")
     (output / "results/README.md").write_text(
         "# 归档结果与输入\n\n"
-        "只需理解和评议实验时，先读 [实验审阅说明](../docs/EXPERIMENT_REVIEW_BRIEF.md)，再看下表中的汇总 CSV 与图；不需要配置环境或重跑。\n\n"
+        "只需理解实验时，先读 [实验记录](../实验记录.md)，再看下表中的汇总 CSV 与图；不需要配置环境或重跑。\n\n"
         f"共 {len(rows)} 个执行目录、{sum(r['records'] for r in rows)} 条指标记录，包含历史阶段、回放和调试；重复记录不代表独立样本。\n\n"
         "| 路径 | 内容 |\n|---|---|\n"
         "| diagnostics/20261029_105246/ | 当前三组协方差对照；从 report.html、comparison.png 或 summary.csv 开始 |\n"

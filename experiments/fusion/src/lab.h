@@ -19,6 +19,19 @@ struct FrozenFrame {
   cv::Mat disparity;
 };
 
+// Prior of one frame pair conditioned on the anchor pose (written by Prepare).
+struct AnchorConditional {
+  int anchor_id = -1, current_id = -1;
+  Eigen::Matrix<double, DIM_STATE, DIM_STATE> covariance =
+    Eigen::Matrix<double, DIM_STATE, DIM_STATE>::Zero();
+  Eigen::Matrix<double, DIM_STATE, DIM_STATE> transition =
+    Eigen::Matrix<double, DIM_STATE, DIM_STATE>::Identity();
+  Eigen::Matrix<double, DIM_STATE, DIM_STATE> process_noise =
+    Eigen::Matrix<double, DIM_STATE, DIM_STATE>::Zero();
+  Eigen::Matrix<double, DIM_STATE, DIM_STATE> anchor_covariance =
+    Eigen::Matrix<double, DIM_STATE, DIM_STATE>::Zero();
+};
+
 struct Record {
   std::string name, method, variant, status, solver_status, covariance_convention;
   int anchor_id = -1, current_id = -1;
@@ -58,6 +71,8 @@ void WriteState(cv::FileStorage &out, const ImuStatesGroup &state);
 ImuStatesGroup ReadState(const cv::FileNode &node);
 void WriteFrame(const fs::path &cache, const FrozenFrame &frame);
 FrozenFrame ReadFrame(const fs::path &cache, int id);
+void WriteConditional(const fs::path &cache, const AnchorConditional &conditional);
+AnchorConditional ReadConditional(const fs::path &cache, int anchor_id, int current_id);
 void WriteRecord(cv::FileStorage &out, const Record &record);
 Record ReadRecord(const cv::FileNode &node);
 pcl::PointCloud<PointTypeRGB>::Ptr ToBody(const FrozenFrame &frame, const Eigen::Matrix4d &t);

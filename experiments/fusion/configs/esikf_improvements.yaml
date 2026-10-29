@@ -1,0 +1,55 @@
+# 关键帧 ESIKF 改进对照（实验记录.md 第 6 节）。同一冻结输入上并排运行全部变体；
+# legacy_* 与原实现完全相同，其余变体逐项打开 E1、E2、E4、E6、E7。E3 的观测放大倍数由静止帧对标定后，
+# scripts/esikf_eval.py calibrate 生成 esikf_calibrated.yaml（继承本文件并追加 e3_* 变体）。
+extends: model.yaml
+
+prior:
+  # 初始化窗口必须静止，否则 prepare 直接报错；不改变先验数值
+  require_static_init: true
+
+esikf:
+  variants:
+    # 原实现
+    - {name: legacy_w1, geometry_weight: 1.0}
+    - {name: legacy_w05, geometry_weight: 0.5}
+    # E1：迭代保留原始先验；旋转、平移分开判断收敛
+    - {name: e1_prior_residual, geometry_weight: 1.0, prior_residual: true,
+       stop_rotation_rad: 1.0e-4, stop_translation_m: 1.0e-4, max_iterations: 8}
+    # E2：在 E1 上改用以锚点位姿为条件的先验协方差
+    - {name: e2_anchor_prior, geometry_weight: 1.0, prior_residual: true,
+       stop_rotation_rad: 1.0e-4, stop_translation_m: 1.0e-4, max_iterations: 8,
+       prior_covariance: anchor_conditioned}
+    # E4：在 E2 上加陀螺刻度误差 1.5%（一般 MEMS 规格，事先取定，不用实测刻度）
+    - {name: e2_e4_gyro_scale, geometry_weight: 1.0, prior_residual: true,
+       stop_rotation_rad: 1.0e-4, stop_translation_m: 1.0e-4, max_iterations: 8,
+       prior_covariance: anchor_conditioned, gyro_scale_sigma: 0.015}
+    # E6：在 E2+E4 上统一亮度定义、属性距离门限 5 cm，并扫描几何权重
+    - {name: e6_photometric_w075, geometry_weight: 0.75, prior_residual: true,
+       stop_rotation_rad: 1.0e-4, stop_translation_m: 1.0e-4, max_iterations: 8,
+       prior_covariance: anchor_conditioned, gyro_scale_sigma: 0.015,
+       uniform_luminance: true, attribute_max_distance_m: 0.05}
+    - {name: e6_photometric_w05, geometry_weight: 0.5, prior_residual: true,
+       stop_rotation_rad: 1.0e-4, stop_translation_m: 1.0e-4, max_iterations: 8,
+       prior_covariance: anchor_conditioned, gyro_scale_sigma: 0.015,
+       uniform_luminance: true, attribute_max_distance_m: 0.05}
+    - {name: e6_photometric_w025, geometry_weight: 0.25, prior_residual: true,
+       stop_rotation_rad: 1.0e-4, stop_translation_m: 1.0e-4, max_iterations: 8,
+       prior_covariance: anchor_conditioned, gyro_scale_sigma: 0.015,
+       uniform_luminance: true, attribute_max_distance_m: 0.05}
+    # E7：在 E2+E4 上换几何残差模型
+    - {name: e7_ray, geometry_weight: 1.0, prior_residual: true,
+       stop_rotation_rad: 1.0e-4, stop_translation_m: 1.0e-4, max_iterations: 8,
+       prior_covariance: anchor_conditioned, gyro_scale_sigma: 0.015,
+       geometry_residual: ray}
+    - {name: e7_point_to_plane, geometry_weight: 1.0, prior_residual: true,
+       stop_rotation_rad: 1.0e-4, stop_translation_m: 1.0e-4, max_iterations: 8,
+       prior_covariance: anchor_conditioned, gyro_scale_sigma: 0.015,
+       geometry_residual: point_to_plane, attribute_max_distance_m: 0.05}
+
+  # E3：calibrate 按 from 指向的静止帧对标定结果，给 base 变体加上观测放大倍数，生成同名 e3_* 变体。
+  # 每种观测模型（点对点、光度、视线、点到面）的信息量不同，各自标定。
+  calibrated_variants:
+    - {name: e3_point_to_point, base: e2_e4_gyro_scale, from: obs_point_to_point}
+    - {name: e3_photometric_w05, base: e6_photometric_w05, from: obs_photometric_w05}
+    - {name: e3_ray, base: e7_ray, from: obs_ray}
+    - {name: e3_point_to_plane, base: e7_point_to_plane, from: obs_point_to_plane}

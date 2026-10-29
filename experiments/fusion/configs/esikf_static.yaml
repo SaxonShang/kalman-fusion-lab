@@ -1,0 +1,37 @@
+# E0 / E3：开始静止段的帧对，真实相对运动为零，标定 ESIKF 虚拟观测协方差时不需要真值。
+# IMU 初始化约在原始帧 91（第 200 个样本），同步摆动约从帧 155 开始，因此只取 96–150。
+# 与评估用的 30 组帧对（含 110→111）不重叠。
+extends: esikf_improvements.yaml
+
+pairs:
+  - {name: static_a096, anchor: 96, current: 97}
+  - {name: static_a100, anchor: 100, current: 101}
+  - {name: static_a104, anchor: 104, current: 105}
+  - {name: static_a108, anchor: 108, current: 109}
+  - {name: static_a112, anchor: 112, current: 113}
+  - {name: static_a116, anchor: 116, current: 117}
+  - {name: static_a120, anchor: 120, current: 121}
+  - {name: static_a124, anchor: 124, current: 125}
+  - {name: static_g128, anchor: 128, current: 134}
+  - {name: static_g136, anchor: 136, current: 142}
+  - {name: static_g144, anchor: 144, current: 150}
+
+esikf:
+  variants:
+    # 纯观测（K 的位姿块为 I）：输出就是点云给出的位姿，用来统计虚拟观测 R 与实际误差之比
+    - {name: obs_point_to_point, geometry_weight: 1.0, observation_only: true,
+       stop_rotation_rad: 1.0e-4, stop_translation_m: 1.0e-4, max_iterations: 8}
+    - {name: obs_photometric_w05, geometry_weight: 0.5, observation_only: true,
+       stop_rotation_rad: 1.0e-4, stop_translation_m: 1.0e-4, max_iterations: 8,
+       uniform_luminance: true, attribute_max_distance_m: 0.05}
+    - {name: obs_ray, geometry_weight: 1.0, observation_only: true,
+       stop_rotation_rad: 1.0e-4, stop_translation_m: 1.0e-4, max_iterations: 8,
+       geometry_residual: ray}
+    - {name: obs_point_to_plane, geometry_weight: 1.0, observation_only: true,
+       stop_rotation_rad: 1.0e-4, stop_translation_m: 1.0e-4, max_iterations: 8,
+       geometry_residual: point_to_plane, attribute_max_distance_m: 0.05}
+    # 对照：原实现与 E2+E4 在静止帧对上的表现
+    - {name: legacy_w1, geometry_weight: 1.0}
+    - {name: e2_e4_gyro_scale, geometry_weight: 1.0, prior_residual: true,
+       stop_rotation_rad: 1.0e-4, stop_translation_m: 1.0e-4, max_iterations: 8,
+       prior_covariance: anchor_conditioned, gyro_scale_sigma: 0.015}

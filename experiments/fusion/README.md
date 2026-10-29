@@ -2,7 +2,7 @@
 
 测试对象分为普通帧 **GICP 位姿观测 + ESKF 松耦合**，以及关键帧 **点云观测 + ESIKF 紧耦合**。静态场景保留全部有效场景点；测试目标不创建 RAFT、动态滤除线程或 3DGS 后端，也不接受后端状态反馈。相机运动和 IMU 预测仍参与测试。
 
-2026-10-29 已修正初始 P 的轴索引与 ESKF 混合量纲阻尼问题，93 项单测通过。新增固定观测/同一 P、重传播 P、P/R 敏感性三组共 960 条对照。精度并未因此全部改善；诊断结论和复现入口见 [FUSION_COVARIANCE_DIAGNOSIS.md](../../docs/FUSION_COVARIANCE_DIAGNOSIS.md)。
+2026-10-29 已修正初始 P 的轴索引与 ESKF 混合量纲阻尼问题，93 项单测通过。新增固定观测/同一 P、重传播 P、P/R 敏感性三组共 960 条对照。精度并未因此全部改善；诊断结论见 [实验记录.md 第 4 节](../../实验记录.md#4-2026-10-29-初始-p-与-eskf-求解修复)。
 
 配准模块采用 [robotic-front main 提交 `744ac2d`](https://github.com/Ben-cpy/robotic-front/commit/744ac2d993ae629b0cc44a3b1d995e04ab4fad48)，默认欧氏 GICP；投影 Stereo-GICP 作为独立对照。算法源码和适配说明见 [registration/README.md](../../modules/registration/README.md)。版本信息随实验配置保存，升级前的结果保留原样。
 
@@ -123,7 +123,7 @@ Stereo 参数见 `gicp.stereo_options`；点面、视差法向和源体素代表
 
 ESIKF 使用相同图像对和 IMU 先验，从点云重新关联并建立点级观测，不使用 GICP 位姿、GICP 的 R 或 ESKF 后验。目标点云的体素、法向、颜色梯度与立体点协方差通过生产模块计算。
 
-默认比较几何权重 `1.0`（纯几何）与 `0.5`（几何 + 光度），在配置的 `esikf.geometry_weights` 中调整。`esikf.prior_covariance_scale` 可用于独立控制 P，默认为 1。
+默认比较几何权重 `1.0`（纯几何）与 `0.5`（几何 + 光度），在配置的 `esikf.geometry_weights` 中调整。`esikf.prior_covariance_scale` 可用于独立控制 P，默认为 1。配置里写 `esikf.variants` 时改为逐个变体运行，可打开迭代先验项、锚点条件先验、观测放大、亮度与残差模型等选项；各选项、配置文件和运行顺序见 [实验记录.md 第 6 节](../../实验记录.md#6-2026-10-29-关键帧-esikf-改进-e0e7待运行)。
 
 重点查看 `esikf_iterations.csv`：对应点是否充足、H 是否退化、虚拟观测 R 和 K 是否合理、每轮修正是否收敛、最终 P 是否对称且半正定，以及相同先验下误差是否减少。未发生有效更新的案例保留为 `no_valid_update`。
 

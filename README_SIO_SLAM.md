@@ -2,13 +2,13 @@
 
 当前前端融合测试入口见 [experiments/fusion/README.md](experiments/fusion/README.md)：独立检查 GICP 及观测协方差、固定观测 ESKF 回放和关键帧 ESIKF，支持本机 FR5 静态场景数据与 IDE 断点调试。
 
-面向外部人员理解和评议实验的完整入口是 [实验审阅说明](docs/EXPERIMENT_REVIEW_BRIEF.md)，其中串联数据、设计、实际计算过程、结果和待审查假设；阅读不需要配置环境或复跑。
+实验介绍和目前最好的结果见 [README.md](README.md)；实验过程、对照、全部数值和运行方法见 [实验记录.md](实验记录.md)。
 
 已接入本机 `models/disp.onnx` 与 RAFT 模型。融合实验默认先导出模型视差缓存，再独立测试滤波；SGBM 保留为显式对照配置。使用方法与模型转换说明见 [本机配置](docs/LOCAL_SETUP.md#模型与实验数据)。
 
 GICP 已采用 `Ben-cpy/robotic-front` 的 main 提交 `744ac2d`；源码、版本记录和滤波接口适配见 [modules/registration/README.md](modules/registration/README.md)。
 
-初始协方差与 ESKF 数值求解的修复、固定观测对照和 P/R 敏感性报告见 [融合协方差诊断](docs/FUSION_COVARIANCE_DIAGNOSIS.md)。
+初始协方差与 ESKF 数值求解的修复、固定观测对照和 P/R 敏感性报告见 [实验记录.md 第 4 节](实验记录.md#4-2026-10-29-初始-p-与-eskf-求解修复)。
 
 独立卡尔曼实验仓库的整理、导出和首次上传步骤见 [PUBLISH_NEW_REPOSITORY.md](docs/PUBLISH_NEW_REPOSITORY.md)。新仓库使用面向实验的首页，并包含历史结果与跨机器复现入口；原工作区的远程配置保持不变。
 

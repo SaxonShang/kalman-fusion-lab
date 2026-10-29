@@ -37,11 +37,18 @@ struct ESIKFIterationDebug {
   Eigen::Matrix<double, 6, 6> pose_gain = Eigen::Matrix<double, 6, 6>::Zero();
   Eigen::Matrix<double, 6, 1> virtual_residual = Eigen::Matrix<double, 6, 1>::Zero();
   Eigen::Matrix<double, 6, 1> pose_correction = Eigen::Matrix<double, 6, 1>::Zero();
+  // Pose offset [δθ, δp] of this iteration's linearization point from the original prior.
+  Eigen::Matrix<double, 6, 1> prior_offset = Eigen::Matrix<double, 6, 1>::Zero();
 };
 
 struct ESIKFDebugSummary {
   bool skipped = false;
   bool converged = false;
+  // True only when the posterior was written back; otherwise the prior is kept unchanged.
+  bool updated = false;
+  // converged / max_iterations / correspondences_lost / too_few_correspondences /
+  // numerical_failure / skipped
+  std::string status = "skipped";
   int num_iters = 0;
   std::size_t final_corr = 0;
   std::size_t source_N = 0;

@@ -135,3 +135,166 @@ TEST(ImuIntegratorTest, ConstantYawRateIntegratesRotation) {
   EXPECT_NEAR(std::atan2(x_axis.y(), x_axis.x()), 1.0, 1e-3);
   sio_test::ExpectMatrixFinite(state.cov);
 }
+
+namespace {
+using Mat21 = Eigen::Matrix<double, DIM_STATE, DIM_STATE>;
+
+// 确定性的对称正定矩阵，用于协方差代数测试
+Mat21 DeterministicSpd(double seed, double scale) {
+  Mat21 a;
+  for (int r = 0; r < DIM_STATE; ++r)
+    for (int c = 0; c < DIM_STATE; ++c) a(r, c) = std::sin(seed + 0.7 * r + 1.3 * c);
+  return scale * (a * a.transpose()) + 1e-4 * Mat21::Identity();
+}
+
+Mat21 DeterministicTransition(double seed) {
+  Mat21 phi = Mat21::Identity();
+  for (int r = 0; r < DIM_STATE; ++r)
+    for (int c = 0; c < DIM_STATE; ++c) phi(r, c) += 0.1 * std::cos(seed + 0.9 * r - 0.4 * c);
+  return phi;
+}
+} // namespace
+
+TEST(ImuIntegratorTest, TransitionReproducesCovariancePropagation) {
+  ImuIntegrator integrator;
+  KeyFrameData keyframe;
+  keyframe.timestamp = 0.0;
+  keyframe.imu_states.gravity = Eigen::Vector3d(0.0, 0.0, -9.81);
+  keyframe.imu_states.vel_end = Eigen::Vector3d(0.3, 0.0, 0.0);
+  keyframe.imu_states.cov = DeterministicSpd(0.5, 1e-3);
+  const auto imu = sio_test::MakeImuSequence(
+    0.0, 41, 200.0, Eigen::Vector3d(0.5, 0.1, 9.81), Eigen::Vector3d(0.2, -0.1, 0.5));
+
+  Mat21 noise = Mat21::Zero();
+  Mat21 transition;
+  // 0.203 s 让最后一段外推也参与 Φ
+  const ImuStatesGroup state =
+    integrator.ImuPreintegrationCov(keyframe, imu, 0.203, &noise, &transition);
+  const Mat21 expected =
+    transition * keyframe.imu_states.cov * transition.transpose() + noise;
+  sio_test::ExpectMatrixNear(state.cov, expected, 1e-10);
+  EXPECT_GT((transition - Mat21::Identity()).norm(), 1e-3);
+}
+
+TEST(ImuIntegratorTest, AnchorConditionedCovarianceMatchesGaussianConditioning) {
+  const Mat21 anchor = DeterministicSpd(0.3, 1e-3);
+  const Mat21 noise = DeterministicSpd(1.1, 1e-4);
+  const Mat21 phi = DeterministicTransition(2.0);
+
+  // 联合高斯 [x_a; x_b]，x_b = Φ x_a + w，再以 x_a 的前 6 维（位姿）为条件
+  Eigen::MatrixXd joint(2 * DIM_STATE, 2 * DIM_STATE);
+  joint.topLeftCorner(DIM_STATE, DIM_STATE) = anchor;
+  joint.topRightCorner(DIM_STATE, DIM_STATE) = anchor * phi.transpose();
+  joint.bottomLeftCorner(DIM_STATE, DIM_STATE) = phi * anchor;
+  joint.bottomRightCorner(DIM_STATE, DIM_STATE) = phi * anchor * phi.transpose() + noise;
+  const Eigen::MatrixXd s_bb = joint.bottomRightCorner(DIM_STATE, DIM_STATE);
+  const Eigen::MatrixXd s_ba = joint.block(DIM_STATE, 0, DIM_STATE, 6);
+  const Eigen::MatrixXd s_aa = joint.block(0, 0, 6, 6);
+  const Eigen::MatrixXd expected = s_bb - s_ba * s_aa.ldlt().solve(s_ba.transpose());
+
+  const Mat21 actual = ConditionOnAnchorPose(anchor, phi, noise);
+  sio_test::ExpectMatrixNear(actual, expected, 1e-10);
+  sio_test::ExpectSymmetric(actual, 1e-14);
+}
+
+TEST(ImuIntegratorTest, AnchorConditionedPoseUncertaintyVanishesWithoutMotion) {
+  const Mat21 anchor = DeterministicSpd(0.7, 1e-3);
+  const Mat21 conditioned = ConditionOnAnchorPose(anchor, Mat21::Identity(), Mat21::Zero());
+  // 没有传播时当前位姿就是锚点位姿：位姿块为 0，速度等仍保留剩余不确定度
+  sio_test::ExpectMatrixNear(conditioned.block<6, 6>(0, 0), Eigen::Matrix<double, 6, 6>::Zero(),
+                             1e-12);
+  EXPECT_GT(conditioned.block<3, 3>(6, 6).trace(), 1e-6);
+}
+
+TEST(ImuIntegratorTest, GyroScaleUncertaintyGrowsWithRotationAngle) {
+  Mat21 cov = Mat21::Zero();
+  const Eigen::Matrix3d R_current =
+    Eigen::AngleAxisd(0.2, Eigen::Vector3d::UnitY()).toRotationMatrix();
+  AddGyroScaleUncertainty(cov, Eigen::Matrix3d::Identity(), R_current, 0.015);
+  const double expected = std::pow(0.015 * 0.2, 2);
+  sio_test::ExpectMatrixNear(cov.block<3, 3>(0, 0), Eigen::Matrix3d::Identity() * expected, 1e-15);
+  EXPECT_DOUBLE_EQ(cov.block<18, 18>(3, 3).norm(), 0.0);
+
+  Mat21 unchanged = Mat21::Zero();
+  AddGyroScaleUncertainty(unchanged, Eigen::Matrix3d::Identity(), Eigen::Matrix3d::Identity(), 0.015);
+  AddGyroScaleUncertainty(unchanged, Eigen::Matrix3d::Identity(), R_current, 0.0);
+  EXPECT_DOUBLE_EQ(unchanged.norm(), 0.0);
+}
+
+TEST(ImuIntegratorTest, NoiseParamsDriveRotationVariance) {
+  for (const double sigma : {1e-3, 2e-3}) {
+    ImuIntegrator integrator;
+    ImuNoiseParams noise;
+    noise.gyro_noise_density = sigma;
+    noise.gyro_random_walk = 1e-12; // 去掉零偏随机游走对姿态方差的贡献
+    integrator.SetNoiseParams(noise);
+    KeyFrameData keyframe;
+    keyframe.timestamp = 0.0;
+    keyframe.imu_states.gravity = Eigen::Vector3d(0.0, 0.0, -9.81);
+    keyframe.imu_states.cov.setZero();
+    const auto imu = sio_test::MakeStaticImu(0.0, 101, 100.0);
+    const ImuStatesGroup state = integrator.ImuPreintegrationCov(keyframe, imu, 1.0);
+    // 静止、零初始协方差：姿态方差为陀螺白噪声的积分 σ² T
+    EXPECT_NEAR(state.cov(0, 0), sigma * sigma, 1e-3 * sigma * sigma);
+    EXPECT_NEAR(state.cov(2, 2), sigma * sigma, 1e-3 * sigma * sigma);
+  }
+}
+
+TEST(ImuIntegratorTest, InitHandlesUpsideDownStaticSensor) {
+  ImuIntegrator integrator;
+  const Eigen::Vector3d upside_down(0.0, 0.0, -9.81);
+  const auto imu = sio_test::MakeStaticImu(1.0, 100, 100.0, upside_down);
+  ImuInitReport report;
+  const ImuStatesGroup state = integrator.ImuInit(imu, &report);
+  // 比力方向必须映到世界系 +z，重力补偿后加速度为零
+  sio_test::ExpectMatrixNear(state.rot_end * upside_down, Eigen::Vector3d(0.0, 0.0, 9.81), 1e-9);
+  sio_test::ExpectMatrixNear(state.rot_end * upside_down + state.gravity, Eigen::Vector3d::Zero(),
+                             1e-9);
+  EXPECT_TRUE(report.static_ok);
+  EXPECT_EQ(report.samples, 100);
+}
+
+TEST(ImuIntegratorTest, InitReportFlagsRotatingWindow) {
+  ImuIntegrator integrator;
+  std::deque<sensor_msgs::msg::Imu::SharedPtr> imu;
+  for (int i = 0; i < 100; ++i) {
+    const double rate = (i % 2 == 0) ? 0.2 : -0.2;
+    imu.push_back(sio_test::MakeImu(1.0 + 0.01 * i, Eigen::Vector3d(0.0, 0.0, 9.81),
+                                    Eigen::Vector3d(rate, 0.0, 0.0)));
+  }
+  ImuInitReport report;
+  integrator.ImuInit(imu, &report);
+  EXPECT_FALSE(report.static_ok);
+  EXPECT_NEAR(report.gyro_max_deviation_rad_s, 0.2, 1e-9);
+}
+
+TEST(ImuIntegratorTest, InitObservabilityCovarianceSeparatesTiltAndYaw) {
+  ImuStatesGroup state;
+  state.rot_end = (Eigen::AngleAxisd(0.3, Eigen::Vector3d::UnitZ()) *
+                   Eigen::AngleAxisd(0.4, Eigen::Vector3d::UnitX())).toRotationMatrix();
+  ImuInitReport report;
+  report.samples = 400;
+  report.gravity_norm = 9.81;
+  report.gyro_std_rad_s = Eigen::Vector3d::Constant(1e-3);
+  report.accel_std = Eigen::Vector3d::Constant(0.02);
+  const InitialCovarianceParams params;
+  const Mat21 cov = ImuIntegrator::ObservabilityInitialCovariance(state, report, params);
+
+  const double accel_mean_noise = report.accel_std.norm() / std::sqrt(3.0 * report.samples);
+  const double tilt_var = (params.accel_bias_sigma * params.accel_bias_sigma
+                           + accel_mean_noise * accel_mean_noise) / (9.81 * 9.81);
+  // 机体系姿态协方差转回世界系后：x、y 为倾斜，z 为航向
+  const Eigen::Matrix3d world =
+    state.rot_end * cov.block<3, 3>(0, 0) * state.rot_end.transpose();
+  const Eigen::Vector3d expected_diag(tilt_var, tilt_var,
+                                      params.yaw_sigma_rad * params.yaw_sigma_rad);
+  sio_test::ExpectMatrixNear(world, Eigen::Matrix3d(expected_diag.asDiagonal()), 1e-12);
+  sio_test::ExpectMatrixNear(cov.block<3, 3>(3, 3),
+    Eigen::Matrix3d::Identity() * params.position_sigma_m * params.position_sigma_m, 1e-15);
+  sio_test::ExpectMatrixNear(cov.block<3, 3>(6, 6),
+    Eigen::Matrix3d::Identity() * params.velocity_sigma_mps * params.velocity_sigma_mps, 1e-15);
+  const double bias_var = 1e-6 / 400.0 + params.gyro_bias_floor_rad_s * params.gyro_bias_floor_rad_s;
+  EXPECT_NEAR(cov(9, 9), bias_var, 1e-15);
+  sio_test::ExpectSymmetric(cov, 1e-15);
+  EXPECT_GT(Eigen::SelfAdjointEigenSolver<Mat21>(cov).eigenvalues().minCoeff(), 0.0);
+}

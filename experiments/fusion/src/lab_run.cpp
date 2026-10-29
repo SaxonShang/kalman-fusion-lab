@@ -1,10 +1,15 @@
 #include "lab.h"
 #include "color_icp.h"
+#include "imu_integrator.h"
 #include "sio_pipeline_helpers.h"
 #include "utils.h"
 #include <chrono>
+#include <cmath>
 #include <iostream>
+#include <set>
 #include <sstream>
+#include <string>
+#include <vector>
 
 namespace fusion_lab {
 namespace {
@@ -162,12 +167,89 @@ void RunEskf(const YAML::Node &cfg, const fs::path &output) {
   out << "]";
 }
 
+namespace {
+// One ESIKF configuration compared on identical inputs. Defaults reproduce the original filter.
+struct EsikfVariant {
+  std::string name;
+  double geometry_weight = 1.0;
+  std::string prior_covariance = "absolute"; // absolute | anchor_conditioned
+  double prior_covariance_scale = 1.0;
+  double gyro_scale_sigma = 0.0;
+  ESIKFOptions options;
+};
+
+std::vector<EsikfVariant> EsikfVariants(const YAML::Node &settings) {
+  std::vector<EsikfVariant> variants;
+  const double default_scale = settings["prior_covariance_scale"].as<double>(1.0);
+  if (!settings["variants"]) {
+    // Older configurations: one original-filter variant per geometry weight, same names as before.
+    for (const auto &weight_node : settings["geometry_weights"]) {
+      EsikfVariant variant;
+      variant.geometry_weight = weight_node.as<double>();
+      variant.prior_covariance_scale = default_scale;
+      std::ostringstream name; name << "geometry_weight_" << variant.geometry_weight;
+      variant.name = name.str();
+      variants.push_back(variant);
+    }
+  } else {
+    for (const auto &node : settings["variants"]) {
+      EsikfVariant variant;
+      variant.name = node["name"].as<std::string>();
+      variant.geometry_weight = node["geometry_weight"].as<double>(1.0);
+      variant.prior_covariance = node["prior_covariance"].as<std::string>("absolute");
+      variant.prior_covariance_scale = node["prior_covariance_scale"].as<double>(default_scale);
+      variant.gyro_scale_sigma = node["gyro_scale_sigma"].as<double>(0.0);
+      auto &o = variant.options;
+      o.prior_residual = node["prior_residual"].as<bool>(false);
+      o.observation_only = node["observation_only"].as<bool>(false);
+      o.stop_rotation_rad = node["stop_rotation_rad"].as<double>(0.0);
+      o.stop_translation_m = node["stop_translation_m"].as<double>(0.0);
+      o.max_iterations = node["max_iterations"].as<int>(8);
+      o.observation_scale_rotation = node["observation_scale_rotation"].as<double>(1.0);
+      o.observation_scale_translation = node["observation_scale_translation"].as<double>(1.0);
+      o.uniform_luminance = node["uniform_luminance"].as<bool>(false);
+      o.attribute_max_distance_m = node["attribute_max_distance_m"].as<double>(0.0);
+      const auto residual = node["geometry_residual"].as<std::string>("point_to_point");
+      if (residual == "ray") {
+        o.geometry_residual = ESIKFOptions::GeometryResidual::Ray;
+      } else if (residual == "point_to_plane") {
+        o.geometry_residual = ESIKFOptions::GeometryResidual::PointToPlane;
+      } else {
+        Require(residual == "point_to_point",
+                "geometry_residual must be point_to_point, ray or point_to_plane");
+      }
+      Require(variant.prior_covariance == "absolute" ||
+              variant.prior_covariance == "anchor_conditioned",
+              "prior_covariance must be absolute or anchor_conditioned");
+      Require(std::isfinite(variant.prior_covariance_scale) && variant.prior_covariance_scale > 0,
+              "Prior covariance scale must be positive");
+      Require(variant.gyro_scale_sigma >= 0, "gyro_scale_sigma must be non-negative");
+      Require(o.max_iterations > 0, "max_iterations must be positive");
+      Require(o.observation_scale_rotation > 0 && o.observation_scale_translation > 0,
+              "Observation scales must be positive");
+      Require(o.stop_rotation_rad >= 0 && o.stop_translation_m >= 0 &&
+              o.attribute_max_distance_m >= 0, "Thresholds must be non-negative");
+      variants.push_back(variant);
+    }
+  }
+  std::set<std::string> names;
+  for (const auto &variant : variants) {
+    Require(std::isfinite(variant.geometry_weight) && variant.geometry_weight >= 0 &&
+            variant.geometry_weight <= 1, "Invalid ESIKF geometry weight");
+    Require(names.insert(variant.name).second, "Duplicate ESIKF variant name: " + variant.name);
+  }
+  Require(!variants.empty(), "No ESIKF variants configured");
+  return variants;
+}
+} // namespace
+
 void RunEsikf(const YAML::Node &cfg, const fs::path &output) {
   const fs::path params = cfg["params_file"].as<std::string>();
   const fs::path cache = cfg["cache_dir"].as<std::string>();
   const auto cam = sio_utils::LoadInferenceCameraIntrinsics(params);
   const auto tbc = sio_utils::LoadImuCameraExtrinsic(params);
   const auto settings = cfg["esikf"];
+  const auto variants = EsikfVariants(settings);
   FeatureProcessor features;
   features.SetCameraIntrinsics(cam);
   features.SetBodyFromCameraExtrinsic(tbc.block<3, 3>(0, 0), tbc.block<3, 1>(0, 3));
@@ -195,35 +277,40 @@ void RunEsikf(const YAML::Node &cfg, const fs::path &output) {
     std::vector<Eigen::Vector3d> gradients, normals;
     features.PrepareColorGradient(with_normals, gradients);
     for (const auto &p : *with_normals) normals.emplace_back(p.normal_x, p.normal_y, p.normal_z);
-    for (const auto &weight_node : settings["geometry_weights"]) {
-      const auto weight = weight_node.as<double>();
-      Require(std::isfinite(weight) && weight >= 0 && weight <= 1, "Invalid ESIKF geometry weight");
+    for (const auto &variant : variants) {
       auto r = Base(pair, anchor, current);
       r.method = "esikf";
-      const double prior_scale = settings["prior_covariance_scale"].as<double>(1.0);
-      Require(std::isfinite(prior_scale) && prior_scale > 0, "Prior covariance scale must be positive");
-      r.prior.cov *= prior_scale;
+      r.variant = variant.name;
+      if (variant.prior_covariance == "anchor_conditioned") {
+        // Same mean; covariance of the current state given the anchor pose (see Prepare).
+        r.prior.cov = ReadConditional(cache, anchor.id, current.id).covariance;
+      }
+      r.prior.cov *= variant.prior_covariance_scale;
+      AddGyroScaleUncertainty(r.prior.cov, anchor.prior.rot_end, current.prior.rot_end,
+                              variant.gyro_scale_sigma);
       r.result = r.prior;
-      std::ostringstream name; name << "geometry_weight_" << weight; r.variant = name.str();
+      estimator.SetESIKFOptions(variant.options);
       const auto start = Clock::now();
       estimator.ESIKF(source_body, tree, gradients, normals, r.result,
-        anchor.prior.rot_end, anchor.prior.pos_end, {}, target_conf, weight,
+        anchor.prior.rot_end, anchor.prior.pos_end, {}, target_conf, variant.geometry_weight,
         nullptr, tbc, &r.esikf_debug, settings["voxel_m"].as<double>(), source_cov, target_cov,
         settings["max_correspondence_m"].as<double>(), anchor.depth, cam);
       r.elapsed_ms = Milliseconds(start);
       r.inliers = static_cast<int>(r.esikf_debug.final_corr);
       r.iterations = r.esikf_debug.num_iters; r.converged = r.esikf_debug.converged;
+      r.solver_status = r.esikf_debug.status;
       if (!r.esikf_debug.iterations.empty()) {
         const auto &last = r.esikf_debug.iterations.back();
         r.observation_covariance = last.observation_covariance;
         r.covariance_native = last.observation_covariance;
         r.covariance_from_hessian = true;
       }
-      r.valid = r.iterations > 0 && !r.esikf_debug.skipped && HealthyState(r.result) &&
+      r.valid = r.esikf_debug.updated && HealthyState(r.result) &&
                 PositiveCovariance(r.observation_covariance);
       r.status = r.valid ? (r.converged ? "updated" : "updated_not_converged") : "no_valid_update";
       WriteRecord(out, r);
-      std::cout << "[esikf] " << r.name << ' ' << r.variant << ' ' << r.status << '\n';
+      std::cout << "[esikf] " << r.name << ' ' << r.variant << ' ' << r.status
+                << " (" << r.solver_status << ")\n";
     }
   }
   out << "]";

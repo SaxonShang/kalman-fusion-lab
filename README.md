@@ -1,84 +1,65 @@
 # Kalman Fusion Lab · 前端卡尔曼滤波实验
 
-我们正在调试双目视觉与 IMU 前端的 **ESKF 普通帧融合**和 **ESIKF 关键帧紧耦合**，重点检查先验协方差 P、视觉观测协方差 R、卡尔曼增益 K 与实际误差之间的关系。
+我们在调试 SIO_SLAM 前端的两条卡尔曼滤波路径：普通帧用 GICP 位姿观测做 **ESKF 松耦合**，关键帧用点云观测做 **ESIKF 紧耦合**。数据是 FR5 机械臂带 ZED X 的 6 条高速录制（平移 0.5 m/s，旋转 50 °/s），机械臂给出逐帧位姿真值。目标是弄清滤波器的先验协方差 P、视觉观测协方差 R 和卡尔曼增益 K 是否与实际误差相符，再改进融合精度。
 
-**这个仓库供外部人员理解实验、审查设计与结论，并提出代码修改建议。阅读不需要安装环境、下载原始数据或运行程序。** 实验代码和原始记录作为论述的依据保留；复跑步骤放在技术附录。
+实验过程、对照设计、全部数值和运行方法见 **[实验记录.md](实验记录.md)**。
 
-**当前结论（2026-10-29）：修复了初始 P 的状态索引与 ESKF 混合量纲阻尼两处问题；93 项单测通过，新增 960 条对照记录数值有效，但旋转精度仍有退化。滤波数值正确性已改善，噪声标定与锚点相关性仍待验证。**
+## 实验怎么做
 
-## 从哪里开始
-
-建议先读 [实验审阅说明](docs/EXPERIMENT_REVIEW_BRIEF.md)：它集中解释研究问题、数据、算法实际计算过程、对照逻辑、已有证据和待审查疑点。再按需要查看下列文档，不必先遍历全部代码和日志。
-
-| 想了解什么 | 入口 |
-|---|---|
-| 完整理解本轮实验，并知道可以对哪里提建议 | **[实验审阅说明](docs/EXPERIMENT_REVIEW_BRIEF.md)** |
-| 为什么做、比较什么、控制哪些变量 | [实验设计](docs/EXPERIMENT_DESIGN.md) |
-| 用的什么数据、坐标系与时间如何处理 | [FR5 数据说明](docs/FR5_DATASET.md) |
-| 已经做了什么、还缺什么 | [进展与待解决问题](docs/EXPERIMENT_PROGRESS.md) |
-| 修复依据、实际结果与限制 | [协方差诊断](docs/FUSION_COVARIANCE_DIAGNOSIS.md) |
-| 每次实验的配置、CSV、完整 P/R/K 和迭代记录 | [结果目录](results/README.md)、[实验清单](results/RUNS.csv) |
-| 生产模块和实验驱动如何连接 | [Fusion Lab 使用说明](experiments/fusion/README.md) |
-
-## 实验在做什么
-
-录制场景中物体静止，相机随机械臂运动。普通帧先独立运行 GICP，取得位姿与 Hessian 协方差，再冻结同一观测和 IMU 先验回放 ESKF；关键帧 ESIKF 则直接读取点云和同一先验。GT 只用于结果评估。
+- **帧对**：每条录制固定 5 组帧对（开始静止、同步摆动、主运动相邻帧、主运动间隔 6 帧、结束静止），共 30 组，每组独立运行。
+- **IMU 先验**：静止段初始化后纯惯性传播，冻结每帧的状态和完整 21×21 P。
+- **普通帧**：独立 GICP（欧氏 GICP 与投影 Stereo-GICP，来自 robotic-front `744ac2d`）给出锚点到当前帧的位姿与 Hessian 协方差，冻结后回放 ESKF。
+- **关键帧**：ESIKF 直接读点云和同一先验，逐轮点级关联与更新。
+- **视差**：用户提供的 ONNX 模型经 TensorRT 推理；不运行动态滤除、RAFT 和后端。
+- **评价**：以锚点估计为条件的相对位姿误差，取 30 组 RMSE；真值只在报告中使用。
 
 ```mermaid
 flowchart LR
-  Stereo[录制双目图像] --> Disp[固定模型视差缓存]
-  Disp --> Cloud[冻结点云]
-  IMU[录制 IMU] --> Prior[纯惯性先验与完整 P]
+  Stereo[双目图像] --> Disp[模型视差]
+  Disp --> Cloud[点云]
+  IMU[IMU] --> Prior[纯惯性先验与 P]
   Cloud --> GICP[独立 GICP]
   Prior --> GICP
-  GICP --> Obs[冻结位姿观测与完整 R]
-  Obs --> ESKF[ESKF 与 P/R 对照]
+  GICP --> ESKF[普通帧 ESKF]
   Prior --> ESKF
-  Cloud --> ESIKF[独立 ESIKF]
+  Cloud --> ESIKF[关键帧 ESIKF]
   Prior --> ESIKF
   ESKF --> Report[误差与协方差诊断]
   ESIKF --> Report
-  GT[相机位姿 GT] --> Report
+  GT[机械臂真值] --> Report
 ```
 
-本轮实验不启动动态点滤除、RAFT、后端优化或后验反馈。完整 SIO_SLAM 源码仍保留，供追踪模块来源；完整系统介绍见 [SIO_SLAM 项目说明](README_SIO_SLAM.md)。
+## 目前最好的结果（2026-10-29）
 
-## 已得到的结果
+30 组固定帧对的条件 RMSE：
 
-六条 FR5 + ZED X 录制：`up / forward / right / yaw_left / pitch_up / roll_right`；4186 对原图，跳过每条前 60 帧后保留 3826 对图像和 23884 个 IMU 样本。每条选定五组帧对，使用相同输入独立比较算法。
+| 路径 | 配置 | 平移 (mm) | 旋转 (°) |
+|---|---|---:|---:|
+| IMU 先验（基准） | 纯惯性传播 | 25.75 | 0.0596 |
+| 普通帧：欧氏 GICP → ESKF | 默认 P、R | 18.83 | 0.466 |
+| 普通帧：Stereo-GICP → ESKF | 默认 P、R | 22.02 | 0.147 |
+| 关键帧：ESIKF | 默认，几何权重 0.5 | 22.73 | 0.375 |
+| 普通帧：欧氏 GICP → ESKF（诊断） | P×1e-4、R×100000 | **15.14** | **0.0595** |
 
-下面是 **30 组固定帧对的 ESKF R×1 条件 RMSE**，单位为 mm / °；不是完整轨迹 ATE。
+- 默认配置下，视觉融合降低了平移误差，但旋转比 IMU 先验差 2.5–8 倍。原因是滤波器用的绝对先验 P（旋转约 6°）远大于视觉 R（约 0.005–0.08°），几乎完全相信视觉，而视觉的实际旋转误差比 IMU 大。
+- 最后一行是灵敏度诊断中事先固定的 6 个 R 档位之一，为其中最好的一档：说明 P、R 量级合理后平移和旋转能同时不劣于 IMU 先验，但它是事后挑出的，不是可用的默认配置。
+- roll_right 结束静止段一组（纯惯性积分约 20 s，先验差 120 mm）占先验平移 RMSE 平方和的约 72%；去掉这一组，先验为 13.74 mm。
+- 这些是固定帧对的条件误差，不是完整轨迹 ATE。
 
-| 观测来源 | 原实现 | 仅修复求解、P 冻结 | 再修复初始 P 并重传播 |
-|---|---:|---:|---:|
-| 欧氏 GICP → ESKF | 18.812 / 0.36887 | 18.887 / 0.47008 | 18.832 / 0.46620 |
-| Stereo-GICP → ESKF | 22.016 / 0.09395 | 22.021 / 0.14733 | 22.021 / 0.14732 |
+## 下一步
 
-同批 IMU 先验为 **25.754 mm / 0.05961°**。修复后 GICP 观测保持一致；旧阻尼曾意外压低视觉角度增益。当前 P/R 的量级使融合接近相信视觉观测，数值检查通过并不意味着精度合格。
+关键帧 ESIKF 的 E0–E7 改进已写好，待 Linux 端运行：迭代保留先验、以锚点位姿为条件的先验协方差、用静止帧对标定观测协方差、陀螺刻度误差、初始化修正、光度一致性、一维几何残差。改动内容与 6 条运行命令见 [实验记录.md 第 6 节](实验记录.md#6-2026-10-29-关键帧-esikf-改进-e0e7待运行)。
 
-![固定观测、求解器和初始协方差对照](results/diagnostics/20261029_105246/comparison.png)
+## 文档与代码
 
-## 希望审阅者帮助判断什么
-
-1. 当前观测来自锚点到当前帧的配准，滤波却使用长期绝对惯性 P；是否需要在观测模型中显式计入锚点相关性？
-2. 初始 P、代码内实际使用的 IMU 噪声和 GICP 的 Hessian R，其量级与坐标约定是否合理？
-3. 独立 ESIKF 的重线性化、先验约束和状态注入是否完整？
-
-欢迎基于具体函数、公式或现有记录提出修改方案；不要求审阅者先运行实验。各疑点的已知事实与未验证部分见 [审阅问题表](docs/EXPERIMENT_REVIEW_BRIEF.md#希望外部人员审查的问题)。
-
-## 直接查看证据
-
-先看 [汇总误差表](results/diagnostics/20261029_105246/summary.csv)、[逐轴 P/R 与实际 K](results/diagnostics/20261029_105246/covariance_audit.csv) 和上面的对照图；需追查单个案例时，再按 [controls.json](results/controls.json) 定位逐次报告。HTML 是附加的交互视图，主要论述、表格和图均可直接在 GitHub 阅读。
-
-## 代码与来源
-
-- 滤波核心：[src/state_estimater.cpp](src/state_estimater.cpp)；状态与初始 P：[include/data.h](include/data.h)。
-- 实验驱动：[experiments/fusion/src](experiments/fusion/src)；报告：[scripts/fusion_report.py](scripts/fusion_report.py)；P/R 对照：[scripts/fusion_audit.py](scripts/fusion_audit.py)。
-- 配准采用 [Ben-cpy/robotic-front main 的固定提交 `744ac2d`](https://github.com/Ben-cpy/robotic-front/commit/744ac2d993ae629b0cc44a3b1d995e04ab4fad48)，本地滤波边界的协方差约定适配有有限差分测试；见 [模块说明](modules/registration/README.md)。
-- 数据格式与采集流程：[SaxonShang/Fr5_recording 的 high-speed 分支](https://github.com/SaxonShang/Fr5_recording/tree/high-speed)。本次录制的索引、IMU、GT、标定与数据哈希在 `results/inputs/`；原始图像需另行取得。
-- 用户提供的 ONNX 身份及转换验证在 `results/models/`；54 帧模型视差保存在 `results/disparity/`。ONNX 权重、设备相关 `.plan` 和编译产物由本地准备步骤生成。
-- 本仓库从 SIO_SLAM 工作区导出；原始基点、代码差异、历史实现和所有归档文件的校验值见 `results/provenance/` 和 `results/SHA256SUMS`。来源与已有授权文件见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
-
-## 技术附录
-
-需要自行检查环境、重建报告或运行程序时，再参考 [复现步骤](docs/REPRODUCING.md) 和 [Fusion Lab 操作说明](experiments/fusion/README.md)。这些步骤不是理解和审阅实验的前提。
+| 内容 | 位置 |
+|---|---|
+| 实验过程、对照、全部数值、运行方法 | [实验记录.md](实验记录.md) |
+| 数据、坐标系与时间 | [docs/FR5_DATASET.md](docs/FR5_DATASET.md) |
+| 环境与复现 | [docs/REPRODUCING.md](docs/REPRODUCING.md)、[docs/LOCAL_SETUP.md](docs/LOCAL_SETUP.md) |
+| 实验驱动与配置 | [experiments/fusion/](experiments/fusion/README.md) |
+| 滤波核心 | [src/state_estimater.cpp](src/state_estimater.cpp)、[src/imu_integator.cpp](src/imu_integator.cpp)、[include/data.h](include/data.h) |
+| 配准模块 | [modules/registration/](modules/registration/README.md) |
+| 实验结果与来源记录 | [results/](results/README.md) |
+| SIO_SLAM 完整系统介绍 | [README_SIO_SLAM.md](README_SIO_SLAM.md) |
+| 第三方来源与授权 | [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) |

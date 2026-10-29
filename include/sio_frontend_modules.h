@@ -207,6 +207,63 @@ private:
 // IMU 预积分 — 见 imu_integrator.h
 
 /**
+ * @brief ESIKF 的可选行为。默认值与原实现完全一致；实验按变体逐项打开，便于在同一输入上对照。
+ */
+struct ESIKFOptions {
+  /// 几何残差模型：原三维点对点；沿目标视线的一维残差；沿目标法向的点到面残差。
+  enum class GeometryResidual { PointToPoint, Ray, PointToPlane };
+
+  /// true：每轮 x_{j+1} = x_pred ⊞ K(r_v + H e_j)，e_j = x_j ⊟ x_pred，保留原始先验；
+  /// false：原实现每轮直接注入 K r_v，迭代越多越接近纯观测解。
+  bool prior_residual = false;
+  /// true：位姿直接取虚拟观测（K 的位姿块为 I，其余状态不改），只用于标定观测协方差。
+  bool observation_only = false;
+  /// 分量停止阈值；两者均大于 0 时启用，否则沿用原来的混合范数 ‖[δθ, δp]‖ < 1e-3。
+  double stop_rotation_rad = 0.0;
+  double stop_translation_m = 0.0;
+  int max_iterations = 8;
+  /// 虚拟观测协方差旋转 / 平移块的放大倍数：R ← D R D，D = diag(√s_r I₃, √s_t I₃)。
+  double observation_scale_rotation = 1.0;
+  double observation_scale_translation = 1.0;
+  /// true：光度残差与颜色梯度同用 RGB 均值亮度；false：残差沿用 BT.709 权重（与梯度不一致）。
+  bool uniform_luminance = false;
+  /// 目标颜色、梯度、法向取自最近的稀疏目标点；该点离几何目标超过此距离 (m) 时不用这些属性。
+  /// 小于等于 0 时不检查（原实现）。
+  double attribute_max_distance_m = 0.0;
+  GeometryResidual geometry_residual = GeometryResidual::PointToPoint;
+};
+
+/** @brief ESIKF 单轮状态更新结果（协方差不在此更新，只在迭代结束时用最后一轮 K、R 更新）。 */
+struct EsikfStepResult {
+  ImuStatesGroup state;                                       ///< 本轮之后的名义状态
+  Eigen::Matrix<double, DIM_STATE, 6> gain =
+    Eigen::Matrix<double, DIM_STATE, 6>::Zero();              ///< 本轮 K
+  Eigen::Matrix<double, 6, 1> pose_step =
+    Eigen::Matrix<double, 6, 1>::Zero();                      ///< 相对上一轮的 [δθ, δp]
+  Eigen::Matrix<double, 6, 1> prior_offset =
+    Eigen::Matrix<double, 6, 1>::Zero();                      ///< 本轮开始时相对原始先验的 [δθ, δp]
+  bool ok = false;
+};
+
+/**
+ * @brief ESIKF 单轮更新（与点云无关，便于单测）。
+ *
+ * 误差状态为 [δθ_body, δp_world, δv, δbg, δba, δg, ...]，H 只选前 6 维。K = P Hᵀ (H P Hᵀ + R)⁻¹，
+ * P 固定取原始先验 prior.cov。
+ * - prior_residual=false：x_{j+1} = x_j ⊞ K r_v（原实现）；
+ * - prior_residual=true：x_{j+1} = x_pred ⊞ K (r_v + H e_j)，与线性情形的闭式卡尔曼更新一致；
+ * - observation_only=true：位姿取 x_j ⊞ r_v，其余状态不变。
+ * @param prior 原始先验（均值与 P）
+ * @param current 本轮线性化点 x_j
+ * @param virtual_residual r_v = −H_obs⁻¹ b_obs，在 x_j 处的位姿高斯牛顿步
+ * @param observation_covariance 虚拟观测协方差 R
+ */
+EsikfStepResult EsikfIterationStep(const ImuStatesGroup &prior, const ImuStatesGroup &current,
+                                   const Eigen::Matrix<double, 6, 1> &virtual_residual,
+                                   const Eigen::Matrix<double, 6, 6> &observation_covariance,
+                                   bool prior_residual, bool observation_only);
+
+/**
  * @brief 融合状态估计：关键帧紧耦合 ESIKF / 普通帧松耦合 ESKF。
  *
  * 观测关联见 BuildObservationSubclouds（欧氏）与
@@ -397,6 +454,20 @@ public:
                       const Eigen::Matrix<double, 6, 6> &R_gicp,
                       Eigen::Matrix<double, DIM_STATE, DIM_STATE> *flow_gate_cov = nullptr,
                       ESKFDebugSummary *debug_out = nullptr);
+
+  /** @brief 设置 ESIKF 可选行为；不设置时保持原实现。 */
+  void SetESIKFOptions(const ESIKFOptions &options) { esikf_options_ = options; }
+  const ESIKFOptions &GetESIKFOptions() const { return esikf_options_; }
+
+  /**
+   * @brief 视线残差使用的相机光心，表达在目标（锚点机体）系。ESIKF 每次调用时按 T_imu_cam 设置；
+   *        单独调用 BuildPointObservationFactor 时可手动设置。
+   */
+  void SetRayOriginInTarget(const Eigen::Vector3d &origin) { ray_origin_in_target_ = origin; }
+
+private:
+  ESIKFOptions esikf_options_;
+  Eigen::Vector3d ray_origin_in_target_ = Eigen::Vector3d::Zero();
 };
 
 /** @brief 点云法向/颜色梯度/立体点协方差与欧氏对应搜索。 */

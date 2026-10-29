@@ -8,6 +8,7 @@
 #include <cmath>
 #include <limits>
 #include <stdexcept>
+#include <string>
 #include <pcl/filters/voxel_grid.h>
 #include <rclcpp/rclcpp.hpp>
 
@@ -288,7 +289,12 @@ void StateEstimator::BuildProjectiveObservationSubclouds(
       std::vector<float> nn_dist(1);
       if (target_kdtree->nearestKSearch(tgt_pt, 1, nn_idx, nn_dist) > 0) {
         const int ti = nn_idx[0];
-        if (ti >= 0 && ti < static_cast<int>(target_cloud->size())) {
+        // 属性来自最近的稀疏目标点；离几何目标过远时不借用其颜色、梯度和法向
+        const double gate = esikf_options_.attribute_max_distance_m;
+        const bool attribute_near = gate <= 0.0 || nn_dist[0] <= gate * gate;
+        if (!attribute_near) {
+          normal = Eigen::Vector3d::Zero();
+        } else if (ti >= 0 && ti < static_cast<int>(target_cloud->size())) {
           tgt_pt.r = target_cloud->points[ti].r;
           tgt_pt.g = target_cloud->points[ti].g;
           tgt_pt.b = target_cloud->points[ti].b;
@@ -365,7 +371,12 @@ bool StateEstimator::BuildPointObservationFactor(
     const Eigen::Matrix3d *source_cov,
     const Eigen::Matrix3d *target_cov) const {
 
-  static const Eigen::Vector3d rgb_w(0.2126, 0.7152, 0.0722);
+  // 颜色梯度（FeatureProcessor::PrepareColorGradient）按 RGB 均值计算亮度；
+  // uniform_luminance 打开时残差也用均值，否则沿用原来的 BT.709 权重。
+  static const Eigen::Vector3d kRec709Weights(0.2126, 0.7152, 0.0722);
+  static const Eigen::Vector3d kUniformWeights = Eigen::Vector3d::Constant(1.0 / 3.0);
+  const Eigen::Vector3d &rgb_w =
+      esikf_options_.uniform_luminance ? kUniformWeights : kRec709Weights;
 
   factor = PointObservationFactor();
 
@@ -426,6 +437,26 @@ bool StateEstimator::BuildPointObservationFactor(
   factor.W_geo = C_ldlt.solve(Eigen::Matrix3d::Identity());
   if (!factor.W_geo.allFinite()) {
     return false;
+  }
+  // 一维残差：只用 e 沿方向 u 的分量，信息为秩一 u uᵀ / (uᵀ C u)，与 u 垂直的方向不加约束。
+  // Ray 取目标点所在的锚点相机视线；PointToPlane 取目标表面法向，缺少有效法向时不建立该对应。
+  if (esikf_options_.geometry_residual != ESIKFOptions::GeometryResidual::PointToPoint) {
+    Eigen::Vector3d u = Eigen::Vector3d::Zero();
+    if (esikf_options_.geometry_residual == ESIKFOptions::GeometryResidual::Ray) {
+      u = q_tgt - ray_origin_in_target_;
+    } else if (target_normal.allFinite()) {
+      u = target_normal;
+    }
+    const double u_norm = u.norm();
+    if (!(u_norm > 1e-9)) {
+      return false;
+    }
+    u /= u_norm;
+    const double variance = u.dot(C * u);
+    if (!std::isfinite(variance) || !(variance > 0.0)) {
+      return false;
+    }
+    factor.W_geo = u * u.transpose() / variance;
   }
   factor.has_stereo_geo = true;
   // 标量噪声近似：用于日志兼容；实际累加用 W_geo
@@ -634,7 +665,78 @@ void ApplyPoseJoseph(Eigen::Matrix<double, DIM_STATE, DIM_STATE> *parallel_cov,
   *parallel_cov = updated;
 }
 
+// 误差状态注入：旋转机体系右乘，其余加法。只改名义状态，不改协方差。
+void InjectErrorState(ImuStatesGroup &state, const ImuStatesGroup &base,
+                      const Eigen::Matrix<double, DIM_STATE, 1> &dx) {
+  state.rot_end = base.rot_end * svio_utils::ExpSO3(dx.segment<3>(0));
+  state.pos_end = base.pos_end + dx.segment<3>(3);
+  state.vel_end = base.vel_end + dx.segment<3>(6);
+  state.bias_g = base.bias_g + dx.segment<3>(9);
+  state.bias_a = base.bias_a + dx.segment<3>(12);
+  state.gravity = base.gravity + dx.segment<3>(15);
+}
+
 } // namespace
+
+EsikfStepResult EsikfIterationStep(const ImuStatesGroup &prior, const ImuStatesGroup &current,
+                                   const Eigen::Matrix<double, 6, 1> &virtual_residual,
+                                   const Eigen::Matrix<double, 6, 6> &observation_covariance,
+                                   bool prior_residual, bool observation_only) {
+  EsikfStepResult out;
+  out.state = current;
+
+  // e_j = x_j ⊟ x_pred：旋转为机体系右扰动 Log(R_predᵀ R_j)，其余为加法差
+  Eigen::Matrix<double, DIM_STATE, 1> offset = Eigen::Matrix<double, DIM_STATE, 1>::Zero();
+  offset.segment<3>(0) = svio_utils::LogSO3(prior.rot_end.transpose() * current.rot_end);
+  offset.segment<3>(3) = current.pos_end - prior.pos_end;
+  offset.segment<3>(6) = current.vel_end - prior.vel_end;
+  offset.segment<3>(9) = current.bias_g - prior.bias_g;
+  offset.segment<3>(12) = current.bias_a - prior.bias_a;
+  offset.segment<3>(15) = current.gravity - prior.gravity;
+  out.prior_offset = offset.head<6>();
+  if (!virtual_residual.allFinite() || !observation_covariance.allFinite() || !offset.allFinite()) {
+    return out;
+  }
+
+  if (observation_only) {
+    out.gain.topRows<6>().setIdentity();
+  } else {
+    // K = P Hᵀ (H P Hᵀ + R)⁻¹，H 选取 [δθ, δp]
+    const Eigen::Matrix<double, 6, 6> S = prior.cov.block<6, 6>(0, 0) + observation_covariance;
+    if (!S.allFinite()) {
+      return out;
+    }
+    const Eigen::LDLT<Eigen::Matrix<double, 6, 6>> S_ldlt(S);
+    if (S_ldlt.info() != Eigen::Success) {
+      return out;
+    }
+    out.gain = prior.cov.block<DIM_STATE, 6>(0, 0)
+               * S_ldlt.solve(Eigen::Matrix<double, 6, 6>::Identity());
+    if (!out.gain.allFinite()) {
+      return out;
+    }
+  }
+
+  if (prior_residual && !observation_only) {
+    // 线性化点 x_j 处的观测：H (x ⊟ x_j) ≈ r_v，即 H (x ⊟ x_pred) ≈ r_v + H e_j。
+    // 对固定先验做一次卡尔曼更新，再从 x_pred 出发注入。
+    const Eigen::Matrix<double, DIM_STATE, 1> d = out.gain * (virtual_residual + offset.head<6>());
+    InjectErrorState(out.state, prior, d);
+    out.pose_step.head<3>() = svio_utils::LogSO3(current.rot_end.transpose() * out.state.rot_end);
+    out.pose_step.tail<3>() = out.state.pos_end - current.pos_end;
+  } else {
+    // 原实现：每轮在 x_j 上直接注入 K r_v
+    const Eigen::Matrix<double, DIM_STATE, 1> dx = out.gain * virtual_residual;
+    InjectErrorState(out.state, current, dx);
+    out.pose_step = dx.head<6>();
+  }
+
+  out.ok = out.state.rot_end.allFinite() && out.state.pos_end.allFinite()
+           && out.state.vel_end.allFinite() && out.state.bias_g.allFinite()
+           && out.state.bias_a.allFinite() && out.state.gravity.allFinite()
+           && out.pose_step.allFinite();
+  return out;
+}
 
 // =============================================================================
 // ESIKF（迭代误差状态卡尔曼滤波，紧耦合点云观测）
@@ -784,18 +886,21 @@ void StateEstimator::ESIKF(
   //
   // H_sel (6×21) 从 21 维误差状态中选取 [δφ, δp]
   // K 通过 P 的非对角交叉协方差，隐式将位姿修正传播到速度/偏置/重力
+  //
+  // 默认行为保持原实现；ESIKFOptions 可逐项打开（单轮更新见 EsikfIterationStep）：
+  //   prior_residual    x_{j+1} = x_pred ⊞ K (r_v + H e_j)，e_j = x_j ⊟ x_pred
+  //   observation_scale R_obs ← D R_obs D
+  //   stop_*            旋转、平移分开判断收敛
+  // 迭代在状态副本上进行；没有成功的迭代或出现数值失败时保留先验均值与协方差。
   // ══════════════════════════════════════════════════════════════════════════
 
-  // ── 先验协方差 P_pred (21×21)（IMU 传播后验，iEKF 迭代过程中固定不变）──
-  const Eigen::Matrix<double, DIM_STATE, DIM_STATE> P_pred =
-      imu_states.cov; // (21×21)
-
-  // ── 预计算 P_pred 在 [rot, pos] 子空间的投影（避免循环内重复提取）──
-  // P_pred_Ht = P_pred · H_selᵀ = P_pred[:, 0:6]   (21×6)
-  // P_pose    = H_sel · P_pred · H_selᵀ = P_pred[0:6, 0:6]  (6×6)
-  const Eigen::Matrix<double, DIM_STATE, 6> P_pred_Ht =
-      P_pred.block<DIM_STATE, 6>(0, 0); // (21×6)
-  const Eigen::Matrix<double, 6, 6> P_pose = P_pred.block<6, 6>(0, 0); // (6×6)
+  // ── 原始先验（iEKF 迭代过程中固定不变）与迭代副本 ──
+  const ESIKFOptions &options = esikf_options_;
+  const ImuStatesGroup prior_state = imu_states;
+  ImuStatesGroup state = imu_states;
+  const Eigen::Matrix<double, DIM_STATE, DIM_STATE> &P_pred = prior_state.cov; // (21×21)
+  // 视线残差的相机光心：锚点左目光心在锚点机体系中的位置
+  SetRayOriginInTarget(T_imu_cam.block<3, 1>(0, 3));
 
   // ── 观测选择矩阵 H_sel (6×21): 前 6 列为 I，其余为 0 ──
   // 显式定义仅用于协方差更新中的 K·H_sel 运算
@@ -819,12 +924,15 @@ void StateEstimator::ESIKF(
   std::vector<Eigen::Matrix3d> source_corr_covariances;
   std::vector<Eigen::Matrix3d> target_corr_covariances;
 
-  // 保存最终迭代的 K 和 R_obs，用于收敛后 Joseph 形式更新 P_post
-  Eigen::Matrix<double, DIM_STATE, 6> K =
+  // 最后一次成功迭代的 K 和 R_obs 成对保存，结束时用于 Joseph 形式更新 P_post
+  Eigen::Matrix<double, DIM_STATE, 6> K_last =
       Eigen::Matrix<double, DIM_STATE, 6>::Zero(); // (21×6)
-  Eigen::Matrix<double, 6, 6> R_obs =
+  Eigen::Matrix<double, 6, 6> R_last =
       Eigen::Matrix<double, 6, 6>::Identity(); // (6×6)
   bool is_converged = false;
+  bool has_update = false;
+  bool numerical_failure = false;
+  std::string stop_reason = "max_iterations";
   int num_iters = 0;
   double last_delta_norm = std::numeric_limits<double>::infinity();
   double last_pose_delta_norm = std::numeric_limits<double>::infinity();
@@ -832,14 +940,21 @@ void StateEstimator::ESIKF(
   size_t last_corr_count = 0;
   constexpr int kMinCorrespondences = 20;
 
-  const int max_iter = 8;
+  const int max_iter = std::max(1, options.max_iterations);
+  const bool component_stop = options.stop_rotation_rad > 0.0 && options.stop_translation_m > 0.0;
+  Eigen::Matrix<double, 6, 1> observation_scale_sqrt;
+  observation_scale_sqrt.head<3>().setConstant(
+    std::sqrt(options.observation_scale_rotation > 0.0 ? options.observation_scale_rotation : 1.0));
+  observation_scale_sqrt.tail<3>().setConstant(
+    std::sqrt(options.observation_scale_translation > 0.0 ? options.observation_scale_translation
+                                                          : 1.0));
 
   for (int iter = 0; iter < max_iter; ++iter) {
     // ── 1. 重线性化：源点在 curr body，目标在 prevkf body ──
     const Eigen::Matrix3d R_curr_to_prevkf =
-        R_anchor.transpose() * imu_states.rot_end;
+        R_anchor.transpose() * state.rot_end;
     const Eigen::Vector3d t_curr_in_prevkf =
-        R_anchor.transpose() * (imu_states.pos_end - t_anchor);
+        R_anchor.transpose() * (state.pos_end - t_anchor);
     const Eigen::Matrix3d R_state_to_target = R_curr_to_prevkf;
     {
       SIO_PROFILE((*sio_prof), sio_frame_id, "esikf", "transform_source");
@@ -897,6 +1012,7 @@ void StateEstimator::ESIKF(
       RCLCPP_WARN(
           logger, "ESIKF iter %d skipped: too few correspondences (%zu < %d).",
           iter, source_corr ? source_corr->size() : 0, kMinCorrespondences);
+      stop_reason = has_update ? "correspondences_lost" : "too_few_correspondences";
       break;
     }
     last_corr_count = source_corr->size();
@@ -916,8 +1032,9 @@ void StateEstimator::ESIKF(
                          target_corr_covariances);
     }
 
-    // ── 4. 求解 6×6 线性系统 + 卡尔曼增益 ──
+    // ── 4. 求解 6×6 虚拟观测：R_obs = H_obs⁻¹，r_v = −H_obs⁻¹ b_obs ──
     Eigen::Matrix<double, 6, 1> r_v;
+    Eigen::Matrix<double, 6, 6> R_obs;
     {
       SIO_PROFILE((*sio_prof), sio_frame_id, "esikf", "solve_6x6");
       const double damping = 1e-6 * std::max(1.0, H_obs.trace() / 6.0);
@@ -925,16 +1042,21 @@ void StateEstimator::ESIKF(
           H_obs + damping * Eigen::Matrix<double, 6, 6>::Identity();
       if (!H_obs_reg.allFinite()) {
         RCLCPP_WARN(logger, "H_obs contains invalid values at iter %d", iter);
+        numerical_failure = true;
         break;
       }
       const Eigen::LDLT<Eigen::Matrix<double, 6, 6>> H_ldlt(H_obs_reg);
       if (H_ldlt.info() != Eigen::Success) {
         RCLCPP_WARN(logger, "H_obs_reg decomposition failed at iter %d", iter);
+        numerical_failure = true;
         break;
       }
       R_obs = H_ldlt.solve(Eigen::Matrix<double, 6, 6>::Identity());
+      // 观测协方差标定：旋转、平移块分别放大，保留块间相关
+      R_obs = observation_scale_sqrt.asDiagonal() * R_obs * observation_scale_sqrt.asDiagonal();
       if (!R_obs.allFinite()) {
         RCLCPP_WARN(logger, "R_obs contains invalid values at iter %d", iter);
+        numerical_failure = true;
         break;
       }
 
@@ -942,45 +1064,30 @@ void StateEstimator::ESIKF(
       if (!r_v.allFinite()) {
         RCLCPP_WARN(logger, "Virtual residual contains invalid values at iter %d",
                     iter);
+        numerical_failure = true;
         break;
       }
       last_virtual_residual_norm = r_v.norm();
-
-      const Eigen::Matrix<double, 6, 6> S = P_pose + R_obs;
-      if (!S.allFinite()) {
-        RCLCPP_WARN(logger, "Innovation covariance S invalid at iter %d", iter);
-        break;
-      }
-      const Eigen::LDLT<Eigen::Matrix<double, 6, 6>> S_ldlt(S);
-      if (S_ldlt.info() != Eigen::Success) {
-        RCLCPP_WARN(logger,
-                    "Innovation covariance decomposition failed at iter %d",
-                    iter);
-        break;
-      }
-      K = P_pred_Ht * S_ldlt.solve(Eigen::Matrix<double, 6, 6>::Identity());
-      if (!K.allFinite()) {
-        RCLCPP_WARN(logger, "Kalman gain invalid at iter %d", iter);
-        break;
-      }
     }
 
-    // ── 5. iEKF 状态更新 ──
-    const Eigen::Matrix<double, DIM_STATE, 1> delta_x = [&]() {
+    // ── 5. iEKF 状态更新（K 用固定先验 P）──
+    EsikfStepResult step;
+    {
       SIO_PROFILE((*sio_prof), sio_frame_id, "esikf", "inject_state");
-      auto dx = K * r_v;
-      last_delta_norm = dx.norm();
-      last_pose_delta_norm = dx.head<6>().norm();
-
-      imu_states.rot_end =
-          imu_states.rot_end * svio_utils::ExpSO3(dx.segment<3>(0));
-      imu_states.pos_end += dx.segment<3>(3);
-      imu_states.vel_end += dx.segment<3>(6);
-      imu_states.bias_g += dx.segment<3>(9);
-      imu_states.bias_a += dx.segment<3>(12);
-      imu_states.gravity += dx.segment<3>(15);
-      return dx;
-    }();
+      step = EsikfIterationStep(prior_state, state, r_v, R_obs, options.prior_residual,
+                                options.observation_only);
+    }
+    if (!step.ok) {
+      RCLCPP_WARN(logger, "ESIKF state update invalid at iter %d", iter);
+      numerical_failure = true;
+      break;
+    }
+    state = step.state;
+    K_last = step.gain;
+    R_last = R_obs;
+    has_update = true;
+    last_delta_norm = (step.gain * r_v).norm();
+    last_pose_delta_norm = step.pose_step.norm();
 
     if (debug_out) {
       ESIKFIterationDebug record;
@@ -988,9 +1095,10 @@ void StateEstimator::ESIKF(
       record.correspondences = last_corr_count;
       record.information = H_obs;
       record.observation_covariance = R_obs;
-      record.pose_gain = K.topRows<6>();
+      record.pose_gain = step.gain.topRows<6>();
       record.virtual_residual = r_v;
-      record.pose_correction = delta_x.head<6>();
+      record.pose_correction = step.pose_step;
+      record.prior_offset = step.prior_offset;
       debug_out->iterations.push_back(std::move(record));
     }
     RCLCPP_INFO(logger,
@@ -999,38 +1107,53 @@ void StateEstimator::ESIKF(
                 iter, last_corr_count, last_virtual_residual_norm,
                 last_pose_delta_norm, last_delta_norm);
 
-    if (last_pose_delta_norm < 1e-3) {
+    num_iters = iter + 1;
+    const bool step_small =
+      component_stop
+        ? (step.pose_step.head<3>().norm() < options.stop_rotation_rad
+           && step.pose_step.tail<3>().norm() < options.stop_translation_m)
+        : last_pose_delta_norm < 1e-3;
+    if (step_small) {
       is_converged = true;
-      num_iters = iter + 1;
+      stop_reason = "converged";
       break;
     }
-    num_iters = iter + 1;
+  }
+  if (numerical_failure) {
+    stop_reason = "numerical_failure";
   }
 
   if (is_converged)
     RCLCPP_INFO(logger, "ESIKF successfully converged.");
   else
     RCLCPP_WARN(logger,
-                "ESIKF reached max iterations without full convergence "
+                "ESIKF stopped without convergence: %s "
                 "(last_corr=%zu last_r_v=%.6e last_delta_pose=%.6e "
                 "last_delta_state=%.6e).",
-                last_corr_count, last_virtual_residual_norm,
+                stop_reason.c_str(), last_corr_count, last_virtual_residual_norm,
                 last_pose_delta_norm, last_delta_norm);
 
-  // ── 7. 后验协方差 P_post (Joseph 形式，保证对称正定) ──
-  {
+  // ── 7. 验收与后验协方差 P_post（Joseph 形式，K 与 R_obs 取同一轮）──
+  // 数值失败或没有任何成功迭代：保留先验均值与协方差，不写入半成品状态。
+  const bool accepted = has_update && !numerical_failure;
+  if (accepted) {
     SIO_PROFILE((*sio_prof), sio_frame_id, "esikf", "covariance_update");
     const Eigen::Matrix<double, DIM_STATE, DIM_STATE> I_KH =
         Eigen::Matrix<double, DIM_STATE, DIM_STATE>::Identity() -
-        K * H_sel;
-    imu_states.cov =
+        K_last * H_sel;
+    state.cov =
         I_KH * P_pred * I_KH.transpose() +
-        K * R_obs * K.transpose();
-    ApplyPoseJoseph(flow_gate_cov, K, H_sel, R_obs);
+        K_last * R_last * K_last.transpose();
+    ApplyPoseJoseph(flow_gate_cov, K_last, H_sel, R_last);
+    imu_states = state;
+  } else {
+    imu_states = prior_state;
   }
 
   if (debug_out) {
     debug_out->converged = is_converged;
+    debug_out->updated = accepted;
+    debug_out->status = stop_reason;
     debug_out->num_iters = num_iters;
     debug_out->final_corr = last_corr_count;
     debug_out->knn_hit = last_funnel.knn_hit;

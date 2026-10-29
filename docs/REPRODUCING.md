@@ -1,6 +1,6 @@
 # 复现实验
 
-本文是可选技术附录。理解实验和提出修改建议不需要执行以下命令；请先读 [实验审阅说明](EXPERIMENT_REVIEW_BRIEF.md)、[实验设计](EXPERIMENT_DESIGN.md) 与 [协方差诊断](FUSION_COVARIANCE_DIAGNOSIS.md)。
+本文是可选技术附录。理解实验不需要执行以下命令；实验过程、对照与结果见 [实验记录](../实验记录.md)。
 
 新仓库以 `results/` 保存不可覆盖的历史证据，新实验写入 Git 忽略的 `artifacts/`。历史 YAML 中的绝对路径保留用于追踪；跨机器执行请使用 `scripts/reproduce_published.py`，它在新配置中重建路径，不改写历史文件。
 
@@ -17,7 +17,7 @@ python3 scripts/reproduce_published.py verify
 python3 scripts/reproduce_published.py audit
 ```
 
-`verify` 校验导出快照中的 SHA256，不需要 Python 第三方包。`audit` 从六条历史对照的矩阵和 CSV 重建归一化 K 校验、P/R 表、图和 HTML；不执行滤波、不读取原图或 GT，不需要 ROS/GPU。新报告路径在终端打印。
+`verify` 校验首次导出快照中的 SHA256，不需要 Python 第三方包；之后在本仓库修改或删除的文件（代码、文档）会被报告为已改变，属正常现象，`audit` 只检查 `results/` 下的归档文件。`audit` 从六条历史对照的矩阵和 CSV 重建归一化 K 校验、P/R 表、图和 HTML；不执行滤波、不读取原图或 GT，不需要 ROS/GPU。新报告路径在终端打印。
 
 ## 2. 从冻结观测回放 ESKF
 

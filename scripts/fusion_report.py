@@ -9,6 +9,7 @@ import json
 import math
 import os
 from pathlib import Path
+import statistics
 
 import cv2
 os.environ.setdefault("MPLCONFIGDIR", str(Path(__file__).resolve().parents[1] / "build/matplotlib-cache"))
@@ -62,6 +63,30 @@ def covariance_stats(covariance):
             float(np.trace(covariance[:3, :3])), float(np.trace(covariance[3:6, 3:6]))]
 
 
+# Pairs whose pure-IMU prior is already this far off are reported separately: they
+# measure recovery from long dead reckoning rather than the steady-state frontend.
+FLAG_PRIOR_TRANSLATION_M = 0.05
+
+
+def whitened_per_dof(error, covariance):
+    """e^T C^-1 e / dim. Close to 1 on average when C describes the actual error."""
+    if covariance is None or not np.isfinite(covariance).all() or not np.isfinite(error).all():
+        return math.nan
+    try:
+        if np.linalg.eigvalsh((covariance + covariance.T) / 2).min() <= 0:
+            return math.nan
+        return float(error @ np.linalg.solve(covariance, error)) / len(error)
+    except np.linalg.LinAlgError:
+        return math.nan
+
+
+def block_whitened(error, covariance):
+    if covariance is None:
+        return math.nan, math.nan
+    return (whitened_per_dof(error[:3], covariance[:3, :3]),
+            whitened_per_dof(error[3:], covariance[3:6, 3:6]))
+
+
 def flatten(prefix, matrix):
     if matrix is None:
         return {}
@@ -109,9 +134,17 @@ def collect(directory, config):
             truth = anchor @ tbc @ np.linalg.inv(a) @ b @ np.linalg.inv(tbc)
             before = np.r_[rotation_error(prior[:3, :3], truth[:3, :3]), truth[:3, 3] - prior[:3, 3]]
             after = np.r_[rotation_error(result[:3, :3], truth[:3, :3]), truth[:3, 3] - result[:3, 3]]
+            # Static pairs move by zero, so the estimated anchor is a reference that needs
+            # no groundtruth; the ESIKF observation scale is calibrated on these columns.
+            zero_motion = np.r_[rotation_error(result[:3, :3], anchor[:3, :3]),
+                                anchor[:3, 3] - result[:3, 3]]
             p0 = mat(n.getNode("prior"), "covariance")
             p1 = mat(n.getNode("result"), "covariance")
             noise = mat(n, "observation_covariance")
+            observed = stage in ("gicp", "esikf")
+            result_by_r = block_whitened(after, noise) if observed else (math.nan, math.nan)
+            zero_by_r = block_whitened(zero_motion, noise) if observed else (math.nan, math.nan)
+            result_by_p = block_whitened(after, p1[:6, :6]) if stage != "gicp" else (math.nan, math.nan)
             eig_min, eig_max, rot_trace, pos_trace = covariance_stats(noise)
             covariance = noise if stage == "gicp" else p1[:6, :6]
             conditional_mahalanobis = math.nan
@@ -143,7 +176,16 @@ def collect(directory, config):
                    "P_result_min_eig": float(np.linalg.eigvalsh((p1+p1.T)/2).min()) if stage != "gicp" else math.nan,
                    "P_result_asymmetry": float(np.max(np.abs(p1-p1.T))) if stage != "gicp" else math.nan,
                    "nis_regularized": number(n, "nis_regularized") if stage == "eskf" and number(n, "valid") else math.nan,
-                   "conditional_pose_mahalanobis": conditional_mahalanobis}
+                   "conditional_pose_mahalanobis": conditional_mahalanobis,
+                   "prior_flagged": int(float(np.linalg.norm(before[3:])) > FLAG_PRIOR_TRANSLATION_M),
+                   "zero_motion_trans_m": float(np.linalg.norm(zero_motion[3:])),
+                   "zero_motion_rot_deg": math.degrees(np.linalg.norm(zero_motion[:3])),
+                   "result_whitened_by_R_rot": result_by_r[0],
+                   "result_whitened_by_R_trans": result_by_r[1],
+                   "zero_motion_whitened_by_R_rot": zero_by_r[0],
+                   "zero_motion_whitened_by_R_trans": zero_by_r[1],
+                   "posterior_whitened_by_P_rot": result_by_p[0],
+                   "posterior_whitened_by_P_trans": result_by_p[1]}
             rows.append(row)
             matrices.append({k: row[k] for k in ("stage", "case", "method", "variant")} |
                 flatten("R", noise) | flatten("P_prior_pose", p0[:6, :6]) |
@@ -163,12 +205,16 @@ def collect(directory, config):
                 it = items.at(j)
                 information, r_cov = mat(it, "information"), mat(it, "R")
                 correction = mat(it, "pose_correction").reshape(-1)
+                offset = mat(it, "prior_offset")
+                offset = offset.reshape(-1) if offset is not None else np.full(6, math.nan)
                 iterations.append({"case": row["case"], "variant": row["variant"],
                     "iteration": int(number(it, "iteration")),
                     "correspondences": int(number(it, "correspondences")),
                     "virtual_residual_norm": float(np.linalg.norm(mat(it, "virtual_residual"))),
                     "correction_rot_deg": math.degrees(np.linalg.norm(correction[:3])),
                     "correction_trans_m": float(np.linalg.norm(correction[3:])),
+                    "prior_offset_rot_deg": math.degrees(np.linalg.norm(offset[:3])),
+                    "prior_offset_trans_m": float(np.linalg.norm(offset[3:])),
                     "information_eig_min": float(np.linalg.eigvalsh(information).min())} |
                     flatten("H", information) | flatten("R", r_cov) | flatten("K_pose", mat(it, "pose_gain")))
         storage.release()
@@ -181,13 +227,34 @@ def summarize(rows):
     for stage, method, variant in groups:
         selected = [r for r in rows if (r["stage"], r["method"], r["variant"]) == (stage, method, variant)]
         valid = [r for r in selected if r["valid"]]
-        rmse = lambda key: math.sqrt(sum(r[key]**2 for r in valid)/len(valid)) if valid else None
+        unflagged = [r for r in valid if not r["prior_flagged"]]
+        def rmse(key, rows=valid):
+            return math.sqrt(sum(r[key]**2 for r in rows)/len(rows)) if rows else None
+        def median(key, rows=valid):
+            values = [r[key] for r in rows if math.isfinite(r[key])]
+            return statistics.median(values) if values else None
+        def mean(key):
+            values = [r[key] for r in valid if math.isfinite(r[key])]
+            return sum(values) / len(values) if values else None
         summary.append({"stage": stage, "method": method, "variant": variant,
                         "valid": len(valid), "total": len(selected),
                         "prior_translation_rmse_m": rmse("prior_trans_error_m"),
                         "result_translation_rmse_m": rmse("result_trans_error_m"),
                         "prior_rotation_rmse_deg": rmse("prior_rot_error_deg"),
-                        "result_rotation_rmse_deg": rmse("result_rot_error_deg")})
+                        "result_rotation_rmse_deg": rmse("result_rot_error_deg"),
+                        "prior_translation_median_m": median("prior_trans_error_m"),
+                        "result_translation_median_m": median("result_trans_error_m"),
+                        "prior_rotation_median_deg": median("prior_rot_error_deg"),
+                        "result_rotation_median_deg": median("result_rot_error_deg"),
+                        "unflagged": len(unflagged),
+                        "result_translation_rmse_unflagged_m": rmse("result_trans_error_m", unflagged),
+                        "result_rotation_rmse_unflagged_deg": rmse("result_rot_error_deg", unflagged),
+                        "improved_translation": sum(r["result_trans_error_m"] < r["prior_trans_error_m"] for r in valid),
+                        "improved_rotation": sum(r["result_rot_error_deg"] < r["prior_rot_error_deg"] for r in valid),
+                        "result_whitened_by_R_rot_mean": mean("result_whitened_by_R_rot"),
+                        "result_whitened_by_R_trans_mean": mean("result_whitened_by_R_trans"),
+                        "posterior_whitened_by_P_rot_mean": mean("posterior_whitened_by_P_rot"),
+                        "posterior_whitened_by_P_trans_mean": mean("posterior_whitened_by_P_trans")})
     return summary
 
 
@@ -222,14 +289,19 @@ def html_report(directory, cfg, rows, summary):
     keys = ["stage", "case", "method", "variant", "status", "solver_status", "inliers", "converged",
             "covariance_convention", "covariance_from_hessian", "fitness", "registration_rmse_m",
             "prior_trans_error_m", "result_trans_error_m", "prior_rot_error_deg",
-            "result_rot_error_deg", "R_rot_trace_rad2", "R_pos_trace_m2", "nis_regularized"]
+            "result_rot_error_deg", "prior_flagged", "R_rot_trace_rad2", "R_pos_trace_m2",
+            "nis_regularized", "posterior_whitened_by_P_rot", "posterior_whitened_by_P_trans"]
     def value(v):
         return f"{v:.5g}" if isinstance(v, float) else html.escape(str(v))
     headers = "".join(f"<th>{html.escape(k)}</th>" for k in keys)
     body = "".join(f"<tr class='{'valid' if r['valid'] else 'failed'}' data-stage='{r['stage']}'>" +
                    "".join(f"<td>{value(r[k])}</td>" for k in keys) + "</tr>" for r in rows)
-    summary_body = "".join("<tr>" + "".join(f"<td>{value(r[k])}</td>" for k in
-        ("stage", "method", "variant", "valid", "total", "result_translation_rmse_m", "result_rotation_rmse_deg")) +
+    summary_keys = ("stage", "method", "variant", "valid", "total", "result_translation_rmse_m",
+                    "result_rotation_rmse_deg", "result_translation_median_m", "result_rotation_median_deg",
+                    "result_translation_rmse_unflagged_m", "result_rotation_rmse_unflagged_deg",
+                    "improved_translation", "improved_rotation",
+                    "posterior_whitened_by_P_rot_mean", "posterior_whitened_by_P_trans_mean")
+    summary_body = "".join("<tr>" + "".join(f"<td>{value(r[k])}</td>" for k in summary_keys) +
         "</tr>" for r in summary)
     page = """<!doctype html><html lang="zh-CN"><meta charset="utf-8">
 <title>Fusion Lab</title><style>
@@ -259,7 +331,11 @@ img{width:100%;background:white}input,select{padding:8px;margin:10px 8px 10px 0}
         page += "<p><b>SGBM 调试基线：</b>结果用于检查接口、坐标与融合行为，模型视差替换后需重新评估 GICP 精度和协方差。</p>"
     page += "<p>误差按每对图像的锚点计算，单位 m / degrees。此处 RMSE 不是全序列 ATE；末帧受同一锚点条件约束。NIS 与条件马氏距离是诊断量，少量相关图像对不能用于宣称协方差已校准。</p>"
     page += "<p><a href='metrics.csv'>全部指标 CSV</a> · <a href='covariances.csv'>R / P / K 矩阵 CSV</a> · <a href='gicp_iterations.csv'>Stereo 求解逐轮 CSV</a> · <a href='esikf_iterations.csv'>ESIKF 逐轮 CSV</a> · <a href='resolved.yaml'>配置快照</a> · <a href='errors.svg'>矢量图</a></p>"
-    page += "<h2>分组结果</h2><div class='scroll'><table><thead><tr><th>stage</th><th>method</th><th>variant</th><th>valid</th><th>total</th><th>translation RMSE (m)</th><th>rotation RMSE (deg)</th></tr></thead><tbody>" + summary_body + "</tbody></table></div>"
+    page += (f"<p>unflagged 排除纯惯性先验平移误差超过 {FLAG_PRIOR_TRANSLATION_M * 1000:.0f} mm 的图像对；"
+             "whitened 为误差按协方差白化后的每自由度均值，协方差与实际误差相符时约为 1。</p>")
+    page += ("<h2>分组结果</h2><div class='scroll'><table><thead><tr>" +
+             "".join(f"<th>{html.escape(k)}</th>" for k in summary_keys) +
+             "</tr></thead><tbody>" + summary_body + "</tbody></table></div>")
     page += "<img src='errors.png' alt='Pairwise errors'><h2>逐对检查</h2><input id='search' placeholder='筛选 case、method、variant'><select id='stage'><option value=''>全部模块</option><option>gicp</option><option>eskf</option><option>esikf</option></select><label><input id='failed' type='checkbox'>只看失败</label>"
     page += "<div class='scroll'><table id='metrics'><thead><tr>" + headers + "</tr></thead><tbody>" + body + "</tbody></table></div>"
     page += """<script>

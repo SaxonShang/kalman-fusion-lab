@@ -88,4 +88,4 @@ t_imu_aligned   = t_imu_raw + lag_ms / 1000
 
 本机验证程序保存在被 Git 忽略的 `build/fr5-loader-probe/`，运行日志为 `build/fr5-loader-probe.log`。这项检查覆盖数据读取和初始化，不依赖推理模型。
 
-本机编译环境、数据与专用标定已接入。用户提供的视差和 RAFT ONNX 已生成本机 `.plan`，模型视差已用于六条序列的独立融合实验；完整 SLAM 与后端尚未运行。模型入口见 [LOCAL_SETUP.md](LOCAL_SETUP.md)，P/R 与精度限制见 [融合协方差诊断](FUSION_COVARIANCE_DIAGNOSIS.md)。
+本机编译环境、数据与专用标定已接入。用户提供的视差和 RAFT ONNX 已生成本机 `.plan`，模型视差已用于六条序列的独立融合实验；完整 SLAM 与后端尚未运行。模型入口见 [LOCAL_SETUP.md](LOCAL_SETUP.md)，P/R 与精度限制见 [实验记录](../实验记录.md) 第 4–5 节。

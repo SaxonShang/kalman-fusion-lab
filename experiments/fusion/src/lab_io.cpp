@@ -94,6 +94,39 @@ FrozenFrame ReadFrame(const fs::path &cache, int id) {
   return frame;
 }
 
+namespace {
+fs::path ConditionalFile(const fs::path &cache, int anchor_id, int current_id) {
+  return cache / ("conditional_" + std::to_string(anchor_id) + "_" +
+                  std::to_string(current_id) + ".yml.gz");
+}
+} // namespace
+
+void WriteConditional(const fs::path &cache, const AnchorConditional &c) {
+  cv::FileStorage out(ConditionalFile(cache, c.anchor_id, c.current_id).string(),
+                      cv::FileStorage::WRITE);
+  Require(out.isOpened(), "Cannot create anchor-conditioned prior");
+  out << "anchor_id" << c.anchor_id << "current_id" << c.current_id
+      << "covariance" << Cv(c.covariance) << "transition" << Cv(c.transition)
+      << "process_noise" << Cv(c.process_noise) << "anchor_covariance" << Cv(c.anchor_covariance);
+}
+
+AnchorConditional ReadConditional(const fs::path &cache, int anchor_id, int current_id) {
+  const auto file = ConditionalFile(cache, anchor_id, current_id);
+  cv::FileStorage in(file.string(), cv::FileStorage::READ);
+  Require(in.isOpened(), "Anchor-conditioned prior not found: " + file.string() +
+          "; the input cache predates format_version 3, rerun prepare");
+  AnchorConditional c;
+  c.anchor_id = static_cast<int>(in["anchor_id"]);
+  c.current_id = static_cast<int>(in["current_id"]);
+  Require(c.anchor_id == anchor_id && c.current_id == current_id,
+          "Anchor-conditioned prior id mismatch");
+  c.covariance = EigenRead<DIM_STATE, DIM_STATE>(in["covariance"]);
+  c.transition = EigenRead<DIM_STATE, DIM_STATE>(in["transition"]);
+  c.process_noise = EigenRead<DIM_STATE, DIM_STATE>(in["process_noise"]);
+  c.anchor_covariance = EigenRead<DIM_STATE, DIM_STATE>(in["anchor_covariance"]);
+  return c;
+}
+
 pcl::PointCloud<PointTypeRGB>::Ptr ToBody(const FrozenFrame &frame, const Eigen::Matrix4d &t) {
   auto cloud = pcl::PointCloud<PointTypeRGB>::Ptr(new pcl::PointCloud<PointTypeRGB>());
   pcl::transformPointCloud(*frame.camera_cloud, *cloud, t.cast<float>());
@@ -137,7 +170,8 @@ void WriteRecord(cv::FileStorage &out, const Record &r) {
     out << "{" << "iteration" << it.iteration << "correspondences" << int(it.correspondences)
         << "information" << Cv(it.information) << "R" << Cv(it.observation_covariance)
         << "pose_gain" << Cv(it.pose_gain) << "virtual_residual" << Cv(it.virtual_residual)
-        << "pose_correction" << Cv(it.pose_correction) << "}";
+        << "pose_correction" << Cv(it.pose_correction)
+        << "prior_offset" << Cv(it.prior_offset) << "}";
   }
   out << "]" << "}";
 }

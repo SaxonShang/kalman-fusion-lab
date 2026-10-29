@@ -27,7 +27,9 @@ SUITES = {
     "imu": "ImuIntegratorTest.*:ImuPreprocessorTest.*",
     "gicp": "StereoGicpTest.*:StereoObservationCompatTest.*:UtilsTest.*Gicp*:UtilsTest.*StereoCovariance*:ColorIcpConfigTest.*",
     "eskf": "StateEstimatorTest.*Eskf*",
-    "esikf": "StateEstimatorTest.*Esikf*:StateEstimatorTest.*Observation*",
+    "esikf": ("StateEstimatorTest.*Esikf*:StateEstimatorTest.*Observation*:"
+              "ImuIntegratorTest.*Anchor*:ImuIntegratorTest.*Init*:ImuIntegratorTest.*Noise*:"
+              "ImuIntegratorTest.*GyroScale*:ImuIntegratorTest.*Transition*"),
 }
 
 
@@ -41,7 +43,7 @@ def load_config(path, seen=None):
     if path in seen:
         raise ValueError(f"Recursive experiment configuration: {path}")
     seen.add(path)
-    overlay = yaml.safe_load(path.read_text())
+    overlay = yaml.safe_load(path.read_text(encoding="utf-8"))
     parent = overlay.pop("extends", None)
     if parent is None:
         return overlay
@@ -187,6 +189,8 @@ def model_disparity(cfg, inputs, output, hashes):
 
 def resolve_config(args, sequence, output):
     cfg = load_config(args.config)
+    config_path = Path(args.config).resolve()
+    cfg["config_file"] = str(config_path.relative_to(ROOT)) if config_path.is_relative_to(ROOT) else str(config_path)
     datasets = sorted((ROOT / "data/datasets/fr5_highspeed").glob("*/metadata.json"))
     matches = [p.parent for p in datasets if p.parent.name == sequence or
                p.parent.name.split("_", 2)[-1] == sequence]
@@ -240,6 +244,9 @@ def resolve_config(args, sequence, output):
         raise ValueError("depth.provider must be tensorrt, sgbm or disparity_cache")
     identity = {"dataset": str(dataset), "files": inputs, "params": params,
                 "depth": cfg["depth"], "pairs": cfg["pairs"], "source_hashes": hashes}
+    if cfg.get("prior"):
+        # IMU noise, initial covariance and the static check change the frozen priors.
+        identity["prior"] = cfg["prior"]
     cfg["cache_key"] = hashlib.sha256(json.dumps(identity, sort_keys=True).encode()).hexdigest()[:20]
     cfg["cache_dir"] = str(CACHES / dataset.name / cfg["cache_key"])
     cfg["output_dir"] = str(output)

@@ -1,5 +1,6 @@
 #include "lab.h"
 #include "dataset_loader.h"
+#include "imu_integrator.h"
 #include "imu_preprocessor.h"
 #include "stereo_gicp.h"
 #include <opencv2/calib3d.hpp>
@@ -61,6 +62,49 @@ cv::Mat Disparity(const YAML::Node &depth, const cv::Mat &left, const cv::Mat &r
   Require(disparity.size() == left.size(), "Disparity must match inference image geometry");
   return disparity;
 }
+ImuNoiseParams NoiseFromConfig(const YAML::Node &prior, bool has_prior) {
+  ImuNoiseParams noise; // legacy constants of the core integrator
+  if (!has_prior || !prior["imu_noise"]) return noise;
+  const YAML::Node node = prior["imu_noise"];
+  if (node.IsScalar()) {
+    Require(node.as<std::string>() == "legacy", "prior.imu_noise must be 'legacy' or a map");
+    return noise;
+  }
+  noise.gyro_noise_density = node["gyro_noise_density"].as<double>();
+  noise.accel_noise_density = node["accel_noise_density"].as<double>();
+  noise.gyro_random_walk = node["gyro_random_walk"].as<double>();
+  noise.accel_random_walk = node["accel_random_walk"].as<double>();
+  Require(noise.gyro_noise_density > 0 && noise.accel_noise_density > 0 &&
+          noise.gyro_random_walk > 0 && noise.accel_random_walk > 0,
+          "IMU noise densities must be positive (SI units)");
+  return noise;
+}
+
+InitialCovarianceParams CovarianceParamsFromConfig(const YAML::Node &prior, bool has_prior) {
+  InitialCovarianceParams params;
+  if (!has_prior || !prior["initial_covariance_params"]) return params;
+  const YAML::Node node = prior["initial_covariance_params"];
+  params.accel_bias_sigma = node["accel_bias_sigma"].as<double>(params.accel_bias_sigma);
+  params.yaw_sigma_rad = node["yaw_sigma_rad"].as<double>(params.yaw_sigma_rad);
+  params.position_sigma_m = node["position_sigma_m"].as<double>(params.position_sigma_m);
+  params.velocity_sigma_mps = node["velocity_sigma_mps"].as<double>(params.velocity_sigma_mps);
+  params.gyro_bias_floor_rad_s =
+    node["gyro_bias_floor_rad_s"].as<double>(params.gyro_bias_floor_rad_s);
+  Require(params.accel_bias_sigma > 0 && params.yaw_sigma_rad > 0 && params.position_sigma_m > 0 &&
+          params.velocity_sigma_mps > 0 && params.gyro_bias_floor_rad_s > 0,
+          "Initial covariance standard deviations must be positive");
+  return params;
+}
+
+// Anchor-to-current propagation for the anchor-conditioned prior (format_version 3).
+struct AnchorTrack {
+  Eigen::Matrix<double, DIM_STATE, DIM_STATE> anchor_cov =
+    Eigen::Matrix<double, DIM_STATE, DIM_STATE>::Zero();
+  Eigen::Matrix<double, DIM_STATE, DIM_STATE> transition =
+    Eigen::Matrix<double, DIM_STATE, DIM_STATE>::Identity();
+  Eigen::Matrix<double, DIM_STATE, DIM_STATE> noise =
+    Eigen::Matrix<double, DIM_STATE, DIM_STATE>::Zero();
+};
 } // namespace
 
 void Prepare(const YAML::Node &cfg, const fs::path &output) {
@@ -69,11 +113,14 @@ void Prepare(const YAML::Node &cfg, const fs::path &output) {
   const auto cam = sio_utils::LoadInferenceCameraIntrinsics(params);
   const auto ids = SourceIds(cfg["dataset_dir"].as<std::string>());
   Require(sio_stereo_gicp::CameraIsValid(cam), "Invalid inference intrinsics");
-  std::set<int> wanted;
+  std::set<int> wanted, anchors;
+  std::multimap<int, int> anchors_by_current;
   for (const auto &pair : cfg["pairs"]) {
     const int a = pair["anchor"].as<int>(), b = pair["current"].as<int>();
     Require(a < b, "Pair anchor must precede current frame");
     wanted.insert(a); wanted.insert(b);
+    anchors.insert(a);
+    anchors_by_current.emplace(b, a);
   }
   Require(!wanted.empty(), "No frame pairs configured");
   for (int id : wanted)
@@ -90,6 +137,19 @@ void Prepare(const YAML::Node &cfg, const fs::path &output) {
   ImuPreprocessor imu_preprocessor;
   imu_preprocessor.LoadConfig(params.string());
   ImuIntegrator integrator;
+  const YAML::Node prior_cfg = cfg["prior"];
+  const bool has_prior = prior_cfg.IsDefined() && prior_cfg.IsMap();
+  integrator.SetNoiseParams(NoiseFromConfig(prior_cfg, has_prior));
+  const auto covariance_params = CovarianceParamsFromConfig(prior_cfg, has_prior);
+  const std::string initial_covariance = has_prior && prior_cfg["initial_covariance"]
+    ? prior_cfg["initial_covariance"].as<std::string>() : "legacy";
+  Require(initial_covariance == "legacy" || initial_covariance == "observability",
+          "prior.initial_covariance must be legacy or observability");
+  const bool require_static = has_prior && prior_cfg["require_static_init"]
+    ? prior_cfg["require_static_init"].as<bool>() : false;
+  ImuInitReport init_report;
+  std::map<int, AnchorTrack> tracks;
+  std::size_t conditionals = 0;
   ImuStatesGroup state;
   std::deque<sensor_msgs::msg::Imu::SharedPtr> imu;
   bool initialized = false;
@@ -110,7 +170,13 @@ void Prepare(const YAML::Node &cfg, const fs::path &output) {
     }
     if (!initialized) {
       if (imu.size() < 200) continue;
-      state = integrator.ImuInit(imu);
+      state = integrator.ImuInit(imu, &init_report);
+      Require(!require_static || init_report.static_ok,
+              "IMU initialization window is not static (gyro deviation " +
+              std::to_string(init_report.gyro_max_deviation_rad_s) + " rad/s, |g| " +
+              std::to_string(init_report.gravity_norm) + ")");
+      if (initial_covariance == "observability")
+        state.cov = ImuIntegrator::ObservabilityInitialCovariance(state, init_report, covariance_params);
       // Like the runtime frontend, start the next interval at the image boundary.
       state.timestamp = input->end_time;
       initialized = true;
@@ -118,9 +184,46 @@ void Prepare(const YAML::Node &cfg, const fs::path &output) {
       KeyFrameData anchor;
       anchor.imu_states = state;
       anchor.timestamp = state.timestamp;
-      state = integrator.ImuPreintegrationCov(anchor, imu, input->end_time);
+      Eigen::Matrix<double, DIM_STATE, DIM_STATE> interval_noise =
+        Eigen::Matrix<double, DIM_STATE, DIM_STATE>::Zero();
+      Eigen::Matrix<double, DIM_STATE, DIM_STATE> interval_transition =
+        Eigen::Matrix<double, DIM_STATE, DIM_STATE>::Identity();
+      state = integrator.ImuPreintegrationCov(anchor, imu, input->end_time, &interval_noise,
+                                              &interval_transition);
+      // Extend every open anchor: Phi <- Phi_k Phi, Q <- Phi_k Q Phi_k^T + Q_k.
+      for (auto &entry : tracks) {
+        AnchorTrack &track = entry.second;
+        const Eigen::Matrix<double, DIM_STATE, DIM_STATE> transition =
+          interval_transition * track.transition;
+        const Eigen::Matrix<double, DIM_STATE, DIM_STATE> noise =
+          interval_transition * track.noise * interval_transition.transpose() + interval_noise;
+        track.transition = transition;
+        track.noise = 0.5 * (noise + noise.transpose());
+      }
     }
     Require(HealthyState(state), "Invalid pure-IMU prior at source frame " + std::to_string(source_id));
+    if (anchors.count(source_id)) {
+      AnchorTrack track;
+      track.anchor_cov = state.cov;
+      tracks[source_id] = track;
+    }
+    const auto paired = anchors_by_current.equal_range(source_id);
+    for (auto it = paired.first; it != paired.second; ++it) {
+      const auto track = tracks.find(it->second);
+      Require(track != tracks.end(), "Anchor frame " + std::to_string(it->second) +
+              " precedes IMU initialization");
+      AnchorConditional conditional;
+      conditional.anchor_id = it->second;
+      conditional.current_id = source_id;
+      conditional.anchor_covariance = track->second.anchor_cov;
+      conditional.transition = track->second.transition;
+      conditional.process_noise = track->second.noise;
+      conditional.covariance = ConditionOnAnchorPose(
+        track->second.anchor_cov, track->second.transition, track->second.noise);
+      Require(conditional.covariance.allFinite(), "Invalid anchor-conditioned prior");
+      WriteConditional(output, conditional);
+      ++conditionals;
+    }
     if (wanted.count(source_id)) {
       auto stereo = image_preprocessor.ProcessStereoAdaptiveLighting(input->imgl, input->imgr);
       cv::Mat left, right;
@@ -151,9 +254,21 @@ void Prepare(const YAML::Node &cfg, const fs::path &output) {
     while (imu.size() > 1) imu.pop_front(); // Keep the last sample across frame boundaries.
   }
   Require(cached == wanted.size(), "Some selected frames precede IMU initialization");
+  Require(conditionals == anchors_by_current.size(), "Missing anchor-conditioned priors");
+  const auto &noise = integrator.GetNoiseParams();
   std::ofstream summary(output / "inputs.yaml");
-  summary << "format_version: 2\nframes: " << cached
+  summary << "format_version: 3\nframes: " << cached << "\nanchor_conditionals: " << conditionals
           << "\nprior: pure_imu_dead_reckoning\ngroundtruth_used: false\n"
-          << "depth_provider: " << depth_cfg["provider"].as<std::string>() << '\n';
+          << "depth_provider: " << depth_cfg["provider"].as<std::string>() << '\n'
+          << "initial_covariance: " << initial_covariance << '\n'
+          << "imu_noise: {gyro_noise_density: " << noise.gyro_noise_density
+          << ", accel_noise_density: " << noise.accel_noise_density
+          << ", gyro_random_walk: " << noise.gyro_random_walk
+          << ", accel_random_walk: " << noise.accel_random_walk << "}\n"
+          << "init_window: {samples: " << init_report.samples
+          << ", duration_s: " << init_report.duration_s
+          << ", gravity_norm: " << init_report.gravity_norm
+          << ", gyro_max_deviation_rad_s: " << init_report.gyro_max_deviation_rad_s
+          << ", static_ok: " << (init_report.static_ok ? "true" : "false") << "}\n";
 }
 } // namespace fusion_lab

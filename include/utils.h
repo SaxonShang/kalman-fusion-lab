@@ -87,6 +87,12 @@ inline V3D So3LogApprox(const M3D &R) {
   return 0.5 * w;
 }
 
+// SO(3) 对数映射 θu。So3LogApprox 实际给出 sin(θ)u，只适合小角度。
+inline V3D LogSO3(const M3D &R) {
+  const Eigen::AngleAxisd angle_axis(R);
+  return angle_axis.angle() * angle_axis.axis();
+}
+
 // 将 Pose6D 转换为旋转矩阵
 inline M3D RotFromPose6D(const Pose6D &pose) {
   M3D R;

@@ -2,15 +2,19 @@
 #include "sio_math.h"
 #include "profiler/simple_profiler.h"
 #include <Eigen/Dense>
+#include <algorithm>
 #include <cmath>
 #include <iostream>
 
 // Static initialization of IMU: estimate gyro bias and gravity from stationary
 // sensor data
 ImuStatesGroup ImuIntegrator::ImuInit(
-  const std::deque<sensor_msgs::msg::Imu::SharedPtr> &imu_buffer) {
+  const std::deque<sensor_msgs::msg::Imu::SharedPtr> &imu_buffer, ImuInitReport *report) {
 
   ImuStatesGroup state;
+  if (report) {
+    *report = ImuInitReport{};
+  }
 
   if (imu_buffer.empty()) {
     std::cerr << "[ImuInit] imu_buffer is empty, returning default state.\n";
@@ -52,8 +56,10 @@ ImuStatesGroup ImuIntegrator::ImuInit(
   const double angle = std::acos(std::max(-1.0, std::min(1.0, dot)));
 
   if (axis.norm() < 1e-6) {
-    // g_body 已与 z_world 对齐，无需旋转
-    state.rot_end = Eigen::Matrix3d::Identity();
+    // 同向时无需旋转；反向（倒置静止）时叉积同样为零，需绕任一水平轴转 180°
+    state.rot_end = dot > 0.0
+                      ? Eigen::Matrix3d::Identity()
+                      : Eigen::AngleAxisd(M_PI, Eigen::Vector3d::UnitX()).toRotationMatrix();
   } else {
     state.rot_end = Eigen::AngleAxisd(angle, axis.normalized()).toRotationMatrix();
   }
@@ -68,6 +74,37 @@ ImuStatesGroup ImuIntegrator::ImuInit(
   // 时间戳取最后一条 IMU 的时间
   const auto &last = imu_buffer.back();
   state.timestamp = last->header.stamp.sec + last->header.stamp.nanosec * 1e-9;
+
+  if (report) {
+    // 静止检查：只报告，不改变初始化结果；是否拒绝由调用方决定
+    constexpr double kMinDurationS = 0.5;
+    constexpr double kMaxGravityDeviation = 0.3;   // m/s²
+    constexpr double kMaxGyroDeviationRadS = 0.05; // 约 2.9°/s
+    Eigen::Vector3d gyro_sq = Eigen::Vector3d::Zero();
+    Eigen::Vector3d acc_sq = Eigen::Vector3d::Zero();
+    double gyro_max_dev = 0.0;
+    for (const auto &msg : imu_buffer) {
+      const Eigen::Vector3d acc(msg->linear_acceleration.x, msg->linear_acceleration.y,
+                                msg->linear_acceleration.z);
+      const Eigen::Vector3d gyro(msg->angular_velocity.x, msg->angular_velocity.y,
+                                 msg->angular_velocity.z);
+      gyro_sq += (gyro - gyro_mean).cwiseAbs2();
+      acc_sq += (acc - acc_mean).cwiseAbs2();
+      gyro_max_dev = std::max(gyro_max_dev, (gyro - gyro_mean).norm());
+    }
+    const double n = static_cast<double>(imu_buffer.size());
+    const auto &first = imu_buffer.front();
+    report->samples = static_cast<int>(imu_buffer.size());
+    report->duration_s =
+      state.timestamp - (first->header.stamp.sec + first->header.stamp.nanosec * 1e-9);
+    report->gravity_norm = acc_norm;
+    report->gyro_max_deviation_rad_s = gyro_max_dev;
+    report->gyro_std_rad_s = (gyro_sq / n).cwiseSqrt();
+    report->accel_std = (acc_sq / n).cwiseSqrt();
+    report->static_ok = report->duration_s >= kMinDurationS
+                        && std::abs(acc_norm - 9.81) <= kMaxGravityDeviation
+                        && gyro_max_dev <= kMaxGyroDeviationRadS;
+  }
 
   std::cout << "[ImuInit] done. gyro_bias=" << gyro_mean.transpose()
             << "  gravity_norm=" << acc_norm << "  rot_end=\n"
@@ -222,9 +259,15 @@ Pose6D ImuIntegrator::ImuPreintegrationPose(
 // Integrate IMU with error state propagation and covariance matrix update
 ImuStatesGroup ImuIntegrator::ImuPreintegrationCov(
   const KeyFrameData &keyframe, const std::deque<sensor_msgs::msg::Imu::SharedPtr> &imu_buffer,
-  double t_end, Eigen::Matrix<double, DIM_STATE, DIM_STATE> *flow_gate_cov) {
+  double t_end, Eigen::Matrix<double, DIM_STATE, DIM_STATE> *flow_gate_cov,
+  Eigen::Matrix<double, DIM_STATE, DIM_STATE> *transition) {
 
   ImuStatesGroup propagated_state = keyframe.imu_states;
+  // Φ：各步离散转移 F_d 按时间顺序左乘；未传播时为单位阵
+  Eigen::Matrix<double, 21, 21> phi = Eigen::Matrix<double, 21, 21>::Identity();
+  if (transition != nullptr) {
+    transition->setIdentity();
+  }
 
   if (imu_buffer.empty()) {
     return propagated_state;
@@ -263,11 +306,11 @@ ImuStatesGroup ImuIntegrator::ImuPreintegrationCov(
   // reserved(19:21)]
   Eigen::Matrix<double, 21, 21> P = propagated_state.cov;
 
-  // IMU 噪声密度参数（单位：rad/s/√Hz, m/s²/√Hz, rad/s²/√Hz, m/s³/√Hz）
-  constexpr double sigma_g = 1.0e-4;  // 陀螺仪量测噪声
-  constexpr double sigma_a = 1.0e-3;  // 加速度计量测噪声
-  constexpr double sigma_bg = 1.0e-5; // 陀螺仪偏置随机游走
-  constexpr double sigma_ba = 1.0e-4; // 加速度计偏置随机游走
+  // IMU 噪声密度参数（单位：rad/s/√Hz, m/s²/√Hz, rad/s²/√Hz, m/s³/√Hz）；默认值即原来的常数
+  const double sigma_g = noise_.gyro_noise_density;   // 陀螺仪量测噪声
+  const double sigma_a = noise_.accel_noise_density;  // 加速度计量测噪声
+  const double sigma_bg = noise_.gyro_random_walk;    // 陀螺仪偏置随机游走
+  const double sigma_ba = noise_.accel_random_walk;   // 加速度计偏置随机游走
 
   // 连续时间噪声协方差矩阵 Q_c (12⅗12)
   // 噪声输入顺序: [ng(3), na(3), nbg(3), nba(3)]
@@ -356,6 +399,9 @@ ImuStatesGroup ImuIntegrator::ImuPreintegrationCov(
           F_d * (*flow_gate_cov) * F_d.transpose() + Q_d;
       *flow_gate_cov = updated;
     }
+    if (transition != nullptr) {
+      phi = F_d * phi;
+    }
   }
 
   // 最后一段：若最后一条 IMU < t_end，用该 IMU 的测量值外推到 t_end
@@ -401,7 +447,14 @@ ImuStatesGroup ImuIntegrator::ImuPreintegrationCov(
             F_d * (*flow_gate_cov) * F_d.transpose() + Q_d;
         *flow_gate_cov = updated;
       }
+      if (transition != nullptr) {
+        const Eigen::Matrix<double, 21, 21> tail_phi = F_d * phi;
+        phi = tail_phi;
+      }
     }
+  }
+  if (transition != nullptr) {
+    *transition = phi;
   }
 
   // 写回传播后的状态
@@ -434,4 +487,79 @@ ImuStatesGroup ImuIntegrator::ImuPreintegrationCov(
   preint_increment_cache_.timestamp = t_end;
 
   return propagated_state;
+}
+
+Eigen::Matrix<double, DIM_STATE, DIM_STATE> ImuIntegrator::ObservabilityInitialCovariance(
+  const ImuStatesGroup &state, const ImuInitReport &report,
+  const InitialCovarianceParams &params) {
+  // 重力、曝光与预留维沿用默认构造的取值
+  Eigen::Matrix<double, DIM_STATE, DIM_STATE> cov = ImuStatesGroup().cov;
+  const double gravity = std::max(report.gravity_norm, 1e-6);
+  const double samples = std::max(1, report.samples);
+
+  // 横滚 / 俯仰：静止时由重力方向测得，误差主要来自加计零偏（ba/g）和均值噪声
+  const double accel_mean_noise = report.accel_std.norm() / std::sqrt(3.0 * samples);
+  const double tilt_sigma =
+    std::sqrt(params.accel_bias_sigma * params.accel_bias_sigma
+              + accel_mean_noise * accel_mean_noise) / gravity;
+  // 世界系 x、y 为倾斜，z 为航向；误差状态是机体系右扰动 δθ_body = R_wbᵀ δθ_world
+  const Eigen::Vector3d world_rot_var(tilt_sigma * tilt_sigma, tilt_sigma * tilt_sigma,
+                                      params.yaw_sigma_rad * params.yaw_sigma_rad);
+  const Eigen::Matrix3d R_wb = state.rot_end;
+  cov.block<3, 3>(0, 0) = R_wb.transpose() * world_rot_var.asDiagonal() * R_wb;
+
+  cov.block<3, 3>(3, 3) =
+    Eigen::Matrix3d::Identity() * params.position_sigma_m * params.position_sigma_m;
+  cov.block<3, 3>(6, 6) =
+    Eigen::Matrix3d::Identity() * params.velocity_sigma_mps * params.velocity_sigma_mps;
+
+  // 陀螺零偏：静止均值的标准误加上下限
+  const double floor_var = params.gyro_bias_floor_rad_s * params.gyro_bias_floor_rad_s;
+  const Eigen::Vector3d gyro_bias_var =
+    report.gyro_std_rad_s.cwiseAbs2() / samples + Eigen::Vector3d::Constant(floor_var);
+  cov.block<3, 3>(9, 9) = gyro_bias_var.asDiagonal();
+
+  cov.block<3, 3>(12, 12) =
+    Eigen::Matrix3d::Identity() * params.accel_bias_sigma * params.accel_bias_sigma;
+  return 0.5 * (cov + cov.transpose());
+}
+
+Eigen::Matrix<double, DIM_STATE, DIM_STATE> ConditionOnAnchorPose(
+  const Eigen::Matrix<double, DIM_STATE, DIM_STATE> &anchor_cov,
+  const Eigen::Matrix<double, DIM_STATE, DIM_STATE> &transition,
+  const Eigen::Matrix<double, DIM_STATE, DIM_STATE> &process_noise) {
+  const Eigen::Matrix<double, DIM_STATE, DIM_STATE> P = 0.5 * (anchor_cov + anchor_cov.transpose());
+
+  // 锚点位姿块的（伪）逆
+  const Eigen::SelfAdjointEigenSolver<Eigen::Matrix<double, 6, 6>> eig(P.block<6, 6>(0, 0));
+  const double tolerance = 1e-12 * std::max(eig.eigenvalues().maxCoeff(), 0.0);
+  Eigen::Matrix<double, 6, 1> inverse_values = Eigen::Matrix<double, 6, 1>::Zero();
+  for (int i = 0; i < 6; ++i) {
+    if (eig.eigenvalues()(i) > tolerance) {
+      inverse_values(i) = 1.0 / eig.eigenvalues()(i);
+    }
+  }
+  const Eigen::Matrix<double, 6, 6> pose_inverse =
+    eig.eigenvectors() * inverse_values.asDiagonal() * eig.eigenvectors().transpose();
+
+  // 已知锚点位姿后的锚点协方差（Schur 补），位姿块为 0，速度、零偏等保留剩余不确定度
+  const Eigen::Matrix<double, DIM_STATE, 6> cross = P.block<DIM_STATE, 6>(0, 0);
+  Eigen::Matrix<double, DIM_STATE, DIM_STATE> conditioned =
+    P - cross * pose_inverse * cross.transpose();
+  conditioned = 0.5 * (conditioned + conditioned.transpose());
+
+  Eigen::Matrix<double, DIM_STATE, DIM_STATE> current =
+    transition * conditioned * transition.transpose() + process_noise;
+  return 0.5 * (current + current.transpose());
+}
+
+void AddGyroScaleUncertainty(Eigen::Matrix<double, DIM_STATE, DIM_STATE> &cov,
+                             const Eigen::Matrix3d &R_anchor, const Eigen::Matrix3d &R_current,
+                             double scale_sigma) {
+  if (!(scale_sigma > 0.0)) {
+    return;
+  }
+  const double angle = Eigen::AngleAxisd(R_anchor.transpose() * R_current).angle();
+  const double sigma = scale_sigma * std::abs(angle);
+  cov.block<3, 3>(0, 0) += Eigen::Matrix3d::Identity() * sigma * sigma;
 }
