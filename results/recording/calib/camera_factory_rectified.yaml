@@ -1,0 +1,38 @@
+# ZED SDK rectified LEFT intrinsics; see image_source_requirement below.
+image_width: 1920
+image_height: 1080
+fx: 734.4576416015625
+fy: 734.4576416015625
+cx: 987.4609375
+cy: 556.6715087890625
+distortion:
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+camera_serial: 49953548
+camera_model: ZED X
+zed_sdk: 5.1.2
+resolution: HD1080
+camera_fps: 15.0
+requested_resolution: HD1080
+requested_fps: 15
+image_view: LEFT
+rectified: true
+calibration_source: calibration_parameters.left_cam
+image_flip: 'OFF'
+self_calibration: disabled
+intrinsics_scope: standalone_export_instance
+exported_utc: '2026-10-08T07:01:06.287440+00:00'
+image_source_requirement: Use original-resolution VIEW.LEFT images from the same camera
+  and SDK configuration. With self-calibration enabled, export intrinsics from the
+  SAME capture instance; another open may change them. With it disabled, also verify
+  matching factory calibration.

@@ -1,0 +1,134 @@
+[
+  {
+    "stage": "esikf",
+    "method": "esikf",
+    "variant": "geometry_weight_0.5",
+    "valid": 5,
+    "total": 5,
+    "prior_translation_rmse_m": 0.013392347521961182,
+    "result_translation_rmse_m": 0.016667047034975558,
+    "prior_rotation_rmse_deg": 0.015573947106224518,
+    "result_rotation_rmse_deg": 0.25345541923886317
+  },
+  {
+    "stage": "esikf",
+    "method": "esikf",
+    "variant": "geometry_weight_1",
+    "valid": 5,
+    "total": 5,
+    "prior_translation_rmse_m": 0.013392347521961182,
+    "result_translation_rmse_m": 0.016678067101668026,
+    "prior_rotation_rmse_deg": 0.015573947106224518,
+    "result_rotation_rmse_deg": 0.25407573886816637
+  },
+  {
+    "stage": "eskf",
+    "method": "small_gicp",
+    "variant": "R_fixed",
+    "valid": 5,
+    "total": 5,
+    "prior_translation_rmse_m": 0.013392347521961182,
+    "result_translation_rmse_m": 0.010135133480769202,
+    "prior_rotation_rmse_deg": 0.015573947106224518,
+    "result_rotation_rmse_deg": 0.10836718171620015
+  },
+  {
+    "stage": "eskf",
+    "method": "small_gicp",
+    "variant": "R_x0.1",
+    "valid": 5,
+    "total": 5,
+    "prior_translation_rmse_m": 0.013392347521961182,
+    "result_translation_rmse_m": 0.010146788292448973,
+    "prior_rotation_rmse_deg": 0.015573947106224518,
+    "result_rotation_rmse_deg": 0.1255717533667532
+  },
+  {
+    "stage": "eskf",
+    "method": "small_gicp",
+    "variant": "R_x1",
+    "valid": 5,
+    "total": 5,
+    "prior_translation_rmse_m": 0.013392347521961182,
+    "result_translation_rmse_m": 0.010169932103656198,
+    "prior_rotation_rmse_deg": 0.015573947106224518,
+    "result_rotation_rmse_deg": 0.12457907305564299
+  },
+  {
+    "stage": "eskf",
+    "method": "small_gicp",
+    "variant": "R_x10",
+    "valid": 5,
+    "total": 5,
+    "prior_translation_rmse_m": 0.013392347521961182,
+    "result_translation_rmse_m": 0.010339632388847565,
+    "prior_rotation_rmse_deg": 0.015573947106224518,
+    "result_rotation_rmse_deg": 0.11866265947331106
+  },
+  {
+    "stage": "eskf",
+    "method": "stereo",
+    "variant": "R_fixed",
+    "valid": 5,
+    "total": 5,
+    "prior_translation_rmse_m": 0.013392347521961182,
+    "result_translation_rmse_m": 0.009987588113442329,
+    "prior_rotation_rmse_deg": 0.015573947106224518,
+    "result_rotation_rmse_deg": 0.025850820414556153
+  },
+  {
+    "stage": "eskf",
+    "method": "stereo",
+    "variant": "R_x0.1",
+    "valid": 5,
+    "total": 5,
+    "prior_translation_rmse_m": 0.013392347521961182,
+    "result_translation_rmse_m": 0.00998961471300403,
+    "prior_rotation_rmse_deg": 0.015573947106224518,
+    "result_rotation_rmse_deg": 0.026019743616708474
+  },
+  {
+    "stage": "eskf",
+    "method": "stereo",
+    "variant": "R_x1",
+    "valid": 5,
+    "total": 5,
+    "prior_translation_rmse_m": 0.013392347521961182,
+    "result_translation_rmse_m": 0.009989613979747522,
+    "prior_rotation_rmse_deg": 0.015573947106224518,
+    "result_rotation_rmse_deg": 0.026019647930285852
+  },
+  {
+    "stage": "eskf",
+    "method": "stereo",
+    "variant": "R_x10",
+    "valid": 5,
+    "total": 5,
+    "prior_translation_rmse_m": 0.013392347521961182,
+    "result_translation_rmse_m": 0.00998960664867458,
+    "prior_rotation_rmse_deg": 0.015573947106224518,
+    "result_rotation_rmse_deg": 0.026018691427717677
+  },
+  {
+    "stage": "gicp",
+    "method": "small_gicp",
+    "variant": "registration",
+    "valid": 5,
+    "total": 5,
+    "prior_translation_rmse_m": 0.013392347521961182,
+    "result_translation_rmse_m": 0.010142836936692537,
+    "prior_rotation_rmse_deg": 0.015573947106224518,
+    "result_rotation_rmse_deg": 0.21050732173243192
+  },
+  {
+    "stage": "gicp",
+    "method": "stereo",
+    "variant": "registration",
+    "valid": 5,
+    "total": 5,
+    "prior_translation_rmse_m": 0.013392347521961182,
+    "result_translation_rmse_m": 0.009990543950965406,
+    "prior_rotation_rmse_deg": 0.015573947106224518,
+    "result_rotation_rmse_deg": 0.041514962783542685
+  }
+]

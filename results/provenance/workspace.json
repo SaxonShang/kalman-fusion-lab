@@ -1,0 +1,19 @@
+{
+  "exported_at": "2026-10-29T11:27:54.791555+08:00",
+  "source_repository": "https://github.com/lihongliang0203/SIO_SLAM",
+  "source_workspace": "/home/ubuntu22/slam/SIO_SLAM",
+  "source_head": "fe6c34c0b4cb0421360adfe67977fd915e360fe5",
+  "source_status": " M .clangd\n M .gitignore\n M .vscode/launch.json\n M .vscode/settings.json\n M CMakeLists.txt\n M README.md\n M apps/run_demo.cpp\n M config/params.yaml\n M docs/BUILD_DEPENDENCIES.md\n M \"docs/SCI_\\346\\212\\225\\345\\275\\261StereoGICP.md\"\n M include/TrtEngine.hpp\n M include/color_icp.h\n M include/data.h\n M include/fusion_debug.h\n M include/sio_frontend_modules.h\n M include/stereo_gicp.h\n M include/utils.h\n D src/color_icp.cpp\n M src/dynamic_cloud_processor.cpp\n M src/frontend.cpp\n M src/state_estimater.cpp\n M src/stereo_gicp.cpp\n M src/torch_pose_optimize.cpp\n M tests/integration/pipeline_smoke_test.cpp\n M tests/unit/test_imu_integrator.cpp\n M tests/unit/test_state_estimator.cpp\n M tests/unit/test_stereo_gicp.cpp\n M tests/unit/test_utils.cpp\n?? .vscode/tasks.json\n?? THIRD_PARTY_NOTICES.md\n?? apps/export_disparity.cpp\n?? docs/EXPERIMENT_DESIGN.md\n?? docs/EXPERIMENT_PROGRESS.md\n?? docs/FR5_DATASET.md\n?? docs/FUSION_COVARIANCE_DIAGNOSIS.md\n?? docs/LOCAL_SETUP.md\n?? docs/PUBLISH_NEW_REPOSITORY.md\n?? docs/REPRODUCING.md\n?? env.sh\n?? experiments/\n?? modules/\n?? requirements-model-tools.txt\n?? scripts/\n?? tests/unit/test_color_icp_config.cpp\n",
+  "history_note": "Independent snapshot; source HEAD alone does not describe uncommitted experiments.",
+  "runs": 50,
+  "metric_rows_including_replays": 2350,
+  "excluded": [
+    "Git metadata and old history",
+    "raw stereo images",
+    "ONNX and TensorRT engines",
+    "point-cloud/build/install caches",
+    "private IDE/chat state and compiled binaries"
+  ],
+  "documentation_updated_at": "2026-10-29T11:49:43.833355+08:00",
+  "reader_purpose": "Understand and review experiment design, actual code, evidence and open hypotheses; running experiments is optional."
+}

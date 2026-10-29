@@ -1,0 +1,10 @@
+INPUT img1 fp32 1 3 448 896
+INPUT img2 fp32 1 3 448 896
+OUTPUT flow_list fp32 1 2 448 896
+OUTPUT 1038 fp32 1 2 448 896
+OUTPUT 1330 fp32 1 2 448 896
+OUTPUT 1622 fp32 1 2 448 896
+OUTPUT 1914 fp32 1 2 448 896
+OUTPUT 2206 fp32 1 2 448 896
+[TRT] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+Final flow finite; identical black images max_abs_px=33.3438

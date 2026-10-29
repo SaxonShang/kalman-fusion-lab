@@ -1,0 +1,5 @@
+Verified cost-volume model already exists: /home/ubuntu22/slam/SIO_SLAM/models/onnx/disp_cost_volume.onnx
+Building onnx/disp_cost_volume.onnx -> disp_896x448_fp16.plan; log: /home/ubuntu22/slam/SIO_SLAM/models/tensorrt/logs/disp-build.log
+Built: /home/ubuntu22/slam/SIO_SLAM/models/tensorrt/disp_896x448_fp16.plan
+Building raft_large_896x448_iter6.onnx -> raft_large_896x448_iter6.plan; log: /home/ubuntu22/slam/SIO_SLAM/models/tensorrt/logs/raft-build.log
+Built: /home/ubuntu22/slam/SIO_SLAM/models/tensorrt/raft_large_896x448_iter6.plan

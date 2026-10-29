@@ -1,0 +1,70 @@
+{
+  "audit_script_sha256": "c0b629abc2c5bd5f0b723bdd2a2e790a0ea4a28c325ce7caeebaa578c74c23b8",
+  "runs": [
+    {
+      "reference": "/home/ubuntu22/slam/SIO_SLAM/artifacts/fusion/20261029_103507_280291_up_all",
+      "sequence": "20261015_112553_up",
+      "observations_sha256": "56964cb522a20ef55f6e98e28f424f3223f7498580c08c3a9fb12102bf19242e",
+      "reference_config_sha256": "50f48a9319530e23cba938e10f8967141183b5f5d26fec24a3a49467054fda4d",
+      "solver_only": "/home/ubuntu22/slam/SIO_SLAM/artifacts/fusion/20261029_105246_745663_20261015_112553_up_solver_audit",
+      "repropagated": "/home/ubuntu22/slam/SIO_SLAM/artifacts/fusion/20261029_105248_723192_20261015_112553_up_all",
+      "sensitivity": "/home/ubuntu22/slam/SIO_SLAM/artifacts/fusion/20261029_105318_125542_20261015_112553_up_weight_audit"
+    },
+    {
+      "reference": "/home/ubuntu22/slam/SIO_SLAM/artifacts/fusion/20261029_103556_371563_forward_all",
+      "sequence": "20261015_112659_forward",
+      "observations_sha256": "01d5b6989e89525cc5d9c03864bbabdab4e7e87b6bd9a30d3351e082b71de8f1",
+      "reference_config_sha256": "17cca2f0f762cc80ff221d2cf12da71572ef916ca9615d103f762b017bc9df35",
+      "solver_only": "/home/ubuntu22/slam/SIO_SLAM/artifacts/fusion/20261029_105320_087821_20261015_112659_forward_solver_audit",
+      "repropagated": "/home/ubuntu22/slam/SIO_SLAM/artifacts/fusion/20261029_105322_190109_20261015_112659_forward_all",
+      "sensitivity": "/home/ubuntu22/slam/SIO_SLAM/artifacts/fusion/20261029_105347_666799_20261015_112659_forward_weight_audit"
+    },
+    {
+      "reference": "/home/ubuntu22/slam/SIO_SLAM/artifacts/fusion/20261029_103643_008432_right_all",
+      "sequence": "20261015_112757_right",
+      "observations_sha256": "ac1ce8e1b85259ec426b26933297159a6da36f628a2ba44283d1abaf253edf19",
+      "reference_config_sha256": "b0c078b671235aeccf86a4b13b003811fc554829aa67e59ea455f1374c75c4c6",
+      "solver_only": "/home/ubuntu22/slam/SIO_SLAM/artifacts/fusion/20261029_105349_728983_20261015_112757_right_solver_audit",
+      "repropagated": "/home/ubuntu22/slam/SIO_SLAM/artifacts/fusion/20261029_105351_743799_20261015_112757_right_all",
+      "sensitivity": "/home/ubuntu22/slam/SIO_SLAM/artifacts/fusion/20261029_105418_640440_20261015_112757_right_weight_audit"
+    },
+    {
+      "reference": "/home/ubuntu22/slam/SIO_SLAM/artifacts/fusion/20261029_103729_083755_yaw_left_all",
+      "sequence": "20261015_112845_yaw_left",
+      "observations_sha256": "2b3b9b1c00d91e70cd3362a45b25e74b0226cc6f45f072aa1e208f304a4d26e6",
+      "reference_config_sha256": "7736a72c5870fc1e1d063caed0ce35442232be65ff62a450ff70f6e34858a6b5",
+      "solver_only": "/home/ubuntu22/slam/SIO_SLAM/artifacts/fusion/20261029_105420_713066_20261015_112845_yaw_left_solver_audit",
+      "repropagated": "/home/ubuntu22/slam/SIO_SLAM/artifacts/fusion/20261029_105422_774626_20261015_112845_yaw_left_all",
+      "sensitivity": "/home/ubuntu22/slam/SIO_SLAM/artifacts/fusion/20261029_105453_484814_20261015_112845_yaw_left_weight_audit"
+    },
+    {
+      "reference": "/home/ubuntu22/slam/SIO_SLAM/artifacts/fusion/20261029_103821_708691_pitch_up_all",
+      "sequence": "20261015_112940_pitch_up",
+      "observations_sha256": "3a5c72c8957cccc9d650421cc3ca95266e68ba41ec5aadde1ab70b634ce8e04e",
+      "reference_config_sha256": "ad1d82265a1d219dd2e0d21134517f0ab8cb6f670429dc9357a76116f7e7f77d",
+      "solver_only": "/home/ubuntu22/slam/SIO_SLAM/artifacts/fusion/20261029_105455_718304_20261015_112940_pitch_up_solver_audit",
+      "repropagated": "/home/ubuntu22/slam/SIO_SLAM/artifacts/fusion/20261029_105457_866101_20261015_112940_pitch_up_all",
+      "sensitivity": "/home/ubuntu22/slam/SIO_SLAM/artifacts/fusion/20261029_105526_031608_20261015_112940_pitch_up_weight_audit"
+    },
+    {
+      "reference": "/home/ubuntu22/slam/SIO_SLAM/artifacts/fusion/20261029_103909_472994_roll_right_all",
+      "sequence": "20261015_113028_roll_right",
+      "observations_sha256": "1e42f06f68c814679dea5b394ac437407b50b78f802360db78a83e38fd1144ec",
+      "reference_config_sha256": "0894c0fea2904ab90f585740ac9762a429d48958f3a444d4ce288344ea39b85b",
+      "solver_only": "/home/ubuntu22/slam/SIO_SLAM/artifacts/fusion/20261029_105528_080140_20261015_113028_roll_right_solver_audit",
+      "repropagated": "/home/ubuntu22/slam/SIO_SLAM/artifacts/fusion/20261029_105530_173588_20261015_113028_roll_right_all",
+      "sensitivity": "/home/ubuntu22/slam/SIO_SLAM/artifacts/fusion/20261029_105553_228969_20261015_113028_roll_right_weight_audit"
+    }
+  ],
+  "sensitivity": {
+    "P_scale": 0.0001,
+    "R_scales": [
+      0.1,
+      1,
+      10,
+      1000,
+      100000
+    ]
+  },
+  "note": "Fixed controls, not GT-selected noise calibration; registration module unchanged"
+}

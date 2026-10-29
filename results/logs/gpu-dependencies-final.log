@@ -1,0 +1,788 @@
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/build/small_gicp
+ninja: no work to do.
+-- Install configuration: "Release"
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/points
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/points/traits.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/points/point_cloud.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/points/eigen.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/pcl
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/pcl/pcl_point_traits.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/pcl/pcl_registration.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/pcl/pcl_proxy.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/pcl/pcl_registration_impl.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/pcl/pcl_point.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/util
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/util/color_gradient_omp.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/util/sort_tbb.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/util/fast_floor.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/util/normal_estimation.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/util/downsampling_tbb.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/util/vector3i_hash.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/util/downsampling_omp.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/util/normal_estimation_tbb.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/util/lie.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/util/color_gradient_tbb.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/util/normal_estimation_omp.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/util/color_gradient.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/util/sort_omp.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/util/downsampling.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/benchmark
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/benchmark/benchmark_odom.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/benchmark/read_points.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/benchmark/benchmark.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/ros
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/ros/ros2.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/ros/ros1.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/ros/ros_impl.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/factors
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/factors/gicp_factor.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/factors/colored_icp_factor.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/factors/general_factor.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/factors/icp_factor.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/factors/plane_icp_factor.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/factors/robust_kernel.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/registration
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/registration/reduction.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/registration/reduction_omp.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/registration/registration.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/registration/termination_criteria.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/registration/registration_result.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/registration/rejector.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/registration/registration_helper.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/registration/reduction_tbb.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/registration/optimizer.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/ann
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/ann/gaussian_voxelmap.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/ann/flat_container.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/ann/traits.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/ann/knn_result.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/ann/kdtree_tbb.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/ann/incremental_voxelmap.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/ann/sequential_voxelmap_accessor.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/ann/projective_search.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/ann/kdtree.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/ann/projection.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/ann/kdtree_omp.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libsmall_gicp.so
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/cmake/small_gicp/small_gicp-targets.cmake
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/cmake/small_gicp/small_gicp-targets-release.cmake
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/cmake/small_gicp/small_gicp-config.cmake
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/cmake/small_gicp/small_gicp-config-version.cmake
+-- Detected processor: x86_64
+-- Looking for ccache - not found
+-- Could NOT find AVIF (missing: AVIF_LIBRARY AVIF_INCLUDE_DIR) 
+-- The imported target "openjpip" references the file
+   "/usr/lib/x86_64-linux-gnu/libopenjpip.so.2.4.0"
+but this file does not exist.  Possible reasons include:
+* The file was deleted, renamed, or moved to another location.
+* An install or uninstall procedure did not complete successfully.
+* The installation package was faulty and contained
+   "/usr/lib/x86_64-linux-gnu/openjpeg-2.1/OpenJPEGTargets.cmake"
+but not all the files it references.
+
+-- The imported target "opj_decompress" references the file
+   "/usr/bin/opj_decompress"
+but this file does not exist.  Possible reasons include:
+* The file was deleted, renamed, or moved to another location.
+* An install or uninstall procedure did not complete successfully.
+* The installation package was faulty and contained
+   "/usr/lib/x86_64-linux-gnu/openjpeg-2.1/OpenJPEGTargets.cmake"
+but not all the files it references.
+
+-- The imported target "opj_compress" references the file
+   "/usr/bin/opj_compress"
+but this file does not exist.  Possible reasons include:
+* The file was deleted, renamed, or moved to another location.
+* An install or uninstall procedure did not complete successfully.
+* The installation package was faulty and contained
+   "/usr/lib/x86_64-linux-gnu/openjpeg-2.1/OpenJPEGTargets.cmake"
+but not all the files it references.
+
+-- The imported target "opj_dump" references the file
+   "/usr/bin/opj_dump"
+but this file does not exist.  Possible reasons include:
+* The file was deleted, renamed, or moved to another location.
+* An install or uninstall procedure did not complete successfully.
+* The installation package was faulty and contained
+   "/usr/lib/x86_64-linux-gnu/openjpeg-2.1/OpenJPEGTargets.cmake"
+but not all the files it references.
+
+-- The imported target "opj_jpip_addxml" references the file
+   "/usr/bin/opj_jpip_addxml"
+but this file does not exist.  Possible reasons include:
+* The file was deleted, renamed, or moved to another location.
+* An install or uninstall procedure did not complete successfully.
+* The installation package was faulty and contained
+   "/usr/lib/x86_64-linux-gnu/openjpeg-2.1/OpenJPEGTargets.cmake"
+but not all the files it references.
+
+-- The imported target "opj_server" references the file
+   "/usr/bin/opj_server"
+but this file does not exist.  Possible reasons include:
+* The file was deleted, renamed, or moved to another location.
+* An install or uninstall procedure did not complete successfully.
+* The installation package was faulty and contained
+   "/usr/lib/x86_64-linux-gnu/openjpeg-2.1/OpenJPEGTargets.cmake"
+but not all the files it references.
+
+-- The imported target "opj_dec_server" references the file
+   "/usr/bin/opj_dec_server"
+but this file does not exist.  Possible reasons include:
+* The file was deleted, renamed, or moved to another location.
+* An install or uninstall procedure did not complete successfully.
+* The installation package was faulty and contained
+   "/usr/lib/x86_64-linux-gnu/openjpeg-2.1/OpenJPEGTargets.cmake"
+but not all the files it references.
+
+-- The imported target "opj_jpip_transcode" references the file
+   "/usr/bin/opj_jpip_transcode"
+but this file does not exist.  Possible reasons include:
+* The file was deleted, renamed, or moved to another location.
+* An install or uninstall procedure did not complete successfully.
+* The installation package was faulty and contained
+   "/usr/lib/x86_64-linux-gnu/openjpeg-2.1/OpenJPEGTargets.cmake"
+but not all the files it references.
+
+-- The imported target "opj_jpip_test" references the file
+   "/usr/bin/opj_jpip_test"
+but this file does not exist.  Possible reasons include:
+* The file was deleted, renamed, or moved to another location.
+* An install or uninstall procedure did not complete successfully.
+* The installation package was faulty and contained
+   "/usr/lib/x86_64-linux-gnu/openjpeg-2.1/OpenJPEGTargets.cmake"
+but not all the files it references.
+
+-- Found system OpenJPEG: openjp2 (found version "2.4.0")
+-- Found OpenEXR: /usr/lib/x86_64-linux-gnu/libIlmImf-2_5.so
+-- libva: missing va.h header (VA_INCLUDE_DIR)
+-- IPPICV: Downloading ippicv_2022.1.0_lnx_intel64_20250130_general.tgz from https://raw.githubusercontent.com/opencv/opencv_3rdparty/767426b2a40a011eb2fa7f44c677c13e60e205ad/ippicv/ippicv_2022.1.0_lnx_intel64_20250130_general.tgz
+-- Try 1 failed
+-- 
+=======================================================================
+  Couldn't connect to server from the Internet.
+  Perhaps direct connections are not allowed in the current network.
+  To use proxy please check/specify these environment variables:
+  - http_proxy/https_proxy
+  - and/or HTTP_PROXY/HTTPS_PROXY
+=======================================================================
+
+CMake Warning at cmake/OpenCVDownload.cmake:251 (message):
+  IPPICV: Download failed: 7;"Couldn't connect to server"
+
+  For details please refer to the download log file:
+
+  
+  /home/ubuntu22/slam/SIO_SLAM/build/dependencies/build/opencv/CMakeDownloadLog.txt
+
+
+Call Stack (most recent call first):
+  3rdparty/ippicv/ippicv.cmake:46 (ocv_download)
+  cmake/OpenCVFindIPP.cmake:272 (download_ippicv)
+  cmake/OpenCVFindLibsPerf.cmake:12 (include)
+  CMakeLists.txt:816 (include)
+
+
+-- CUDA detected: 12.9
+-- CUDA: Using CUDA_ARCH_BIN=8.9
+-- CUDA: NVCC target flags -gencode;arch=compute_89,code=sm_89;-D_FORCE_INLINES
+-- Could NOT find Atlas (missing: Atlas_CLAPACK_INCLUDE_DIR Atlas_CBLAS_LIBRARY Atlas_BLAS_LIBRARY) 
+-- Found VTK 9.1.0
+-- ADE: Downloading v0.1.2e.zip from https://github.com/opencv/ade/archive/v0.1.2e.zip
+-- Try 1 failed
+-- 
+=======================================================================
+  Couldn't connect to server from the Internet.
+  Perhaps direct connections are not allowed in the current network.
+  To use proxy please check/specify these environment variables:
+  - http_proxy/https_proxy
+  - and/or HTTP_PROXY/HTTPS_PROXY
+=======================================================================
+
+CMake Warning at cmake/OpenCVDownload.cmake:251 (message):
+  ADE: Download failed: 7;"Couldn't connect to server"
+
+  For details please refer to the download log file:
+
+  
+  /home/ubuntu22/slam/SIO_SLAM/build/dependencies/build/opencv/CMakeDownloadLog.txt
+
+
+Call Stack (most recent call first):
+  modules/gapi/cmake/DownloadADE.cmake:5 (ocv_download)
+  modules/gapi/cmake/init.cmake:20 (include)
+  cmake/OpenCVModule.cmake:298 (include)
+  cmake/OpenCVModule.cmake:361 (_add_modules_1)
+  cmake/OpenCVModule.cmake:408 (ocv_glob_modules)
+  CMakeLists.txt:1096 (ocv_register_modules)
+
+
+-- Checking for module 'gtk+-2.0'
+--   No package 'gtk+-2.0' found
+-- Checking for module 'libavresample'
+--   No package 'libavresample' found
+-- Checking for module 'gstreamer-base-1.0'
+--   No package 'gstreamer-base-1.0' found
+-- Checking for module 'gstreamer-app-1.0'
+--   No package 'gstreamer-app-1.0' found
+-- Checking for module 'gstreamer-riff-1.0'
+--   No package 'gstreamer-riff-1.0' found
+-- Checking for module 'gstreamer-pbutils-1.0'
+--   No package 'gstreamer-pbutils-1.0' found
+-- Checking for module 'gstreamer-video-1.0'
+--   No package 'gstreamer-video-1.0' found
+-- Checking for module 'gstreamer-audio-1.0'
+--   No package 'gstreamer-audio-1.0' found
+-- freetype2:   YES (ver 24.1.18)
+-- harfbuzz:    YES (ver 2.7.4)
+-- Julia not found. Not compiling Julia Bindings. 
+-- Module opencv_ovis disabled because OGRE3D was not found
+-- Checking for module 'tesseract'
+--   No package 'tesseract' found
+-- Tesseract:   NO
+-- Using whitelist: opencv_calib3d;opencv_core;opencv_cudaarithm;opencv_cudaimgproc;opencv_cudawarping;opencv_cudev;opencv_features2d;opencv_flann;opencv_highgui;opencv_imgcodecs;opencv_imgproc;opencv_videoio
+-- Module opencv_dnn disabled by whitelist
+-- Module opencv_java_bindings_generator disabled by whitelist
+-- Module opencv_js_bindings_generator disabled by whitelist
+-- Module opencv_ml disabled by whitelist
+-- Module opencv_objc_bindings_generator disabled by whitelist
+-- Module opencv_objdetect disabled by whitelist
+-- Module opencv_photo disabled by whitelist
+-- Module opencv_python_bindings_generator disabled by whitelist
+-- Module opencv_python_tests disabled by whitelist
+-- Module opencv_stitching disabled by whitelist
+-- Module opencv_video disabled by whitelist
+-- Module opencv_alphamat disabled by whitelist
+-- Module opencv_aruco disabled by whitelist
+-- Module opencv_bgsegm disabled by whitelist
+-- Module opencv_bioinspired disabled by whitelist
+-- Module opencv_ccalib disabled by whitelist
+-- Module opencv_cudabgsegm disabled by whitelist
+-- Module opencv_cudacodec disabled by whitelist
+-- Module opencv_cudafeatures2d disabled by whitelist
+-- Module opencv_cudafilters disabled by whitelist
+-- Module opencv_cudalegacy disabled by whitelist
+-- Module opencv_cudaobjdetect disabled by whitelist
+-- Module opencv_cudaoptflow disabled by whitelist
+-- Module opencv_cudastereo disabled by whitelist
+-- Module opencv_datasets disabled by whitelist
+-- Module opencv_dnn_objdetect disabled by whitelist
+-- Module opencv_dnn_superres disabled by whitelist
+-- Module opencv_dpm disabled by whitelist
+-- Module opencv_face disabled by whitelist
+-- Module opencv_freetype disabled by whitelist
+-- Module opencv_fuzzy disabled by whitelist
+-- Module opencv_hdf disabled by whitelist
+-- Module opencv_hfs disabled by whitelist
+-- Module opencv_img_hash disabled by whitelist
+-- Module opencv_intensity_transform disabled by whitelist
+-- Module opencv_line_descriptor disabled by whitelist
+-- Module opencv_mcc disabled by whitelist
+-- Module opencv_optflow disabled by whitelist
+-- Module opencv_phase_unwrapping disabled by whitelist
+-- Module opencv_plot disabled by whitelist
+-- Module opencv_quality disabled by whitelist
+-- Module opencv_rapid disabled by whitelist
+-- Module opencv_reg disabled by whitelist
+-- Module opencv_rgbd disabled by whitelist
+-- Module opencv_saliency disabled by whitelist
+-- Module opencv_sfm disabled by whitelist
+-- Module opencv_shape disabled by whitelist
+-- Module opencv_signal disabled by whitelist
+-- Module opencv_stereo disabled by whitelist
+-- Module opencv_structured_light disabled by whitelist
+-- Module opencv_superres disabled by whitelist
+-- Module opencv_surface_matching disabled by whitelist
+-- Module opencv_text disabled by whitelist
+-- Module opencv_tracking disabled by whitelist
+-- Module opencv_videostab disabled by whitelist
+-- Module opencv_viz disabled by whitelist
+-- Module opencv_wechat_qrcode disabled by whitelist
+-- Module opencv_xfeatures2d disabled by whitelist
+-- Module opencv_ximgproc disabled by whitelist
+-- Module opencv_xobjdetect disabled by whitelist
+-- Module opencv_xphoto disabled by whitelist
+-- Allocator metrics storage type: 'long long'
+-- Excluding from source files list: modules/imgproc/src/imgwarp.lasx.cpp
+-- Excluding from source files list: modules/imgproc/src/resize.lasx.cpp
+-- highgui: using builtin backend: GTK3
+-- 
+-- General configuration for OpenCV 4.12.0 =====================================
+--   Version control:               fe6c34c-dirty
+-- 
+--   Extra modules:
+--     Location (extra):            /home/ubuntu22/slam/SIO_SLAM/build/dependencies/src/opencv_contrib-4.12.0/modules
+--     Version control (extra):     fe6c34c-dirty
+-- 
+--   Platform:
+--     Timestamp:                   2026-10-28T03:45:19Z
+--     Host:                        Linux 6.8.0-138-generic x86_64
+--     CMake:                       3.22.1
+--     CMake generator:             Ninja
+--     CMake build tool:            /usr/bin/ninja
+--     Configuration:               Release
+--     Algorithm Hint:              ALGO_HINT_ACCURATE
+-- 
+--   CPU/HW features:
+--     Baseline:                    SSE SSE2 SSE3
+--       requested:                 SSE3
+--     Dispatched code generation:  SSE4_1 SSE4_2 AVX FP16 AVX2 AVX512_SKX
+--       SSE4_1 (15 files):         + SSSE3 SSE4_1
+--       SSE4_2 (1 files):          + SSSE3 SSE4_1 POPCNT SSE4_2
+--       AVX (4 files):             + SSSE3 SSE4_1 POPCNT SSE4_2 AVX
+--       FP16 (0 files):            + SSSE3 SSE4_1 POPCNT SSE4_2 AVX FP16
+--       AVX2 (29 files):           + SSSE3 SSE4_1 POPCNT SSE4_2 AVX FP16 AVX2 FMA3
+--       AVX512_SKX (4 files):      + SSSE3 SSE4_1 POPCNT SSE4_2 AVX FP16 AVX2 FMA3 AVX_512F AVX512_COMMON AVX512_SKX
+-- 
+--   C/C++:
+--     Built as dynamic libs?:      YES
+--     C++ standard:                11
+--     C++ Compiler:                /usr/bin/c++  (ver 11.4.0)
+--     C++ flags (Release):         -fsigned-char -W -Wall -Wreturn-type -Wnon-virtual-dtor -Waddress -Wsequence-point -Wformat -Wformat-security -Wmissing-declarations -Wundef -Winit-self -Wpointer-arith -Wshadow -Wsign-promo -Wuninitialized -Wsuggest-override -Wno-delete-non-virtual-dtor -Wno-comment -Wimplicit-fallthrough=3 -Wno-strict-overflow -fdiagnostics-show-option -pthread -fomit-frame-pointer -ffunction-sections -fdata-sections  -msse3 -fvisibility=hidden -fvisibility-inlines-hidden -O3 -DNDEBUG  -DNDEBUG
+--     C++ flags (Debug):           -fsigned-char -W -Wall -Wreturn-type -Wnon-virtual-dtor -Waddress -Wsequence-point -Wformat -Wformat-security -Wmissing-declarations -Wundef -Winit-self -Wpointer-arith -Wshadow -Wsign-promo -Wuninitialized -Wsuggest-override -Wno-delete-non-virtual-dtor -Wno-comment -Wimplicit-fallthrough=3 -Wno-strict-overflow -fdiagnostics-show-option -pthread -fomit-frame-pointer -ffunction-sections -fdata-sections  -msse3 -fvisibility=hidden -fvisibility-inlines-hidden -g  -O0 -DDEBUG -D_DEBUG
+--     C Compiler:                  /usr/bin/cc
+--     C flags (Release):           -fsigned-char -W -Wall -Wreturn-type -Waddress -Wsequence-point -Wformat -Wformat-security -Wmissing-declarations -Wmissing-prototypes -Wstrict-prototypes -Wundef -Winit-self -Wpointer-arith -Wshadow -Wuninitialized -Wno-comment -Wimplicit-fallthrough=3 -Wno-strict-overflow -fdiagnostics-show-option -pthread -fomit-frame-pointer -ffunction-sections -fdata-sections  -msse3 -fvisibility=hidden -O3 -DNDEBUG  -DNDEBUG
+--     C flags (Debug):             -fsigned-char -W -Wall -Wreturn-type -Waddress -Wsequence-point -Wformat -Wformat-security -Wmissing-declarations -Wmissing-prototypes -Wstrict-prototypes -Wundef -Winit-self -Wpointer-arith -Wshadow -Wuninitialized -Wno-comment -Wimplicit-fallthrough=3 -Wno-strict-overflow -fdiagnostics-show-option -pthread -fomit-frame-pointer -ffunction-sections -fdata-sections  -msse3 -fvisibility=hidden -g  -O0 -DDEBUG -D_DEBUG
+--     Linker flags (Release):      -Wl,--gc-sections -Wl,--as-needed -Wl,--no-undefined  
+--     Linker flags (Debug):        -Wl,--gc-sections -Wl,--as-needed -Wl,--no-undefined  
+--     ccache:                      NO
+--     Precompiled headers:         NO
+--     Extra dependencies:          m pthread cudart_static dl rt nppc nppial nppicc nppidei nppif nppig nppim nppist nppisu nppitc npps cublas cufft -L/usr/local/cuda-12.9/lib64 -L/usr/lib/x86_64-linux-gnu
+--     3rdparty dependencies:
+-- 
+--   OpenCV modules:
+--     To be built:                 calib3d core cudaarithm cudaimgproc cudawarping cudev features2d flann highgui imgcodecs imgproc videoio
+--     Disabled:                    python3 world
+--     Disabled by dependency:      alphamat aruco bgsegm bioinspired ccalib cudabgsegm cudacodec cudafeatures2d cudafilters cudalegacy cudaobjdetect cudaoptflow cudastereo datasets dnn dnn_objdetect dnn_superres dpm face freetype fuzzy hdf hfs img_hash intensity_transform java_bindings_generator js_bindings_generator line_descriptor mcc ml objc_bindings_generator objdetect optflow phase_unwrapping photo plot python_bindings_generator python_tests quality rapid reg rgbd saliency sfm shape signal stereo stitching structured_light superres surface_matching text tracking video videostab viz wechat_qrcode xfeatures2d ximgproc xobjdetect xphoto
+--     Unavailable:                 cannops cvv fastcv gapi java julia matlab ovis python2 ts
+--     Applications:                apps
+--     Documentation:               NO
+--     Non-free algorithms:         NO
+-- 
+--   GUI:                           GTK3
+--     GTK+:                        YES (ver 3.24.33)
+--     VTK support:                 YES (ver 9.1.0)
+-- 
+--   Media I/O: 
+--     ZLib:                        /usr/lib/x86_64-linux-gnu/libz.so (ver 1.2.11)
+--     JPEG:                        /usr/lib/x86_64-linux-gnu/libjpeg.so (ver 80)
+--     WEBP:                        /usr/lib/x86_64-linux-gnu/libwebp.so (ver decoder: 0x0209, encoder: 0x020f, demux: 0x0107)
+--     AVIF:                        NO
+--     PNG:                         /usr/lib/x86_64-linux-gnu/libpng.so (ver 1.6.37)
+--     TIFF:                        /usr/lib/x86_64-linux-gnu/libtiff.so (ver 42 / 4.3.0)
+--     JPEG 2000:                   OpenJPEG (ver 2.4.0)
+--     OpenEXR:                     /usr/lib/x86_64-linux-gnu/libImath-2_5.so /usr/lib/x86_64-linux-gnu/libIlmImf-2_5.so /usr/lib/x86_64-linux-gnu/libIex-2_5.so /usr/lib/x86_64-linux-gnu/libHalf-2_5.so /usr/lib/x86_64-linux-gnu/libIlmThread-2_5.so (ver 2.5.7)
+--     GIF:                         YES
+--     HDR:                         YES
+--     SUNRASTER:                   YES
+--     PXM:                         YES
+--     PFM:                         YES
+-- 
+--   Video I/O:
+--     FFMPEG:                      YES
+--       avcodec:                   YES (58.134.100)
+--       avformat:                  YES (58.76.100)
+--       avutil:                    YES (56.70.100)
+--       swscale:                   YES (5.9.100)
+--       avresample:                NO
+--     GStreamer:                   NO
+--     v4l/v4l2:                    YES (linux/videodev2.h)
+-- 
+--   Parallel framework:            pthreads
+-- 
+--   Trace:                         YES (with Intel ITT(3.25.4))
+-- 
+--   Other third-party libraries:
+--     VA:                          NO
+--     Lapack:                      NO
+--     Eigen:                       YES (ver 3.4.0)
+--     Custom HAL:                  NO
+--     Protobuf:                    build (3.19.1)
+--     Flatbuffers:                 builtin/3rdparty (23.5.9)
+-- 
+--   NVIDIA CUDA:                   YES (ver 12.9, CUFFT CUBLAS)
+--     NVIDIA GPU arch:             89
+--     NVIDIA PTX archs:
+-- 
+--   OpenCL:                        YES (no extra features)
+--     Include path:                /home/ubuntu22/slam/SIO_SLAM/build/dependencies/src/opencv-4.12.0/3rdparty/include/opencl/1.2
+--     Link libraries:              Dynamic load
+-- 
+--   Python (for build):            /usr/bin/python3
+-- 
+--   Install to:                    /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install
+-- -----------------------------------------------------------------
+-- 
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/build/opencv
+ninja: no work to do.
+-- Install configuration: "Release"
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/licenses/opencv4/flatbuffers-LICENSE.txt
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/licenses/opencv4/opencl-headers-LICENSE.txt
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cvconfig.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/opencv_modules.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/pkgconfig/opencv4.pc
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/cmake/opencv4/OpenCVModules.cmake
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/cmake/opencv4/OpenCVModules-release.cmake
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/cmake/opencv4/OpenCVConfig-version.cmake
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/cmake/opencv4/OpenCVConfig.cmake
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/bin/setup_vars_opencv4.sh
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/valgrind.supp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/valgrind_3rdparty.supp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/licenses/opencv4/protobuf-LICENSE
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/licenses/opencv4/protobuf-README.md
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/licenses/opencv4/ittnotify-BSD-3-Clause.txt
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/licenses/opencv4/ittnotify-GPL-2.0-only.txt
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/opencv.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_cudev.so.4.12.0
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_cudev.so.412
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_cudev.so
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/block/block.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/block/detail/reduce.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/block/detail/reduce_key_val.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/block/dynamic_smem.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/block/reduce.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/block/scan.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/block/vec_distance.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/common.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/common.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/expr/binary_func.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/expr/binary_op.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/expr/color.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/expr/deriv.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/expr/expr.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/expr/per_element_func.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/expr/reduction.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/expr/unary_func.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/expr/unary_op.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/expr/warping.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/functional/color_cvt.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/functional/detail/color_cvt.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/functional/functional.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/functional/tuple_adapter.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/grid/copy.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/grid/detail/copy.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/grid/detail/histogram.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/grid/detail/integral.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/grid/detail/minmaxloc.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/grid/detail/pyr_down.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/grid/detail/pyr_up.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/grid/detail/reduce.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/grid/detail/reduce_to_column.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/grid/detail/reduce_to_row.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/grid/detail/split_merge.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/grid/detail/transform.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/grid/detail/transpose.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/grid/histogram.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/grid/integral.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/grid/pyramids.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/grid/reduce.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/grid/reduce_to_vec.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/grid/split_merge.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/grid/transform.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/grid/transpose.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/ptr2d/constant.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/ptr2d/deriv.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/ptr2d/detail/gpumat.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/ptr2d/extrapolation.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/ptr2d/glob.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/ptr2d/gpumat.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/ptr2d/interpolation.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/ptr2d/lut.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/ptr2d/mask.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/ptr2d/remap.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/ptr2d/resize.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/ptr2d/texture.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/ptr2d/traits.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/ptr2d/transform.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/ptr2d/warping.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/ptr2d/zip.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/util/atomic.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/util/detail/tuple.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/util/detail/type_traits.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/util/limits.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/util/saturate_cast.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/util/simd_functions.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/util/tuple.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/util/type_traits.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/util/vec_math.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/util/vec_traits.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/warp/detail/reduce.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/warp/detail/reduce_key_val.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/warp/reduce.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/warp/scan.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/warp/shuffle.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/warp/warp.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_core.so.4.12.0
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_core.so.412
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_core.so
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/affine.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/async.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/base.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/bindings_utils.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/bufferpool.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/check.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/core.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/core_c.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda.inl.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/block.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/border_interpolate.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/color.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/common.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/datamov_utils.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/detail/color_detail.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/detail/reduce.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/detail/reduce_key_val.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/detail/transform_detail.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/detail/type_traits_detail.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/detail/vec_distance_detail.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/dynamic_smem.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/emulation.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/filters.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/funcattrib.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/functional.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/limits.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/reduce.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/saturate_cast.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/scan.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/simd_functions.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/transform.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/type_traits.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/utility.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/vec_distance.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/vec_math.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/vec_traits.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/warp.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/warp_reduce.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/warp_shuffle.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda_stream_accessor.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda_types.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cv_cpu_dispatch.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cv_cpu_helper.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cvdef.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cvstd.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cvstd.inl.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cvstd_wrapper.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/detail/async_promise.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/detail/dispatch_helper.impl.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/detail/exception_ptr.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/directx.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/dualquaternion.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/dualquaternion.inl.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/eigen.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/fast_math.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/hal/hal.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/hal/interface.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/hal/intrin.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/hal/intrin_avx.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/hal/intrin_avx512.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/hal/intrin_cpp.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/hal/intrin_forward.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/hal/intrin_lasx.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/hal/intrin_legacy_ops.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/hal/intrin_lsx.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/hal/intrin_math.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/hal/intrin_msa.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/hal/intrin_neon.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/hal/intrin_rvv071.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/hal/intrin_rvv_scalable.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/hal/intrin_sse.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/hal/intrin_sse_em.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/hal/intrin_vsx.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/hal/intrin_wasm.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/hal/msa_macros.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/hal/simd_utils.impl.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/mat.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/mat.inl.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/matx.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/matx.inl.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/neon_utils.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/ocl.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/ocl_genbase.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/opencl/ocl_defs.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/opencl/opencl_info.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/opencl/opencl_svm.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/opencl/runtime/autogenerated/opencl_clblas.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/opencl/runtime/autogenerated/opencl_clfft.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/opencl/runtime/autogenerated/opencl_core.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/opencl/runtime/autogenerated/opencl_core_wrappers.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/opencl/runtime/autogenerated/opencl_gl.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/opencl/runtime/autogenerated/opencl_gl_wrappers.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/opencl/runtime/opencl_clblas.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/opencl/runtime/opencl_clfft.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/opencl/runtime/opencl_core.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/opencl/runtime/opencl_core_wrappers.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/opencl/runtime/opencl_gl.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/opencl/runtime/opencl_gl_wrappers.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/opencl/runtime/opencl_svm_20.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/opencl/runtime/opencl_svm_definitions.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/opencl/runtime/opencl_svm_hsa_extension.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/opengl.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/operations.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/optim.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/ovx.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/parallel/backend/parallel_for.openmp.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/parallel/backend/parallel_for.tbb.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/parallel/parallel_backend.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/persistence.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/quaternion.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/quaternion.inl.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/saturate.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/simd_intrinsics.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/softfloat.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/sse_utils.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/traits.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/types.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/types_c.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/utility.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/utils/allocator_stats.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/utils/allocator_stats.impl.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/utils/filesystem.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/utils/fp_control_utils.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/utils/instrumentation.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/utils/logger.defines.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/utils/logger.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/utils/logtag.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/utils/tls.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/utils/trace.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/va_intel.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/version.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/vsx_utils.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/licenses/opencv4/SoftFloat-COPYING.txt
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_cudaarithm.so.4.12.0
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_cudaarithm.so.412
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_cudaarithm.so
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudaarithm.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_flann.so.4.12.0
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_flann.so.412
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_flann.so
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/all_indices.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/allocator.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/any.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/autotuned_index.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/composite_index.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/config.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/defines.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/dist.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/dummy.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/dynamic_bitset.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/flann.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/flann_base.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/general.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/ground_truth.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/heap.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/hierarchical_clustering_index.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/index_testing.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/kdtree_index.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/kdtree_single_index.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/kmeans_index.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/linear_index.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/logger.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/lsh_index.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/lsh_table.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/matrix.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/miniflann.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/nn_index.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/object_factory.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/params.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/random.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/result_set.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/sampling.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/saving.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/simplex_downhill.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/timer.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_imgproc.so.4.12.0
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_imgproc.so.412
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_imgproc.so
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/imgproc.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/imgproc/bindings.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/imgproc/detail/gcgraph.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/imgproc/detail/legacy.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/imgproc/hal/hal.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/imgproc/hal/interface.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/imgproc/imgproc.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/imgproc/imgproc_c.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/imgproc/segmentation.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/imgproc/types_c.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_cudaimgproc.so.4.12.0
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_cudaimgproc.so.412
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_cudaimgproc.so
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudaimgproc.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_cudawarping.so.4.12.0
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_cudawarping.so.412
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_cudawarping.so
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudawarping.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_features2d.so.4.12.0
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_features2d.so.412
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_features2d.so
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/features2d.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/features2d/features2d.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/features2d/hal/interface.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/licenses/opencv4/mscr-chi_table_LICENSE.txt
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_imgcodecs.so.4.12.0
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_imgcodecs.so.412
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_imgcodecs.so
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/imgcodecs.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/imgcodecs/imgcodecs.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/imgcodecs/imgcodecs_c.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/imgcodecs/ios.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/imgcodecs/legacy/constants_c.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/imgcodecs/macosx.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_videoio.so.4.12.0
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_videoio.so.412
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_videoio.so
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/videoio.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/videoio/legacy/constants_c.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/videoio/registry.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/videoio/videoio.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/videoio/videoio_c.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_calib3d.so.4.12.0
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_calib3d.so.412
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_calib3d.so
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/calib3d.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/calib3d/calib3d.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/calib3d/calib3d_c.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_highgui.so.4.12.0
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_highgui.so.412
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_highgui.so
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/highgui.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/highgui/highgui.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/highgui/highgui_c.h
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/haarcascades/haarcascade_eye.xml
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/haarcascades/haarcascade_eye_tree_eyeglasses.xml
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/haarcascades/haarcascade_frontalcatface.xml
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/haarcascades/haarcascade_frontalcatface_extended.xml
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/haarcascades/haarcascade_frontalface_alt.xml
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/haarcascades/haarcascade_frontalface_alt2.xml
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/haarcascades/haarcascade_frontalface_alt_tree.xml
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/haarcascades/haarcascade_frontalface_default.xml
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/haarcascades/haarcascade_fullbody.xml
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/haarcascades/haarcascade_lefteye_2splits.xml
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/haarcascades/haarcascade_license_plate_rus_16stages.xml
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/haarcascades/haarcascade_lowerbody.xml
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/haarcascades/haarcascade_profileface.xml
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/haarcascades/haarcascade_righteye_2splits.xml
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/haarcascades/haarcascade_russian_plate_number.xml
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/haarcascades/haarcascade_smile.xml
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/haarcascades/haarcascade_upperbody.xml
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/lbpcascades/lbpcascade_frontalcatface.xml
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/lbpcascades/lbpcascade_frontalface.xml
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/lbpcascades/lbpcascade_frontalface_improved.xml
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/lbpcascades/lbpcascade_profileface.xml
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/lbpcascades/lbpcascade_silverware.xml
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/bin/opencv_annotation
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/bin/opencv_visualisation
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/bin/opencv_version
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/build/rasterizer
+ninja: no work to do.
+GPU dependencies built. Next: bash scripts/build.sh gpu

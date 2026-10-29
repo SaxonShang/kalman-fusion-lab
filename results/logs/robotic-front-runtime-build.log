@@ -1,0 +1,143 @@
+[0/1] Re-running CMake...
+-- SIO Profiling: DISABLED
+-- Using TensorRT hints from project_config.local.yaml
+-- Found ament_cmake: 1.3.14 (/opt/ros/humble/share/ament_cmake/cmake)
+-- Found rclcpp: 16.0.21 (/opt/ros/humble/share/rclcpp/cmake)
+-- Found rosidl_generator_c: 3.1.9 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+-- Found rosidl_adapter: 3.1.9 (/opt/ros/humble/share/rosidl_adapter/cmake)
+-- Found rosidl_generator_cpp: 3.1.9 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found rmw_implementation_cmake: 6.1.4 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+-- Found rmw_fastrtps_cpp: 6.2.10 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- Found sensor_msgs: 4.9.2 (/opt/ros/humble/share/sensor_msgs/cmake)
+-- Found pcl_conversions: 2.4.5 (/opt/ros/humble/share/pcl_conversions/cmake)
+-- Eigen found (include: /usr/include/eigen3, version: 3.4.0)
+-- FLANN found (include: /usr/include, lib: /usr/lib/x86_64-linux-gnu/libflann_cpp.so)
+-- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+-- OpenNI2 found (version: 2.2.0.33, include: /usr/include/openni2, lib: /usr/lib/x86_64-linux-gnu/libOpenNI2.so;libusb::libusb)
+-- Eigen found (include: /usr/include/eigen3, version: 3.4.0)
+-- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+-- OpenNI2 found (version: 2.2.0.33, include: /usr/include/openni2, lib: /usr/lib/x86_64-linux-gnu/libOpenNI2.so;libusb::libusb)
+-- Found Qhull version 8.0.2
+-- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+-- Found CUDA: /usr/local/cuda-12.9 (found suitable exact version "12.9") 
+-- Found OpenCV: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install (found version "4.12.0") 
+CMake Warning (dev) at CMakeLists.txt:82 (find_package):
+  Policy CMP0074 is not set: find_package uses <PackageName>_ROOT variables.
+  Run "cmake --help-policy CMP0074" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  CMake variable PCL_ROOT is set to:
+
+    /usr
+
+  For compatibility, CMake is ignoring the variable.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Found yaml-cpp: include=/usr/include, lib=/usr/lib/x86_64-linux-gnu/libyaml-cpp.so
+CMake Warning (dev) at CMakeLists.txt:120 (find_package):
+  Policy CMP0074 is not set: find_package uses <PackageName>_ROOT variables.
+  Run "cmake --help-policy CMP0074" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  CMake variable CUDAToolkit_ROOT is set to:
+
+    /usr/local/cuda-12.9
+
+  For compatibility, CMake is ignoring the variable.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Found CUDAToolkit: /usr/local/cuda-12.9/include (found version "12.9.86") 
+-- Found OpenCV: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install (found version "4.12.0") found components: core imgproc imgcodecs highgui cudaarithm cudaimgproc cudawarping 
+-- Found CUDA: /usr/local/cuda-12.9 (found version "12.9") 
+-- Found CUDAToolkit: /usr/local/cuda-12.9/include (found version "12.9.86") 
+-- PyTorch: CUDA detected: 12.9
+-- PyTorch: CUDA nvcc is: /usr/local/cuda-12.9/bin/nvcc
+-- PyTorch: CUDA toolkit directory: /usr/local/cuda-12.9
+-- PyTorch: Header version is: 12.9
+CMake Warning at build/dependencies/install/libtorch/share/cmake/Caffe2/public/cuda.cmake:140 (message):
+  Failed to compute shorthash for libnvrtc.so
+Call Stack (most recent call first):
+  build/dependencies/install/libtorch/share/cmake/Caffe2/Caffe2Config.cmake:86 (include)
+  build/dependencies/install/libtorch/share/cmake/Torch/TorchConfig.cmake:68 (find_package)
+  CMakeLists.txt:417 (find_package)
+
+
+-- USE_CUDNN is set to 0. Compiling without cuDNN support
+-- USE_CUSPARSELT is set to 0. Compiling without cuSPARSELt support
+-- USE_CUDSS is set to 0. Compiling without cuDSS support
+-- USE_CUFILE is set to 0. Compiling without cuFile support
+-- Added CUDA NVCC flags for: -gencode;arch=compute_89,code=sm_89
+-- Found ament_cmake_gtest: 1.3.14 (/opt/ros/humble/share/ament_cmake_gtest/cmake)
+-- Found gtest sources under '/opt/ros/humble/src/gtest_vendor': C++ tests using 'Google Test' will be built
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/ubuntu22/slam/SIO_SLAM/build/local/gpu
+[1/66] Building CXX object CMakeFiles/run_frontend.dir/src/dataset_loader.cpp.o
+[2/66] Building CXX object CMakeFiles/run_frontend.dir/src/fusion_debug_logger.cpp.o
+[3/66] Building CXX object CMakeFiles/run_frontend.dir/src/image_preprocessor.cpp.o
+[4/66] Building CXX object CMakeFiles/run_frontend.dir/src/imu_debug_logger.cpp.o
+[5/66] Building CXX object CMakeFiles/run_frontend.dir/src/imu_integator.cpp.o
+[6/66] Building CXX object CMakeFiles/run_frontend.dir/src/profiler/simple_profiler.cpp.o
+[7/66] Building CXX object CMakeFiles/run_frontend.dir/src/sio_stereo_geometry.cpp.o
+[8/66] Building CXX object CMakeFiles/run_frontend.dir/src/feature_processor.cpp.o
+[9/66] Building CXX object CMakeFiles/run_frontend.dir/src/stereo_gicp.cpp.o
+[10/66] Building CXX object CMakeFiles/run_frontend.dir/src/keyframe_manager.cpp.o
+[11/66] Building CXX object CMakeFiles/run_demo.dir/src/image_preprocessor.cpp.o
+[12/66] Building CXX object CMakeFiles/run_demo.dir/src/imu_debug_logger.cpp.o
+[13/66] Building CXX object CMakeFiles/run_frontend.dir/modules/registration/src/color_icp.cpp.o
+[14/66] Building CXX object CMakeFiles/run_demo.dir/src/imu_integator.cpp.o
+[15/66] Building CXX object CMakeFiles/run_demo.dir/src/imu_preprocessor.cpp.o
+[16/66] Building CXX object CMakeFiles/run_demo.dir/src/profiler/simple_profiler.cpp.o
+[17/66] Building CXX object CMakeFiles/run_demo.dir/src/keyframe_manager.cpp.o
+[18/66] Building CXX object CMakeFiles/run_demo.dir/src/stereo_gicp.cpp.o
+[19/66] Building CXX object CMakeFiles/run_demo.dir/modules/registration/src/stereo_gicp.cpp.o
+[20/66] Building CXX object CMakeFiles/run_demo.dir/src/state_estimater.cpp.o
+[21/66] Building CXX object CMakeFiles/run_demo.dir/src/sio_stereo_geometry.cpp.o
+[22/66] Building CXX object CMakeFiles/run_demo.dir/src/sio_config.cpp.o
+[23/66] Building CXX object CMakeFiles/run_demo.dir/src/frontend_debug_visualizer.cpp.o
+[24/66] Building CXX object CMakeFiles/run_demo.dir/src/dynamic_cloud_processor.cpp.o
+[25/66] Building CXX object CMakeFiles/run_demo.dir/src/fusion_debug_logger.cpp.o
+[26/66] Building CXX object CMakeFiles/run_demo.dir/modules/registration/src/color_icp.cpp.o
+[27/66] Building CXX object CMakeFiles/run_demo.dir/src/dataset_loader.cpp.o
+[28/66] Building CXX object CMakeFiles/run_demo.dir/src/feature_processor.cpp.o
+[29/66] Building CXX object CMakeFiles/run_frontend.dir/src/sio_config.cpp.o
+[30/66] Building CXX object CMakeFiles/run_frontend.dir/apps/run_frontend.cpp.o
+[31/66] Building CXX object CMakeFiles/run_frontend.dir/src/dynamic_cloud_processor.cpp.o
+[32/66] Building CXX object CMakeFiles/run_frontend.dir/src/frontend_debug_visualizer.cpp.o
+[33/66] Building CXX object CMakeFiles/run_frontend.dir/src/backend.cpp.o
+[34/66] Building CXX object CMakeFiles/run_frontend.dir/src/yaml.cpp.o
+[35/66] Building CXX object CMakeFiles/run_frontend.dir/src/frontend.cpp.o
+[36/66] Building CXX object CMakeFiles/run_frontend.dir/src/learning_rate_scheduler_factory.cpp.o
+[37/66] Building CXX object CMakeFiles/run_frontend.dir/src/torch_pose_optimize.cpp.o
+[38/66] Building CXX object CMakeFiles/run_frontend.dir/src/pose_3dgs_optimizer.cpp.o
+[39/66] Building CXX object CMakeFiles/run_demo.dir/src/yaml.cpp.o
+[40/66] Building CXX object CMakeFiles/run_frontend.dir/src/gaussian_map_manager.cpp.o
+[41/66] Building CXX object CMakeFiles/run_frontend.dir/src/imu_preprocessor.cpp.o
+[42/66] Building CXX object CMakeFiles/run_demo.dir/apps/run_demo.cpp.o
+[43/66] Linking CXX executable run_demo
+[44/66] Building CXX object CMakeFiles/run_frontend.dir/modules/registration/src/stereo_gicp.cpp.o
+[45/66] Building CXX object CMakeFiles/run_frontend.dir/src/state_estimater.cpp.o
+[46/66] Linking CXX executable run_frontend
+[47/66] Building CXX object CMakeFiles/pipeline_smoke_test.dir/src/feature_processor.cpp.o
+[48/66] Building CXX object CMakeFiles/pipeline_smoke_test.dir/src/dataset_loader.cpp.o
+[49/66] Building CXX object CMakeFiles/pipeline_smoke_test.dir/src/image_preprocessor.cpp.o
+[50/66] Building CXX object CMakeFiles/pipeline_smoke_test.dir/src/fusion_debug_logger.cpp.o
+[51/66] Building CXX object CMakeFiles/pipeline_smoke_test.dir/src/imu_debug_logger.cpp.o
+[52/66] Building CXX object CMakeFiles/pipeline_smoke_test.dir/src/imu_integator.cpp.o
+[53/66] Building CXX object CMakeFiles/pipeline_smoke_test.dir/src/imu_preprocessor.cpp.o
+[54/66] Building CXX object CMakeFiles/pipeline_smoke_test.dir/src/profiler/simple_profiler.cpp.o
+[55/66] Building CXX object CMakeFiles/pipeline_smoke_test.dir/src/keyframe_manager.cpp.o
+[56/66] Building CXX object CMakeFiles/pipeline_smoke_test.dir/src/stereo_gicp.cpp.o
+[57/66] Building CXX object CMakeFiles/pipeline_smoke_test.dir/modules/registration/src/stereo_gicp.cpp.o
+[58/66] Building CXX object CMakeFiles/pipeline_smoke_test.dir/src/state_estimater.cpp.o
+[59/66] Building CXX object CMakeFiles/pipeline_smoke_test.dir/src/sio_stereo_geometry.cpp.o
+[60/66] Building CXX object CMakeFiles/pipeline_smoke_test.dir/src/sio_config.cpp.o
+[61/66] Building CXX object CMakeFiles/pipeline_smoke_test.dir/src/dynamic_cloud_processor.cpp.o
+[62/66] Building CXX object CMakeFiles/pipeline_smoke_test.dir/src/frontend_debug_visualizer.cpp.o
+[63/66] Building CXX object CMakeFiles/pipeline_smoke_test.dir/src/yaml.cpp.o
+[64/66] Building CXX object CMakeFiles/pipeline_smoke_test.dir/modules/registration/src/color_icp.cpp.o
+[65/66] Building CXX object CMakeFiles/pipeline_smoke_test.dir/tests/integration/pipeline_smoke_test.cpp.o
+[66/66] Linking CXX executable pipeline_smoke_test

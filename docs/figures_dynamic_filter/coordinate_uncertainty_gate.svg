@@ -1,0 +1,147 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="980" viewBox="0 0 1800 980" role="img" aria-labelledby="title desc">
+  <title id="title">坐标变换与像素域不确定度门控</title>
+  <desc id="desc">名义位姿传播几何光流中心，相对位姿协方差经相机坐标变换和投影传播得到倾斜椭圆门控。</desc>
+  <defs>
+    <style>
+      text{font-family:'Microsoft YaHei','Noto Sans CJK SC',Arial,sans-serif}
+      .title{font-size:32px;font-weight:700;fill:#15263d}
+      .subtitle{font-size:17px;fill:#52647a}
+      .eyebrow{font-size:13px;font-weight:700;letter-spacing:1.4px;fill:#708197}
+      .heading{font-size:19px;font-weight:700;fill:#15263d}
+      .body{font-size:16px;fill:#41546b}
+      .note{font-size:14px;fill:#64758b}
+      .formula{font-size:17px;font-weight:600;fill:#174a57}
+      .card{fill:#fff;stroke:#d7e0e9;stroke-width:1.5}
+      .nominal{fill:none;stroke:#4285a5;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+      .cov{fill:none;stroke:#8a6bb5;stroke-width:2.6;stroke-dasharray:8 7;stroke-linecap:round;stroke-linejoin:round}
+      .axis{fill:none;stroke:#778aa0;stroke-width:1.6;stroke-linecap:round}
+    </style>
+    <marker id="arrow-blue" markerWidth="10" markerHeight="10" refX="8.5" refY="5" orient="auto">
+      <path d="M0 0 10 5 0 10Z" fill="#4285a5"/>
+    </marker>
+    <marker id="arrow-violet" markerWidth="10" markerHeight="10" refX="8.5" refY="5" orient="auto">
+      <path d="M0 0 10 5 0 10Z" fill="#8a6bb5"/>
+    </marker>
+    <marker id="arrow-dark" markerWidth="10" markerHeight="10" refX="8.5" refY="5" orient="auto">
+      <path d="M0 0 10 5 0 10Z" fill="#52647a"/>
+    </marker>
+    <filter id="shadow" x="-15%" y="-15%" width="130%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#263a50" flood-opacity=".07"/>
+    </filter>
+  </defs>
+
+  <rect width="1800" height="980" fill="#f4f7fa"/>
+  <text x="62" y="61" class="title">坐标变换与像素域不确定度门控</text>
+  <text x="62" y="92" class="subtitle">两条信息路径各司其职：名义位姿预测像素位置，协方差传播门控椭圆</text>
+  <text x="62" y="142" class="eyebrow">01  NOMINAL PROJECTION · 像素预测中心</text>
+
+  <!-- Nominal projection row -->
+  <g filter="url(#shadow)">
+    <rect x="55" y="166" width="310" height="220" rx="18" class="card"/>
+    <rect x="420" y="166" width="310" height="220" rx="18" class="card"/>
+    <rect x="785" y="166" width="320" height="220" rx="18" class="card"/>
+    <rect x="1170" y="150" width="575" height="270" rx="18" class="card"/>
+  </g>
+  <rect x="55" y="166" width="6" height="220" rx="3" fill="#4285a5"/>
+  <text x="82" y="204" class="heading">参考关键帧 k</text>
+  <text x="82" y="242" class="formula">P<tspan baseline-shift="sub">k</tspan> = (X, Y, Z)<tspan baseline-shift="super">T</tspan></text>
+  <text x="82" y="279" class="body">已知参考深度与像素位置</text>
+  <text x="82" y="316" class="body">(u, v) = π(P<tspan baseline-shift="sub">k</tspan>)</text>
+  <text x="82" y="356" class="note">参考几何为像素位移提供深度锚点</text>
+
+  <rect x="420" y="166" width="6" height="220" rx="3" fill="#4285a5"/>
+  <text x="447" y="204" class="heading">当前相机 c：名义变换</text>
+  <text x="447" y="247" class="formula">P<tspan baseline-shift="sub">c</tspan> = R<tspan baseline-shift="sub">c←k</tspan>P<tspan baseline-shift="sub">k</tspan> + t<tspan baseline-shift="sub">c←k</tspan></text>
+  <text x="447" y="289" class="body">T<tspan baseline-shift="sub">c←k</tspan> 仅用于投影</text>
+  <text x="447" y="328" class="body">不决定残差的统计尺度</text>
+  <text x="447" y="356" class="note">由 IMU / 滤波器名义位姿给出</text>
+
+  <rect x="785" y="166" width="6" height="220" rx="3" fill="#198a91"/>
+  <text x="812" y="204" class="heading">几何光流预测</text>
+  <text x="812" y="247" class="formula">(u′, v′) = π(P<tspan baseline-shift="sub">c</tspan>)</text>
+  <text x="812" y="289" class="body">f<tspan baseline-shift="sub">geo</tspan> = (u′ − u, v′ − v)</text>
+  <text x="812" y="328" class="body">该像素位置是门控椭圆中心</text>
+  <text x="812" y="356" class="note">中心由位姿均值决定</text>
+
+  <!-- Pixel-domain covariance ellipse -->
+  <text x="1200" y="190" class="heading">像素域门控：方向与尺度来自 Σ̃<tspan baseline-shift="sub">f</tspan></text>
+  <line x1="1280" y1="345" x2="1630" y2="345" class="axis" marker-end="url(#arrow-dark)"/>
+  <line x1="1375" y1="390" x2="1375" y2="220" class="axis" marker-end="url(#arrow-dark)"/>
+  <text x="1636" y="352" class="note">u</text>
+  <text x="1367" y="214" class="note">v</text>
+  <g transform="translate(1453 278) rotate(-28)">
+    <ellipse cx="0" cy="0" rx="120" ry="49" fill="#e9e4f3" fill-opacity=".95" stroke="#8062aa" stroke-width="3"/>
+    <ellipse cx="0" cy="0" rx="78" ry="32" fill="none" stroke="#b7a6cf" stroke-width="1.5" stroke-dasharray="5 5"/>
+    <line x1="-132" y1="0" x2="132" y2="0" stroke="#8062aa" stroke-width="1.5"/>
+  </g>
+  <circle cx="1453" cy="278" r="6" fill="#4285a5"/>
+  <circle cx="1537" cy="236" r="8" fill="#d65f5f" stroke="#fff" stroke-width="2"/>
+  <path d="M1462 273 1527 241" fill="none" stroke="#d65f5f" stroke-width="2.5" marker-end="url(#arrow-dark)"/>
+  <circle cx="1220" cy="389" r="6" fill="#4285a5"/>
+  <text x="1234" y="394" class="note">中心 f<tspan baseline-shift="sub">geo</tspan></text>
+  <circle cx="1360" cy="389" r="6" fill="#d65f5f"/>
+  <text x="1374" y="394" class="note">观测位置 f<tspan baseline-shift="sub">nn</tspan></text>
+  <line x1="1520" y1="389" x2="1550" y2="389" stroke="#8062aa" stroke-width="2"/>
+  <text x="1559" y="394" class="note">交叉项使椭圆倾斜</text>
+
+  <!-- Clear separation between uncertainty propagation and mean projection -->
+  <rect x="55" y="444" width="1690" height="2" fill="#dfe6ed"/>
+  <text x="62" y="484" class="eyebrow">02  UNCERTAINTY PROPAGATION · 门控尺度与方向</text>
+
+  <g filter="url(#shadow)">
+    <rect x="55" y="512" width="345" height="172" rx="18" class="card"/>
+    <rect x="465" y="512" width="345" height="172" rx="18" class="card"/>
+    <rect x="875" y="512" width="345" height="172" rx="18" class="card"/>
+    <rect x="1285" y="512" width="460" height="172" rx="18" class="card"/>
+  </g>
+  <rect x="55" y="512" width="6" height="172" rx="3" fill="#8a6bb5"/>
+  <text x="82" y="551" class="heading">关键帧相对协方差</text>
+  <text x="82" y="591" class="formula">P<tspan baseline-shift="sub">rel</tspan> = Cov(T<tspan baseline-shift="sub">c←k</tspan>)</text>
+  <text x="82" y="630" class="body">包含旋转、平移及其交叉项</text>
+  <text x="82" y="658" class="note">不是绝对当前位姿协方差</text>
+
+  <rect x="465" y="512" width="6" height="172" rx="3" fill="#8a6bb5"/>
+  <text x="492" y="551" class="heading">变换到相机误差坐标</text>
+  <text x="492" y="591" class="formula">P<tspan baseline-shift="sub">cam</tspan> = A P<tspan baseline-shift="sub">rel</tspan>A<tspan baseline-shift="super">T</tspan></text>
+  <text x="492" y="630" class="body">外参旋转与相机–IMU 杠杆臂</text>
+  <text x="492" y="658" class="note">保留完整 6 × 6 相关结构</text>
+
+  <rect x="875" y="512" width="6" height="172" rx="3" fill="#8a6bb5"/>
+  <text x="902" y="551" class="heading">传播到几何光流</text>
+  <text x="902" y="591" class="formula">Σ<tspan baseline-shift="sub">f</tspan> = J<tspan baseline-shift="sub">f</tspan>P<tspan baseline-shift="sub">cam</tspan>J<tspan baseline-shift="super">T</tspan><tspan baseline-shift="sub">f</tspan></text>
+  <text x="902" y="630" class="body">加脊：Σ̃<tspan baseline-shift="sub">f</tspan> = Σ<tspan baseline-shift="sub">f</tspan> + τ₀²I</text>
+  <text x="902" y="658" class="note">投影点误差经雅可比映入像素域</text>
+
+  <rect x="1285" y="512" width="6" height="172" rx="3" fill="#198a91"/>
+  <text x="1312" y="551" class="heading">像素域马氏门控</text>
+  <text x="1312" y="594" class="formula">r<tspan baseline-shift="sub">f</tspan> = f<tspan baseline-shift="sub">nn</tspan> − f<tspan baseline-shift="sub">geo</tspan></text>
+  <text x="1312" y="632" class="formula">s = r<tspan baseline-shift="super">T</tspan><tspan baseline-shift="sub">f</tspan>Σ̃<tspan baseline-shift="super">−1</tspan><tspan baseline-shift="sub">f</tspan>r<tspan baseline-shift="sub">f</tspan></text>
+  <text x="1312" y="661" class="note">联合残差与不确定度判别运动</text>
+
+  <!-- Flow arrows for uncertainty path -->
+  <path d="M400 598H465" class="cov" marker-end="url(#arrow-violet)"/>
+  <path d="M810 598H875" class="cov" marker-end="url(#arrow-violet)"/>
+  <path d="M1220 598H1285" class="cov" marker-end="url(#arrow-violet)"/>
+
+  <!-- Final interpretation -->
+  <g filter="url(#shadow)">
+    <rect x="385" y="754" width="1030" height="145" rx="18" class="card"/>
+  </g>
+  <text x="420" y="795" class="heading">门控解释</text>
+  <line x1="420" y1="814" x2="1380" y2="814" stroke="#e3eaf0" stroke-width="1.5"/>
+  <circle cx="447" cy="850" r="13" fill="#fae9e8"/>
+  <path d="M441 844 453 856m0-12-12 12" stroke="#c44949" stroke-width="2" stroke-linecap="round"/>
+  <text x="470" y="856" class="body">s ≥ τ<tspan baseline-shift="sub">s</tspan>：动态观测</text>
+  <circle cx="800" cy="850" r="13" fill="#e5f4f1"/>
+  <path d="m794 850 5 5 9-11" fill="none" stroke="#198a91" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="823" y="856" class="body">s &lt; τ<tspan baseline-shift="sub">s</tspan>：静态候选</text>
+  <text x="1060" y="856" class="note">协方差仅改变门控形状，不移动几何预测中心</text>
+
+  <path d="M1105 275H1170" class="nominal" marker-end="url(#arrow-blue)"/>
+  <path d="M1047 512V470H1500V420" class="cov" marker-end="url(#arrow-violet)"/>
+
+  <line x1="140" y1="930" x2="185" y2="930" class="nominal"/>
+  <text x="198" y="936" class="note">均值 / 几何预测路径</text>
+  <line x1="395" y1="930" x2="440" y2="930" class="cov"/>
+  <text x="453" y="936" class="note">协方差传播路径</text>
+</svg>

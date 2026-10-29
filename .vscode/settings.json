@@ -1,0 +1,54 @@
+{
+  "C_Cpp.intelliSenseEngine": "disabled",
+  "C_Cpp.autocomplete": "disabled",
+  "C_Cpp.errorSquiggles": "disabled",
+  "C_Cpp.formatting": "disabled",
+
+  "clangd.path": "clangd",
+  "clangd.arguments": [
+    "--background-index",
+    "--clang-tidy",
+    "--header-insertion=iwyu"
+  ],
+
+  "cmake.sourceDirectory": "${workspaceFolder}",
+  "cmake.buildDirectory": "${workspaceFolder}/build/local/fusion",
+  "cmake.buildTargets": ["sio_fusion_lab", "sio_unit_tests"],
+  "cmake.configureSettings": {
+    "SIO_BUILD_RUNTIME": "OFF",
+    "SIO_BUILD_FUSION_LAB": "ON",
+    "SIO_ENABLE_ZED": "OFF",
+    "SIO_ENABLE_LIBTORCH": "OFF"
+  },
+  "cmake.environment": {
+    "CMAKE_PREFIX_PATH": "${workspaceFolder}/build/dependencies/install:/opt/ros/humble"
+  },
+  "cmake.configureOnOpen": false,
+  "cmake.useCMakePresets": "never",
+
+  "[cpp]": {
+    "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+
+  "files.associations": {
+    "*.h": "cpp",
+    "*.cpp": "cpp",
+    "*.ipp": "cpp"
+  },
+
+  "search.exclude": {
+    "**/build": true,
+    "**/install": true,
+    "**/data": true,
+    "**/submodules/**/build": true
+  },
+  "files.watcherExclude": {
+    "**/build/**": true,
+    "**/install/**": true,
+    "**/data/**": true,
+    "**/submodules/**/build/**": true
+  }
+}

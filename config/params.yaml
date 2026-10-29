@@ -1,0 +1,132 @@
+camera intrinsic:
+  # 工作分辨率 1280×720；1080p 录制会在 DatasetLoader 入口线性缩放到此分辨率
+  # 当前：由 data/20260622_170525/camera_params.yaml (1920×1080) 等比缩放得到
+  # fx: 711.785563
+  # fy: 711.785563
+  # cx: 653.824749
+  # cy: 371.338216
+  # baseline: 0.119879                                         # 双目基线（m）
+  # --- 旧配置：ZED 2.2mm LEFT_CAM_HD 原生 1280×720（后续可能切回）---
+  fx: 533.245
+  fy: 533.26
+  cx: 647.175
+  cy: 370.99
+  baseline: 0.119879
+  source_width: 1280
+  source_height: 720
+  inference_width: 896
+  inference_height: 448
+  distortion_coefficients: [-0.0642171, 0.0428786, -0.000427169, 0.000500914, -0.017399]
+imu parameters:
+  accel_noise_density: 0.01
+  gyro_noise_density: 0.001     
+
+
+T_imu_cam:
+  # Left Camera → IMU, p_imu = T @ p_cam（标定 matrix_m，平移单位 m）
+  rotation: [4.726962402473e-04, -1.491200262658e-03, -9.834017102640e-04] # roll, pitch, yaw (rad)
+  translation: [-0.023063736, 0.000238736, 0.001965712] # x, y, z (m)
+
+slam parameters:
+  tracking_target_max_points: 50000
+  tracking_target_min_depth_m: 0.2
+  tracking_target_max_depth_m: 30.0
+  tracking_target_min_confidence: 0.0
+  # ESIKF target_cache 与 GICP 共用体素降采样
+  tracking_target_voxel_size: 0.05
+  tracking_target_max_correspondence_distance: 0.10
+  esikf_max_correspondence_distance: 0.15
+
+  backend:
+    sliding_window_size: 10
+
+  keyframe_selection:
+    # frontend keyframe (for tracking/fusion)
+    front_trans_thresh_m: 0.8
+    front_angle_thresh_deg: 10.0
+    front_time_thresh_s: 0.5
+
+    # speed-adaptive scale for translation threshold:
+    # trans_thresh = front_trans_thresh_m * clamp(speed_ref_mps / speed, min, max)
+    speed_ref_mps: 1.5
+    adaptive_scale_min: 0.5
+    adaptive_scale_max: 2.0
+
+    # backend keyframe promotion (for future backend optimization)
+    backend_min_frontend_kfs: 3
+    backend_queue_legacy_trigger: 5
+    backend_trans_thresh_m: 1.8
+    backend_angle_thresh_deg: 35.0
+    backend_time_thresh_s: 1.0
+
+# 动态点滤除：
+# 当前相机系 6×6 位姿协方差（含交叉项）→ J_f P J_fᵀ → Σ_f，对 (raft-geo) 做马氏门控
+# （见 include/internal/geo_flow_error.h）。
+# tau_px_* 已废弃，保留字段仅兼容旧配置读取；门控主路径不再使用。
+# geo_flow_min_sq：双流都小于该阈值时跳过像素（默认 0.25 ≈ 0.5px）
+dynamic_filter:
+  tau_px_fixed: 12.0          # deprecated
+  raft_noise_base_px: 2.0     # deprecated
+  raft_noise_near_px: 6.0     # deprecated
+  geo_flow_min_sq: 0.25
+
+debug:
+  # 填写路径后自动落盘 CSV；留空则关闭对应日志
+  fusion_csv:
+  imu_csv:
+  console: false
+  track_console: true
+  # PCL 六宫格调试窗口（需 DISPLAY；本地/SSH X11 可用）
+  visualize: false
+  visualize_pause_ms: 0    # 0=每帧按 Enter；>0=自动播放(ms)，建议 >=100 便于看见窗口
+  visualize_voxel_m: 0.08
+  visualize_max_points: 8000
+
+imu_preprocessor:
+  enable: false # 是否启用IMU预处理器 为false则不进行IMU预处理  
+  enable_lpf: true # 是否启用低通滤波
+  enable_outlier_reject: true # 是否启用异常值拒绝  
+  sample_rate_hz: 400.0 # 采样率 单位: Hz
+  lpf_cutoff_hz: 20.0   # 低通滤波截止频率 单位: Hz
+  gyro_outlier_rad_s: 10.0 # 陀螺仪异常值阈值 单位: rad/s
+  acc_outlier_mps2: 30.0 # 加速度计异常值阈值 单位: m/s^2
+
+image_preprocessor:
+  image_preprocess:
+    enable: true                    # 双目 SLAM Y 通道自适应增强
+    dark_threshold: 70.0            # raw median Y 低于此值视为暗场景
+    bright_threshold: 170.0         # raw median Y 高于此值视为亮场景
+    luminance_percentile: 50.0      # 亮度统计分位（中位数）
+    target_luminance: 70.0          # 暗场景线性提亮目标 midtone
+    gain_max: 1.8                   # 最大线性增益
+    denoise: true                   # gain>1 时对 Y 通道轻量去噪
+    denoise_ksize: 3
+    denoise_sigma: 0.8
+    auto_gamma: true                # 暗场景按 midtone 自动 gamma
+    gamma_min: 0.55                 # 最暗 midtone 对应 gamma
+    gamma_midtone_dark: 15.0
+    highlight_aware: true             # 按 P99 高光限制 gain 上限
+    shadow_exclude_below: 10.0      # 统计时排除的阴影 Y 阈值
+    highlight_exclude_above: 220.0  # 统计时排除的饱和 Y 阈值
+    highlight_ceiling: 245.0          # 高光感知 gain 上限参考
+    highlight_percentile: 99.0
+    highlight_knee: 220               # 亮场景 Y 软压缩起点
+    highlight_slope: 0.45             # 亮场景 Y 软压缩斜率
+    bright_gamma: 1.15              # 亮场景额外压高光 gamma（1.0=关闭）
+    saturation_enable: true         # Y 增强后提升 Cr/Cb 饱和度
+    saturation_gain: 1.5            # Y gain=gain_max 时的色度增益上限，中间按 Y gain 线性插值
+    saturation_only_dark: true      # 仅暗场景且 gain>1 时生效
+
+color_icp:
+  # Pinned robotic-front main uses Euclidean GICP by default.
+  registration_type: gicp
+  color_weight: srgb                                      # ntsc / srgb / uniform(其他值)
+  num_threads: 8
+  gradient_min_neighbors: 5
+  gradient_max_neighbors: 24
+  nn_search_epsilon: 0.01                                 # KD-Tree 近似搜索容差
+  verbose_iteration: false
+  icp_max_iterations: 20
+  icp_transformation_epsilon: 1.0e-6                      # 收敛阈值
+  icp_max_corres_dist: 0.5                                  # 最近邻最大对应距离 (m)
+  color_icp_lambda: 0.9                                    # 几何权重，0=纯光度，1=纯几何

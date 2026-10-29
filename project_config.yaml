@@ -1,0 +1,10 @@
+# Shared runtime config. Keep collaborator defaults here.
+
+dataset_dir: /home/smartrobot/SIO_SLAM/data/20260701_160422/
+imu_file: /home/smartrobot/SIO_SLAM/data/20260701_160422/imu.csv
+plan_disp: /home/smartrobot/robotic-front/model/foundation_stereo_896x448.plan
+plan_raft: /home/smartrobot/robotic-front/model/raft_large_896x448_iter6.plan
+params_file: config/params.yaml
+
+topic: /sio/pipeline_debug_cloud
+frame_id: map

@@ -1,0 +1,196 @@
+注意：这只是一次模拟！
+　　　apt-get 需要 root 特权进行实际的执行。
+　　　同时请记住此时并未锁定，所以请勿完全相信当前的情况！
+正在读取软件包列表...
+正在分析软件包的依赖关系树...
+正在读取状态信息...
+将会同时安装下列软件：
+  cuda-cccl-12-9 cuda-command-line-tools-12-9 cuda-compiler-12-9 cuda-crt-12-9
+  cuda-cudart-12-9 cuda-cudart-dev-12-9 cuda-cuobjdump-12-9 cuda-cupti-12-9
+  cuda-cupti-dev-12-9 cuda-cuxxfilt-12-9 cuda-documentation-12-9
+  cuda-driver-dev-12-9 cuda-gdb-12-9 cuda-libraries-12-9
+  cuda-libraries-dev-12-9 cuda-nsight-12-9 cuda-nsight-compute-12-9
+  cuda-nsight-systems-12-9 cuda-nvcc-12-9 cuda-nvdisasm-12-9
+  cuda-nvml-dev-12-9 cuda-nvprof-12-9 cuda-nvprune-12-9 cuda-nvrtc-12-9
+  cuda-nvrtc-dev-12-9 cuda-nvtx-12-9 cuda-nvvm-12-9 cuda-nvvp-12-9
+  cuda-opencl-12-9 cuda-profiler-api-12-9 cuda-sandbox-dev-12-9
+  cuda-sanitizer-12-9 cuda-toolkit-12-9-config-common
+  cuda-toolkit-12-config-common cuda-toolkit-config-common cuda-tools-12-9
+  cuda-visual-tools-12-9 gds-tools-12-9 libcublas-12-9 libcublas-dev-12-9
+  libcufft-12-9 libcufft-dev-12-9 libcufile-12-9 libcufile-dev-12-9
+  libcurand-12-9 libcurand-dev-12-9 libcusolver-12-9 libcusolver-dev-12-9
+  libcusparse-12-9 libcusparse-dev-12-9 libnpp-12-9 libnpp-dev-12-9
+  libnvfatbin-12-9 libnvfatbin-dev-12-9 libnvjitlink-12-9
+  libnvjitlink-dev-12-9 libnvjpeg-12-9 libnvjpeg-dev-12-9 libxcb-cursor0
+  nsight-compute-2025.2.1 nsight-systems-2025.1.3
+下列【新】软件包将被安装：
+  cuda-cccl-12-9 cuda-command-line-tools-12-9 cuda-compiler-12-9 cuda-crt-12-9
+  cuda-cudart-12-9 cuda-cudart-dev-12-9 cuda-cuobjdump-12-9 cuda-cupti-12-9
+  cuda-cupti-dev-12-9 cuda-cuxxfilt-12-9 cuda-documentation-12-9
+  cuda-driver-dev-12-9 cuda-gdb-12-9 cuda-libraries-12-9
+  cuda-libraries-dev-12-9 cuda-nsight-12-9 cuda-nsight-compute-12-9
+  cuda-nsight-systems-12-9 cuda-nvcc-12-9 cuda-nvdisasm-12-9
+  cuda-nvml-dev-12-9 cuda-nvprof-12-9 cuda-nvprune-12-9 cuda-nvrtc-12-9
+  cuda-nvrtc-dev-12-9 cuda-nvtx-12-9 cuda-nvvm-12-9 cuda-nvvp-12-9
+  cuda-opencl-12-9 cuda-profiler-api-12-9 cuda-sandbox-dev-12-9
+  cuda-sanitizer-12-9 cuda-toolkit-12-9 cuda-toolkit-12-9-config-common
+  cuda-toolkit-12-config-common cuda-toolkit-config-common cuda-tools-12-9
+  cuda-visual-tools-12-9 gds-tools-12-9 libcublas-12-9 libcublas-dev-12-9
+  libcufft-12-9 libcufft-dev-12-9 libcufile-12-9 libcufile-dev-12-9
+  libcurand-12-9 libcurand-dev-12-9 libcusolver-12-9 libcusolver-dev-12-9
+  libcusparse-12-9 libcusparse-dev-12-9 libnpp-12-9 libnpp-dev-12-9
+  libnvfatbin-12-9 libnvfatbin-dev-12-9 libnvinfer-bin libnvinfer-dev
+  libnvinfer-dispatch10 libnvinfer-headers-dev libnvinfer-headers-plugin-dev
+  libnvinfer-lean10 libnvinfer-plugin-dev libnvinfer-plugin10
+  libnvinfer-vc-plugin10 libnvinfer10 libnvjitlink-12-9 libnvjitlink-dev-12-9
+  libnvjpeg-12-9 libnvjpeg-dev-12-9 libnvonnxparsers-dev libnvonnxparsers10
+  libxcb-cursor0 nsight-compute-2025.2.1 nsight-systems-2025.1.3
+升级了 0 个软件包，新安装了 74 个软件包，要卸载 0 个软件包，有 111 个软件包未被升级。
+Inst cuda-cccl-12-9 (12.9.27-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst cuda-cupti-12-9 (12.9.79-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst cuda-cupti-dev-12-9 (12.9.79-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst cuda-nvdisasm-12-9 (12.9.88-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst cuda-cuobjdump-12-9 (12.9.82-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst cuda-gdb-12-9 (12.9.79-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst cuda-nvprof-12-9 (12.9.79-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst cuda-nvtx-12-9 (12.9.79-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst cuda-sanitizer-12-9 (12.9.79-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst cuda-command-line-tools-12-9 (12.9.2-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst cuda-cuxxfilt-12-9 (12.9.82-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst cuda-toolkit-config-common (13.4.92-1 NVIDIA CUDA:developer.download.nvidia.com [all])
+Inst cuda-toolkit-12-config-common (12.9.79-1 NVIDIA CUDA:developer.download.nvidia.com [all])
+Inst cuda-toolkit-12-9-config-common (12.9.79-1 NVIDIA CUDA:developer.download.nvidia.com [all])
+Inst cuda-cudart-12-9 (12.9.79-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst cuda-driver-dev-12-9 (12.9.79-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst cuda-cudart-dev-12-9 (12.9.79-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst cuda-nvvm-12-9 (12.9.86-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst cuda-crt-12-9 (12.9.86-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst cuda-nvcc-12-9 (12.9.86-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst cuda-nvprune-12-9 (12.9.82-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst cuda-compiler-12-9 (12.9.2-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst cuda-documentation-12-9 (12.9.88-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst cuda-nvrtc-12-9 (12.9.86-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst cuda-opencl-12-9 (12.9.19-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst libcublas-12-9 (12.9.2.10-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst libcufft-12-9 (11.4.1.4-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst libcufile-12-9 (1.14.1.1-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst libcurand-12-9 (10.3.10.19-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst libcusolver-12-9 (11.7.5.82-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst libcusparse-12-9 (12.5.10.65-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst libnpp-12-9 (12.4.1.87-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst libnvjitlink-12-9 (12.9.86-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst libnvfatbin-12-9 (12.9.82-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst libnvjpeg-12-9 (12.4.0.76-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst cuda-libraries-12-9 (12.9.2-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst cuda-profiler-api-12-9 (12.9.79-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst cuda-nvrtc-dev-12-9 (12.9.86-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst cuda-sandbox-dev-12-9 (12.9.19-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst libcublas-dev-12-9 (12.9.2.10-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst libcufft-dev-12-9 (11.4.1.4-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst libcufile-dev-12-9 (1.14.1.1-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst libcurand-dev-12-9 (10.3.10.19-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst libcusolver-dev-12-9 (11.7.5.82-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst libcusparse-dev-12-9 (12.5.10.65-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst libnpp-dev-12-9 (12.4.1.87-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst libnvjitlink-dev-12-9 (12.9.86-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst libnvfatbin-dev-12-9 (12.9.82-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst libnvjpeg-dev-12-9 (12.4.0.76-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst cuda-libraries-dev-12-9 (12.9.2-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst cuda-nsight-12-9 (12.9.79-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst nsight-compute-2025.2.1 (2025.2.1.3-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst cuda-nsight-compute-12-9 (12.9.2-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst libxcb-cursor0 (0.1.1-4ubuntu1 Ubuntu:22.04/jammy [amd64])
+Inst nsight-systems-2025.1.3 (2025.1.3.140-251335620677v0 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst cuda-nsight-systems-12-9 (12.9.2-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst cuda-nvml-dev-12-9 (12.9.79-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst cuda-nvvp-12-9 (12.9.79-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst cuda-visual-tools-12-9 (12.9.2-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst gds-tools-12-9 (1.14.1.1-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst cuda-tools-12-9 (12.9.2-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst cuda-toolkit-12-9 (12.9.2-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst libnvinfer10 (10.14.1.48-1+cuda12.9 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst libnvinfer-lean10 (10.14.1.48-1+cuda12.9 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst libnvinfer-plugin10 (10.14.1.48-1+cuda12.9 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst libnvinfer-vc-plugin10 (10.14.1.48-1+cuda12.9 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst libnvinfer-dispatch10 (10.14.1.48-1+cuda12.9 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst libnvonnxparsers10 (10.14.1.48-1+cuda12.9 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst libnvinfer-bin (10.14.1.48-1+cuda12.9 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst libnvinfer-headers-dev (10.14.1.48-1+cuda12.9 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst libnvinfer-dev (10.14.1.48-1+cuda12.9 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst libnvinfer-headers-plugin-dev (10.14.1.48-1+cuda12.9 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst libnvinfer-plugin-dev (10.14.1.48-1+cuda12.9 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Inst libnvonnxparsers-dev (10.14.1.48-1+cuda12.9 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf cuda-cccl-12-9 (12.9.27-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf cuda-cupti-12-9 (12.9.79-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf cuda-cupti-dev-12-9 (12.9.79-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf cuda-nvdisasm-12-9 (12.9.88-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf cuda-cuobjdump-12-9 (12.9.82-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf cuda-gdb-12-9 (12.9.79-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf cuda-nvprof-12-9 (12.9.79-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf cuda-nvtx-12-9 (12.9.79-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf cuda-sanitizer-12-9 (12.9.79-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf cuda-command-line-tools-12-9 (12.9.2-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf cuda-cuxxfilt-12-9 (12.9.82-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf cuda-toolkit-config-common (13.4.92-1 NVIDIA CUDA:developer.download.nvidia.com [all])
+Conf cuda-toolkit-12-config-common (12.9.79-1 NVIDIA CUDA:developer.download.nvidia.com [all])
+Conf cuda-toolkit-12-9-config-common (12.9.79-1 NVIDIA CUDA:developer.download.nvidia.com [all])
+Conf cuda-cudart-12-9 (12.9.79-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf cuda-driver-dev-12-9 (12.9.79-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf cuda-cudart-dev-12-9 (12.9.79-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf cuda-nvvm-12-9 (12.9.86-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf cuda-crt-12-9 (12.9.86-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf cuda-nvcc-12-9 (12.9.86-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf cuda-nvprune-12-9 (12.9.82-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf cuda-compiler-12-9 (12.9.2-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf cuda-documentation-12-9 (12.9.88-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf cuda-nvrtc-12-9 (12.9.86-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf cuda-opencl-12-9 (12.9.19-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf libcublas-12-9 (12.9.2.10-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf libcufft-12-9 (11.4.1.4-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf libcufile-12-9 (1.14.1.1-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf libcurand-12-9 (10.3.10.19-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf libcusolver-12-9 (11.7.5.82-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf libcusparse-12-9 (12.5.10.65-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf libnpp-12-9 (12.4.1.87-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf libnvjitlink-12-9 (12.9.86-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf libnvfatbin-12-9 (12.9.82-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf libnvjpeg-12-9 (12.4.0.76-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf cuda-libraries-12-9 (12.9.2-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf cuda-profiler-api-12-9 (12.9.79-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf cuda-nvrtc-dev-12-9 (12.9.86-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf cuda-sandbox-dev-12-9 (12.9.19-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf libcublas-dev-12-9 (12.9.2.10-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf libcufft-dev-12-9 (11.4.1.4-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf libcufile-dev-12-9 (1.14.1.1-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf libcurand-dev-12-9 (10.3.10.19-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf libcusolver-dev-12-9 (11.7.5.82-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf libcusparse-dev-12-9 (12.5.10.65-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf libnpp-dev-12-9 (12.4.1.87-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf libnvjitlink-dev-12-9 (12.9.86-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf libnvfatbin-dev-12-9 (12.9.82-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf libnvjpeg-dev-12-9 (12.4.0.76-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf cuda-libraries-dev-12-9 (12.9.2-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf cuda-nsight-12-9 (12.9.79-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf nsight-compute-2025.2.1 (2025.2.1.3-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf cuda-nsight-compute-12-9 (12.9.2-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf libxcb-cursor0 (0.1.1-4ubuntu1 Ubuntu:22.04/jammy [amd64])
+Conf nsight-systems-2025.1.3 (2025.1.3.140-251335620677v0 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf cuda-nsight-systems-12-9 (12.9.2-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf cuda-nvml-dev-12-9 (12.9.79-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf cuda-nvvp-12-9 (12.9.79-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf cuda-visual-tools-12-9 (12.9.2-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf gds-tools-12-9 (1.14.1.1-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf cuda-tools-12-9 (12.9.2-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf cuda-toolkit-12-9 (12.9.2-1 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf libnvinfer10 (10.14.1.48-1+cuda12.9 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf libnvinfer-lean10 (10.14.1.48-1+cuda12.9 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf libnvinfer-plugin10 (10.14.1.48-1+cuda12.9 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf libnvinfer-vc-plugin10 (10.14.1.48-1+cuda12.9 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf libnvinfer-dispatch10 (10.14.1.48-1+cuda12.9 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf libnvonnxparsers10 (10.14.1.48-1+cuda12.9 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf libnvinfer-bin (10.14.1.48-1+cuda12.9 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf libnvinfer-headers-dev (10.14.1.48-1+cuda12.9 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf libnvinfer-dev (10.14.1.48-1+cuda12.9 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf libnvinfer-headers-plugin-dev (10.14.1.48-1+cuda12.9 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf libnvinfer-plugin-dev (10.14.1.48-1+cuda12.9 NVIDIA CUDA:developer.download.nvidia.com [amd64])
+Conf libnvonnxparsers-dev (10.14.1.48-1+cuda12.9 NVIDIA CUDA:developer.download.nvidia.com [amd64])

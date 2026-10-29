@@ -1,0 +1,25 @@
+Checking original cost volume against fixed random feature inputs
+Checking pad_concat cost volume against fixed random feature inputs
+{
+  "source": "/home/ubuntu22/slam/SIO_SLAM/models/disp.onnx",
+  "source_sha256": "e9f49736a65d68d06681add463866b6defdf78fdd7f4f50f6cc941b682fdc0bc",
+  "output": "/home/ubuntu22/slam/SIO_SLAM/models/onnx/disp_cost_volume.onnx",
+  "output_sha256": "684e5a91d34438a35977f3c7c30455c606be56a2107bd7ee1e9b0f4e1c8eec95",
+  "original_nodes": 48651,
+  "derived_nodes": 14202,
+  "transformation": "ScatterND disparity planes to Pad/Concat; original update tensors preserved",
+  "validation": {
+    "provider": "ONNX Runtime CPU",
+    "seed": 20261029,
+    "output_shape": [
+      1,
+      32,
+      104,
+      112,
+      224
+    ],
+    "max_abs_error": 0.0,
+    "rtol": 1e-06,
+    "atol": 1e-06
+  }
+}

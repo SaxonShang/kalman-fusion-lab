@@ -1,0 +1,102 @@
+sequence: 20261015_113028_roll_right
+pairs:
+- name: static_start
+  anchor: 110
+  current: 111
+- name: sync_motion
+  anchor: 185
+  current: 186
+- name: main_motion
+  anchor: 340
+  current: 341
+- name: main_motion_long
+  anchor: 340
+  current: 346
+- name: static_end
+  anchor: 640
+  current: 641
+depth:
+  provider: tensorrt
+  disparity_dir: ''
+  min_m: 0.5
+  max_m: 15.0
+  pixel_stride: 2
+  sgbm_num_disparities: 128
+  sgbm_block_size: 5
+  plan_file: models/tensorrt/disp_896x448_fp16.plan
+  onnx_file: models/disp.onnx
+gicp:
+  methods:
+  - small_gicp
+  - stereo
+  voxel_m: 0.05
+  max_correspondence_m: 0.1
+  max_iterations: 20
+  min_inliers: 20
+  require_convergence: false
+  stereo_solver:
+    gn_rot_eps: 1.0e-06
+    gn_trans_eps: 1.0e-06
+    cov_floor_trans_m: 0.0
+    cov_floor_rot_deg: 0.0
+  stereo_options:
+    stereo_point_plane: false
+    stereo_disparity_normals: false
+    stereo_source_voxel_representative: false
+    stereo_plane_gate_sigma: 0.0
+    stereo_measurement_scale: 1.0
+    stereo_robust_delta: 0.0
+eskf:
+  prior_covariance_scale: 1.0
+  covariance_scales:
+  - 0.1
+  - 1.0
+  - 10.0
+  fixed_rotation_sigma_deg: 0.5
+  fixed_position_sigma_m: 0.02
+esikf:
+  prior_covariance_scale: 1.0
+  geometry_weights:
+  - 1.0
+  - 0.5
+  voxel_m: 0.05
+  max_correspondence_m: 0.15
+threads: 4
+dataset_dir: /home/ubuntu22/slam/SIO_SLAM/data/datasets/fr5_highspeed/20261015_113028_roll_right
+imu_file: /home/ubuntu22/slam/SIO_SLAM/data/datasets/fr5_highspeed/20261015_113028_roll_right/imu.csv
+groundtruth_file: /home/ubuntu22/slam/SIO_SLAM/data/datasets/fr5_highspeed/20261015_113028_roll_right/groundtruth_tum.txt
+registration_upstream:
+  repository: https://github.com/Ben-cpy/robotic-front
+  branch: main
+  commit: 744ac2d993ae629b0cc44a3b1d995e04ab4fad48
+  import_date: '2026-10-28'
+  default_registration: GICP
+  files:
+  - upstream: modules/registration/include/registration/color_icp.h
+    local: modules/registration/include/registration/color_icp.h
+    upstream_sha256: 959caf3d688ab3b80a7068b4dbaf0a786e1547e3203abd7cb3af930b653eeb00
+  - upstream: modules/registration/include/registration/stereo_gicp.h
+    local: modules/registration/include/registration/stereo_gicp.h
+    upstream_sha256: ad4c77960abcddb36c6b1d1d0ca370e77659cac80f775bd4acab5795ea482538
+  - upstream: modules/registration/src/color_icp.cpp
+    local: modules/registration/src/color_icp.cpp
+    upstream_sha256: afa607ec3c9087818b8af414321a48bea2501434a72852239ca763c53ebec53b
+  - upstream: modules/registration/src/stereo_gicp.cpp
+    local: modules/registration/src/stereo_gicp.cpp
+    upstream_sha256: 07b503255b84cf3bcbb6aa94b7db09122d71274363ee5e649abb8e0428313d68
+  - upstream: modules/registration/tests/test_stereo_gicp.cpp
+    local: modules/registration/tests/test_stereo_gicp.cpp
+    upstream_sha256: 1e92647cedd9d5a4253431203dc2bf7d45946cce2af9fd684507cfe4d5062749
+  local_adaptations:
+  - Use registration/ include paths and yaml-cpp; accept flat and nested color_icp
+    parameters.
+  - Retain Ubuntu OpenCV/FLANN header and PCL template compatibility.
+  - Initialize failed-result covariance; expose Hessian provenance, perturbation convention
+    and Stereo RMSE diagnostics.
+  - Preserve upstream registration math and convergence semantics; align right-source
+    GICP and left-target Stereo covariance at the local ESKF boundary.
+  - Keep legacy observation helpers for independent ESIKF; remove the previous duplicate
+    projective alignment solver.
+params_file: /home/ubuntu22/slam/SIO_SLAM/artifacts/fusion/20261029_103909_472994_roll_right_all/params.yaml
+params_sha256: 3099643715f09e129af23254c11a0250736705a429cba4667c0cf9166616a912
+completed_stages: []

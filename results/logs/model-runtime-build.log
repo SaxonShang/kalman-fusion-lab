@@ -1,0 +1,6 @@
+[1/6] Building CXX object CMakeFiles/run_demo.dir/src/dynamic_cloud_processor.cpp.o
+[2/6] Building CXX object CMakeFiles/run_frontend.dir/src/dynamic_cloud_processor.cpp.o
+[3/6] Linking CXX executable run_demo
+[4/6] Linking CXX executable run_frontend
+[5/6] Building CXX object CMakeFiles/pipeline_smoke_test.dir/src/dynamic_cloud_processor.cpp.o
+[6/6] Linking CXX executable pipeline_smoke_test

@@ -1,0 +1,90 @@
+[
+  {
+    "stage": "eskf",
+    "method": "small_gicp",
+    "variant": "R_fixed",
+    "valid": 5,
+    "total": 5,
+    "prior_translation_rmse_m": 0.013392347521961182,
+    "result_translation_rmse_m": 0.020512798386422934,
+    "prior_rotation_rmse_deg": 0.015573947106224518,
+    "result_rotation_rmse_deg": 0.2627856828784334
+  },
+  {
+    "stage": "eskf",
+    "method": "small_gicp",
+    "variant": "R_x0.1",
+    "valid": 5,
+    "total": 5,
+    "prior_translation_rmse_m": 0.013392347521961182,
+    "result_translation_rmse_m": 0.020550894322930544,
+    "prior_rotation_rmse_deg": 0.015573947106224518,
+    "result_rotation_rmse_deg": 0.3181555896529612
+  },
+  {
+    "stage": "eskf",
+    "method": "small_gicp",
+    "variant": "R_x1",
+    "valid": 5,
+    "total": 5,
+    "prior_translation_rmse_m": 0.013392347521961182,
+    "result_translation_rmse_m": 0.020552148495143432,
+    "prior_rotation_rmse_deg": 0.015573947106224518,
+    "result_rotation_rmse_deg": 0.3173145873780321
+  },
+  {
+    "stage": "eskf",
+    "method": "small_gicp",
+    "variant": "R_x10",
+    "valid": 5,
+    "total": 5,
+    "prior_translation_rmse_m": 0.013392347521961182,
+    "result_translation_rmse_m": 0.02056603471363344,
+    "prior_rotation_rmse_deg": 0.015573947106224518,
+    "result_rotation_rmse_deg": 0.3096401588662545
+  },
+  {
+    "stage": "eskf",
+    "method": "stereo",
+    "variant": "R_fixed",
+    "valid": 5,
+    "total": 5,
+    "prior_translation_rmse_m": 0.013392347521961182,
+    "result_translation_rmse_m": 0.009865796885143925,
+    "prior_rotation_rmse_deg": 0.015573947106224518,
+    "result_rotation_rmse_deg": 0.06553934659226827
+  },
+  {
+    "stage": "eskf",
+    "method": "stereo",
+    "variant": "R_x0.1",
+    "valid": 5,
+    "total": 5,
+    "prior_translation_rmse_m": 0.013392347521961182,
+    "result_translation_rmse_m": 0.00986789843438592,
+    "prior_rotation_rmse_deg": 0.015573947106224518,
+    "result_rotation_rmse_deg": 0.06805391343705536
+  },
+  {
+    "stage": "eskf",
+    "method": "stereo",
+    "variant": "R_x1",
+    "valid": 5,
+    "total": 5,
+    "prior_translation_rmse_m": 0.013392347521961182,
+    "result_translation_rmse_m": 0.00986789501092431,
+    "prior_rotation_rmse_deg": 0.015573947106224518,
+    "result_rotation_rmse_deg": 0.06805378738273501
+  },
+  {
+    "stage": "eskf",
+    "method": "stereo",
+    "variant": "R_x10",
+    "valid": 5,
+    "total": 5,
+    "prior_translation_rmse_m": 0.013392347521961182,
+    "result_translation_rmse_m": 0.009867860778682007,
+    "prior_rotation_rmse_deg": 0.015573947106224518,
+    "result_rotation_rmse_deg": 0.0680525269573673
+  }
+]

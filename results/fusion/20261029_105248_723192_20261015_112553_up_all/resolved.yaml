@@ -1,0 +1,233 @@
+sequence: 20261015_112553_up
+pairs:
+- name: static_start
+  anchor: 110
+  current: 111
+- name: sync_motion
+  anchor: 185
+  current: 186
+- name: main_motion
+  anchor: 340
+  current: 341
+- name: main_motion_long
+  anchor: 340
+  current: 346
+- name: static_end
+  anchor: 640
+  current: 641
+depth:
+  provider: disparity_cache
+  disparity_dir: /home/ubuntu22/slam/SIO_SLAM/data/cache/model_disparity/20261015_112553_up/cac23a45dbdff8f38ca5
+  min_m: 0.5
+  max_m: 15.0
+  pixel_stride: 2
+  sgbm_num_disparities: 128
+  sgbm_block_size: 5
+  plan_file: models/tensorrt/disp_896x448_fp16.plan
+  onnx_file: models/disp.onnx
+  model_plan: /home/ubuntu22/slam/SIO_SLAM/models/tensorrt/disp_896x448_fp16.plan
+  model_plan_sha256: 604cf6ac1f705c877260711730dd5d2d58c2a21f3020c03c668401ef7fb1e768
+  model_origin:
+    onnx_file: /home/ubuntu22/slam/SIO_SLAM/models/disp.onnx
+    onnx_sha256: e9f49736a65d68d06681add463866b6defdf78fdd7f4f50f6cc941b682fdc0bc
+    graph_validation:
+      source: /home/ubuntu22/slam/SIO_SLAM/models/disp.onnx
+      source_sha256: e9f49736a65d68d06681add463866b6defdf78fdd7f4f50f6cc941b682fdc0bc
+      script_sha256: 44b3d40d191657f93c7c1463ba10ed7c4b107558b1698c5877272a8bef4eec81
+      output: /home/ubuntu22/slam/SIO_SLAM/models/onnx/disp_cost_volume.onnx
+      output_sha256: 684e5a91d34438a35977f3c7c30455c606be56a2107bd7ee1e9b0f4e1c8eec95
+      original_nodes: 48651
+      derived_nodes: 14202
+      transformation: ScatterND disparity planes to Pad/Concat; original update tensors
+        preserved
+      validation:
+        provider: ONNX Runtime CPU
+        seed: 20261029
+        output_shape:
+        - 1
+        - 32
+        - 104
+        - 112
+        - 224
+        max_abs_error: 0.0
+        rtol: 1.0e-06
+        atol: 1.0e-06
+  model_input: RGB float32 NCHW 0..255
+  model_output: raw disparity pixels
+gicp:
+  methods:
+  - small_gicp
+  - stereo
+  voxel_m: 0.05
+  max_correspondence_m: 0.1
+  max_iterations: 20
+  min_inliers: 20
+  require_convergence: false
+  stereo_solver:
+    gn_rot_eps: 1.0e-06
+    gn_trans_eps: 1.0e-06
+    cov_floor_trans_m: 0.0
+    cov_floor_rot_deg: 0.0
+  stereo_options:
+    stereo_point_plane: false
+    stereo_disparity_normals: false
+    stereo_source_voxel_representative: false
+    stereo_plane_gate_sigma: 0.0
+    stereo_measurement_scale: 1.0
+    stereo_robust_delta: 0.0
+eskf:
+  prior_covariance_scale: 1.0
+  covariance_scales:
+  - 0.1
+  - 1.0
+  - 10.0
+  fixed_rotation_sigma_deg: 0.5
+  fixed_position_sigma_m: 0.02
+esikf:
+  prior_covariance_scale: 1.0
+  geometry_weights:
+  - 1.0
+  - 0.5
+  voxel_m: 0.05
+  max_correspondence_m: 0.15
+threads: 4
+dataset_dir: /home/ubuntu22/slam/SIO_SLAM/data/datasets/fr5_highspeed/20261015_112553_up
+imu_file: /home/ubuntu22/slam/SIO_SLAM/data/datasets/fr5_highspeed/20261015_112553_up/imu.csv
+groundtruth_file: /home/ubuntu22/slam/SIO_SLAM/data/datasets/fr5_highspeed/20261015_112553_up/groundtruth_tum.txt
+registration_upstream:
+  repository: https://github.com/Ben-cpy/robotic-front
+  branch: main
+  commit: 744ac2d993ae629b0cc44a3b1d995e04ab4fad48
+  import_date: '2026-10-28'
+  default_registration: GICP
+  files:
+  - upstream: modules/registration/include/registration/color_icp.h
+    local: modules/registration/include/registration/color_icp.h
+    upstream_sha256: 959caf3d688ab3b80a7068b4dbaf0a786e1547e3203abd7cb3af930b653eeb00
+  - upstream: modules/registration/include/registration/stereo_gicp.h
+    local: modules/registration/include/registration/stereo_gicp.h
+    upstream_sha256: ad4c77960abcddb36c6b1d1d0ca370e77659cac80f775bd4acab5795ea482538
+  - upstream: modules/registration/src/color_icp.cpp
+    local: modules/registration/src/color_icp.cpp
+    upstream_sha256: afa607ec3c9087818b8af414321a48bea2501434a72852239ca763c53ebec53b
+  - upstream: modules/registration/src/stereo_gicp.cpp
+    local: modules/registration/src/stereo_gicp.cpp
+    upstream_sha256: 07b503255b84cf3bcbb6aa94b7db09122d71274363ee5e649abb8e0428313d68
+  - upstream: modules/registration/tests/test_stereo_gicp.cpp
+    local: modules/registration/tests/test_stereo_gicp.cpp
+    upstream_sha256: 1e92647cedd9d5a4253431203dc2bf7d45946cce2af9fd684507cfe4d5062749
+  local_adaptations:
+  - Use registration/ include paths and yaml-cpp; accept flat and nested color_icp
+    parameters.
+  - Retain Ubuntu OpenCV/FLANN header and PCL template compatibility.
+  - Initialize failed-result covariance; expose Hessian provenance, perturbation convention
+    and Stereo RMSE diagnostics.
+  - Preserve upstream registration math and convergence semantics; align right-source
+    GICP and left-target Stereo covariance at the local ESKF boundary.
+  - Keep legacy observation helpers for independent ESIKF; remove the previous duplicate
+    projective alignment solver.
+params_file: /home/ubuntu22/slam/SIO_SLAM/artifacts/fusion/20261029_105248_723192_20261015_112553_up_all/params.yaml
+params_sha256: 3099643715f09e129af23254c11a0250736705a429cba4667c0cf9166616a912
+completed_stages:
+- gicp
+- eskf
+- esikf
+cache_key: 8877786990aa4402feba
+cache_dir: /home/ubuntu22/slam/SIO_SLAM/data/cache/fusion/20261015_112553_up/8877786990aa4402feba
+output_dir: /home/ubuntu22/slam/SIO_SLAM/artifacts/fusion/20261029_105248_723192_20261015_112553_up_all
+source_hashes:
+  apps/export_disparity.cpp: 4df46794488e599197f6adbc4fafeefa9d9f8a949103a8e5fa0b99f3b40ad23b
+  experiments/fusion/src/lab.h: 72f7ead72bc7e3a2668ec12a1a60415c35bc91426d4da69ac50d9ea7cec4f4da
+  experiments/fusion/src/lab_io.cpp: d0a9939c02fec479bfd6f0eb22f96ebb71816ed3d54a14de5fbbc363d4d9c3e6
+  experiments/fusion/src/lab_prepare.cpp: 033786a736370e4a4d913fe4480a1c1839d0db5a3c2499f7496cdefe0a4eac7c
+  experiments/fusion/src/lab_run.cpp: 53408b151ccf95e0d00dad1d51f64a2c2882801e37c449728b262b34b56d153e
+  experiments/fusion/src/main.cpp: d472636d8c56f834dcd4ff4a38ca8ae97bff53488101e6af67f53ea98dea7065
+  include/TrtEngine.hpp: f1d97871940b686583cfab22883b09b947a63ab2b9ccd44b85a74dd164966a94
+  include/backend.h: 774528a1c24ce41e12d14ea455d131b89555b9c5aba0a7bd39dc92349a348db0
+  include/camera_intrinsics.h: d7544c92358b54b5b4ee695484e0ee0258fbcdb3f1a95ff4481cb63dd59e721e
+  include/color_icp/yaml.h: e645fe459683c91a61624527e9f460c1a62bf8a1ff9ea47cb663dc72d207ad9a
+  include/color_icp.h: ea423e9243ebfe81f2122af14e2a748db3e6cb9eb896163a39c7e268e7b58ba0
+  include/data.h: edcb47ba29a545954d382c83e54066906ece73e5d1344a9e1424378b1a002894
+  include/dataset_loader.h: 5226e14fa8759058b00c4180e88eb6b88743b176b7d9457614eeb8e90cf6b356
+  include/frontend.h: 34f2a4668862f3f93c94bf955c126221023621fbe24beee36cb4cb2c60d5cbc2
+  include/frontend_debug_visualizer.h: e4f199aed4a434d9256a6654438f8666bf35cccce66b836c7d7ee5fdc0315f60
+  include/fusion_debug.h: 85dc848d8a895b066a4d9af8ab021ebb41e976a2f5af51dcefe3d8412f6d2e7b
+  include/gaussian_map_manager.h: 57289969f77cf9d05f2b0319b05d2b9e482aa974c1590e021580b8aa00b96429
+  include/image_preprocessor.h: 218afed2aa7324b6292c368d3eac86f1d814ff82900783ed49178f4aa25958e7
+  include/imu_debug.h: 1750dc3860b0527a74f92dfe9b383134ec61e352c5254bcc32339cd9247564b5
+  include/imu_integrator.h: e79111245aa3eb6bab8bf52dd9aadaf5c5edda396e40f3a39c306a99ec662ae8
+  include/imu_msg_utils.h: aee5c65776d66d69885efe5b5b7e42d1751f82d2b9368b353b0e99ee06d01b05
+  include/imu_preprocessor.h: e1e1997fad3639fdb5a8cf8834f58c4c292bf89d4722b5b42531f3766b558a13
+  include/internal/geo_flow_error.h: cb076570d557823eed4b5fb759e5ef4da6581627c4f522d78a7b7e446e7107f8
+  include/profiler/simple_profiler.h: e9c40f3aca1f089761aa092694a17f4bf6beec595231856bf533a2e3a7fe92fa
+  include/sio_backend_modules.h: 6abfcb2d259b36f14734897facd377fbc3c5ead732e18459118d4b20640fd5ff
+  include/sio_config.h: 379e546e3df7306e3863fe4f2e5b08acc93b525bfdffaaa3add850d3c7face14
+  include/sio_frontend_modules.h: 915482a25cdc86d7a69ec968b19641e231140f0f7d541e91f51be2d56df7bcb6
+  include/sio_math.h: a2202a1c11d299a071001efdb42ef1c848cb46322841613a44ec2d445720b237
+  include/sio_pipeline_helpers.h: f3b497aec027700ce255fad7786476d9786dc5d3a1a580e80b9a63938ff1013b
+  include/sio_stereo_geometry.h: bce579c5130a36ce6a6cba750ff969650d9a97a51d8994e63002eac3ae22336b
+  include/stereo_gicp.h: feb19ebcd665798ce75b90eae53c1120084e2c4ce9083202636bdde4a0e06280
+  include/utils/types.h: db0d0e08d510a0cc06209f3a49ee7640c2fc4ca81abd7abdc80ddebd5f77285c
+  include/utils.h: d3482e90bd0e8bd311e5933a916974fa13e3263e0101601a411676e18ca3d4b2
+  modules/registration/UPSTREAM.json: f85bf510d80974529eef3d61f3246fec5f2ada86947ddf74abf17cf01ed0d2c6
+  modules/registration/include/registration/color_icp.h: de0e9c00543b202851c2f16331ec0baec81a84ca2202504ce6cb8a1faaaca573
+  modules/registration/include/registration/stereo_gicp.h: e9b47f798a08bdc199e4d515771afa99cdd00c8df99693f4b282c95d2b4aae3f
+  modules/registration/src/color_icp.cpp: 65f3a1270b0e11522b290b67c38916422536d0ba2172315c94e946de34104ed7
+  modules/registration/src/stereo_gicp.cpp: d3c54415b638b195851eca48d8ba6be5a120d0a5ea0527535974cf36ab74c19f
+  scripts/fusion_lab.py: 03091a0d2139a52dbc1a7dfc1b3128658cb77eeb29f89d7709b11edd39e29718
+  src/backend.cpp: c1044abc0b554bb19b81aed6d699a8e12adb0e7dd7e631ddd1398c454f8b31d2
+  src/dataset_loader.cpp: 2d5b4f942404805da9bcd943b01db0c88c1a1bf8c3c6ac5682d7f12097efd3a5
+  src/dynamic_cloud_processor.cpp: 17fe204de0446f993391f2b6dd7c497493e2c071363116b1bfb5e11d3f3efa15
+  src/feature_processor.cpp: 2b1f0e438a0ee8e2e4ee8eff5e1632ca6d48f6540b4727b89e41a9cc52c2c93f
+  src/frontend.cpp: e2ed2ecccd9d7ed6f3bf499d7a01698bf61e6f0b28f5a99f19a41b5d9cd4c0b5
+  src/frontend_debug_visualizer.cpp: b993e8594b1299c89d0d20200a102bd0cbcaac2b6af1784d53d237a24641ee7e
+  src/fusion_debug_logger.cpp: 38ace341cb7bf74a37c85d3e5842fc069c19f75b6a0941990fce641c8a2464f4
+  src/gaussian_map_manager.cpp: 96600cf663c62f10b4c46336d9f25c3b57f297da93400b85cea98fe3e0d9d87c
+  src/image_preprocessor.cpp: 8945fe13447380ef1294ce7be25fb334b66de18431983dc71f2ef4f3da50aef4
+  src/imu_debug_logger.cpp: 6d265707d54d7e670ac5df553c6eac9786113e9aaed1d088441b79f4ece7ad3b
+  src/imu_integator.cpp: 72ed2a755f3175ab597fcc9e720295db99d97c41019a6a6b622443b37736c655
+  src/imu_preprocessor.cpp: 35d4084e06274acda9aff8426e9e8572650a4e9da628f48452c9b34443ddf871
+  src/keyframe_manager.cpp: 94eb39e7145c00752903157937237da5829ce28d61f1b57b65f624f7acc2ef77
+  src/learning_rate_scheduler_factory.cpp: c9c3062e6ff18b5564c9c494242b67feda572b02a969a5e94507e9f7a75f0f75
+  src/pose_3dgs_optimizer.cpp: 8b7e1a84383c71b6fe0fdc8f248f5ae71e592a4515905886892efcbbd6ec9b2d
+  src/sio_config.cpp: 2ee8d2120d8d592d5030514e059711a7d78a06c1cc3c1afef82955f7715115a6
+  src/sio_stereo_geometry.cpp: 46ee2e0b299af864856b554994563a8b75dd232d0f81723adde769db092b4e52
+  src/state_estimater.cpp: b3ec5e072d27249e536e9d4d1158848f9cc5b2a1379e654c5f5c23951ca2398e
+  src/stereo_gicp.cpp: c0bc809e702adcd11e173c5a8887866f2ccc0494362b81893dfa77a4fb23dead
+  src/torch_pose_optimize.cpp: 3f843a450aa243dc407984f5ee1200ddf066ac72cb1660bf7d4471a1e19ffcdb
+  src/yaml.cpp: 8b77cd53c18c3ac2379f27ef98bc76c93c001e6ff301f755880c6a6d0d07ad2d
+input_hashes:
+  frames.csv: a786eff0ca9ab10f403d6071619c2b0998137fb9ade6ab6ae5ecbf7739a2ef32
+  imu.csv: 48821cbc411016aad8aaef8c73c565e64ee7a24b5af0a0c95e5a9c642391efab
+  left/1792034776598.jpg: 0455cdff5bd259b52846d40be95a4ff9e9668b3d05b41a7ae84254d8353b8b29
+  right/1792034776598.jpg: a919e89ab845bd9ef452398dab7e8f8b0a27a9e0403f7ce29cea99b2262760d8
+  left/1792034776632.jpg: 0773eebf23b696073666af30aa7e3ad6ec15e4f579c1a1eae041f742117963ef
+  right/1792034776632.jpg: 854852d29956f900343f203d4bc0bd9f0f33a4345189d71fd468baf252a01ed9
+  left/1792034779098.jpg: 65fd8397c9f15bc79a0d7090fcd4d1adae7a1cc057e7e4c79c8bf7094a27e703
+  right/1792034779098.jpg: 5307c1b3f05cdd5ff569d73ac9a661610dffe5d9651f7b27c57b7428acae480a
+  left/1792034779132.jpg: c64735ed9a871e41b04243351ad051b371078da609da859360ac1b399faf86ff
+  right/1792034779132.jpg: 134d8b0d05962d08d0080ba73545e463cef1f7dd562fc06558760e70981882cf
+  left/1792034784265.jpg: 2490f62fda72f8ccc3dd1a94f6f6888507a11c48b38f2b4078851c9627340157
+  right/1792034784265.jpg: de1264155b75536c7bf68ca113f5190f13d9f6aa80830b6caf61fa15c538aab5
+  left/1792034784299.jpg: 04cd25036a694edda440c1892d4f02a1c52f1cc1841821a7a9d0eab3bd5e8562
+  right/1792034784299.jpg: d0df63c23873372452633a0a0f9f91022e98ed53b0dab1e5f4facd78470cac82
+  left/1792034784465.jpg: b72009f83ff52dab162cae69adc1f19bb4d477e4e0df5b019d3a4263eb8dc0ab
+  right/1792034784465.jpg: d363af7061582780f310c0c05403db52888b16079b3c0c14f5f13ffb0f1b1fc7
+  left/1792034794266.jpg: c0a34d4ac0eb0f9304c7d948337c6126d2eea0bb72c50dd540facfa69d145270
+  right/1792034794266.jpg: c3a74e965e3f47db4bef77d60397344614ed430319a765a56ae3e39440a6ff7e
+  left/1792034794299.jpg: b9b7522642f3a0296134e265010aad418b6d318b17d06861b7015b3ff61079e6
+  right/1792034794299.jpg: 650463eb28a402d7a125747848e0b0f96979b0d89bfab475c304380743428cab
+  /home/ubuntu22/slam/SIO_SLAM/data/cache/model_disparity/20261015_112553_up/cac23a45dbdff8f38ca5/1792034776598.yml.gz: 8126b33256cc5e72effb80bd128c417674a7faacb7ed744bebd7dd6284dec191
+  /home/ubuntu22/slam/SIO_SLAM/data/cache/model_disparity/20261015_112553_up/cac23a45dbdff8f38ca5/1792034776632.yml.gz: 47104c6eb1e68a33473b717847dc2b645e1af6e6e978331ca20fd3ccde515b12
+  /home/ubuntu22/slam/SIO_SLAM/data/cache/model_disparity/20261015_112553_up/cac23a45dbdff8f38ca5/1792034779098.yml.gz: f36ffc5bc91b4296e5497fe1f4983b717c4222442052542ed22a7ff72eb67182
+  /home/ubuntu22/slam/SIO_SLAM/data/cache/model_disparity/20261015_112553_up/cac23a45dbdff8f38ca5/1792034779132.yml.gz: af1155f308bf234abd4cabd5def795b97cd44147feb27eb6c2fc082c723b5175
+  /home/ubuntu22/slam/SIO_SLAM/data/cache/model_disparity/20261015_112553_up/cac23a45dbdff8f38ca5/1792034784265.yml.gz: f15f89894009fd9d3cc6e5c265b508ee3542ef9c0c527e81c5e37c12cd06712c
+  /home/ubuntu22/slam/SIO_SLAM/data/cache/model_disparity/20261015_112553_up/cac23a45dbdff8f38ca5/1792034784299.yml.gz: d727378e50f336e758afbfed0b4cc82d50238a915c2987825bb45e0391203d0c
+  /home/ubuntu22/slam/SIO_SLAM/data/cache/model_disparity/20261015_112553_up/cac23a45dbdff8f38ca5/1792034784465.yml.gz: 40939f734e5a9b4868f9429284949c4381870823857db1fba51965500ade2ce4
+  /home/ubuntu22/slam/SIO_SLAM/data/cache/model_disparity/20261015_112553_up/cac23a45dbdff8f38ca5/1792034794266.yml.gz: 843ca8a09f7fcfbf4075cb61b83661486beefd35ae12bf755d238df40db4d764
+  /home/ubuntu22/slam/SIO_SLAM/data/cache/model_disparity/20261015_112553_up/cac23a45dbdff8f38ca5/1792034794299.yml.gz: 204825609880fc7cfab2c59c484c88e50e70e3c54102de55d510f17916ed54d1
+groundtruth_sha256: 446c4f3747a02c234eb8dd1e03921f158dcb9bdaff954dd5c1453e86e71edfdd
+git_commit: fe6c34c0b4cb0421360adfe67977fd915e360fe5
+binary_sha256: 0a00b4e50cda0d70da687e7e0047aee559ad68fbbd5af66954a81afe8f9855c9
+observations_sha256: 832ccd31dbd779b596f7eea2eaa80f5bd670362e031874478dc80b5a909cea1d
+observations: /home/ubuntu22/slam/SIO_SLAM/artifacts/fusion/20261029_105248_723192_20261015_112553_up_all/observations.yml.gz

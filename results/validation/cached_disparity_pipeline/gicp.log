@@ -1,0 +1,2 @@
+[gicp] main_motion small_gicp eligible inliers=16849 converged=1
+[gicp] main_motion stereo eligible inliers=15113 converged=1

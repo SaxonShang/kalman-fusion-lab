@@ -1,0 +1,166 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="960" viewBox="0 0 1800 960" role="img" aria-labelledby="title desc">
+  <title id="title">协方差驱动的动态观测滤波流程</title>
+  <desc id="desc">双目几何、图像光流和关键帧相对位姿不确定度汇合到像素域马氏门控，输出动态判别与静态候选。</desc>
+  <defs>
+    <style>
+      text{font-family:'Microsoft YaHei','Noto Sans CJK SC',Arial,sans-serif}
+      .title{font-size:32px;font-weight:700;fill:#15263d}
+      .subtitle{font-size:17px;fill:#52647a}
+      .eyebrow{font-size:13px;font-weight:700;letter-spacing:1.4px;fill:#708197}
+      .heading{font-size:20px;font-weight:700;fill:#15263d}
+      .body{font-size:16px;fill:#41546b}
+      .note{font-size:14px;fill:#64758b}
+      .formula{font-size:17px;font-weight:600;fill:#174a57}
+      .card{fill:#fff;stroke:#d7e0e9;stroke-width:1.5}
+      .line{fill:none;stroke:#7890a7;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+      .flow{fill:none;stroke:#198a91;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round}
+      .uncertainty{fill:none;stroke:#8a6bb5;stroke-width:2.8;stroke-dasharray:8 7;stroke-linecap:round;stroke-linejoin:round}
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8.5" refY="5" orient="auto">
+      <path d="M0 0 10 5 0 10Z" fill="#7890a7"/>
+    </marker>
+    <marker id="arrow-teal" markerWidth="10" markerHeight="10" refX="8.5" refY="5" orient="auto">
+      <path d="M0 0 10 5 0 10Z" fill="#198a91"/>
+    </marker>
+    <marker id="arrow-violet" markerWidth="10" markerHeight="10" refX="8.5" refY="5" orient="auto">
+      <path d="M0 0 10 5 0 10Z" fill="#8a6bb5"/>
+    </marker>
+    <filter id="shadow" x="-15%" y="-15%" width="130%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#263a50" flood-opacity=".07"/>
+    </filter>
+  </defs>
+
+  <rect width="1800" height="960" fill="#f4f7fa"/>
+  <text x="62" y="61" class="title">协方差驱动的动态观测滤波</text>
+  <text x="62" y="92" class="subtitle">名义相对位姿决定几何光流中心；关键帧相对协方差决定像素域门控尺度与方向</text>
+  <text x="62" y="151" class="eyebrow">OBSERVATIONS</text>
+  <text x="360" y="151" class="eyebrow">PREDICTION BRANCHES</text>
+  <text x="1050" y="296" class="eyebrow">PIXEL-DOMAIN TEST</text>
+  <text x="1435" y="151" class="eyebrow">CLASSIFICATION</text>
+
+  <!-- Input signals -->
+  <g filter="url(#shadow)">
+    <rect x="55" y="180" width="235" height="510" rx="18" class="card"/>
+  </g>
+  <rect x="55" y="180" width="6" height="510" rx="3" fill="#4285a5"/>
+  <text x="82" y="219" class="heading">同步观测</text>
+  <rect x="78" y="243" width="189" height="112" rx="12" fill="#edf5f8"/>
+  <circle cx="105" cy="280" r="14" fill="#4285a5"/>
+  <circle cx="151" cy="280" r="14" fill="#75a8b8"/>
+  <path d="M118 280H138" stroke="#fff" stroke-width="3"/>
+  <text x="96" y="322" class="body">双目图像与视差</text>
+  <text x="96" y="344" class="note">参考关键帧 k / 当前帧 c</text>
+  <rect x="78" y="374" width="189" height="112" rx="12" fill="#eef7f5"/>
+  <rect x="96" y="395" width="52" height="36" rx="5" fill="#b6d8cf"/>
+  <path d="M102 423 116 407 127 417 138 402 145 423" fill="none" stroke="#328276" stroke-width="2"/>
+  <text x="96" y="457" class="body">当前 / 参考图像对</text>
+  <text x="96" y="478" class="note">神经光流观测 f<tspan baseline-shift="sub">nn</tspan></text>
+  <rect x="78" y="505" width="189" height="143" rx="12" fill="#f3eff9"/>
+  <path d="M98 537h43m-34-10 11 10-11 10" fill="none" stroke="#8a6bb5" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="96" y="577" class="body">IMU / 滤波状态</text>
+  <text x="96" y="600" class="note">位姿均值与并行协方差</text>
+  <text x="96" y="623" class="note">图像时间戳与状态同步</text>
+
+  <!-- Mean-pose prediction -->
+  <g filter="url(#shadow)">
+    <rect x="355" y="185" width="260" height="180" rx="18" class="card"/>
+  </g>
+  <rect x="355" y="185" width="6" height="180" rx="3" fill="#4285a5"/>
+  <text x="382" y="224" class="heading">名义相对位姿</text>
+  <text x="382" y="264" class="body">IMU / 滤波器位姿均值</text>
+  <text x="382" y="298" class="formula">T<tspan baseline-shift="sub">c←k</tspan></text>
+  <text x="382" y="336" class="note">仅用于几何投影，不决定门控宽度</text>
+
+  <!-- Geometry -->
+  <g filter="url(#shadow)">
+    <rect x="700" y="185" width="285" height="250" rx="18" class="card"/>
+  </g>
+  <rect x="700" y="185" width="6" height="250" rx="3" fill="#198a91"/>
+  <text x="727" y="224" class="heading">双目几何分支</text>
+  <text x="727" y="266" class="body">视差 → 深度 / 点云</text>
+  <text x="727" y="300" class="body">Z-buffer 投影与可见性</text>
+  <rect x="726" y="325" width="225" height="1" fill="#e3eaf0"/>
+  <text x="727" y="361" class="formula">几何光流 f<tspan baseline-shift="sub">geo</tspan></text>
+  <text x="727" y="397" class="note">生成静态场景的像素预测</text>
+
+  <!-- Neural flow -->
+  <g filter="url(#shadow)">
+    <rect x="700" y="500" width="285" height="190" rx="18" class="card"/>
+  </g>
+  <rect x="700" y="500" width="6" height="190" rx="3" fill="#d79b35"/>
+  <text x="727" y="539" class="heading">图像观测分支</text>
+  <text x="727" y="580" class="body">RAFT / 稠密光流网络</text>
+  <text x="727" y="617" class="formula">观测光流 f<tspan baseline-shift="sub">nn</tspan></text>
+  <text x="727" y="655" class="note">由当前与参考图像估计</text>
+
+  <!-- Relative covariance -->
+  <g filter="url(#shadow)">
+    <rect x="355" y="590" width="260" height="190" rx="18" class="card"/>
+  </g>
+  <rect x="355" y="590" width="6" height="190" rx="3" fill="#8a6bb5"/>
+  <text x="382" y="629" class="heading">相对位姿不确定度</text>
+  <text x="382" y="670" class="body">关键帧置零后的并行协方差</text>
+  <text x="382" y="707" class="body">相机–IMU 外参与杠杆臂</text>
+  <text x="382" y="746" class="note">保留旋转–平移交叉项</text>
+
+  <!-- Innovation and score -->
+  <g filter="url(#shadow)">
+    <rect x="1050" y="330" width="300" height="260" rx="18" class="card"/>
+  </g>
+  <rect x="1050" y="330" width="6" height="260" rx="3" fill="#198a91"/>
+  <text x="1078" y="370" class="heading">残差与马氏评分</text>
+  <text x="1078" y="414" class="formula">r<tspan baseline-shift="sub">f</tspan> = f<tspan baseline-shift="sub">nn</tspan> − f<tspan baseline-shift="sub">geo</tspan></text>
+  <text x="1078" y="458" class="body">Σ<tspan baseline-shift="sub">f</tspan> = J<tspan baseline-shift="sub">f</tspan>P<tspan baseline-shift="sub">cam</tspan>J<tspan baseline-shift="super">T</tspan><tspan baseline-shift="sub">f</tspan> + τ₀²I</text>
+  <rect x="1077" y="480" width="245" height="1" fill="#e3eaf0"/>
+  <text x="1078" y="524" class="formula">s = r<tspan baseline-shift="super">T</tspan><tspan baseline-shift="sub">f</tspan>Σ̃<tspan baseline-shift="super">−1</tspan><tspan baseline-shift="sub">f</tspan>r<tspan baseline-shift="sub">f</tspan></text>
+  <text x="1078" y="561" class="note">协方差决定椭圆方向与尺度</text>
+
+  <!-- Classification and static output -->
+  <g filter="url(#shadow)">
+    <rect x="1435" y="205" width="300" height="145" rx="18" fill="#fff"/>
+    <rect x="1435" y="420" width="300" height="145" rx="18" fill="#fff"/>
+    <rect x="1435" y="660" width="300" height="145" rx="18" fill="#fff"/>
+  </g>
+  <rect x="1435" y="205" width="6" height="145" rx="3" fill="#d65f5f"/>
+  <circle cx="1475" cy="253" r="18" fill="#fae9e8"/>
+  <path d="M1468 246 1482 260m0-14-14 14" stroke="#c44949" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="1510" y="252" class="heading">动态观测</text>
+  <text x="1470" y="302" class="body">s ≥ τ<tspan baseline-shift="sub">s</tspan>：运动不一致</text>
+  <text x="1470" y="328" class="note">从静态几何观测中剔除</text>
+  <rect x="1435" y="420" width="6" height="145" rx="3" fill="#d79b35"/>
+  <circle cx="1475" cy="468" r="18" fill="#fcf1dc"/>
+  <circle cx="1475" cy="468" r="7" fill="#c38b28"/>
+  <text x="1510" y="467" class="heading">静态候选</text>
+  <text x="1470" y="517" class="body">s &lt; τ<tspan baseline-shift="sub">s</tspan>：运动一致</text>
+  <text x="1470" y="543" class="note">等待可见性与边界清理</text>
+  <rect x="1435" y="660" width="6" height="145" rx="3" fill="#198a91"/>
+  <circle cx="1475" cy="708" r="18" fill="#e5f4f1"/>
+  <path d="m1467 708 6 6 11-13" fill="none" stroke="#198a91" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="1510" y="707" class="heading">静态索引 S</text>
+  <text x="1470" y="757" class="body">可见性与连通域后处理</text>
+  <text x="1470" y="783" class="note">输出到 Stereo-GICP / ESKF / ESIKF</text>
+
+  <!-- Connectors: input to the prediction branches -->
+  <path d="M290 296H323V405H670V390H700" class="line" marker-end="url(#arrow)"/>
+  <path d="M290 428H322V470H670V595H700" class="line" marker-end="url(#arrow)"/>
+  <path d="M290 580H322V275H355" class="line" marker-end="url(#arrow)"/>
+  <path d="M290 620H322V685H355" class="uncertainty" marker-end="url(#arrow-violet)"/>
+  <path d="M615 275H700" class="flow" marker-end="url(#arrow-teal)"/>
+
+  <!-- Separate geometric-center and covariance paths into the score -->
+  <path d="M985 285H1017V405H1050" class="flow" marker-end="url(#arrow-teal)"/>
+  <path d="M985 590H1050" class="line" marker-end="url(#arrow)"/>
+  <path d="M615 685V830H1018V548H1050" class="uncertainty" marker-end="url(#arrow-violet)"/>
+
+  <!-- Score branches into dynamic and static decisions -->
+  <path d="M1350 400H1387V278H1435" class="line" marker-end="url(#arrow)"/>
+  <path d="M1350 510H1435" class="line" marker-end="url(#arrow)"/>
+  <path d="M1585 565V660" class="flow" marker-end="url(#arrow-teal)"/>
+
+  <g>
+    <line x1="1055" y1="870" x2="1095" y2="870" class="flow" marker-end="url(#arrow-teal)"/>
+    <text x="1110" y="876" class="note">几何 / 观测数据流</text>
+    <line x1="1290" y1="870" x2="1330" y2="870" class="uncertainty" marker-end="url(#arrow-violet)"/>
+    <text x="1345" y="876" class="note">不确定度传播</text>
+  </g>
+</svg>

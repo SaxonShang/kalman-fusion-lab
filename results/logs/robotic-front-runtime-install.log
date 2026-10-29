@@ -1,0 +1,20 @@
+-- Install configuration: "Release"
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/install/local/lib/sio_slam/run_frontend
+-- Set runtime path of "/home/ubuntu22/slam/SIO_SLAM/install/local/lib/sio_slam/run_frontend" to ""
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/install/local/lib/sio_slam/run_demo
+-- Set runtime path of "/home/ubuntu22/slam/SIO_SLAM/install/local/lib/sio_slam/run_demo" to ""
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/install/local/share/ament_index/resource_index/package_run_dependencies/sio_slam
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/install/local/share/ament_index/resource_index/parent_prefix_path/sio_slam
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/install/local/share/sio_slam/environment/ament_prefix_path.sh
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/install/local/share/sio_slam/environment/ament_prefix_path.dsv
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/install/local/share/sio_slam/environment/path.sh
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/install/local/share/sio_slam/environment/path.dsv
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/install/local/share/sio_slam/local_setup.bash
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/install/local/share/sio_slam/local_setup.sh
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/install/local/share/sio_slam/local_setup.zsh
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/install/local/share/sio_slam/local_setup.dsv
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/install/local/share/sio_slam/package.dsv
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/install/local/share/ament_index/resource_index/packages/sio_slam
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/install/local/share/sio_slam/cmake/sio_slamConfig.cmake
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/install/local/share/sio_slam/cmake/sio_slamConfig-version.cmake
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/install/local/share/sio_slam/package.xml

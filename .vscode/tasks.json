@@ -1,0 +1,96 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Models: build TensorRT engines",
+      "type": "process",
+      "command": "bash",
+      "args": ["${workspaceFolder}/scripts/build_models.sh", "all"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": []
+    },
+    {
+      "label": "Fusion: build",
+      "type": "process",
+      "command": "python3",
+      "args": ["${workspaceFolder}/scripts/fusion_lab.py", "build"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": "$gcc",
+      "group": {"kind": "build", "isDefault": true}
+    },
+    {
+      "label": "Fusion: unit tests",
+      "type": "process",
+      "command": "python3",
+      "args": ["${workspaceFolder}/scripts/fusion_lab.py", "test"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": [],
+      "group": {"kind": "test", "isDefault": true}
+    },
+    {
+      "label": "Fusion: GICP observations",
+      "type": "process",
+      "command": "python3",
+      "args": ["${workspaceFolder}/scripts/fusion_lab.py", "run", "--mode", "gicp", "--sequence", "${input:fusionSequence}"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": []
+    },
+    {
+      "label": "Fusion: all isolated experiments",
+      "type": "process",
+      "command": "python3",
+      "args": ["${workspaceFolder}/scripts/fusion_lab.py", "run", "--mode", "all", "--sequence", "${input:fusionSequence}"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": []
+    },
+    {
+      "label": "Fusion: replay ESKF (latest observations)",
+      "type": "process",
+      "command": "python3",
+      "args": ["${workspaceFolder}/scripts/fusion_lab.py", "replay"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": []
+    },
+    {
+      "label": "Fusion: ESIKF without GICP",
+      "type": "process",
+      "command": "python3",
+      "args": ["${workspaceFolder}/scripts/fusion_lab.py", "run", "--mode", "esikf", "--sequence", "${input:fusionSequence}"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": []
+    },
+    {
+      "label": "Fusion: prepare GICP debugger",
+      "type": "process",
+      "command": "python3",
+      "args": ["${workspaceFolder}/scripts/fusion_lab.py", "debug", "--mode", "gicp"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": []
+    },
+    {
+      "label": "Fusion: prepare ESKF debugger",
+      "type": "process",
+      "command": "python3",
+      "args": ["${workspaceFolder}/scripts/fusion_lab.py", "debug", "--mode", "eskf"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": []
+    },
+    {
+      "label": "Fusion: prepare ESIKF debugger",
+      "type": "process",
+      "command": "python3",
+      "args": ["${workspaceFolder}/scripts/fusion_lab.py", "debug", "--mode", "esikf"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "fusionSequence",
+      "type": "pickString",
+      "description": "FR5 test sequence",
+      "options": ["up", "forward", "right", "yaw_left", "pitch_up", "roll_right", "all"],
+      "default": "up"
+    }
+  ]
+}

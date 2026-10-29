@@ -1,0 +1,37 @@
+Building disp.onnx -> disp_896x448_fp16.plan; log: /home/ubuntu22/slam/SIO_SLAM/models/tensorrt/logs/disp-build.log
+已终止
+[10/29/2026-10:04:57] [I] Selected Device UUID: GPU-07f659d3-086f-e86f-bb8a-9e6ee2b1eaa7
+[10/29/2026-10:04:57] [I] Compute Capability: 8.9
+[10/29/2026-10:04:57] [I] SMs: 24
+[10/29/2026-10:04:57] [I] Device Global Memory: 7807 MiB
+[10/29/2026-10:04:57] [I] Shared Memory per SM: 100 KiB
+[10/29/2026-10:04:57] [I] Memory Bus Width: 128 bits (ECC disabled)
+[10/29/2026-10:04:57] [I] Application Compute Clock Rate: 2.25 GHz
+[10/29/2026-10:04:57] [I] Application Memory Clock Rate: 8.001 GHz
+[10/29/2026-10:04:57] [I] 
+[10/29/2026-10:04:57] [I] Note: The application clock rates do not reflect the actual clock rates that the GPU is currently running at.
+[10/29/2026-10:04:57] [I] 
+[10/29/2026-10:04:57] [I] TensorRT version: 10.14.1
+[10/29/2026-10:04:57] [I] Loading standard plugins
+[10/29/2026-10:04:58] [I] [TRT] [MemUsageChange] Init CUDA: CPU +2, GPU +0, now: CPU 30, GPU 116 (MiB)
+[10/29/2026-10:04:58] [I] Start parsing network model.
+[10/29/2026-10:04:59] [I] [TRT] ----------------------------------------------------------------
+[10/29/2026-10:04:59] [I] [TRT] Input filename:   /home/ubuntu22/slam/SIO_SLAM/models/disp.onnx
+[10/29/2026-10:04:59] [I] [TRT] ONNX IR version:  0.0.8
+[10/29/2026-10:04:59] [I] [TRT] Opset version:    16
+[10/29/2026-10:04:59] [I] [TRT] Producer name:    pytorch
+[10/29/2026-10:04:59] [I] [TRT] Producer version: 2.5.1
+[10/29/2026-10:04:59] [I] [TRT] Domain:           
+[10/29/2026-10:04:59] [I] [TRT] Model version:    0
+[10/29/2026-10:04:59] [I] [TRT] Doc string:       
+[10/29/2026-10:04:59] [I] [TRT] ----------------------------------------------------------------
+[10/29/2026-10:05:00] [I] Finished parsing network model. Parse time: 2.05911
+[10/29/2026-10:05:00] [I] Set shape of input tensor left for optimization profile 0 to: MIN=1x3x448x896 OPT=1x3x448x896 MAX=1x3x448x896
+[10/29/2026-10:05:00] [I] Set shape of input tensor right for optimization profile 0 to: MIN=1x3x448x896 OPT=1x3x448x896 MAX=1x3x448x896
+[10/29/2026-10:05:00] [I] [TRT] Loaded 5770930 bytes of cache from file: /home/ubuntu22/slam/SIO_SLAM/models/tensorrt/disp.timing-cache
+[10/29/2026-10:05:01] [I] [TRT] [MemUsageChange] Init builder kernel library: CPU +273, GPU +4, now: CPU 1678, GPU 120 (MiB)
+[10/29/2026-10:05:04] [W] [TRT] Detected layernorm nodes in FP16.
+[10/29/2026-10:05:04] [W] [TRT] Running layernorm after self-attention with FP16 Reduce or Pow may cause overflow. Forcing Reduce or Pow Layers in FP32 precision, or exporting the model to use INormalizationLayer (available with ONNX opset >= 17) can help preserving accuracy.
+[10/29/2026-10:05:05] [I] [TRT] Global timing cache in use. Profiling results in this builder pass will be stored.
+[10/29/2026-10:05:05] [I] [TRT] Compiler backend is used during engine build.
+[10/29/2026-10:07:09] [W] [TRT] UNSUPPORTED_STATE: Skipping tactic 0 due to insufficient memory on requested size of 4294967296 detected for tactic 0x0000000000000000.Try decreasing the workspace size with IBuilderConfig::setMemoryPoolLimit().

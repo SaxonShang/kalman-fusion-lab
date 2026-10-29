@@ -1,0 +1,36 @@
+Building disp.onnx -> disp_896x448_fp16.plan; log: /home/ubuntu22/slam/SIO_SLAM/models/tensorrt/logs/disp-build.log
+[10/29/2026-10:16:38] [V] [TRT] *************** Autotuning format combination: Half(5619712,25088,224,1), Half(5619712,25088,224,1), Half(301056,25088,224,1), Half(301056,25088,224,1) -> Half(83492864,2609152,25088,224,1) ***************
+[10/29/2026-10:16:38] [V] [TRT] --------------- Timing Runner: {ForeignNode[ONNXTRT_ShapeShuffle_105839_output[Constant].../Concat_835]} (Myelin[0x80000023])
+[10/29/2026-10:16:40] [V] [TRT] Disabling gemm+pointwise/reduce fusions at optimization level 0
+[10/29/2026-10:16:40] [V] [TRT] Set number of tactics to 1 at optimization level 0
+[10/29/2026-10:18:23] [V] [TRT]  (foreignNode) [pass.cpp:2006: run_passes] Exceeded mem budget of 3221225472. Need 3494368896
+[10/29/2026-10:18:23] [V] [TRT]  Try increasing the workspace size with IBuilderConfig::setMemoryPoolLimit.
+[10/29/2026-10:18:23] [V] [TRT]  Example of equivalent trtexec option: --memPoolSize=workspace:16384 
+[10/29/2026-10:18:24] [W] [TRT] UNSUPPORTED_STATE: Skipping tactic 0 due to insufficient memory on requested size of 3221225472 detected for tactic 0x0000000000000000.
+[10/29/2026-10:18:24] [V] [TRT] {ForeignNode[ONNXTRT_ShapeShuffle_105839_output[Constant].../Concat_835]} (Myelin[0x80000023]) profiling completed in 105.301 seconds. Fastest Tactic: 0xd15ea5edd15ea5ed Time: inf
+[10/29/2026-10:18:24] [V] [TRT] *************** Autotuning format combination: Half(702464,1:8,6272,28), Half(702464,1:8,6272,28), Half(50176,1:8,448,2), Half(50176,1:8,448,2) -> Half(10436608,326144,1:8,2912,13) ***************
+[10/29/2026-10:18:24] [V] [TRT] --------------- Timing Runner: {ForeignNode[ONNXTRT_ShapeShuffle_105839_output[Constant].../Concat_835]} (Myelin[0x80000023])
+[10/29/2026-10:18:25] [V] [TRT] Disabling gemm+pointwise/reduce fusions at optimization level 0
+[10/29/2026-10:18:25] [V] [TRT] Set number of tactics to 1 at optimization level 0
+[10/29/2026-10:20:06] [V] [TRT]  (foreignNode) [pass.cpp:2006: run_passes] Exceeded mem budget of 3221225472. Need 3526748544
+[10/29/2026-10:20:06] [V] [TRT]  Try increasing the workspace size with IBuilderConfig::setMemoryPoolLimit.
+[10/29/2026-10:20:06] [V] [TRT]  Example of equivalent trtexec option: --memPoolSize=workspace:16384 
+[10/29/2026-10:20:07] [W] [TRT] UNSUPPORTED_STATE: Skipping tactic 0 due to insufficient memory on requested size of 3221225472 detected for tactic 0x0000000000000000.
+[10/29/2026-10:20:07] [V] [TRT] {ForeignNode[ONNXTRT_ShapeShuffle_105839_output[Constant].../Concat_835]} (Myelin[0x80000023]) profiling completed in 103.564 seconds. Fastest Tactic: 0xd15ea5edd15ea5ed Time: inf
+[10/29/2026-10:20:08] [E] Error[10]: IBuilder::buildSerializedNetworkToStream: Error Code 10: Internal Error (Could not find any implementation for node {ForeignNode[ONNXTRT_ShapeShuffle_105839_output[Constant].../Concat_835]}. In computeCosts at /_src/optimizer/common/tactic/optimizer.cpp:4143)
+[10/29/2026-10:20:08] [I] Created engine with size: 0 MiB
+[10/29/2026-10:20:08] [I] Engine built in 345.206 sec.
+[10/29/2026-10:20:08] [V] [TRT] Trying to set exclusive file lock /home/ubuntu22/slam/SIO_SLAM/models/tensorrt/disp.timing-cache.lock
+
+[10/29/2026-10:20:08] [I] [TRT] Loaded 5770930 bytes of cache from file: /home/ubuntu22/slam/SIO_SLAM/models/tensorrt/disp.timing-cache
+[10/29/2026-10:20:08] [V] [TRT] Loaded 404 timing cache entries.
+[10/29/2026-10:20:08] [V] [TRT] Loaded 8408 bytes of code generator cache.
+[10/29/2026-10:20:08] [V] [TRT] Loaded 5720338 bytes of compilation cache.
+[10/29/2026-10:20:08] [V] [TRT] Serializing timing cache. UUID = GPU-07f659d3-086f-e86f-bb8a-9e6ee2b1eaa7, commit ID = 6f83b4fa4daa0ead
+[10/29/2026-10:20:08] [I] [TRT] Serialized 8408 bytes of code generator cache.
+[10/29/2026-10:20:08] [I] [TRT] Serialized 5835486 bytes of compilation cache.
+[10/29/2026-10:20:08] [I] [TRT] Serialized 602 timing cache entries
+[10/29/2026-10:20:08] [V] [TRT] Trying to set exclusive file lock /home/ubuntu22/slam/SIO_SLAM/models/tensorrt/disp.timing-cache.lock
+
+[10/29/2026-10:20:08] [I] [TRT] Saved 5906670 bytes of timing cache to /home/ubuntu22/slam/SIO_SLAM/models/tensorrt/disp.timing-cache
+[10/29/2026-10:20:08] [E] Assertion failure: false && "Attempting to access an empty engine!"

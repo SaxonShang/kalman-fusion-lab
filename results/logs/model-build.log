@@ -1,0 +1,36 @@
+Building disp.onnx -> disp_896x448_fp16.plan; log: /home/ubuntu22/slam/SIO_SLAM/models/tensorrt/logs/disp-build.log
+[10/28/2026-16:58:43] [I] Loading standard plugins
+[10/28/2026-16:58:43] [I] [TRT] [MemUsageChange] Init CUDA: CPU +2, GPU +0, now: CPU 30, GPU 113 (MiB)
+[10/28/2026-16:58:43] [I] Start parsing network model.
+[10/28/2026-16:58:44] [I] [TRT] ----------------------------------------------------------------
+[10/28/2026-16:58:44] [I] [TRT] Input filename:   /home/ubuntu22/slam/SIO_SLAM/models/disp.onnx
+[10/28/2026-16:58:44] [I] [TRT] ONNX IR version:  0.0.8
+[10/28/2026-16:58:44] [I] [TRT] Opset version:    16
+[10/28/2026-16:58:44] [I] [TRT] Producer name:    pytorch
+[10/28/2026-16:58:44] [I] [TRT] Producer version: 2.5.1
+[10/28/2026-16:58:44] [I] [TRT] Domain:           
+[10/28/2026-16:58:44] [I] [TRT] Model version:    0
+[10/28/2026-16:58:44] [I] [TRT] Doc string:       
+[10/28/2026-16:58:44] [I] [TRT] ----------------------------------------------------------------
+[10/28/2026-16:58:45] [I] Finished parsing network model. Parse time: 1.99455
+[10/28/2026-16:58:45] [I] Set shape of input tensor left for optimization profile 0 to: MIN=1x3x448x896 OPT=1x3x448x896 MAX=1x3x448x896
+[10/28/2026-16:58:45] [I] Set shape of input tensor right for optimization profile 0 to: MIN=1x3x448x896 OPT=1x3x448x896 MAX=1x3x448x896
+[10/28/2026-16:58:45] [W] [TRT] Could not read cache from: /home/ubuntu22/slam/SIO_SLAM/models/tensorrt/disp.timing-cache. A new cache will be generated and written.
+[10/28/2026-16:58:46] [I] [TRT] [MemUsageChange] Init builder kernel library: CPU +262, GPU +4, now: CPU 1672, GPU 117 (MiB)
+[10/28/2026-16:58:49] [W] [TRT] Detected layernorm nodes in FP16.
+[10/28/2026-16:58:49] [W] [TRT] Running layernorm after self-attention with FP16 Reduce or Pow may cause overflow. Forcing Reduce or Pow Layers in FP32 precision, or exporting the model to use INormalizationLayer (available with ONNX opset >= 17) can help preserving accuracy.
+[10/28/2026-16:58:49] [I] [TRT] Global timing cache in use. Profiling results in this builder pass will be stored.
+[10/28/2026-16:58:58] [I] [TRT] Compiler backend is used during engine build.
+[10/28/2026-16:59:54] [I] [TRT] Some tactics do not have sufficient workspace memory to run. Increasing workspace size will enable more tactics, please check verbose output for requested sizes.
+[10/28/2026-17:02:27] [W] [TRT] UNSUPPORTED_STATE: Skipping tactic 0 due to insufficient memory on requested size of 1073741824 detected for tactic 0x0000000000000000.
+[10/28/2026-17:04:15] [W] [TRT] UNSUPPORTED_STATE: Skipping tactic 0 due to insufficient memory on requested size of 1073741824 detected for tactic 0x0000000000000000.
+[10/28/2026-17:05:59] [W] [TRT] UNSUPPORTED_STATE: Skipping tactic 0 due to insufficient memory on requested size of 1073741824 detected for tactic 0x0000000000000000.
+[10/28/2026-17:06:00] [E] Error[4]: IBuilder::buildSerializedNetworkToStream: Error Code 4: Internal Error (Could not find any implementation for node {ForeignNode[ONNXTRT_ShapeShuffle_105839_output[Constant].../Concat_835]} due to insufficient workspace. See verbose log for requested sizes. In computeCosts at /_src/optimizer/common/tactic/optimizer.cpp:4140)
+[10/28/2026-17:06:00] [I] Created engine with size: 0 MiB
+[10/28/2026-17:06:00] [I] Engine built in 434.316 sec.
+[10/28/2026-17:06:00] [W] [TRT] Could not read cache from: /home/ubuntu22/slam/SIO_SLAM/models/tensorrt/disp.timing-cache. A new cache will be generated and written.
+[10/28/2026-17:06:00] [I] [TRT] Serialized 8408 bytes of code generator cache.
+[10/28/2026-17:06:00] [I] [TRT] Serialized 5720338 bytes of compilation cache.
+[10/28/2026-17:06:00] [I] [TRT] Serialized 404 timing cache entries
+[10/28/2026-17:06:00] [I] [TRT] Saved 5770930 bytes of timing cache to /home/ubuntu22/slam/SIO_SLAM/models/tensorrt/disp.timing-cache
+[10/28/2026-17:06:00] [E] Assertion failure: false && "Attempting to access an empty engine!"

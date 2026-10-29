@@ -1,0 +1,2505 @@
+diff --git a/.clangd b/.clangd
+index ec0b890..29788b8 100644
+--- a/.clangd
++++ b/.clangd
+@@ -1,2 +1,2 @@
+ CompileFlags:
+-  CompilationDatabase: build
++  CompilationDatabase: .
+diff --git a/.gitignore b/.gitignore
+index 4b9111b..31513d2 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -2,6 +2,7 @@ project_config.local.yaml
+ build/
+ install/
+ data/
++models/
+ submodules/diff-gaussian-rasterization-w-pose-main/build/*
+ 
+ # IDE 个人界面（团队共享插件配置见 .vscode/settings.json）
+@@ -18,4 +19,5 @@ _outline.txt
+ SIO-SLAM-Introduction-styled.pptx
+ SIO-SLAM-Topic-Share-EN.pptx
+ artifacts/
++experiments/fusion/local/
+ tools/create_paper_drafts.py
+diff --git a/.vscode/launch.json b/.vscode/launch.json
+index 415c2c1..90f9adf 100644
+--- a/.vscode/launch.json
++++ b/.vscode/launch.json
+@@ -5,17 +5,17 @@
+       "name": "run_frontend (Debug)",
+       "type": "cppdbg",
+       "request": "launch",
+-      "program": "${workspaceFolder}/build/run_frontend",
++      "program": "${workspaceFolder}/build/local/gpu/run_frontend",
+       "args": [],
+       "cwd": "${workspaceFolder}",
+       "environment": [
+         {
+           "name": "LD_LIBRARY_PATH",
+-          "value": "/home/smartrobot/miniconda3/envs/foundation_stereo/TensorRT-10.14.1.48/lib:/opt/ros/jazzy/lib:${env:LD_LIBRARY_PATH}"
++          "value": "${workspaceFolder}/build/dependencies/install/lib:${workspaceFolder}/build/dependencies/install/libtorch/lib:/opt/ros/humble/lib:/usr/local/cuda-12.9/lib64:${env:LD_LIBRARY_PATH}"
+         },
+         {
+           "name": "AMENT_PREFIX_PATH",
+-          "value": "/opt/ros/jazzy:${env:AMENT_PREFIX_PATH}"
++          "value": "/opt/ros/humble:${env:AMENT_PREFIX_PATH}"
+         }
+       ],
+       "MIMode": "gdb",
+@@ -26,6 +26,51 @@
+           "ignoreFailures": true
+         }
+       ]
++    },
++    {
++      "name": "Fusion: GICP and observation covariance",
++      "type": "cppdbg",
++      "request": "launch",
++      "program": "${workspaceFolder}/build/local/fusion/sio_fusion_lab",
++      "args": ["gicp", "${workspaceFolder}/experiments/fusion/local/debug.yaml", "@config"],
++      "cwd": "${workspaceFolder}",
++      "preLaunchTask": "Fusion: prepare GICP debugger",
++      "environment": [
++        {"name": "LD_LIBRARY_PATH", "value": "${workspaceFolder}/build/dependencies/install/lib:/opt/ros/humble/lib:/usr/local/cuda-12.9/lib64:${env:LD_LIBRARY_PATH}"},
++        {"name": "OMP_NUM_THREADS", "value": "4"}
++      ],
++      "MIMode": "gdb",
++      "setupCommands": [{"text": "-enable-pretty-printing", "ignoreFailures": true}]
++    },
++    {
++      "name": "Fusion: ESKF frozen observations",
++      "type": "cppdbg",
++      "request": "launch",
++      "program": "${workspaceFolder}/build/local/fusion/sio_fusion_lab",
++      "args": ["eskf", "${workspaceFolder}/experiments/fusion/local/debug.yaml", "@config"],
++      "cwd": "${workspaceFolder}",
++      "preLaunchTask": "Fusion: prepare ESKF debugger",
++      "environment": [
++        {"name": "LD_LIBRARY_PATH", "value": "${workspaceFolder}/build/dependencies/install/lib:/opt/ros/humble/lib:/usr/local/cuda-12.9/lib64:${env:LD_LIBRARY_PATH}"},
++        {"name": "OMP_NUM_THREADS", "value": "4"}
++      ],
++      "MIMode": "gdb",
++      "setupCommands": [{"text": "-enable-pretty-printing", "ignoreFailures": true}]
++    },
++    {
++      "name": "Fusion: ESIKF direct point observations",
++      "type": "cppdbg",
++      "request": "launch",
++      "program": "${workspaceFolder}/build/local/fusion/sio_fusion_lab",
++      "args": ["esikf", "${workspaceFolder}/experiments/fusion/local/debug.yaml", "@config"],
++      "cwd": "${workspaceFolder}",
++      "preLaunchTask": "Fusion: prepare ESIKF debugger",
++      "environment": [
++        {"name": "LD_LIBRARY_PATH", "value": "${workspaceFolder}/build/dependencies/install/lib:/opt/ros/humble/lib:/usr/local/cuda-12.9/lib64:${env:LD_LIBRARY_PATH}"},
++        {"name": "OMP_NUM_THREADS", "value": "4"}
++      ],
++      "MIMode": "gdb",
++      "setupCommands": [{"text": "-enable-pretty-printing", "ignoreFailures": true}]
+     }
+   ]
+ }
+diff --git a/.vscode/settings.json b/.vscode/settings.json
+index 074587a..e81823d 100644
+--- a/.vscode/settings.json
++++ b/.vscode/settings.json
+@@ -12,7 +12,17 @@
+   ],
+ 
+   "cmake.sourceDirectory": "${workspaceFolder}",
+-  "cmake.buildDirectory": "${workspaceFolder}/build",
++  "cmake.buildDirectory": "${workspaceFolder}/build/local/fusion",
++  "cmake.buildTargets": ["sio_fusion_lab", "sio_unit_tests"],
++  "cmake.configureSettings": {
++    "SIO_BUILD_RUNTIME": "OFF",
++    "SIO_BUILD_FUSION_LAB": "ON",
++    "SIO_ENABLE_ZED": "OFF",
++    "SIO_ENABLE_LIBTORCH": "OFF"
++  },
++  "cmake.environment": {
++    "CMAKE_PREFIX_PATH": "${workspaceFolder}/build/dependencies/install:/opt/ros/humble"
++  },
+   "cmake.configureOnOpen": false,
+   "cmake.useCMakePresets": "never",
+ 
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index cdda6c5..7d79129 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -16,6 +16,10 @@ include(CTest)
+ set(CMAKE_CXX_STANDARD 17)
+ set(CMAKE_CXX_STANDARD_REQUIRED ON)
+ 
++option(SIO_BUILD_RUNTIME "Build GPU runtime programs and the pipeline smoke test" ON)
++option(SIO_ENABLE_LIBTORCH "Enable LibTorch backend optimization" OFF)
++option(SIO_BUILD_FUSION_LAB "Build the offline CPU fusion experiment runner" OFF)
++
+ # ---- Profiling support ----
+ option(SIO_ENABLE_PROFILING "Enable frontend profiling instrumentation" OFF)
+ if(SIO_ENABLE_PROFILING)
+@@ -84,8 +88,6 @@ else()
+   set(SIO_OPENMP_LIBS "")
+   message(STATUS "OpenMP not found — ColorPointObserver will run serially")
+ endif()
+-set(CUDA_TOOLKIT_ROOT_DIR "" CACHE PATH "CUDA toolkit root directory")
+-find_package(CUDAToolkit QUIET)
+ find_package(small_gicp QUIET)
+ # ---- 查找 yaml-cpp（手动方式，因为 find_package 可能找不到配置文件） ----
+ find_path(YAML_CPP_INCLUDE_DIR
+@@ -113,6 +115,11 @@ include_directories(
+ )
+ 
+ # 2.1 TensorRT / CUDA 依赖（DynamicCloudProcessor + TrtEngine）
++if(SIO_BUILD_RUNTIME)
++set(CUDA_TOOLKIT_ROOT_DIR "" CACHE PATH "CUDA toolkit root directory")
++find_package(CUDAToolkit REQUIRED)
++find_package(OpenCV REQUIRED COMPONENTS
++    core imgproc imgcodecs highgui cudaarithm cudaimgproc cudawarping)
+ set(TENSORRT_ROOT_HINT "" CACHE PATH "TensorRT root path (contains include/ and lib/)")
+ set(NVINFER_INCLUDE_HINT "" CACHE PATH "Directory containing NvInfer.h")
+ set(NVINFER_LIBRARY_HINT "" CACHE PATH "Directory containing libnvinfer")
+@@ -219,6 +226,7 @@ if(NOT CUDART_LINK_TARGET)
+     message(FATAL_ERROR
+         "CUDA runtime library (cudart) not found. Please install CUDA toolkit/runtime.")
+ endif()
++endif() # SIO_BUILD_RUNTIME
+ 
+ # Color ICP 依赖 upstream 的 mini-yaml 实现：include/color_icp/yaml.h + src/yaml.cpp
+ set(COLOR_ICP_YAML_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/include/color_icp/yaml.h")
+@@ -247,13 +255,14 @@ set(SIO_LIGHT_SRC_FILES
+     ${CMAKE_CURRENT_SOURCE_DIR}/src/profiler/simple_profiler.cpp
+     ${CMAKE_CURRENT_SOURCE_DIR}/src/state_estimater.cpp
+     ${CMAKE_CURRENT_SOURCE_DIR}/src/stereo_gicp.cpp
++    ${CMAKE_CURRENT_SOURCE_DIR}/modules/registration/src/stereo_gicp.cpp
+     ${CMAKE_CURRENT_SOURCE_DIR}/src/sio_config.cpp
+     ${CMAKE_CURRENT_SOURCE_DIR}/src/sio_stereo_geometry.cpp
+ )
+ 
+ set(SIO_RUNTIME_SRC_FILES
+     ${SIO_LIGHT_SRC_FILES}
+-    ${CMAKE_CURRENT_SOURCE_DIR}/src/color_icp.cpp
++    ${CMAKE_CURRENT_SOURCE_DIR}/modules/registration/src/color_icp.cpp
+     ${CMAKE_CURRENT_SOURCE_DIR}/src/dynamic_cloud_processor.cpp
+     ${CMAKE_CURRENT_SOURCE_DIR}/src/frontend_debug_visualizer.cpp
+     ${CMAKE_CURRENT_SOURCE_DIR}/src/yaml.cpp
+@@ -292,7 +301,7 @@ option(SIO_ENABLE_ZED "Enable ZED 2i live capture in DatasetLoader" ON)
+ set(SIO_ZED_INCLUDE_DIR "" CACHE PATH "ZED SDK include directory")
+ set(SIO_ZED_LIBRARY_DIR "" CACHE PATH "ZED SDK library directory")
+ 
+-if(SIO_ENABLE_ZED)
++if(SIO_ENABLE_ZED AND SIO_BUILD_RUNTIME)
+     find_path(SIO_ZED_INCLUDE_DIR
+         NAMES sl/Camera.hpp
+         HINTS $ENV{ZED_SDK_ROOT} ${SIO_ZED_INCLUDE_DIR}
+@@ -333,6 +342,7 @@ function(sio_configure_light_target target_name)
+ 
+     target_include_directories(${target_name} PRIVATE
+         ${CMAKE_CURRENT_SOURCE_DIR}/include
++        ${CMAKE_CURRENT_SOURCE_DIR}/modules/registration/include
+         ${CMAKE_CURRENT_SOURCE_DIR}/tests
+         ${YAML_CPP_INCLUDE_DIR}
+     )
+@@ -346,6 +356,7 @@ function(sio_configure_light_target target_name)
+         ${PCL_LIBRARIES}
+         ${SIO_OPENMP_LIBS}
+         ${YAML_CPP_LIBRARY}
++        ${SMALL_GICP_LINK_TARGET}
+     )
+ 
+     ament_target_dependencies(${target_name}
+@@ -378,10 +389,16 @@ function(sio_configure_runtime_target target_name)
+ endfunction()
+ 
+ # 设置 diff-gaussian-rasterization 的根目录（注意路径末尾不要有多余斜杠）
++if(SIO_BUILD_RUNTIME)
+ set(DIFF_GS_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/submodules/diff-gaussian-rasterization-w-pose-main)
+ 
+ # 指定静态库的完整路径
+-set(CUDA_RASTERIZER_LIB ${DIFF_GS_ROOT}/build/libCudaRasterizer.a)
++set(SIO_CUDA_RASTERIZER_LIBRARY "${DIFF_GS_ROOT}/build/libCudaRasterizer.a"
++    CACHE FILEPATH "Prebuilt CUDA rasterizer static library")
++if(NOT EXISTS "${SIO_CUDA_RASTERIZER_LIBRARY}")
++    message(FATAL_ERROR
++        "CUDA rasterizer missing: ${SIO_CUDA_RASTERIZER_LIBRARY}. Run bash scripts/build_deps.sh gpu first.")
++endif()
+ 
+ # 头文件搜索路径（cuda_rasterizer 和 third_party/glm）
+ set(CUDA_RASTERIZER_INCLUDES
+@@ -393,10 +410,18 @@ add_executable(run_frontend
+     ${SIO_FRONTEND_SRC_FILES}
+     ${CMAKE_CURRENT_SOURCE_DIR}/apps/run_frontend.cpp
+ )
+-target_link_libraries(run_frontend ${CUDA_RASTERIZER_LIB})
++target_link_libraries(run_frontend ${SIO_CUDA_RASTERIZER_LIBRARY})
+ sio_configure_runtime_target(run_frontend)
+ 
+-find_package(CUDAToolkit REQUIRED)
++if(SIO_ENABLE_LIBTORCH)
++    find_package(Torch REQUIRED)
++    target_compile_definitions(run_frontend PRIVATE SIO_USE_LIBTORCH)
++    separate_arguments(SIO_TORCH_CXX_FLAGS NATIVE_COMMAND "${TORCH_CXX_FLAGS}")
++    target_compile_options(run_frontend PRIVATE ${SIO_TORCH_CXX_FLAGS})
++    target_link_libraries(run_frontend ${TORCH_LIBRARIES})
++else()
++    message(WARNING "LibTorch is disabled; backend joint optimization is unavailable.")
++endif()
+ 
+ # 3. 添加头文件目录
+ target_include_directories(run_frontend PRIVATE
+@@ -423,6 +448,28 @@ install(TARGETS
+     run_demo
+     DESTINATION lib/${PROJECT_NAME}
+ )
++add_executable(sio_export_disparity
++    ${CMAKE_CURRENT_SOURCE_DIR}/apps/export_disparity.cpp
++    ${CMAKE_CURRENT_SOURCE_DIR}/src/dataset_loader.cpp
++    ${CMAKE_CURRENT_SOURCE_DIR}/src/image_preprocessor.cpp
++    ${CMAKE_CURRENT_SOURCE_DIR}/src/sio_config.cpp
++    ${CMAKE_CURRENT_SOURCE_DIR}/src/sio_stereo_geometry.cpp
++)
++sio_configure_runtime_target(sio_export_disparity)
++endif() # SIO_BUILD_RUNTIME
++
++if(SIO_BUILD_FUSION_LAB)
++    add_executable(sio_fusion_lab
++        ${SIO_LIGHT_SRC_FILES}
++        ${CMAKE_CURRENT_SOURCE_DIR}/modules/registration/src/color_icp.cpp
++        ${CMAKE_CURRENT_SOURCE_DIR}/src/yaml.cpp
++        ${CMAKE_CURRENT_SOURCE_DIR}/experiments/fusion/src/main.cpp
++        ${CMAKE_CURRENT_SOURCE_DIR}/experiments/fusion/src/lab_io.cpp
++        ${CMAKE_CURRENT_SOURCE_DIR}/experiments/fusion/src/lab_prepare.cpp
++        ${CMAKE_CURRENT_SOURCE_DIR}/experiments/fusion/src/lab_run.cpp
++    )
++    sio_configure_light_target(sio_fusion_lab)
++endif()
+ 
+ # 5. 自动测试：轻依赖单测 + 短集成测试
+ if(BUILD_TESTING)
+@@ -430,6 +477,9 @@ if(BUILD_TESTING)
+ 
+     ament_add_gtest(sio_unit_tests
+         ${SIO_LIGHT_SRC_FILES}
++        ${CMAKE_CURRENT_SOURCE_DIR}/modules/registration/src/color_icp.cpp
++        ${CMAKE_CURRENT_SOURCE_DIR}/modules/registration/tests/test_stereo_gicp.cpp
++        ${CMAKE_CURRENT_SOURCE_DIR}/tests/unit/test_color_icp_config.cpp
+         ${CMAKE_CURRENT_SOURCE_DIR}/tests/unit/test_utils.cpp
+         ${CMAKE_CURRENT_SOURCE_DIR}/tests/unit/test_imu_integrator.cpp
+         ${CMAKE_CURRENT_SOURCE_DIR}/tests/unit/test_keyframe_manager.cpp
+@@ -446,6 +496,7 @@ if(BUILD_TESTING)
+         sio_configure_light_target(sio_unit_tests)
+     endif()
+ 
++    if(SIO_BUILD_RUNTIME)
+     add_executable(pipeline_smoke_test
+         ${SIO_RUNTIME_SRC_FILES}
+         ${CMAKE_CURRENT_SOURCE_DIR}/tests/integration/pipeline_smoke_test.cpp
+@@ -456,6 +507,7 @@ if(BUILD_TESTING)
+         COMMAND pipeline_smoke_test --ros-args -p max_frames:=5 -p run_color_icp:=false
+     )
+     set_tests_properties(pipeline_smoke_test PROPERTIES TIMEOUT 420)
++    endif()
+ endif()
+ 
+ ament_package()
+diff --git a/README.md b/README.md
+index f136e62..7669848 100644
+--- a/README.md
++++ b/README.md
+@@ -1,5 +1,15 @@
+ # SIO_SLAM
+ 
++当前前端融合测试入口见 [experiments/fusion/README.md](experiments/fusion/README.md)：独立检查 GICP 及观测协方差、固定观测 ESKF 回放和关键帧 ESIKF，支持本机 FR5 静态场景数据与 IDE 断点调试。
++
++已接入本机 `models/disp.onnx` 与 RAFT 模型。融合实验默认先导出模型视差缓存，再独立测试滤波；SGBM 保留为显式对照配置。使用方法与模型转换说明见 [本机配置](docs/LOCAL_SETUP.md#模型与实验数据)。
++
++GICP 已采用 `Ben-cpy/robotic-front` 的 main 提交 `744ac2d`；源码、版本记录和滤波接口适配见 [modules/registration/README.md](modules/registration/README.md)。
++
++初始协方差与 ESKF 数值求解的修复、固定观测对照和 P/R 敏感性报告见 [融合协方差诊断](docs/FUSION_COVARIANCE_DIAGNOSIS.md)。
++
++独立卡尔曼实验仓库的整理、导出和首次上传步骤见 [PUBLISH_NEW_REPOSITORY.md](docs/PUBLISH_NEW_REPOSITORY.md)。新仓库使用面向实验的首页，并包含历史结果与跨机器复现入口；原工作区的远程配置保持不变。
++
+ ## 项目简介
+ 
+ SIO_SLAM 是一个面向双目视觉与 IMU 融合的 SLAM 研究工程。项目当前由两条主线组成：
+@@ -30,7 +40,7 @@ SIOFrontend (frontend.h / frontend.cpp)
+   ├─ ImagePreprocessor / ImuPreprocessor
+   ├─ DynamicCloudProcessor     双目视差 → 点云 → 动态滤除
+   ├─ FeatureProcessor          法向 / 颜色梯度 / 立体点协方差
+-  ├─ ColorICP + stereo_gicp    普通帧配准（StereoGICP / GICP 回退）
++  ├─ registration             普通帧配准（默认 GICP，可显式选择 Stereo-GICP）
+   ├─ ImuIntegrator             初始化 + 预积分
+   ├─ StateEstimator            关键帧 ESIKF / 普通帧 ESKF
+   └─ KeyframeManager           前后端关键帧判定与创建
+@@ -50,7 +60,7 @@ SIOBackend (backend.h / backend.cpp)   滑动窗口 3DGS + IMU 联合优化
+ 2. 图像/IMU 预处理后，通过视差恢复与点云生成得到当前帧稠密观测。
+ 3. 基于 IMU 预积分获得当前帧先验状态。
+ 4. 基于预测相对位姿进行动态点剔除。
+-5. 非关键帧：投影 Stereo-GICP（失败时欧氏 GICP）得到位姿观测，再松耦合 ESKF 更新。
++5. 非关键帧：默认欧氏 GICP，可显式选择投影 Stereo-GICP；位姿与协方差作为 ESKF 观测，失败时保留 IMU 先验。
+ 6. 关键帧：投影关联下的几何-光度 ESIKF 紧耦合更新，并推进关键帧管理、推送后端。
+ 
+ 前端主控入口位于 [apps/run_frontend.cpp](apps/run_frontend.cpp)，编排实现位于 [src/frontend.cpp](src/frontend.cpp)；算法模块声明见 [include/sio_frontend_modules.h](include/sio_frontend_modules.h)、[include/color_icp.h](include/color_icp.h)、[include/stereo_gicp.h](include/stereo_gicp.h)。
+@@ -81,6 +91,7 @@ SIOBackend (backend.h / backend.cpp)   滑动窗口 3DGS + IMU 联合优化
+ │   ├── imu_integrator.h / imu_preprocessor.h / image_preprocessor.h
+ │   └── data.h / sio_config.h / ...
+ ├── src/                  主要实现代码（与 include 一一对应）
++├── modules/registration/ robotic-front main 配准模块与上游版本记录
+ ├── tests/                单元测试与集成测试
+ ├── submodules/           第三方子模块（含 diff-gaussian-rasterization）
+ ├── CMakeLists.txt        构建脚本
+@@ -98,8 +109,8 @@ SIOBackend (backend.h / backend.cpp)   滑动窗口 3DGS + IMU 联合优化
+ | IMU 预积分 | [src/imu_integator.cpp](src/imu_integator.cpp) | 静止初始化、位姿增量与协方差传播 |
+ | 稠密视觉处理 | [src/dynamic_cloud_processor.cpp](src/dynamic_cloud_processor.cpp) | 视差、光流、点云及动态点滤除 |
+ | 特征预处理 | [src/feature_processor.cpp](src/feature_processor.cpp) | 法向、颜色梯度、立体点协方差 |
+-| 投影 Stereo-GICP | [src/stereo_gicp.cpp](src/stereo_gicp.cpp) | 投影关联、立体 Σ、独立配准 |
+-| Color ICP / GICP | [src/color_icp.cpp](src/color_icp.cpp) | Colored ICP；欧氏 GICP；调用 StereoGICP |
++| 投影 Stereo-GICP | [modules/registration/src/stereo_gicp.cpp](modules/registration/src/stereo_gicp.cpp) | 上游投影关联、立体 Σ、独立配准 |
++| Color ICP / GICP | [modules/registration/src/color_icp.cpp](modules/registration/src/color_icp.cpp) | 上游 Colored ICP、欧氏 GICP 及 Stereo 入口 |
+ | 前端状态估计 | [src/state_estimater.cpp](src/state_estimater.cpp) | 投影/欧氏关联、ESIKF、ESKF |
+ | 前端主控 | [src/frontend.cpp](src/frontend.cpp) | 组织数据流、调度前端各模块 |
+ | 关键帧管理 | [src/keyframe_manager.cpp](src/keyframe_manager.cpp) | 前后端关键帧触发与创建 |
+@@ -125,7 +136,11 @@ SIOBackend (backend.h / backend.cpp)   滑动窗口 3DGS + IMU 联合优化
+ 
+ 完整安装步骤、CMake 选项与排错说明见 [docs/BUILD_DEPENDENCIES.md](docs/BUILD_DEPENDENCIES.md)。
+ 
+-注意：当前工程在 CMake 配置阶段就会检查 TensorRT、CUDA 和 small_gicp，因此即使只想运行部分测试，也需要先把这些依赖配置到位。
++本机 Ubuntu 22.04 / RTX 4060 的目录约定、安装脚本和构建步骤见 [docs/LOCAL_SETUP.md](docs/LOCAL_SETUP.md)。
++
++FR5 + ZED X 高速实验数据接入见 [docs/FR5_DATASET.md](docs/FR5_DATASET.md)。原始数据放入 `data/recordings/recordings_highspeed/` 后，执行 `python3 scripts/prepare_fr5_dataset.py --activate up` 生成兼容索引、时间补偿与相机标定，并选择本机运行序列。
++
++默认构建会检查 TensorRT、CUDA 和 small_gicp。仅开发 CPU 算法模块时可使用 `-DSIO_BUILD_RUNTIME=OFF`，或执行 `bash scripts/build.sh cpu`。
+ 
+ ## 运行前需要修改的配置
+ 
+@@ -172,20 +187,17 @@ source install/setup.bash
+ colcon build --packages-select sio_slam --cmake-args -DCMAKE_BUILD_TYPE=Release -DSIO_ENABLE_PROFILING=ON
+ ```
+ 
+-在初次构建3dgs时使用以下命令
+-'''bash
+-cd submodules/diff-gaussian-rasterization-w-pose-main
+-rm -rf build
+-mkdir build && cd build
+-cmake .. -DCMAKE_POSITION_INDEPENDENT_CODE=ON  # 强制开启 PIC
+-make
+-再回到主项目继续构建
+-cd /home/czzt/czzt/SIO_SLAM_ROBOTIC/SIO_SLAM
+-mkdir build
+-cd build 
+-
+-cmake .. -DTENSORRT_ROOT_HINT=/home/smartrobot/miniconda3/envs/foundation_stereo/TensorRT-10.14.1.48/
+-'''
++本机首次构建可使用以下脚本，依赖与构建产物存放在工作区内：
++
++```bash
++bash scripts/install_system_deps.sh  # 本机终端输入 sudo 密码；完成后保存工作并重启
++bash scripts/build_deps.sh gpu       # 普通用户执行
++bash scripts/build.sh gpu
++source env.sh
++```
++
++脚本会构建 3DGS 光栅化器，并开启 LibTorch 后端优化。模型和数据需要另外提供。
++
+ ## 运行入口
+ 
+ ### 前端主程序
+@@ -268,7 +280,7 @@ colcon test-result --verbose
+ 1. [docs/SIO_SLAM_前端说明.md](docs/SIO_SLAM_前端说明.md)
+ 2. [docs/SCI_投影StereoGICP.md](docs/SCI_投影StereoGICP.md) / [docs/SCI_ESKF与ESIKF.md](docs/SCI_ESKF与ESIKF.md)
+ 3. [src/frontend.cpp](src/frontend.cpp)
+-4. [src/stereo_gicp.cpp](src/stereo_gicp.cpp)、[src/color_icp.cpp](src/color_icp.cpp)
++4. [modules/registration/README.md](modules/registration/README.md) 及其中的配准源码
+ 5. [src/state_estimater.cpp](src/state_estimater.cpp)
+ 6. [src/keyframe_manager.cpp](src/keyframe_manager.cpp)
+ 7. [docs/IMAGE_PREPROCESSOR.md](docs/IMAGE_PREPROCESSOR.md)
+@@ -304,7 +316,7 @@ colcon test-result --verbose
+ 2. [src/frontend.cpp](src/frontend.cpp)
+ 3. [src/dataset_loader.cpp](src/dataset_loader.cpp)
+ 4. [src/dynamic_cloud_processor.cpp](src/dynamic_cloud_processor.cpp)
+-5. [src/stereo_gicp.cpp](src/stereo_gicp.cpp) / [src/color_icp.cpp](src/color_icp.cpp)
++5. [modules/registration/src/stereo_gicp.cpp](modules/registration/src/stereo_gicp.cpp) / [modules/registration/src/color_icp.cpp](modules/registration/src/color_icp.cpp)
+ 6. [src/state_estimater.cpp](src/state_estimater.cpp)
+ 7. [src/keyframe_manager.cpp](src/keyframe_manager.cpp)
+ 8. [src/backend.cpp](src/backend.cpp)
+diff --git a/apps/run_demo.cpp b/apps/run_demo.cpp
+index 0cdbc9f..455e7a4 100644
+--- a/apps/run_demo.cpp
++++ b/apps/run_demo.cpp
+@@ -468,7 +468,7 @@ int main(int argc, char **argv) {
+           target_cache.thread_kdtrees[0]) {
+         const Eigen::Matrix4d color_icp_transform = color_icp.ColorICPRegistration(
+             source_normals_cloud, target_cache.normals_cloud,
+-            target_cache.color_gradient, *target_cache.thread_kdtrees[0],
++            target_cache.color_gradient, target_cache.thread_kdtrees,
+             T_prevkf_curr);
+         color_icp_trans_norm = color_icp_transform.block<3, 1>(0, 3).norm();
+       }
+diff --git a/config/params.yaml b/config/params.yaml
+index c462052..c025b9e 100644
+--- a/config/params.yaml
++++ b/config/params.yaml
+@@ -118,6 +118,8 @@ image_preprocessor:
+     saturation_only_dark: true      # 仅暗场景且 gain>1 时生效
+ 
+ color_icp:
++  # Pinned robotic-front main uses Euclidean GICP by default.
++  registration_type: gicp
+   color_weight: srgb                                      # ntsc / srgb / uniform(其他值)
+   num_threads: 8
+   gradient_min_neighbors: 5
+@@ -127,4 +129,4 @@ color_icp:
+   icp_max_iterations: 20
+   icp_transformation_epsilon: 1.0e-6                      # 收敛阈值
+   icp_max_corres_dist: 0.5                                  # 最近邻最大对应距离 (m)
+-  color_icp_lambda: 0.9                                    # 几何权重，0=纯光度，1=纯几何
+\ No newline at end of file
++  color_icp_lambda: 0.9                                    # 几何权重，0=纯光度，1=纯几何
+diff --git a/docs/BUILD_DEPENDENCIES.md b/docs/BUILD_DEPENDENCIES.md
+index 59fa393..dcaa9bd 100644
+--- a/docs/BUILD_DEPENDENCIES.md
++++ b/docs/BUILD_DEPENDENCIES.md
+@@ -12,10 +12,10 @@ SIO_SLAM 是一个 **ROS 2 ament_cmake** 包（包名 `sio_slam`），使用 **C
+ |------|------|----------|
+ | `run_frontend` | 完整运行时 | 前端 + 后端主程序（含 3DGS 光栅化） |
+ | `run_demo` | 运行时（无 3DGS 静态库） | 演示 / 稠密视觉链路 |
+-| `sio_unit_tests` | 轻量单测 | 不链接 TensorRT / CUDA 运行库，但 **CMake 配置阶段仍会检查全部硬依赖** |
++| `sio_unit_tests` | 轻量单测 | 不链接 TensorRT / CUDA 运行库；`SIO_BUILD_RUNTIME=OFF` 时可独立构建 |
+ | `pipeline_smoke_test` | 集成测试 | 与 `run_demo` 同级运行时依赖 |
+ 
+-> **重要**：当前 CMake 在 **configure 阶段** 就会强制检查 TensorRT、CUDA Runtime、`small_gicp`、`project_config.yaml` 等。即使只编译单元测试，也需先把下列硬依赖配置到位。
++> **重要**：默认 `SIO_BUILD_RUNTIME=ON`，配置阶段会检查 TensorRT、CUDA、CUDA OpenCV、small_gicp 等依赖。仅构建 CPU 单元测试时设置 `SIO_BUILD_RUNTIME=OFF`，仍需 ROS、OpenCV、PCL、Eigen、yaml-cpp 和 small_gicp。本机脚本见 [LOCAL_SETUP.md](LOCAL_SETUP.md)。
+ 
+ ---
+ 
+@@ -67,7 +67,7 @@ SIO_SLAM 是一个 **ROS 2 ament_cmake** 包（包名 `sio_slam`），使用 **C
+ |------|------|
+ | **OpenMP** | `find_package(OpenMP)`；未找到时 `ColorPointObserver` 串行运行 |
+ | **nvinfer_plugin** | TensorRT 插件库；找到则链接，未找到不报错 |
+-| **LibTorch** | 源码中通过 `SIO_USE_LIBTORCH` 宏控制；**当前 `CMakeLists.txt` 尚未接入 `SIO_ENABLE_LIBTORCH` 选项**，后端联合优化完整功能需自行扩展 CMake |
++| **LibTorch** | 通过 `SIO_ENABLE_LIBTORCH=ON` 查找和链接；启用 `SIO_USE_LIBTORCH` 宏。完整后端联合优化需要开启，本机 GPU 构建脚本默认开启 |
+ 
+ ### 3.4 运行时资源（非编译依赖，但运行必需）
+ 
+@@ -233,18 +233,20 @@ small_gicp library not found for linking.
+ 使用位置：
+ 
+ - `src/dynamic_cloud_processor.cpp` — GICP 位姿估计
+-- `src/color_icp.cpp` / `include/color_icp.h` — 彩色 ICP 配准
++- `modules/registration/src/color_icp.cpp` / `include/color_icp.h` — robotic-front main 配准与兼容头；版本见 `modules/registration/UPSTREAM.json`
+ 
+ ---
+ 
+ ## 8. 子模块：diff-gaussian-rasterization
+ 
+-仅 **`run_frontend`** 链接此静态库：
++仅 **`run_frontend`** 链接此静态库，默认位置为：
+ 
+ ```
+ submodules/diff-gaussian-rasterization-w-pose-main/build/libCudaRasterizer.a
+ ```
+ 
++可通过 `SIO_CUDA_RASTERIZER_LIBRARY` 指定其他位置；本机脚本使用 `build/dependencies/build/rasterizer/libCudaRasterizer.a`。
++
+ ### 8.1 初始化子模块
+ 
+ ```bash
+@@ -299,6 +301,9 @@ CMake 配置阶段会检查以下文件；缺失则 **立即 FATAL_ERROR**：
+ | 选项 | 类型 | 默认 | 说明 |
+ |------|------|------|------|
+ | `SIO_ENABLE_PROFILING` | `option` | `OFF` | 开启前端性能剖析埋点 |
++| `SIO_BUILD_RUNTIME` | `option` | `ON` | 构建 GPU 主程序与集成测试；关闭后仅生成 CPU 测试 |
++| `SIO_ENABLE_LIBTORCH` | `option` | `OFF` | 启用 LibTorch 后端优化，需提供 `Torch_DIR` 或 `CMAKE_PREFIX_PATH` |
++| `SIO_CUDA_RASTERIZER_LIBRARY` | `CACHE FILEPATH` | 子模块下的静态库路径 | 预编译光栅化器路径 |
+ | `BUILD_TESTING` | CTest | colcon 默认 | 生成 `sio_unit_tests` 与 `pipeline_smoke_test` |
+ | `TENSORRT_ROOT_HINT` | `CACHE PATH` | 空 | TensorRT 根目录 |
+ | `NVINFER_INCLUDE_HINT` | `CACHE PATH` | 空 | `NvInfer.h` 所在目录 |
+@@ -311,7 +316,7 @@ CMake 配置阶段会检查以下文件；缺失则 **立即 FATAL_ERROR**：
+ |----|------|------|
+ | `SIO_ENABLE_PROFILING` | `-DSIO_ENABLE_PROFILING=ON` | 启用 profiler |
+ | `SIO_SLAM_PROJECT_CONFIG_PATH` | 始终定义 | 指向 `project_config.yaml` 绝对路径 |
+-| `SIO_USE_LIBTORCH` | 需自行在 CMake 中添加 | 启用 LibTorch 后端优化（源码已预留，CMake 未默认接入） |
++| `SIO_USE_LIBTORCH` | `SIO_ENABLE_LIBTORCH=ON` | 启用 LibTorch 后端优化 |
+ 
+ ---
+ 
+diff --git "a/docs/SCI_\346\212\225\345\275\261StereoGICP.md" "b/docs/SCI_\346\212\225\345\275\261StereoGICP.md"
+index 44e5fb0..03d0e72 100644
+--- "a/docs/SCI_\346\212\225\345\275\261StereoGICP.md"
++++ "b/docs/SCI_\346\212\225\345\275\261StereoGICP.md"
+@@ -1,6 +1,6 @@
+ # 基于立体点协方差的投影关联 Stereo-GICP
+ 
+-> 五篇 SCI 之 **Paper 2** · [索引](SCI_五篇论文索引.md) · 工程：`src/stereo_gicp.cpp` 的 `AlignProjective` / `ProjectiveAssociate`，ESIKF 经 `BuildProjectiveObservationSubclouds` 调用同一关联
++> 五篇 SCI 之 **Paper 2** · [索引](SCI_五篇论文索引.md) · 本文描述原投影实现。2026-10-28 配准已升级为 [robotic-front main `744ac2d`](../modules/registration/README.md)，独立求解器位于 `modules/registration/src/stereo_gicp.cpp`；`src/stereo_gicp.cpp` 保留 ESIKF 的观测工具。本文下方关于共用关联及旧函数名的描述对应升级前版本，当前实现以模块源码与版本说明为准。
+ 
+ ## 建议题目
+ 
+diff --git a/include/TrtEngine.hpp b/include/TrtEngine.hpp
+index 32511a9..fa79769 100644
+--- a/include/TrtEngine.hpp
++++ b/include/TrtEngine.hpp
+@@ -6,6 +6,8 @@
+ #include <fstream>
+ #include <iostream>
+ #include <string>
++#include <stdexcept>
++#include <algorithm>
+ #include <vector>
+ 
+ class Logger : public nvinfer1::ILogger {
+@@ -25,58 +27,96 @@ public:
+   std::vector<std::string> tensor_names;
+   inline static Logger gLogger;
+ 
++  static void CheckCuda(cudaError_t code, const char *operation) {
++    if (code != cudaSuccess)
++      throw std::runtime_error(std::string(operation) + ": " + cudaGetErrorString(code));
++  }
++
+   explicit TrtEngine(const std::string &plan_file) {
+     std::ifstream file(plan_file, std::ios::binary);
+     if (!file.good()) {
+-      std::cerr << "文件打开失败: " << plan_file << std::endl;
+-      exit(1);
++      throw std::runtime_error("Cannot open TensorRT engine: " + plan_file);
+     }
+ 
+     file.seekg(0, file.end);
+     size_t size = static_cast<size_t>(file.tellg());
+     file.seekg(0, file.beg);
+     std::vector<char> trt_model_stream(size);
+-    file.read(trt_model_stream.data(), static_cast<std::streamsize>(size));
++    if (size == 0 || !file.read(trt_model_stream.data(), static_cast<std::streamsize>(size)))
++      throw std::runtime_error("Empty or incomplete TensorRT engine: " + plan_file);
+     file.close();
+ 
+-    runtime = nvinfer1::createInferRuntime(gLogger);
+-    engine = runtime->deserializeCudaEngine(trt_model_stream.data(), size);
+-    context = engine->createExecutionContext();
++    try {
++      runtime = nvinfer1::createInferRuntime(gLogger);
++      if (!runtime) throw std::runtime_error("TensorRT runtime creation failed");
++      engine = runtime->deserializeCudaEngine(trt_model_stream.data(), size);
++      if (!engine) throw std::runtime_error("TensorRT deserialization failed: " + plan_file);
++      context = engine->createExecutionContext();
++      if (!context) throw std::runtime_error("TensorRT execution context creation failed");
+ 
+     int num_tensors = engine->getNbIOTensors();
+-    bindings.resize(static_cast<size_t>(num_tensors));
++    bindings.resize(static_cast<size_t>(num_tensors), nullptr);
+     tensor_names.resize(static_cast<size_t>(num_tensors));
+ 
++    // Resolve dynamic batch dimensions before sizing any output buffer.
++    for (int i = 0; i < num_tensors; ++i) {
++      const char *name = engine->getIOTensorName(i);
++      if (engine->getTensorIOMode(name) != nvinfer1::TensorIOMode::kINPUT) continue;
++      auto dims = engine->getTensorShape(name);
++      bool dynamic = false;
++      for (int d = 0; d < dims.nbDims; ++d) dynamic |= dims.d[d] < 0;
++      if (dynamic) dims = engine->getProfileShape(name, 0, nvinfer1::OptProfileSelector::kOPT);
++      if (!context->setInputShape(name, dims))
++        throw std::runtime_error(std::string("Invalid input profile: ") + name);
++    }
++
+     for (int i = 0; i < num_tensors; ++i) {
+       const char *name = engine->getIOTensorName(i);
+       tensor_names[static_cast<size_t>(i)] = name;
+-      nvinfer1::Dims dims = engine->getTensorShape(name);
++      if (engine->getTensorDataType(name) != nvinfer1::DataType::kFLOAT)
++        throw std::runtime_error(std::string("Expected FP32 tensor I/O: ") + name);
++      nvinfer1::Dims dims = context->getTensorShape(name);
++      if (dims.nbDims <= 0) throw std::runtime_error("Unresolved tensor shape");
+ 
+       size_t vol = 1;
+-      for (int d = 0; d < dims.nbDims; ++d)
+-        vol *= dims.d[d] > 0 ? static_cast<size_t>(dims.d[d]) : 1;
++      for (int d = 0; d < dims.nbDims; ++d) {
++        if (dims.d[d] <= 0) throw std::runtime_error(std::string("Unresolved dimension: ") + name);
++        vol *= static_cast<size_t>(dims.d[d]);
++      }
+ 
+-      cudaMalloc(&bindings[static_cast<size_t>(i)], vol * sizeof(float));
+-      context->setTensorAddress(name, bindings[static_cast<size_t>(i)]);
++      CheckCuda(cudaMalloc(&bindings[static_cast<size_t>(i)], vol * sizeof(float)), "cudaMalloc");
++      if (!context->setTensorAddress(name, bindings[static_cast<size_t>(i)]))
++        throw std::runtime_error(std::string("Cannot bind tensor: ") + name);
+     }
++    } catch (...) { Release(); throw; }
+   }
+ 
+-  ~TrtEngine() {
++  TrtEngine(const TrtEngine &) = delete;
++  TrtEngine &operator=(const TrtEngine &) = delete;
++  ~TrtEngine() { Release(); }
++
++  void Release() noexcept {
+     for (void *ptr : bindings)
+       cudaFree(ptr);
+     delete context;
+     delete engine;
+     delete runtime;
++    bindings.clear(); context = nullptr; engine = nullptr; runtime = nullptr;
+   }
+ 
+-  void infer(cudaStream_t stream) { context->enqueueV3(stream); }
++  void infer(cudaStream_t stream) {
++    if (!context->enqueueV3(stream)) throw std::runtime_error("TensorRT enqueueV3 failed");
++  }
++
++  bool hasTensor(const std::string &name) const {
++    return std::find(tensor_names.begin(), tensor_names.end(), name) != tensor_names.end();
++  }
+ 
+   void *getBindingPtr(const std::string &name) {
+     for (size_t i = 0; i < tensor_names.size(); ++i) {
+       if (tensor_names[i] == name)
+         return bindings[i];
+     }
+-    std::cerr << "致命错误: 找不到 Tensor " << name << std::endl;
+-    exit(1);
++    throw std::runtime_error("Tensor not found: " + name);
+   }
+ };
+diff --git a/include/color_icp.h b/include/color_icp.h
+index 881eea8..3517de8 100644
+--- a/include/color_icp.h
++++ b/include/color_icp.h
+@@ -1,185 +1,3 @@
+ #pragma once
+-/**
+- * @file color_icp.h
+- * @brief Color ICP / small_gicp / 投影 Stereo-GICP 配准入口。
+- *
+- * - ColorICPRegistration：Colored ICP（几何+光度）
+- * - EstimatePoseGICP*：欧氏 GICP（含关键帧 prep 缓存）
+- * - EstimatePoseStereoGICP：投影关联独立配准，供普通帧 ESKF
+- */
+-
+-#include "color_icp/yaml.h"
+-#include "profiler/simple_profiler.h"
+-#include "camera_intrinsics.h"
+-
+-#include <Eigen/Geometry>
+-#include <memory>
+-#include <opencv2/core.hpp>
+-#include <pcl/features/normal_3d.h>
+-#include <pcl/kdtree/kdtree_flann.h>
+-#include <pcl/point_cloud.h>
+-#include <pcl/point_types.h>
+-#include <pcl/search/kdtree.h>
+-#include <small_gicp/ann/kdtree.hpp>
+-#include <small_gicp/points/point_cloud.hpp>
+-#include <small_gicp/registration/registration_helper.hpp>
+-#include <string>
+-#include <vector>
+-
+-namespace Eigen {
+-  typedef Eigen::Matrix<double, 6, 6> Matrix6d;
+-  typedef Eigen::Matrix<double, 6, 1> Vector6d;
+-} // namespace Eigen
+-
+-class ColorICP {
+-public:
+-  using PointT = pcl::PointXYZRGBNormal;
+-  using NormalT = pcl::PointXYZRGBNormal;
+-  using PointCloudPtr = pcl::PointCloud<PointT>::Ptr;
+-
+-  ColorICP();
+-  ~ColorICP() = default;
+-
+-  /**
+-   * @brief Colored ICP 配准（几何点到面 + 切平面光度）。
+-   * @param source 当前帧（含法向）
+-   * @param target 上一关键帧（含法向）
+-   * @param target_color_gradient 与 target 对齐的颜色梯度
+-   * @param target_kdtree 目标 KD 树（调用方复用）
+-   * @param initial_guess IMU 预积分初值（target←source）
+-   * @return 优化后的 4×4 变换
+-   */
+-  Eigen::Matrix4d ColorICPRegistration(
+-    const PointCloudPtr &source, const PointCloudPtr &target,
+-    const std::vector<Eigen::Vector3d> &target_color_gradient,
+-    const pcl::search::KdTree<PointT> &target_kdtree,
+-    Eigen::Matrix4d initial_guess);
+-
+-  /** @brief GICP/StereoGICP 统一结果：位姿 + Hessian 逆协方差。 */
+-  struct GICPResult {
+-    Eigen::Matrix4f T;                      ///< target ← source
+-    Eigen::Matrix<double, 6, 6> covariance; ///< [rot(3), trans(3)] 左扰动系
+-    int num_inliers = 0;
+-    int iterations = 0;
+-    bool converged = false;
+-    int downsample_target = 0;
+-    int downsample_source = 0;
+-    bool target_prep_cached = false;
+-    double error = 0.0;
+-  };
+-
+-  /**
+-   * @brief 配置欧氏 GICP 体素与最大对应距离。
+-   * @param voxel_size 下采样叶长 (m)
+-   * @param max_correspondence_distance 最大对应距离 (m)
+-   */
+-  void ConfigureGICP(double voxel_size, double max_correspondence_distance);
+-
+-  /** @brief 使关键帧 small_gicp prep 缓存失效。 */
+-  void InvalidateGicpTargetPrepCache();
+-
+-  /**
+-   * @brief 关键帧上预计算 small_gicp 点/法向/协方差。
+-   * @param cache_cloud target_cache 点云
+-   * @param source_indices 相对完整参考云的下标
+-   * @param keyframe_ts 关键帧时间戳，用于缓存命中
+-   * @return 成功构建为 true
+-   */
+-  bool BuildGicpKeyframeTargetPrep(const pcl::PointCloud<pcl::PointXYZRGB>::Ptr &cache_cloud,
+-                                   const std::vector<size_t> &source_indices,
+-                                   double keyframe_ts);
+-
+-  /**
+-   * @brief 欧氏 GICP（small_gicp），协方差供 ESKF。
+-   * @param target_cloud,source_cloud 目标/源点云
+-   * @param init_guess 初值
+-   * @param target_keyframe_ts ≥0 时尝试复用关键帧 prep
+-   */
+-  GICPResult EstimatePoseGICP(pcl::PointCloud<pcl::PointXYZRGB>::Ptr target_cloud,
+-                              pcl::PointCloud<pcl::PointXYZRGB>::Ptr source_cloud,
+-                              const Eigen::Matrix4d &init_guess = Eigen::Matrix4d::Identity(),
+-                              double target_keyframe_ts = -1.0 SIO_PROFILER_PARAMS);
+-
+-  /**
+-   * @brief 投影 Stereo-GICP：相机系源点 ↔ 关键帧深度（+可选 splat 目标）。
+-   * @param source_cam 当前帧相机系点云
+-   * @param T_curr_cam_to_prevkf_cam 初值：prevkf_cam ← curr_cam
+-   * @param camera 内参
+-   * @param target_depth 关键帧左目深度
+-   * @param T_imu_cam 外参，用于把 T/cov 转到 body
+-   * @param target_cam 非空则只从该静态云 splat 深度
+-   * @return body 系 T 与协方差
+-   */
+-  GICPResult EstimatePoseStereoGICP(
+-    const pcl::PointCloud<pcl::PointXYZRGB>::Ptr &source_cam,
+-    const Eigen::Matrix4d &T_curr_cam_to_prevkf_cam, const CameraIntrinsics &camera,
+-    const cv::Mat &target_depth, const Eigen::Matrix4d &T_imu_cam,
+-    const pcl::PointCloud<pcl::PointXYZRGB>::Ptr &target_cam = nullptr SIO_PROFILER_PARAMS);
+-
+-  /**
+-   * @brief 按 static_indices 筛选关键帧 prep 子集做 GICP（动态滤除后 fallback）。
+-   * @param static_indices 相对完整参考的静态下标
+-   * @param fallback_target_cloud prep 未命中时的目标云
+-   */
+-  GICPResult EstimatePoseGICPWithCacheFilter(
+-    pcl::PointCloud<pcl::PointXYZRGB>::Ptr source_cloud, const Eigen::Matrix4d &init_guess,
+-    double target_keyframe_ts, const std::vector<int> &static_indices,
+-    pcl::PointCloud<pcl::PointXYZRGB>::Ptr fallback_target_cloud SIO_PROFILER_PARAMS);
+-
+-private:
+-  /** @brief 6 维李代数增量 → 4×4 SE(3)。 */
+-  static Eigen::Matrix4d TransformVector6dToMatrix4d(const Eigen::Vector6d &input);
+-
+-  /**
+-   * @brief 在已 prep 的 target 上对齐 source（small_gicp 核心）。
+-   * @param target_prep_from_keyframe_cache 是否来自关键帧缓存
+-   */
+-  GICPResult AlignGICP(const small_gicp::PointCloud::Ptr &target_cloud_prep,
+-                       const std::shared_ptr<small_gicp::KdTree<small_gicp::PointCloud>>
+-                         &target_kdtree,
+-                       pcl::PointCloud<pcl::PointXYZRGB>::Ptr source_cloud,
+-                       const Eigen::Matrix4d &init_guess, bool target_prep_from_keyframe_cache
+-                         SIO_PROFILER_PARAMS);
+-
+-private:
+-  // 共享 KD-Tree（目标点云搜索器）
+-  pcl::search::KdTree<PointT, pcl::KdTreeFLANN<PointT, flann::L2_Simple<float>>>::Ptr kdtree_;
+-
+-  pcl::PointCloud<PointT>::Ptr source_cloud_;
+-  pcl::PointCloud<PointT>::Ptr target_cloud_;
+-
+-  // target 上预计算的颜色梯度，与 target 点一一对齐
+-  std::vector<Eigen::Vector3d> target_color_gradient_;
+-
+-  // RGB -> 亮度加权系数（可配置为 NTSC / sRGB / 均匀）
+-  Eigen::Vector3d rgb_to_intensity_weight_;
+-
+-  // 当前累计变换（由 ColorICPRegistration 更新）
+-  Eigen::Matrix4d transformation_;
+-
+-  // 从 YAML 加载的算法参数
+-  Yaml::Node params_;
+-
+-  int num_threads_;
+-  int gradient_min_neighbors_;
+-  int gradient_max_neighbors_;
+-  double nn_search_epsilon_;
+-  bool verbose_iteration_;
+-
+-  // 缓存的配准参数（构造时从 YAML 读取一次，避免每次配准/迭代重复解析）
+-  int max_iterations_;
+-  double transformation_epsilon_;
+-  double max_corres_dist_;
+-  double color_icp_lambda_;
+-  double gicp_voxel_size_ = 0.05;
+-  double gicp_max_correspondence_distance_ = 0.10;
+-
+-  struct GicpKeyframePrep {
+-    double keyframe_ts = -1.0;
+-    double voxel_size = 0.0;
+-    small_gicp::PointCloud::Ptr cloud;
+-    std::vector<size_t> source_indices;
+-    std::shared_ptr<small_gicp::KdTree<small_gicp::PointCloud>> kdtree;
+-    bool valid = false;
+-  } gicp_keyframe_prep_;
+-};
++// robotic-front main registration API; see modules/registration/UPSTREAM.json.
++#include "registration/color_icp.h"
+diff --git a/include/data.h b/include/data.h
+index c80b095..e97a4c2 100644
+--- a/include/data.h
++++ b/include/data.h
+@@ -224,8 +224,11 @@ struct ImuStatesGroup {
+     inv_expo_time = 1.0;
+     // 初始协方差：默认较小正定值，偏置部分更小
+     cov = MD(DIM_STATE, DIM_STATE)::Identity() * 0.01;
+-    cov(6, 6) = 0.00001;
+-    cov.block<9, 9>(10, 10) = MD(9, 9)::Identity() * 0.00001;
++    cov.block<3, 3>(6, 6) = M3D::Identity() * 0.00001;   // velocity, all axes
++    cov.block<3, 3>(9, 9) = M3D::Identity() * 0.00001;   // gyro bias
++    cov.block<3, 3>(12, 12) = M3D::Identity() * 0.00001; // accel bias
++    cov.block<3, 3>(15, 15) = M3D::Identity() * 0.00001; // gravity
++    cov(18, 18) = 0.00001;                            // exposure
+   }
+ 
+   // 拷贝构造
+diff --git a/include/fusion_debug.h b/include/fusion_debug.h
+index fe52b9e..3f243c6 100644
+--- a/include/fusion_debug.h
++++ b/include/fusion_debug.h
+@@ -7,6 +7,7 @@
+ #include <memory>
+ #include <mutex>
+ #include <string>
++#include <vector>
+ 
+ struct CorrespondenceFunnelStats {
+   std::size_t source_N = 0;
+@@ -16,6 +17,28 @@ struct CorrespondenceFunnelStats {
+   std::size_t normal_pass = 0;
+ };
+ 
++struct ESKFDebugSummary {
++  Eigen::Matrix<double, 6, 1> innovation = Eigen::Matrix<double, 6, 1>::Zero();
++  Eigen::Matrix<double, 6, 6> observation_covariance = Eigen::Matrix<double, 6, 6>::Zero();
++  Eigen::Matrix<double, 6, 6> innovation_covariance = Eigen::Matrix<double, 6, 6>::Zero();
++  Eigen::Matrix<double, 6, 1> innovation_scale = Eigen::Matrix<double, 6, 1>::Ones();
++  Eigen::Matrix<double, 6, 6> normalized_innovation_covariance = Eigen::Matrix<double, 6, 6>::Zero();
++  Eigen::Matrix<double, DIM_STATE, 6> gain = Eigen::Matrix<double, DIM_STATE, 6>::Zero();
++  Eigen::Matrix<double, DIM_STATE, 1> correction = Eigen::Matrix<double, DIM_STATE, 1>::Zero();
++  double damping = 0.0; // Dimensionless relative jitter after diagonal whitening.
++  double nis_regularized = 0.0;
++};
++
++struct ESIKFIterationDebug {
++  int iteration = 0;
++  std::size_t correspondences = 0;
++  Eigen::Matrix<double, 6, 6> information = Eigen::Matrix<double, 6, 6>::Zero();
++  Eigen::Matrix<double, 6, 6> observation_covariance = Eigen::Matrix<double, 6, 6>::Zero();
++  Eigen::Matrix<double, 6, 6> pose_gain = Eigen::Matrix<double, 6, 6>::Zero();
++  Eigen::Matrix<double, 6, 1> virtual_residual = Eigen::Matrix<double, 6, 1>::Zero();
++  Eigen::Matrix<double, 6, 1> pose_correction = Eigen::Matrix<double, 6, 1>::Zero();
++};
++
+ struct ESIKFDebugSummary {
+   bool skipped = false;
+   bool converged = false;
+@@ -29,6 +52,8 @@ struct ESIKFDebugSummary {
+   double pose_delta_m = 0.0;
+   double pose_delta_deg = 0.0;
+   double virtual_residual_norm = 0.0;
++  // Filled only when a summary is requested. One record per completed iteration.
++  std::vector<ESIKFIterationDebug> iterations;
+ };
+ 
+ struct VisualFusionDebugRecord {
+diff --git a/include/sio_frontend_modules.h b/include/sio_frontend_modules.h
+index 460384f..c65f42f 100644
+--- a/include/sio_frontend_modules.h
++++ b/include/sio_frontend_modules.h
+@@ -390,11 +390,13 @@ public:
+    * @param T_gicp 世界系绝对位姿观测
+    * @param R_gicp 已对齐到混合误差 [δθ_body, δp_world] 的 6×6 观测噪声
+    * @param flow_gate_cov 非空时用同一次 K、H、R 更新这份并行协方差，不改返回的绝对协方差
++   * @param debug_out 可选输出本次实际创新、正则化 S、K、修正量和 NIS，不改变更新计算
+    * @return 后验 ImuStatesGroup（Joseph 协方差）
+    */
+   ImuStatesGroup ESKF(const ImuStatesGroup &imu_propagated, const Eigen::Matrix4f &T_gicp,
+                       const Eigen::Matrix<double, 6, 6> &R_gicp,
+-                      Eigen::Matrix<double, DIM_STATE, DIM_STATE> *flow_gate_cov = nullptr);
++                      Eigen::Matrix<double, DIM_STATE, DIM_STATE> *flow_gate_cov = nullptr,
++                      ESKFDebugSummary *debug_out = nullptr);
+ };
+ 
+ /** @brief 点云法向/颜色梯度/立体点协方差与欧氏对应搜索。 */
+@@ -624,4 +626,4 @@ private:
+   std::mutex mtx_imu_buffer_;
+   int frontend_keyframe_id_ = 0;
+   int backend_keyframe_id_ = 0;
+-};
+\ No newline at end of file
++};
+diff --git a/include/stereo_gicp.h b/include/stereo_gicp.h
+index 17fb55c..27ceb74 100644
+--- a/include/stereo_gicp.h
++++ b/include/stereo_gicp.h
+@@ -1,5 +1,9 @@
+ #pragma once
+ 
++// Compatibility helpers for ESIKF point observations and image preprocessing.
++// Standalone registration uses the pinned robotic-front module below.
++#include "registration/stereo_gicp.h"
++
+ #include "data.h"
+ 
+ #include <Eigen/Core>
+@@ -47,17 +51,6 @@ struct ProjectiveMatch {
+   double z_j = 0.0;                                  ///< 命中深度 (m)
+ };
+ 
+-/** 独立投影 Stereo-GICP 的输出：相对位姿、左扰动协方差与收敛信息。 */
+-struct AlignResult {
+-  Eigen::Matrix4d T_target_source = Eigen::Matrix4d::Identity(); ///< 目标←源
+-  Eigen::Matrix<double, 6, 6> covariance =
+-    Eigen::Matrix<double, 6, 6>::Identity() * 1e-2; ///< 目标系左扰动 H^{-1}
+-  int num_inliers = 0;
+-  int num_iterations = 0;
+-  bool converged = false;
+-  double error = 0.0; ///< 累加的 Huber 鲁棒代价 Σ ρ(eᵀ W e)
+-};
+-
+ /**
+  * @brief 检查双目内参是否可用于三角化 / 投影。
+  * @param camera 焦距、主点、基线等
+@@ -145,27 +138,6 @@ std::vector<ProjectiveMatch> ProjectiveAssociate(
+   float z_gate_sigma = kZGateSigma, float edge_sigma = kEdgeSigma, float zmin = kZMin,
+   float zmax = kZMax);
+ 
+-/**
+- * @brief 独立投影 Stereo-GICP：外层重关联 + 内层左扰动 GN（Huber）。
+- *
+- * 有 target_cam 时只从该点云 splat 深度做投影关联；target_depth 仅作画布尺寸或无点云时的回退。
+- *
+- * @param source_cam 源点云（相机系）
+- * @param camera 内参
+- * @param T_target_source_init 初值 4×4
+- * @param target_depth 目标深度或尺寸参考
+- * @param target_cam 可选静态目标点云；非空则优先 splat
+- * @param max_iterations 外层最大轮数
+- * @param voxel_leaf 源点体素下采样边长 (m)；≤0 或点数很少时不下采样
+- * @return AlignResult；对应过少时 num_inliers 不足且可能未更新位姿
+- */
+-AlignResult AlignProjective(const pcl::PointCloud<PointTypeRGB> &source_cam,
+-                            const CameraIntrinsics &camera,
+-                            const Eigen::Matrix4d &T_target_source_init,
+-                            const cv::Mat &target_depth,
+-                            const pcl::PointCloud<PointTypeRGB> *target_cam = nullptr,
+-                            int max_iterations = 20, float voxel_leaf = 0.05f);
+-
+ /**
+  * @brief 相机系相对位姿共轭到机体系：T_body = T_imu_cam · T_cam · T_imu_cam⁻¹。
+  * @param T_cam_target_source 相机系目标←源
+diff --git a/include/utils.h b/include/utils.h
+index d08936b..3bc4517 100644
+--- a/include/utils.h
++++ b/include/utils.h
+@@ -185,14 +185,30 @@ inline Eigen::Matrix<double, 6, 6> BuildGicpToEskfPoseJacobian(
+     const Eigen::Matrix3d &R_w_keyframe,
+     const Eigen::Matrix4d &T_target_source) {
+   const Eigen::Matrix3d R_kc = T_target_source.block<3, 3>(0, 0);
+-  const Eigen::Vector3d t_k = T_target_source.block<3, 1>(0, 3);
+   Eigen::Matrix<double, 6, 6> J = Eigen::Matrix<double, 6, 6>::Zero();
+   J.block<3, 3>(0, 0) = Eigen::Matrix3d::Identity();
+-  J.block<3, 3>(3, 0) = R_w_keyframe * sio_utils::SkewSymmetric(t_k);
++  // T * Exp([w,rho]): rotation error is w in current body, while
++  // additive world position changes only by R_w_keyframe * R_kc * rho.
+   J.block<3, 3>(3, 3) = R_w_keyframe * R_kc;
+   return J;
+ }
+ 
++// Stereo-GICP supplies target/body left perturbations, whereas ESKF uses
++// [rotation in current body, additive position in world]. Keep cross terms.
++inline Eigen::Matrix<double, 6, 6> AlignStereoGicpCovarianceToEskfPose(
++    const Eigen::Matrix<double, 6, 6> &cov_body,
++    const Eigen::Matrix3d &R_w_keyframe,
++    const Eigen::Matrix4d &T_target_source) {
++  Eigen::Matrix<double, 6, 6> J = Eigen::Matrix<double, 6, 6>::Zero();
++  J.block<3, 3>(0, 0) = T_target_source.block<3, 3>(0, 0).transpose();
++  // Exp([w,rho]) * T: delta_t_target = -[t]x*w + rho.
++  J.block<3, 3>(3, 0) = -R_w_keyframe *
++    sio_utils::SkewSymmetric(T_target_source.block<3, 1>(0, 3));
++  J.block<3, 3>(3, 3) = R_w_keyframe;
++  const Eigen::Matrix<double, 6, 6> aligned = J * cov_body * J.transpose();
++  return 0.5 * (aligned + aligned.transpose());
++}
++
+ inline Eigen::Matrix<double, 6, 6> AlignGicpCovarianceToEskfPose(
+     const Eigen::Matrix<double, 6, 6> &gicp_cov,
+     const Eigen::Matrix3d &R_w_keyframe,
+diff --git a/src/color_icp.cpp b/src/color_icp.cpp
+deleted file mode 100644
+index 03a2719..0000000
+--- a/src/color_icp.cpp
++++ /dev/null
+@@ -1,550 +0,0 @@
+-// Color ICP Registration
+-// Hanzhe Teng, Feb 2022
+-// 实现 Colored ICP（ICCV 2017）、Stereo-GICP（投影关联 + 立体 Σ）和 small_gicp 欧氏退路
+-#include "color_icp.h"
+-
+-#include "sio_frontend_modules.h"
+-#include "stereo_gicp.h"
+-
+-// OpenCV（经 data.h 等）会先包含 opencv2/flann，并把 USE_UNORDERED_MAP 设为 1；
+-// 系统 FLANN 对 LSH 的序列化只特化了 std::map，unordered_map 会编译失败。
+-// 在实例化 PCL/FLANN 模板之前强制使用 std::map。
+-#ifdef USE_UNORDERED_MAP
+-#undef USE_UNORDERED_MAP
+-#endif
+-#define USE_UNORDERED_MAP 0
+-
+-#include <algorithm>
+-#include <atomic>
+-#include <chrono>
+-#include <pcl/common/transforms.h>
+-#include <pcl/kdtree/impl/kdtree_flann.hpp> // needed for L1 distance
+-#include <pcl/search/impl/kdtree.hpp>       // needed for L2 distance
+-#include <small_gicp/pcl/pcl_point_traits.hpp>
+-#include <small_gicp/registration/registration.hpp>
+-#include <small_gicp/registration/registration_helper.hpp>
+-#include <small_gicp/util/downsampling.hpp>
+-#include <small_gicp/util/normal_estimation_omp.hpp>
+-
+-#include "sio_pipeline_helpers.h"
+-
+-#ifdef _OPENMP
+-#  include <omp.h>
+-#endif
+-
+-#include "color_icp/yaml.h"
+-#include "sio_config.h"
+-
+-namespace {
+-
+-Yaml::Node ColorIcpParamsNode(Yaml::Node root) {
+-  Yaml::Node section = root["color_icp"];
+-  return section.IsMap() ? section : root;
+-}
+-
+-} // namespace
+-
+-// ColorICP构造函数：初始化配置参数
+-ColorICP::ColorICP()
+-  // ── 初始化列表：设置默认值 ──
+-  : source_cloud_(new pcl::PointCloud<PointT>)
+-  , // 源点云（预留，ColorICPRegistration
+-    // 内部不直接使用）
+-  target_cloud_(new pcl::PointCloud<PointT>)
+-  , // 目标点云（同上）
+-  transformation_(Eigen::Matrix4d::Identity())
+-  , // 累计变换矩阵
+-  rgb_to_intensity_weight_(Eigen::Vector3d::Ones() / 3.0)
+-  , // RGB→亮度权重，默认均匀
+-  num_threads_(1)
+-  , gradient_min_neighbors_(5)
+-  , // 颜色梯度估计最少邻域点数
+-  gradient_max_neighbors_(24)
+-  , // 颜色梯度估计最大邻域点数
+-  nn_search_epsilon_(0.01)
+-  , // KD-Tree 近似搜索容差
+-  verbose_iteration_(false)
+-  , // 是否输出每轮迭代信息
+-  kdtree_(new pcl::search::KdTree<PointT, pcl::KdTreeFLANN<PointT, flann::L2_Simple<float>>>) {
+-
+-  // 从 params.yaml 的 color_icp 节读取参数（路径与 project_config.params_file 一致）
+-  const std::filesystem::path params_path = sio_utils::LocateParamsFile();
+-  if (!params_path.empty()) {
+-    Yaml::Parse(params_, params_path.string().c_str());
+-  }
+-  Yaml::Node cfg = ColorIcpParamsNode(params_);
+-
+-  // RGB→亮度转换权重：支持 NTSC / sRGB 标准
+-  const std::string color_weight = cfg["color_weight"].As<std::string>();
+-  if (color_weight == "ntsc")
+-    rgb_to_intensity_weight_ = Eigen::Vector3d(0.299, 0.587, 0.114); // YIQ/YUV/NTSC 标准
+-  else if (color_weight == "srgb")
+-    rgb_to_intensity_weight_ = Eigen::Vector3d(0.2126, 0.7152, 0.0722); // sRGB/Rec709 标准
+-  // 否则保持默认均匀权重 (1/3, 1/3, 1/3)
+-
+-  // 多线程与梯度估计参数
+-  num_threads_ = std::max(1, cfg["num_threads"].As<int>(1));
+-  gradient_min_neighbors_ = std::max(5, cfg["gradient_min_neighbors"].As<int>(5));
+-  gradient_max_neighbors_ =
+-    std::max(gradient_min_neighbors_, cfg["gradient_max_neighbors"].As<int>(32));
+-  nn_search_epsilon_ = cfg["nn_search_epsilon"].As<double>(0.0);
+-  verbose_iteration_ = cfg["verbose_iteration"].As<bool>(false);
+-
+-  // 【优化】缓存配准参数到成员变量，避免每次调用 ColorICPRegistration /
+-  // 每次迭代都重新解析 YAML 字符串
+-  max_iterations_ = cfg["icp_max_iterations"].As<int>(20); // 最大迭代轮数
+-  transformation_epsilon_ =
+-    cfg["icp_transformation_epsilon"].As<double>(1e-6); // 收敛阈值（平移平方 + 旋转角度）
+-  max_corres_dist_ = cfg["icp_max_corres_dist"].As<double>(0.5); // 最近邻对应点最大距离
+-  color_icp_lambda_ = // 几何项/光度项权重（0=纯光度，1=纯几何）
+-    std::max(0.0, std::min(1.0, cfg["color_icp_lambda"].As<double>(0.5)));
+-  gicp_voxel_size_ = std::max(0.01, cfg["gicp_voxel_size"].As<double>(0.05));
+-  gicp_max_correspondence_distance_ = std::max(
+-    gicp_voxel_size_, cfg["gicp_max_correspondence_distance"].As<double>(2.0 * gicp_voxel_size_));
+-}
+-
+-void ColorICP::ConfigureGICP(double voxel_size, double max_correspondence_distance) {
+-  gicp_voxel_size_ = std::max(0.01, voxel_size);
+-  gicp_max_correspondence_distance_ = std::max(gicp_voxel_size_, max_correspondence_distance);
+-  InvalidateGicpTargetPrepCache();
+-}
+-// gicp目标缓存清理函数
+-void ColorICP::InvalidateGicpTargetPrepCache() {
+-  gicp_keyframe_prep_ = GicpKeyframePrep{};
+-}
+-
+-namespace {
+-
+-void PclRgbCloudToEigen4f(const pcl::PointCloud<pcl::PointXYZRGB>::Ptr &cloud,
+-                          std::vector<Eigen::Vector4f> &out) {
+-  if (!cloud) {
+-    out.clear();
+-    return;
+-  }
+-  out.clear();
+-  out.reserve(cloud->size());
+-  for (const auto &p : cloud->points) {
+-    out.emplace_back(p.x, p.y, p.z, 1.0f);
+-  }
+-}
+-
+-small_gicp::PointCloud::Ptr PclRgbCloudToSmallGicp(
+-  const pcl::PointCloud<pcl::PointXYZRGB>::Ptr &cloud) {
+-  auto out = std::make_shared<small_gicp::PointCloud>();
+-  if (!cloud || cloud->empty()) {
+-    return out;
+-  }
+-  out->resize(cloud->size());
+-  for (size_t i = 0; i < cloud->size(); ++i) {
+-    const auto &p = cloud->points[i];
+-    out->point(i) << static_cast<double>(p.x), static_cast<double>(p.y),
+-      static_cast<double>(p.z), 1.0;
+-  }
+-  return out;
+-}
+-
+-small_gicp::PointCloud::Ptr FilterGicpCloudByStaticIndices(
+-  const small_gicp::PointCloud &full_cloud, const std::vector<size_t> &source_indices,
+-  const std::vector<int> &static_indices) {
+-  if (full_cloud.empty() || source_indices.empty() || static_indices.empty()) {
+-    return nullptr;
+-  }
+-
+-  const int max_index = *std::max_element(static_indices.begin(), static_indices.end());
+-  if (max_index < 0) {
+-    return nullptr;
+-  }
+-
+-  std::vector<uint8_t> is_static(static_cast<size_t>(max_index) + 1, 0);
+-  for (const int idx : static_indices) {
+-    if (idx >= 0 && idx < static_cast<int>(is_static.size())) {
+-      is_static[static_cast<size_t>(idx)] = 1;
+-    }
+-  }
+-
+-  const size_t cache_size = std::min(full_cloud.size(), source_indices.size());
+-  auto filtered = std::make_shared<small_gicp::PointCloud>();
+-  filtered->points.reserve(cache_size);
+-  filtered->normals.reserve(cache_size);
+-  filtered->covs.reserve(cache_size);
+-
+-  for (size_t i = 0; i < cache_size; ++i) {
+-    const size_t src_idx = source_indices[i];
+-    if (src_idx >= is_static.size() || !is_static[src_idx]) {
+-      continue;
+-    }
+-    filtered->points.push_back(full_cloud.points[i]);
+-    filtered->normals.push_back(full_cloud.normals[i]);
+-    filtered->covs.push_back(full_cloud.covs[i]);
+-  }
+-
+-  return filtered->empty() ? nullptr : filtered;
+-}
+-
+-small_gicp::PointCloud::Ptr PrepareGicpSourceCloud(
+-  const pcl::PointCloud<pcl::PointXYZRGB>::Ptr &source_cloud, double voxel_size,
+-  int num_threads) {
+-  if (!source_cloud || source_cloud->empty()) {
+-    return nullptr;
+-  }
+-
+-  pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud_for_gicp = source_cloud;
+-  pcl::PointCloud<pcl::PointXYZRGB>::Ptr downsampled;
+-  std::vector<float> downsampled_confidences;
+-  std::vector<size_t> unused_indices;
+-  const std::vector<float> empty_confidences;
+-  constexpr size_t kDenseCloudThreshold = 5000;
+-  if (source_cloud->size() > kDenseCloudThreshold && voxel_size > 0.0) {
+-    if (!sio_pipeline::BuildIndexAlignedTargetCloud(
+-          source_cloud, empty_confidences, static_cast<float>(voxel_size), downsampled,
+-          downsampled_confidences, unused_indices)
+-        || !downsampled || downsampled->empty()) {
+-      return nullptr;
+-    }
+-    cloud_for_gicp = downsampled;
+-  }
+-
+-  auto sg_cloud = PclRgbCloudToSmallGicp(cloud_for_gicp);
+-  if (!sg_cloud || sg_cloud->empty()) {
+-    return nullptr;
+-  }
+-
+-  auto kdtree = std::make_shared<small_gicp::KdTree<small_gicp::PointCloud>>(sg_cloud);
+-  small_gicp::estimate_normals_covariances_omp(*sg_cloud, *kdtree, 10, num_threads);
+-  return sg_cloud;
+-}
+-
+-} // namespace
+-
+-bool ColorICP::BuildGicpKeyframeTargetPrep(
+-  const pcl::PointCloud<pcl::PointXYZRGB>::Ptr &cache_cloud,
+-  const std::vector<size_t> &source_indices, double keyframe_ts) {
+-  InvalidateGicpTargetPrepCache();
+-  if (!cache_cloud || cache_cloud->empty() || source_indices.size() != cache_cloud->size()) {
+-    return false;
+-  }
+-
+-  auto sg_cloud = PclRgbCloudToSmallGicp(cache_cloud); // 将pcl点云转换为small_gicp点云
+-  if (!sg_cloud || sg_cloud->empty()) {
+-    return false;
+-  }
+-
+-  auto kdtree = std::make_shared<small_gicp::KdTree<small_gicp::PointCloud>>(sg_cloud);
+-  small_gicp::estimate_normals_covariances_omp(*sg_cloud, *kdtree, 10, num_threads_);
+-
+-  gicp_keyframe_prep_.cloud = sg_cloud;
+-  gicp_keyframe_prep_.kdtree = kdtree;
+-  gicp_keyframe_prep_.source_indices = source_indices;
+-  gicp_keyframe_prep_.keyframe_ts = keyframe_ts;
+-  gicp_keyframe_prep_.voxel_size = gicp_voxel_size_;
+-  gicp_keyframe_prep_.valid = true;
+-  return true;
+-}
+-
+-ColorICP::GICPResult ColorICP::AlignGICP(
+-  const small_gicp::PointCloud::Ptr &target_cloud_prep,
+-  const std::shared_ptr<small_gicp::KdTree<small_gicp::PointCloud>> &target_kdtree,
+-  pcl::PointCloud<pcl::PointXYZRGB>::Ptr source_cloud, const Eigen::Matrix4d &init_guess,
+-  bool target_prep_from_keyframe_cache SIO_PROFILER_PARAMS_IMPL) {
+-  GICPResult out;
+-  out.T = Eigen::Matrix4f::Identity();
+-  out.covariance = Eigen::Matrix<double, 6, 6>::Identity() * 1e-2;
+-  out.target_prep_cached = target_prep_from_keyframe_cache;
+-  out.downsample_target = target_cloud_prep ? static_cast<int>(target_cloud_prep->size()) : 0;
+-
+-  if (!target_cloud_prep || target_cloud_prep->empty() || !target_kdtree || !source_cloud
+-      || source_cloud->empty()) {
+-    return out;
+-  }
+-
+-  small_gicp::PointCloud::Ptr source_cloud_prep = [&]() {
+-    SIO_PROFILE((*sio_prof), sio_frame_id, "gicp", "preprocess_source");
+-    return PrepareGicpSourceCloud(source_cloud, gicp_voxel_size_, num_threads_);
+-  }();
+-  out.downsample_source = source_cloud_prep ? static_cast<int>(source_cloud_prep->size()) : 0;
+-
+-  if (!source_cloud_prep) {
+-    return out;
+-  }
+-
+-  small_gicp::RegistrationSetting setting;
+-  setting.type = small_gicp::RegistrationSetting::GICP;
+-  setting.max_correspondence_distance = gicp_max_correspondence_distance_;
+-  setting.max_iterations = max_iterations_;
+-  setting.num_threads = num_threads_;
+-
+-  Eigen::Isometry3d init_iso;
+-  init_iso.matrix() = init_guess;
+-
+-  auto result = [&]() {
+-    SIO_PROFILE((*sio_prof), sio_frame_id, "gicp", "align");
+-    return small_gicp::align(*target_cloud_prep, *source_cloud_prep, *target_kdtree, init_iso,
+-                             setting);
+-  }();
+-
+-  out.T = result.T_target_source.matrix().cast<float>();
+-  out.num_inliers = static_cast<int>(result.num_inliers);
+-  out.iterations = static_cast<int>(result.iterations + 1);
+-  out.converged = result.converged;
+-
+-  {
+-    SIO_PROFILE((*sio_prof), sio_frame_id, "gicp", "covariance");
+-    const double det = result.H.determinant();
+-    if (std::isfinite(det) && std::abs(det) > 1e-12) {
+-      out.covariance = result.H.inverse();
+-      out.covariance = 0.5 * (out.covariance + out.covariance.transpose());
+-    } else {
+-      const double scale =
+-        (result.num_inliers > 0) ? 1.0 / static_cast<double>(result.num_inliers) : 1e-2;
+-      out.covariance = Eigen::Matrix<double, 6, 6>::Identity() * scale;
+-    }
+-  }
+-
+-  return out;
+-}
+-
+-ColorICP::GICPResult ColorICP::EstimatePoseGICPWithCacheFilter(
+-  pcl::PointCloud<pcl::PointXYZRGB>::Ptr source_cloud, const Eigen::Matrix4d &init_guess,
+-  double target_keyframe_ts, const std::vector<int> &static_indices,
+-  pcl::PointCloud<pcl::PointXYZRGB>::Ptr fallback_target_cloud SIO_PROFILER_PARAMS_IMPL) {
+-  if (!source_cloud || source_cloud->empty()) {
+-    return GICPResult{};
+-  }
+-
+-  const bool keyframe_prep_ready =
+-    gicp_keyframe_prep_.valid && gicp_keyframe_prep_.cloud && gicp_keyframe_prep_.kdtree
+-    && gicp_keyframe_prep_.keyframe_ts == target_keyframe_ts
+-    && gicp_keyframe_prep_.voxel_size == gicp_voxel_size_
+-    && gicp_keyframe_prep_.source_indices.size() == gicp_keyframe_prep_.cloud->size();
+-
+-  if (keyframe_prep_ready && !static_indices.empty()) {
+-    small_gicp::PointCloud::Ptr target_cloud_prep;
+-    std::shared_ptr<small_gicp::KdTree<small_gicp::PointCloud>> target_kdtree;
+-
+-    target_cloud_prep = [&]() {
+-      SIO_PROFILE((*sio_prof), sio_frame_id, "gicp", "filter_target_prep");
+-      return FilterGicpCloudByStaticIndices(*gicp_keyframe_prep_.cloud,
+-                                            gicp_keyframe_prep_.source_indices, static_indices);
+-    }();
+-
+-    if (target_cloud_prep) {
+-      if (target_cloud_prep->size() == gicp_keyframe_prep_.cloud->size()) {
+-        target_kdtree = gicp_keyframe_prep_.kdtree;
+-      } else {
+-        target_kdtree = [&]() {
+-          SIO_PROFILE((*sio_prof), sio_frame_id, "gicp", "build_target_kdtree");
+-          return std::make_shared<small_gicp::KdTree<small_gicp::PointCloud>>(target_cloud_prep);
+-        }();
+-      }
+-
+-      return AlignGICP(target_cloud_prep, target_kdtree, source_cloud, init_guess, true
+-                       SIO_PROFILER_CALL(sio_prof, sio_frame_id));
+-    }
+-  }
+-
+-  return EstimatePoseGICP(fallback_target_cloud, source_cloud, init_guess, target_keyframe_ts
+-                          SIO_PROFILER_CALL(sio_prof, sio_frame_id));
+-}
+-
+-ColorICP::GICPResult ColorICP::EstimatePoseGICP(
+-  pcl::PointCloud<pcl::PointXYZRGB>::Ptr target_cloud,
+-  pcl::PointCloud<pcl::PointXYZRGB>::Ptr source_cloud, const Eigen::Matrix4d &init_guess,
+-  double target_keyframe_ts SIO_PROFILER_PARAMS_IMPL) {
+-  (void)target_keyframe_ts;
+-
+-  if (!target_cloud || target_cloud->empty() || !source_cloud || source_cloud->empty()) {
+-    return GICPResult{};
+-  }
+-
+-  const double voxel_size = gicp_voxel_size_;
+-  std::vector<Eigen::Vector4f> target_pts;
+-  {
+-    SIO_PROFILE((*sio_prof), sio_frame_id, "gicp", "pcl_to_eigen_target");
+-    PclRgbCloudToEigen4f(target_cloud, target_pts);
+-  }
+-  auto target_prep = [&]() {
+-    SIO_PROFILE((*sio_prof), sio_frame_id, "gicp", "preprocess_target");
+-    return small_gicp::preprocess_points(target_pts, voxel_size, 10, num_threads_);
+-  }();
+-
+-  return AlignGICP(target_prep.first, target_prep.second, source_cloud, init_guess, false
+-                   SIO_PROFILER_CALL(sio_prof, sio_frame_id));
+-}
+-
+-ColorICP::GICPResult ColorICP::EstimatePoseStereoGICP(
+-  const pcl::PointCloud<pcl::PointXYZRGB>::Ptr &source_cam,
+-  const Eigen::Matrix4d &T_curr_cam_to_prevkf_cam, const CameraIntrinsics &camera,
+-  const cv::Mat &target_depth, const Eigen::Matrix4d &T_imu_cam,
+-  const pcl::PointCloud<pcl::PointXYZRGB>::Ptr &target_cam SIO_PROFILER_PARAMS_IMPL) {
+-  GICPResult out;
+-  out.T = Eigen::Matrix4f::Identity();
+-  out.covariance = Eigen::Matrix<double, 6, 6>::Identity() * 1e-2;
+-  if (!source_cam || source_cam->empty() || !sio_stereo_gicp::CameraIsValid(camera)) {
+-    return out;
+-  }
+-
+-  sio_stereo_gicp::AlignResult aligned;
+-  {
+-    SIO_PROFILE((*sio_prof), sio_frame_id, "gicp", "stereo_projective");
+-    aligned = sio_stereo_gicp::AlignProjective(
+-      *source_cam, camera, T_curr_cam_to_prevkf_cam, target_depth,
+-      target_cam ? target_cam.get() : nullptr, max_iterations_,
+-      static_cast<float>(gicp_voxel_size_));
+-  }
+-
+-  const Eigen::Matrix4d T_body =
+-    sio_stereo_gicp::CameraPoseToBody(aligned.T_target_source, T_imu_cam);
+-  out.T = T_body.cast<float>();
+-  out.covariance = sio_stereo_gicp::CameraPoseCovToBody(aligned.covariance, T_imu_cam);
+-  out.num_inliers = aligned.num_inliers;
+-  out.iterations = aligned.num_iterations;
+-  out.converged = aligned.converged;
+-  out.error = aligned.error;
+-  out.downsample_source = aligned.num_inliers;
+-  out.downsample_target = target_cam ? static_cast<int>(target_cam->size()) : 0;
+-  return out;
+-}
+-
+-// 将6维李代数增量转换为4x4 SE(3)齐次变换矩阵
+-Eigen::Matrix4d ColorICP::TransformVector6dToMatrix4d(const Eigen::Vector6d &input) {
+-  Eigen::Matrix4d output = Eigen::Matrix4d::Identity();
+-  output.block<3, 3>(0, 0) = (Eigen::AngleAxisd(input(2), Eigen::Vector3d::UnitZ())
+-                              * Eigen::AngleAxisd(input(1), Eigen::Vector3d::UnitY())
+-                              * Eigen::AngleAxisd(input(0), Eigen::Vector3d::UnitX()))
+-                               .matrix();
+-  output.block<3, 1>(0, 3) = input.block<3, 1>(3, 0);
+-  return output;
+-}
+-
+-// 执行Colored ICP配准，融合几何和光度信息进行位姿估计
+-Eigen::Matrix4d ColorICP::ColorICPRegistration(
+-  const PointCloudPtr &source, const PointCloudPtr &target,
+-  const std::vector<Eigen::Vector3d> &target_color_gradient,
+-  const pcl::search::KdTree<PointT> &target_kdtree,
+-  Eigen::Matrix4d guess_transformation) {
+-  if (!source || source->empty() || !target || target->empty())
+-    return guess_transformation;
+-
+-  // ── 从缓存的成员变量读取参数（构造时已从 YAML 解析） ──
+-  const double rotation_epsilon = 1.0 - transformation_epsilon_;
+-  const double dist_sq_thresh = max_corres_dist_ * max_corres_dist_;
+-  const double sqrt_lambda = std::sqrt(color_icp_lambda_);
+-  const double sqrt_1m_lambda = std::sqrt(1.0 - color_icp_lambda_);
+-  const int cloud_size = static_cast<int>(source->size());
+-  const int actual_threads = num_threads_;
+-
+-  Eigen::Matrix4d final_transformation = guess_transformation;
+-
+-  // ── 预分配变换后源点云缓冲区（每轮迭代复用） ──
+-  pcl::PointCloud<PointT> source_trans;
+-  source_trans.points.resize(source->size());
+-  // ══════════════════════════════════════════════════════════════════════════
+-  // 迭代优化主循环：每轮融合 NN 搜索 + Gauss-Newton 累加为单次遍历
+-  // ══════════════════════════════════════════════════════════════════════════
+-  for (int iter = 0; iter < max_iterations_; ++iter) {
+-    // 用当前累计变换将 source 变换到估计坐标系
+-    pcl::transformPointCloud<PointT>(*source, source_trans, final_transformation);
+-
+-    // ── per-thread Gauss-Newton 累加器（每轮置零，线程独立无竞争） ──
+-    // JTJ_G / JTr_G: 几何项（point-to-plane）的法方程累加
+-    // JTJ_C / JTr_C: 光度项（photometric）的法方程累加
+-    // corres_local:  每线程有效对应数（用于判断本轮是否有足够对应）
+-    std::vector<Eigen::Matrix6d> JTJ_G_local(actual_threads, Eigen::Matrix6d::Zero());
+-    std::vector<Eigen::Vector6d> JTr_G_local(actual_threads, Eigen::Vector6d::Zero());
+-    std::vector<Eigen::Matrix6d> JTJ_C_local(actual_threads, Eigen::Matrix6d::Zero());
+-    std::vector<Eigen::Vector6d> JTr_C_local(actual_threads, Eigen::Vector6d::Zero());
+-    std::vector<int> corres_local(actual_threads, 0);
+-
+-#ifdef _OPENMP
+-#  pragma omp parallel num_threads(actual_threads)
+-#endif
+-    {
+-      int tid = 0;
+-#ifdef _OPENMP
+-      tid = omp_get_thread_num();
+-#endif
+-      // 线程私有的 NN 搜索缓冲区（parallel 区域外分配一次，内层循环复用）
+-      std::vector<int> nn_idx(1);
+-      std::vector<float> nn_sq(1);
+-
+-#ifdef _OPENMP
+-#  pragma omp for schedule(static)
+-#endif
+-      for (int i = 0; i < cloud_size; ++i) {
+-
+-        // ── Step 1: 在 target 中搜索源点 i 的最近邻 ──
+-        target_kdtree.nearestKSearch(source_trans.points[i], 1, nn_idx, nn_sq);
+-        if (nn_sq[0] > dist_sq_thresh) // 距离超阈值，丢弃此对应
+-          continue;
+-        const int j = nn_idx[0]; // target 中最近邻点索引
+-        ++corres_local[tid];     // 统计有效对应数
+-
+-        // ── Step 2: 就地读取源/目标点数据（零拷贝，不再拷贝到子点云） ──
+-        // q: 变换后的源点坐标   cq/iq: 源点颜色/亮度
+-        const Eigen::Vector3d q = source_trans.points[i].getVector3fMap().cast<double>();
+-        const Eigen::Vector3d cq = source_trans.points[i].getRGBVector3i().cast<double>();
+-        const double iq = cq.dot(rgb_to_intensity_weight_) / 255.0;
+-
+-        // p: 目标对应点坐标   np: 目标点法向   cp/ip: 目标点颜色/亮度
+-        // dp: 目标点颜色梯度（由 PrepareColorGradient 预计算）
+-        const Eigen::Vector3d p = target->points[j].getVector3fMap().cast<double>();
+-        const Eigen::Vector3d np = target->points[j].getNormalVector3fMap().cast<double>();
+-        const Eigen::Vector3d cp = target->points[j].getRGBVector3i().cast<double>();
+-        const double ip = cp.dot(rgb_to_intensity_weight_) / 255.0;
+-        const Eigen::Vector3d &dp = target_color_gradient[j];
+-
+-        // ── Step 3: 几何项（point-to-plane） ──
+-        // 残差: r_geo = (q - p) · n_p              (论文 Eq.19)
+-        // 雅可比: J_geo = [q × n_p ; n_p]^T        (论文 Eq.30)
+-        const double r_geo = (q - p).dot(np);
+-        Eigen::Vector6d J_geo;
+-        J_geo.head<3>() = q.cross(np);                           // 对旋转分量的导数
+-        J_geo.tail<3>() = np;                                    // 对平移分量的导数
+-        JTJ_G_local[tid].noalias() += J_geo * J_geo.transpose(); // J^T J 累加
+-        JTr_G_local[tid].noalias() += J_geo * r_geo;             // J^T r 累加
+-
+-        // ── Step 4: 光度项（photometric） ──
+-        // dpM = dp - (dp · np) np  等价于 dp^T (I - np np^T)，但避免了 3×3
+-        // 矩阵乘 r_color = I(q_proj) - I(q)，其中 q_proj 是 q 在切平面上的投影
+-        const Eigen::Vector3d dpM = dp - dp.dot(np) * np;
+-        const double r_color = ip + dp.dot(q - (q - p).dot(np) * np - p) - iq;
+-        Eigen::Vector6d J_color;
+-        J_color.head<3>() = q.cross(dpM); // 光度雅可比对旋转分量  (论文 Eq.28-29)
+-        J_color.tail<3>() = dpM;          // 光度雅可比对平移分量
+-        JTJ_C_local[tid].noalias() += J_color * J_color.transpose();
+-        JTr_C_local[tid].noalias() += J_color * r_color;
+-      }
+-    }
+-
+-    // ── 归约：合并各线程的法方程，按 lambda 权重融合几何项与光度项 ──
+-    // JTJ = √λ · JTJ_G + √(1-λ) · JTJ_C  （与 Open3D 公式一致）
+-    Eigen::Matrix6d JTJ = Eigen::Matrix6d::Zero();
+-    Eigen::Vector6d JTr = Eigen::Vector6d::Zero();
+-    int total_corres = 0;
+-    for (int tid = 0; tid < actual_threads; ++tid) {
+-      JTJ.noalias() += sqrt_lambda * JTJ_G_local[tid] + sqrt_1m_lambda * JTJ_C_local[tid];
+-      JTr.noalias() += sqrt_lambda * JTr_G_local[tid] + sqrt_1m_lambda * JTr_C_local[tid];
+-      total_corres += corres_local[tid];
+-    }
+-
+-    // 无有效对应或数值异常时提前退出
+-    if (total_corres == 0 || !JTJ.allFinite() || !JTr.allFinite())
+-      break;
+-
+-    // ── 求解 6 维位姿增量 X = [α,β,γ,tx,ty,tz] ──
+-    // 线性系统: JTJ · X = -JTr（Gauss-Newton 正规方程）
+-    const Eigen::Vector6d X = JTJ.ldlt().solve(-JTr);
+-    const Eigen::Matrix4d dT = TransformVector6dToMatrix4d(X); // 增量变换矩阵
+-    final_transformation = dT * final_transformation;          // 左乘更新累计变换
+-
+-    // ── 收敛判断 ──
+-    // 旋转：cos(angle) = (tr(dT_rot) - 1) / 2，越接近 1 增量越小
+-    // 平移：增量平移的平方和
+-    const double cos_angle = 0.5 * (dT(0, 0) + dT(1, 1) + dT(2, 2) - 1.0);
+-    const double trans_sqr = dT(0, 3) * dT(0, 3) + dT(1, 3) * dT(1, 3) + dT(2, 3) * dT(2, 3);
+-    if (cos_angle >= rotation_epsilon && trans_sqr <= transformation_epsilon_)
+-      break; // 旋转和平移增量均足够小，认为已收敛
+-  }
+-
+-  return final_transformation; // 返回 source → target 的最终 4×4 刚体变换
+-}
+diff --git a/src/dynamic_cloud_processor.cpp b/src/dynamic_cloud_processor.cpp
+index dc25e58..143f4dd 100644
+--- a/src/dynamic_cloud_processor.cpp
++++ b/src/dynamic_cloud_processor.cpp
+@@ -279,7 +279,11 @@ bool DynamicCloudProcessor::removeDynamicObjects(
+   uploadRaftTensor(curr_prep, (float *)algo_raft->bindings[1]);
+   algo_raft->infer(stream_raft_);
+   cudaStreamSynchronize(stream_raft_);
+-  cv::Mat raft_flow_mat = postprocessRaftFlow((float *)algo_raft->bindings[2], w, h);
++  // The supplied iter6 export exposes every iteration; 2206 is the final flow.
++  // Single-output exports retain their existing output binding.
++  void *flow_output = algo_raft->hasTensor("2206")
++    ? algo_raft->getBindingPtr("2206") : algo_raft->bindings[2];
++  cv::Mat raft_flow_mat = postprocessRaftFlow(static_cast<float *>(flow_output), w, h);
+ 
+   cv::Mat dynamic_mask =
+     detectDynamicObjectsAdaptive(raft_flow_mat, geo_results.geo_flow, prev_disp, cam_,
+@@ -670,4 +674,4 @@ StereoCloud DynamicCloudProcessor::extractStaticPointCloud(
+     *invisible_cloud = invisible_pcd;
+   }
+   return static_pcd;
+-}
+\ No newline at end of file
++}
+diff --git a/src/frontend.cpp b/src/frontend.cpp
+index d2de40d..3ce6aa3 100644
+--- a/src/frontend.cpp
++++ b/src/frontend.cpp
+@@ -896,10 +896,10 @@ void SIOFrontend::run() {
+         svio_utils::RelativeTransform(T_w_kf, T_w_curr_fused);
+       FillImuFusedFields(state_after_fuse, T_prevkf_curr_fused, &fusion_rec);
+       fusion_rec.gicp_inliers = gicp_out.num_inliers;
+-      fusion_rec.gicp_iters = gicp_out.iterations;
++      fusion_rec.gicp_iters = gicp_out.num_iterations;
+       fusion_rec.gicp_converged = gicp_out.converged;
+-      fusion_rec.gicp_ds_target = gicp_out.downsample_target;
+-      fusion_rec.gicp_ds_source = gicp_out.downsample_source;
++      fusion_rec.gicp_ds_target = gicp_out.downsampled_target_points;
++      fusion_rec.gicp_ds_source = gicp_out.downsampled_source_points;
+       fusion_rec.gicp_target_prep_cached = gicp_out.target_prep_cached;
+       if (!is_keyframe) {
+         ComputeRelativeTransformDelta(T_kf_curr_body, gicp_out.T.cast<double>(),
+@@ -962,27 +962,27 @@ void SIOFrontend::run() {
+         continue;
+       }
+ 
+-      // --------------非关键帧：Stereo-GICP 位姿观测 + IMU 先验做 ESKF 松耦合
+-      // 当前帧完整相机点云 ↔ 上一关键帧静态点云（投影关联 + 立体 Σ）。
++      // 非关键帧：按显式配置选择 GICP，默认与 robotic-front main 一致。
++      // 配准位姿及协方差作为 ESKF 观测；关键帧 ESIKF 独立。
+       const auto filtered_target_cloud =
+         BuildCloudByIndices(prev_keyframe_full_cloud_body_, static_prev_indices);
+       const auto filtered_target_cloud_cam =
+         StereoCloudToXyzrgbByIndices(prev_keyframe_full_cloud_camera_, static_prev_indices);
+ 
+       CameraIntrinsics model_cam = cam_inference;
+-      if (!prev_keyframe_.image_left.empty()) {
+-        model_cam.image_width = prev_keyframe_.image_left.cols;
+-        model_cam.image_height = prev_keyframe_.image_left.rows;
+-      } else if (!prev_keyframe_.disp_filtered.empty()) {
++      if (!prev_keyframe_.disp_filtered.empty()) {
+         model_cam.image_width = prev_keyframe_.disp_filtered.cols;
+         model_cam.image_height = prev_keyframe_.disp_filtered.rows;
+       }
+ 
+-      auto gicp_out = color_icp_.EstimatePoseStereoGICP(
+-        pointcloud_cur_camera_, T_prevkf_curr_cam, model_cam, cv::Mat(), T_imu_cam,
+-        filtered_target_cloud_cam);
+-      const bool used_stereo_gicp = gicp_out.num_inliers >= 20;
+-      if (!used_stereo_gicp) {
++      ColorICP::GICPResult gicp_out;
++      const bool used_stereo_gicp = color_icp_.GetRegistrationType() ==
++                                    ColorICP::RegistrationType::STEREO_GICP;
++      if (used_stereo_gicp) {
++        gicp_out = color_icp_.EstimatePoseStereoGICP(
++          pointcloud_cur_camera_, prev_keyframe_.disp_filtered, filtered_target_cloud_cam,
++          model_cam, T_imu_cam, T_prevkf_curr_cam);
++      } else {
+         gicp_out = color_icp_.EstimatePoseGICPWithCacheFilter(
+           pointcloud_cur_, T_kf_curr_body, prev_keyframe_.timestamp, static_prev_indices,
+           filtered_target_cloud);
+@@ -995,10 +995,10 @@ void SIOFrontend::run() {
+         ComputeRelativeTransformDelta(T_kf_curr_body, T_gicp_kf_curr, &gicp_corr_trans_m,
+                                       &gicp_corr_rot_deg);
+         std::cout << "[GICP] frame=" << frame_data->frame_id
+-                  << " method=" << (used_stereo_gicp ? "stereo" : "small_gicp")
++                  << " method=" << gicp_out.registration_type
+                   << " static_tgt=" << static_prev_indices.size()
+-                  << " ds_tgt=" << gicp_out.downsample_target
+-                  << " ds_src=" << gicp_out.downsample_source
++                  << " ds_tgt=" << gicp_out.downsampled_target_points
++                  << " ds_src=" << gicp_out.downsampled_source_points
+                   << " inliers=" << gicp_out.num_inliers
+                   << " max_corr=" << tracking_cfg.gicp_max_correspondence_distance
+                   << " converged=" << (gicp_out.converged ? 1 : 0) << " corr_delta="
+@@ -1011,14 +1011,11 @@ void SIOFrontend::run() {
+       const Eigen::Matrix4d T_w_curr_gicp = T_w_kf * gicp_out.T.cast<double>();
+ 
+       Eigen::Matrix<double, 6, 6> R_obs_aligned;
+-      if (used_stereo_gicp) {
+-        // Stereo-GICP 左扰动协方差已映到 body；按 robotic-front 对齐到 ESKF 混合坐标。
+-        const Eigen::Matrix3d R_prevkf_curr = gicp_out.T.block<3, 3>(0, 0).cast<double>();
+-        Eigen::Matrix<double, 6, 6> J_obs = Eigen::Matrix<double, 6, 6>::Zero();
+-        J_obs.block<3, 3>(0, 0) = R_prevkf_curr.transpose();
+-        J_obs.block<3, 3>(3, 3) = T_w_kf.block<3, 3>(0, 0);
+-        R_obs_aligned = J_obs * gicp_out.covariance * J_obs.transpose();
+-        R_obs_aligned = 0.5 * (R_obs_aligned + R_obs_aligned.transpose());
++      if (gicp_out.covariance_convention == ColorICP::CovarianceConvention::LeftTarget) {
++        // Stereo-GICP 左扰动协方差已映到 body；转换为 ESKF 混合坐标。
++        R_obs_aligned = svio_utils::AlignStereoGicpCovarianceToEskfPose(
++          gicp_out.covariance, prev_keyframe_.imu_states.rot_end,
++          gicp_out.T.cast<double>());
+       } else {
+         // small_gicp Σ: T_target_source 的 se(3) 右扰动 [δθ_curr, δt_curr]（body）
+         R_obs_aligned = svio_utils::AlignGicpCovarianceToEskfPose(
+@@ -1029,9 +1026,14 @@ void SIOFrontend::run() {
+       // ESKF 松耦合：在 IMU 先验基础上用 GICP 观测做一次滤波更新，得到当前帧的后验状态
+ 
+       const ImuStatesGroup imu_before_eskf = imu_pred_state_curr_;
+-      imu_states_ =
+-        estimator_.ESKF(imu_pred_state_curr_, T_w_curr_gicp.cast<float>(), R_obs_aligned,
+-                        &flow_gate_cov_);
++      const Eigen::LLT<Eigen::Matrix<double, 6, 6>> observation_llt(R_obs_aligned);
++      const bool observation_usable = gicp_out.num_inliers >= 20 &&
++        gicp_out.covariance_from_hessian && T_w_curr_gicp.allFinite() &&
++        R_obs_aligned.allFinite() && observation_llt.info() == Eigen::Success;
++      imu_states_ = observation_usable
++        ? estimator_.ESKF(imu_pred_state_curr_, T_w_curr_gicp.cast<float>(), R_obs_aligned,
++                          &flow_gate_cov_)
++        : imu_pred_state_curr_;
+       write_fusion_debug(false, gicp_out, imu_before_eskf, imu_states_, {}, T_w_curr_gicp);
+ 
+       if (debug_viz_->enabled()) {
+@@ -1233,4 +1235,4 @@ bool SIOFrontend::isImuDataContinuous() const {
+     }
+   }
+   return true;
+-}
+\ No newline at end of file
++}
+diff --git a/src/state_estimater.cpp b/src/state_estimater.cpp
+index f6fb3d1..26f8e6d 100644
+--- a/src/state_estimater.cpp
++++ b/src/state_estimater.cpp
+@@ -7,6 +7,7 @@
+ #include <algorithm>
+ #include <cmath>
+ #include <limits>
++#include <stdexcept>
+ #include <pcl/filters/voxel_grid.h>
+ #include <rclcpp/rclcpp.hpp>
+ 
+@@ -981,6 +982,17 @@ void StateEstimator::ESIKF(
+       return dx;
+     }();
+ 
++    if (debug_out) {
++      ESIKFIterationDebug record;
++      record.iteration = iter;
++      record.correspondences = last_corr_count;
++      record.information = H_obs;
++      record.observation_covariance = R_obs;
++      record.pose_gain = K.topRows<6>();
++      record.virtual_residual = r_v;
++      record.pose_correction = delta_x.head<6>();
++      debug_out->iterations.push_back(std::move(record));
++    }
+     RCLCPP_INFO(logger,
+                 "ESIKF iter %d: corr=%zu r_v=%.6e delta_pose=%.6e "
+                 "delta_state=%.6e",
+@@ -1053,7 +1065,8 @@ void StateEstimator::ESIKF(
+ ImuStatesGroup StateEstimator::ESKF(
+     const ImuStatesGroup &imu_propagated, const Eigen::Matrix4f &T_gicp,
+     const Eigen::Matrix<double, 6, 6> &R_gicp,
+-    Eigen::Matrix<double, DIM_STATE, DIM_STATE> *flow_gate_cov) {
++    Eigen::Matrix<double, DIM_STATE, DIM_STATE> *flow_gate_cov,
++    ESKFDebugSummary *debug_out) {
+ 
+   ImuStatesGroup fused = imu_propagated;
+ 
+@@ -1074,20 +1087,53 @@ ImuStatesGroup StateEstimator::ESKF(
+   const auto &P_pred = imu_propagated.cov;
+   const Eigen::Matrix<double, 6, 6> &R_obs = R_gicp;
+   const Eigen::Matrix<double, 6, 6> P_pose = H_sel * P_pred * H_sel.transpose();
+-  const Eigen::Matrix<double, 6, 6> S = P_pose + R_obs;
+-  const double damping = 1e-6 * std::max(1.0, S.trace() / 6.0);
+-  const Eigen::Matrix<double, 6, 6> S_reg =
+-    S + damping * Eigen::Matrix<double, 6, 6>::Identity();
+-  const Eigen::LDLT<Eigen::Matrix<double, 6, 6>> S_ldlt(S_reg);
+-  Eigen::Matrix<double, 6, 6> S_inv;
+-  if (S_ldlt.info() == Eigen::Success) {
+-    S_inv = S_ldlt.solve(Eigen::Matrix<double, 6, 6>::Identity());
+-  } else {
+-    S_inv = S.inverse();
++  const Eigen::Matrix<double, 6, 6> S = 0.5 *
++    (P_pose + R_obs + (P_pose + R_obs).transpose());
++  if (!S.allFinite() || (S.diagonal().array() <= 0.0).any())
++    throw std::invalid_argument("ESKF innovation covariance must have finite positive diagonal");
++  // S contains both radians^2 and metres^2. Solve in dimensionless coordinates
++  // so a large position variance cannot inject artificial angular noise.
++  const Eigen::Matrix<double, 6, 1> scales = S.diagonal().cwiseSqrt();
++  const Eigen::Matrix<double, 6, 1> inverse_scales = scales.cwiseInverse();
++  const Eigen::Matrix<double, 6, 6> normalized =
++    inverse_scales.asDiagonal() * S * inverse_scales.asDiagonal();
++  Eigen::Matrix<double, 6, 6> normalized_regularized;
++  Eigen::LDLT<Eigen::Matrix<double, 6, 6>> solver;
++  double damping = 0.0;
++  bool solved = false;
++  for (int attempt = 0; attempt < 8; ++attempt) {
++    normalized_regularized = normalized +
++      damping * Eigen::Matrix<double, 6, 6>::Identity();
++    solver.compute(normalized_regularized);
++    if (solver.info() == Eigen::Success && solver.isPositive() &&
++        solver.vectorD().minCoeff() > 64 * std::numeric_limits<double>::epsilon() *
++                                       solver.vectorD().maxCoeff()) {
++      solved = true;
++      break;
++    }
++    damping = damping == 0.0 ? 1e-12 : damping * 10;
+   }
+-  const Eigen::Matrix<double, DIM_STATE, 6> K = P_pred * H_sel.transpose() * S_inv;
++  if (!solved) throw std::runtime_error("ESKF innovation covariance is not positive definite");
++  const Eigen::Matrix<double, DIM_STATE, 6> scaled_cross =
++    (P_pred * H_sel.transpose()) * inverse_scales.asDiagonal();
++  const Eigen::Matrix<double, DIM_STATE, 6> K =
++    solver.solve(scaled_cross.transpose()).transpose() * inverse_scales.asDiagonal();
++  const Eigen::Matrix<double, 6, 6> S_reg =
++    scales.asDiagonal() * normalized_regularized * scales.asDiagonal();
+ 
+   const Eigen::Matrix<double, DIM_STATE, 1> delta_x = K * z_innov;
++  if (debug_out) {
++    debug_out->innovation = z_innov;
++    debug_out->observation_covariance = R_obs;
++    debug_out->innovation_covariance = S_reg;
++    debug_out->innovation_scale = scales;
++    debug_out->normalized_innovation_covariance = normalized_regularized;
++    debug_out->gain = K;
++    debug_out->correction = delta_x;
++    debug_out->damping = damping;
++    const Eigen::Matrix<double, 6, 1> standardized = inverse_scales.asDiagonal() * z_innov;
++    debug_out->nis_regularized = standardized.dot(solver.solve(standardized));
++  }
+   fused.rot_end = imu_propagated.rot_end * svio_utils::ExpSO3(delta_x.segment<3>(0));
+   fused.pos_end = imu_propagated.pos_end + delta_x.segment<3>(3);
+   fused.vel_end = imu_propagated.vel_end + delta_x.segment<3>(6);
+diff --git a/src/stereo_gicp.cpp b/src/stereo_gicp.cpp
+index 8cbcfdb..715b438 100644
+--- a/src/stereo_gicp.cpp
++++ b/src/stereo_gicp.cpp
+@@ -3,11 +3,9 @@
+ #include <algorithm>
+ #include <cmath>
+ #include <limits>
+-#include <pcl/filters/voxel_grid.h>
+ #include <queue>
+ #include <utility>
+ 
+-#include <Eigen/Cholesky>
+ #include <Eigen/Geometry>
+ 
+ namespace sio_stereo_gicp {
+@@ -354,247 +352,14 @@ std::vector<ProjectiveMatch> ProjectiveAssociate(
+   return matches;
+ }
+ 
+-namespace {
+-
+-/** @brief 向量反对称矩阵 [v]_×。 */
+-Eigen::Matrix3d Skew(const Eigen::Vector3d &v) {
+-  Eigen::Matrix3d s;
+-  s << 0.0, -v.z(), v.y(), v.z(), 0.0, -v.x(), -v.y(), v.x(), 0.0;
+-  return s;
+-}
+-
+-/** @brief SO(3) 指数映射 Exp([w]_×)。 */
+-Eigen::Matrix3d ExpSO3(const Eigen::Vector3d &w) {
+-  const double theta = w.norm();
+-  if (theta < 1e-12) {
+-    return Eigen::Matrix3d::Identity();
+-  }
+-  return Eigen::AngleAxisd(theta, w / theta).toRotationMatrix();
+-}
+-
+-/**
+- * @brief SE(3) 伴随 Ad_T，用于协方差从相机系推到机体。
+- * @param T 4×4 刚体变换
+- */
+-Eigen::Matrix<double, 6, 6> AdjointSE3(const Eigen::Matrix4d &T) {
+-  const Eigen::Matrix3d R = T.block<3, 3>(0, 0);
+-  const Eigen::Vector3d t = T.block<3, 1>(0, 3);
+-  Eigen::Matrix<double, 6, 6> Ad = Eigen::Matrix<double, 6, 6>::Zero();
+-  Ad.block<3, 3>(0, 0) = R;
+-  Ad.block<3, 3>(3, 3) = R;
+-  Ad.block<3, 3>(3, 0) = Skew(t) * R;
+-  return Ad;
+-}
+-
+-/**
+- * @brief 体素下采样；叶长≤0 或点数过少时原样返回。
+- * @param leaf 叶长 (m)
+- */
+-pcl::PointCloud<PointTypeRGB> VoxelDownsample(const pcl::PointCloud<PointTypeRGB> &cloud,
+-                                              float leaf) {
+-  if (leaf <= 0.0f || cloud.size() < 32) {
+-    return cloud;
+-  }
+-  pcl::PointCloud<PointTypeRGB>::Ptr in(new pcl::PointCloud<PointTypeRGB>(cloud));
+-  pcl::PointCloud<PointTypeRGB> out;
+-  pcl::VoxelGrid<PointTypeRGB> voxel;
+-  voxel.setInputCloud(in);
+-  voxel.setLeafSize(leaf, leaf, leaf);
+-  voxel.filter(out);
+-  return out;
+-}
+-
+-} // namespace
+-
+-Eigen::Matrix4d CameraPoseToBody(const Eigen::Matrix4d &T_cam_target_source,
+-                                 const Eigen::Matrix4d &T_imu_cam) {
+-  return T_imu_cam * T_cam_target_source * T_imu_cam.inverse();
++Eigen::Matrix4d CameraPoseToBody(const Eigen::Matrix4d &pose,
++                                 const Eigen::Matrix4d &extrinsic) {
++  return BodyFromCamera(pose, extrinsic);
+ }
+ 
+-Eigen::Matrix<double, 6, 6> CameraPoseCovToBody(const Eigen::Matrix<double, 6, 6> &cov_cam,
+-                                                const Eigen::Matrix4d &T_imu_cam) {
+-  const Eigen::Matrix<double, 6, 6> Ad = AdjointSE3(T_imu_cam);
+-  Eigen::Matrix<double, 6, 6> cov = Ad * cov_cam * Ad.transpose();
+-  return 0.5 * (cov + cov.transpose());
+-}
+-
+-/**
+- * @brief 独立投影 Stereo-GICP：外层重关联 + 内层左扰动 GN（Huber）。
+- *
+- * 有 target_cam 时只从该点云 splat 深度做投影关联；target_depth 仅作画布尺寸或无点云时的回退。
+- * 流程：下采样源云 → 准备目标深度 → 外层迭代（关联 → 累加 H/g → 左乘更新 T）→ 用 H⁻¹ 作协方差。
+- */
+-AlignResult AlignProjective(const pcl::PointCloud<PointTypeRGB> &source_cam,
+-                            const CameraIntrinsics &camera,
+-                            const Eigen::Matrix4d &T_target_source_init,
+-                            const cv::Mat &target_depth,
+-                            const pcl::PointCloud<PointTypeRGB> *target_cam, int max_iterations,
+-                            float voxel_leaf) {
+-  AlignResult out;
+-  out.T_target_source = T_target_source_init;
+-  if (!CameraIsValid(camera) || source_cam.empty()) {
+-    return out;
+-  }
+-
+-  // 源点体素下采样，控制关联与 GN 规模。
+-  const pcl::PointCloud<PointTypeRGB> source = VoxelDownsample(source_cam, voxel_leaf);
+-  if (source.empty()) {
+-    return out;
+-  }
+-
+-  // 有目标点云时只从它 splat 深度，避免整图视差把动态区域又配回来。
+-  cv::Mat depth;
+-  cv::Mat splat_index;
+-  const bool have_target_cloud = target_cam != nullptr && !target_cam->empty();
+-  if (have_target_cloud) {
+-    int width = camera.image_width > 0
+-                  ? camera.image_width
+-                  : std::max(1, static_cast<int>(std::ceil(2.0f * camera.cx + 2.0f)));
+-    int height = camera.image_height > 0
+-                   ? camera.image_height
+-                   : std::max(1, static_cast<int>(std::ceil(2.0f * camera.cy + 2.0f)));
+-    if (!target_depth.empty()) {
+-      width = target_depth.cols;
+-      height = target_depth.rows;
+-    }
+-    // fill ≈ 0.05 m 在约 3 m 处的像素半径，用于 splat 空洞近邻填充。
+-    const int fill =
+-      std::max(1, static_cast<int>(std::ceil(0.05 * static_cast<double>(camera.fx) / 3.0)));
+-    const SplatMaps splat = SplatTarget(*target_cam, camera, width, height, fill);
+-    depth = splat.depth;
+-    splat_index = splat.index;
+-  } else if (!target_depth.empty() && target_depth.type() == CV_32FC1) {
+-    depth = target_depth;
+-  } else {
+-    return out;
+-  }
+-
+-  constexpr int kMinCorrespondences = 20;
+-  const int iters = std::max(1, max_iterations);
+-  Eigen::Matrix3d R = out.T_target_source.block<3, 3>(0, 0);
+-  Eigen::Vector3d t = out.T_target_source.block<3, 1>(0, 3);
+-  Eigen::Matrix<double, 6, 6> H_last = Eigen::Matrix<double, 6, 6>::Zero();
+-
+-  // 外层：当前 (R,t) 下重关联，再做一轮左扰动 GN。
+-  for (int iter = 0; iter < iters; ++iter) {
+-    const std::vector<ProjectiveMatch> matches =
+-      ProjectiveAssociate(source, R, t, depth, camera, splat_index);
+-    if (static_cast<int>(matches.size()) < kMinCorrespondences) {
+-      break;
+-    }
+-
+-    Eigen::Matrix<double, 6, 6> H = Eigen::Matrix<double, 6, 6>::Zero();
+-    Eigen::Matrix<double, 6, 1> g = Eigen::Matrix<double, 6, 1>::Zero();
+-    double cost = 0.0;
+-    const int match_count = static_cast<int>(matches.size());
+-
+-    // 内层：对每对对应累加 Huber 加权的法方程 H ξ = -g。
+-#ifdef _OPENMP
+-#  pragma omp parallel
+-    {
+-      Eigen::Matrix<double, 6, 6> H_thread = Eigen::Matrix<double, 6, 6>::Zero();
+-      Eigen::Matrix<double, 6, 1> g_thread = Eigen::Matrix<double, 6, 1>::Zero();
+-      double cost_thread = 0.0;
+-#  pragma omp for nowait
+-      for (int i = 0; i < match_count; ++i) {
+-#else
+-    for (int i = 0; i < match_count; ++i) {
+-#endif
+-        const auto &match = matches[static_cast<size_t>(i)];
+-        if (match.src_index < 0 || match.src_index >= static_cast<int>(source.size())) {
+-          continue;
+-        }
+-        const auto &src = source.points[static_cast<size_t>(match.src_index)];
+-        const Eigen::Vector3d p_src(src.x, src.y, src.z);
+-        const Eigen::Vector3d e = match.p_prime - match.q; // 目标系点到点残差
+-        // Σ = R Σ_src Rᵀ + Σ_tgt；W = Σ⁻¹ 白化。
+-        const Eigen::Matrix3d cov =
+-          R * PointCovarianceFromXyz(p_src, camera) * R.transpose()
+-          + PointCovarianceFromXyz(match.q, camera, kMatchSigmaUPx, kMatchSigmaVPx, kSigmaDPx);
+-        const Eigen::LDLT<Eigen::Matrix3d> cov_ldlt(cov);
+-        if (cov_ldlt.info() != Eigen::Success) {
+-          continue;
+-        }
+-        const Eigen::Matrix3d W = cov_ldlt.solve(Eigen::Matrix3d::Identity());
+-        if (!W.allFinite()) {
+-          continue;
+-        }
+-        const double mahalanobis_sq = e.dot(W * e);
+-        const double robust_w = HuberWeight(mahalanobis_sq);
+-        if (!(robust_w > 0.0)) {
+-          continue;
+-        }
+-        // 左扰动：δp' ≈ [-p'^] ξ_ω + ξ_v。
+-        Eigen::Matrix<double, 3, 6> J = Eigen::Matrix<double, 3, 6>::Zero();
+-        J.leftCols<3>() = -Skew(match.p_prime);
+-        J.rightCols<3>() = Eigen::Matrix3d::Identity();
+-        const double robust_cost = (mahalanobis_sq <= kHuberDelta * kHuberDelta)
+-                                     ? mahalanobis_sq
+-                                     : (2.0 * kHuberDelta * std::sqrt(mahalanobis_sq)
+-                                        - kHuberDelta * kHuberDelta);
+-#ifdef _OPENMP
+-        H_thread.noalias() += robust_w * J.transpose() * W * J;
+-        g_thread.noalias() += robust_w * J.transpose() * W * e;
+-        cost_thread += robust_cost;
+-#else
+-        H.noalias() += robust_w * J.transpose() * W * J;
+-        g.noalias() += robust_w * J.transpose() * W * e;
+-        cost += robust_cost;
+-#endif
+-#ifdef _OPENMP
+-      }
+-#  pragma omp critical
+-      {
+-        H += H_thread;
+-        g += g_thread;
+-        cost += cost_thread;
+-      }
+-    }
+-#else
+-    }
+-#endif
+-
+-    if (!H.allFinite() || !g.allFinite()) {
+-      break;
+-    }
+-    // 对称化 + 迹比例阻尼，解 ξ，左乘更新 T ← exp(ξ^) T。
+-    H_last = 0.5 * (H + H.transpose());
+-    const double damping = 1e-6 * std::max(1.0, H_last.trace() / 6.0);
+-    const Eigen::Matrix<double, 6, 6> H_reg =
+-      H_last + damping * Eigen::Matrix<double, 6, 6>::Identity();
+-    const Eigen::LDLT<Eigen::Matrix<double, 6, 6>> H_ldlt(H_reg);
+-    if (H_ldlt.info() != Eigen::Success) {
+-      break;
+-    }
+-    const Eigen::Matrix<double, 6, 1> dx = -H_ldlt.solve(g);
+-    if (!dx.allFinite()) {
+-      break;
+-    }
+-
+-    const Eigen::Matrix3d dR = ExpSO3(dx.head<3>());
+-    R = dR * R;
+-    t = dR * t + dx.tail<3>();
+-    out.num_inliers = match_count;
+-    out.num_iterations = iter + 1;
+-    out.error = cost;
+-    if (dx.head<3>().norm() < 1e-4 && dx.tail<3>().norm() < 1e-4) {
+-      out.converged = true;
+-      break;
+-    }
+-  }
+-
+-  out.T_target_source = Eigen::Matrix4d::Identity();
+-  out.T_target_source.block<3, 3>(0, 0) = R;
+-  out.T_target_source.block<3, 1>(0, 3) = t;
+-  // 末轮信息矩阵 H⁻¹ 作为左扰动协方差（相机目标系）。
+-  if (H_last.allFinite() && H_last.squaredNorm() > 0.0) {
+-    const Eigen::LDLT<Eigen::Matrix<double, 6, 6>> H_ldlt(H_last);
+-    if (H_ldlt.info() == Eigen::Success) {
+-      out.covariance = H_ldlt.solve(Eigen::Matrix<double, 6, 6>::Identity());
+-      out.covariance = 0.5 * (out.covariance + out.covariance.transpose());
+-    }
+-  }
+-  return out;
++Eigen::Matrix<double, 6, 6> CameraPoseCovToBody(
++    const Eigen::Matrix<double, 6, 6> &covariance,
++    const Eigen::Matrix4d &extrinsic) {
++  return CovarianceBodyFromCamera(covariance, extrinsic);
+ }
+-
+ } // namespace sio_stereo_gicp
+diff --git a/src/torch_pose_optimize.cpp b/src/torch_pose_optimize.cpp
+index fe0e213..d7193cb 100644
+--- a/src/torch_pose_optimize.cpp
++++ b/src/torch_pose_optimize.cpp
+@@ -185,17 +185,17 @@ bool TorchPoseOptimizer::BackwardAndStep(ImuStatesGroup &state, const ImuStatesG
+ 
+   if (pose_lr > 0 && pose_optim_) {
+     for (auto &group : pose_optim_->param_groups()) {
+-      group.options.set_lr(pose_lr);
++      group.options().set_lr(pose_lr);
+     }
+   }
+   if (bias_gyr_lr > 0 && bg_optim_) {
+     for (auto &group : bg_optim_->param_groups()) {
+-      group.options.set_lr(bias_gyr_lr);
++      group.options().set_lr(bias_gyr_lr);
+     }
+   }
+   if (bias_acc_lr > 0 && ba_optim_) {
+     for (auto &group : ba_optim_->param_groups()) {
+-      group.options.set_lr(bias_acc_lr);
++      group.options().set_lr(bias_acc_lr);
+     }
+   }
+ 
+diff --git a/tests/integration/pipeline_smoke_test.cpp b/tests/integration/pipeline_smoke_test.cpp
+index 9623b11..dc80117 100644
+--- a/tests/integration/pipeline_smoke_test.cpp
++++ b/tests/integration/pipeline_smoke_test.cpp
+@@ -319,7 +319,7 @@ int main(int argc, char **argv) {
+         target_cache.thread_kdtrees[0]) {
+       color_icp_transform = color_icp.ColorICPRegistration(
+           source_normals_cloud, target_cache.normals_cloud,
+-          target_cache.color_gradient, *target_cache.thread_kdtrees[0],
++          target_cache.color_gradient, target_cache.thread_kdtrees,
+           T_prevkf_curr);
+     }
+ 
+diff --git a/tests/unit/test_imu_integrator.cpp b/tests/unit/test_imu_integrator.cpp
+index 627b93b..4e02389 100644
+--- a/tests/unit/test_imu_integrator.cpp
++++ b/tests/unit/test_imu_integrator.cpp
+@@ -9,6 +9,18 @@
+ #include <deque>
+ #include <gtest/gtest.h>
+ 
++TEST(ImuIntegratorTest, DefaultPriorIsIsotropicWithinPhysicalStateBlocks) {
++  const ImuStatesGroup state;
++  // An isotropic default must not select a privileged velocity or bias axis.
++  // A cyclic permutation changes no information about an uncalibrated state.
++  Eigen::Matrix<double, DIM_STATE, DIM_STATE> axes =
++    Eigen::Matrix<double, DIM_STATE, DIM_STATE>::Identity();
++  Eigen::Matrix3d cycle;
++  cycle << 0, 1, 0, 0, 0, 1, 1, 0, 0;
++  for (int start : {0, 3, 6, 9, 12, 15}) axes.block<3, 3>(start, start) = cycle;
++  sio_test::ExpectMatrixNear(state.cov, axes * state.cov * axes.transpose(), 1e-15);
++}
++
+ TEST(ImuIntegratorTest, EmptyInitReturnsDefaultState) {
+   ImuIntegrator integrator;
+   const std::deque<sensor_msgs::msg::Imu::SharedPtr> empty;
+diff --git a/tests/unit/test_state_estimator.cpp b/tests/unit/test_state_estimator.cpp
+index bb2f7a1..080e881 100644
+--- a/tests/unit/test_state_estimator.cpp
++++ b/tests/unit/test_state_estimator.cpp
+@@ -112,6 +112,115 @@ TEST(StateEstimatorTest, EskfProducesFiniteSymmetricCovariance) {
+   sio_test::ExpectSymmetric(fused.cov, 1e-9);
+ }
+ 
++TEST(StateEstimatorTest, EskfAngularGainIsIndependentOfUncorrelatedPositionVariance) {
++  StateEstimator estimator;
++  ImuStatesGroup local, uncertain_position;
++  local.cov.setIdentity(); local.cov *= 1e-6;
++  local.cov.block<3, 3>(3, 3) = Eigen::Matrix3d::Identity() * 1e-2;
++  uncertain_position = local;
++  uncertain_position.cov.block<3, 3>(3, 3) = Eigen::Matrix3d::Identity() * 1e12;
++  Eigen::Matrix4f observation = Eigen::Matrix4f::Identity();
++  observation.block<3, 3>(0, 0) =
++    svio_utils::ExpSO3(Eigen::Vector3d(.01, -.005, .002)).cast<float>();
++  Eigen::Matrix<double, 6, 6> noise = Eigen::Matrix<double, 6, 6>::Identity() * 1e-8;
++  noise.bottomRightCorner<3, 3>() *= 1e4;
++  ESKFDebugSummary a, b;
++  const auto first = estimator.ESKF(local, observation, noise, nullptr, &a);
++  const auto second = estimator.ESKF(uncertain_position, observation, noise, nullptr, &b);
++  const double expected = 1e-6 / (1e-6 + 1e-8);
++  EXPECT_NEAR(a.gain(0, 0), expected, 1e-12);
++  EXPECT_NEAR(b.gain(0, 0), expected, 1e-12);
++  sio_test::ExpectMatrixNear(first.rot_end, second.rot_end, 1e-12);
++  sio_test::ExpectSymmetric(second.cov, 1e-12);
++}
++
++TEST(StateEstimatorTest, EskfHandlesCorrelatedInnovationAtFloatingPointResolution) {
++  StateEstimator estimator;
++  ImuStatesGroup prior;
++  prior.cov.setIdentity();
++  prior.cov(0, 1) = prior.cov(1, 0) = 1.0;
++  // R is positive, but adding it to the unit-scale rank-one block loses
++  // the 1e-20 diagonal increment in double precision.
++  const Eigen::Matrix<double, 6, 6> noise = Eigen::Matrix<double, 6, 6>::Identity() * 1e-20;
++  Eigen::Matrix4f observation = Eigen::Matrix4f::Identity();
++  observation.block<3, 3>(0, 0) =
++    svio_utils::ExpSO3(Eigen::Vector3d(.01, -.01, 0)).cast<float>();
++  ESKFDebugSummary debug;
++  const auto fused = estimator.ESKF(prior, observation, noise, nullptr, &debug);
++  EXPECT_GT(debug.damping, 0.0);
++  EXPECT_LT(debug.damping, 1e-6);
++  EXPECT_TRUE(debug.gain.allFinite());
++  EXPECT_TRUE(std::isfinite(debug.nis_regularized));
++  sio_test::ExpectSymmetric(fused.cov, 1e-12);
++  EXPECT_GT(fused.cov.selfadjointView<Eigen::Lower>().eigenvalues().minCoeff(), -1e-12);
++}
++
++TEST(StateEstimatorTest, EskfGainRespondsToObservationUncertainty) {
++  StateEstimator estimator;
++  ImuStatesGroup prior;
++  prior.cov.setIdentity();
++  prior.cov *= 0.1;
++  Eigen::Matrix4f observed = Eigen::Matrix4f::Identity();
++  observed.block<3, 3>(0, 0) = svio_utils::ExpSO3(Eigen::Vector3d(0.02, -0.01, 0.03)).cast<float>();
++  observed(0, 3) = 0.2f;
++  const auto original_cov = prior.cov;
++  ESKFDebugSummary low_debug, high_debug;
++  const auto low = estimator.ESKF(prior, observed,
++    Eigen::Matrix<double, 6, 6>::Identity() * 1e-4, nullptr, &low_debug);
++  const auto high = estimator.ESKF(prior, observed,
++    Eigen::Matrix<double, 6, 6>::Identity() * 1.0, nullptr, &high_debug);
++  EXPECT_GT(low.pos_end.x(), high.pos_end.x());
++  EXPECT_GT(low_debug.gain.topRows<6>().trace(), high_debug.gain.topRows<6>().trace());
++  EXPECT_GT(low_debug.nis_regularized, high_debug.nis_regularized);
++  EXPECT_LT(low.cov.trace(), high.cov.trace());
++  sio_test::ExpectMatrixNear(prior.cov, original_cov, 0.0);
++  const auto without_debug = estimator.ESKF(prior, observed,
++    Eigen::Matrix<double, 6, 6>::Identity() * 1e-4);
++  sio_test::ExpectMatrixNear(without_debug.pos_end, low.pos_end, 0.0);
++  sio_test::ExpectMatrixNear(without_debug.cov, low.cov, 0.0);
++}
++
++TEST(StateEstimatorTest, EsikfUpdatesGeometryWithoutGicpPoseObservation) {
++  StateEstimator estimator;
++  const auto target = sio_test::MakeGridCloud(20, 20);
++  auto tree = std::make_shared<pcl::KdTreeFLANN<PointTypeRGB>>();
++  tree->setInputCloud(target);
++  Eigen::Matrix4f offset = Eigen::Matrix4f::Identity();
++  offset(2, 3) = -0.02f;
++  const auto source = sio_test::TransformCloud(target, offset);
++  std::vector<Eigen::Vector3d> normals(target->size(), Eigen::Vector3d::UnitZ());
++  std::vector<Eigen::Vector3d> gradients(target->size(), Eigen::Vector3d::Zero());
++  ImuStatesGroup state;
++  ESIKFDebugSummary debug;
++  estimator.ESIKF(source, tree, gradients, normals, state, Eigen::Matrix3d::Identity(),
++    Eigen::Vector3d::Zero(), {}, {}, 1.0, nullptr, Eigen::Matrix4d::Identity(), &debug);
++  ASSERT_GT(debug.num_iters, 0);
++  ASSERT_FALSE(debug.iterations.empty());
++  EXPECT_EQ(debug.iterations.size(), static_cast<std::size_t>(debug.num_iters));
++  EXPECT_GT(state.pos_end.z(), 0.005);
++  EXPECT_NEAR(state.pos_end.z(), 0.02, 0.015);
++  EXPECT_GE(debug.final_corr, 20u);
++  sio_test::ExpectMatrixFinite(debug.iterations.back().information);
++  sio_test::ExpectMatrixFinite(debug.iterations.back().observation_covariance);
++  sio_test::ExpectSymmetric(state.cov, 1e-9);
++}
++
++TEST(StateEstimatorTest, EskfUsesAxisSpecificObservationUncertainty) {
++  StateEstimator estimator;
++  ImuStatesGroup prior;
++  prior.cov.setIdentity();
++  prior.cov *= 0.01;
++  Eigen::Matrix4f observed = Eigen::Matrix4f::Identity();
++  observed(0, 3) = observed(1, 3) = 0.1f;
++  Eigen::Matrix<double, 6, 6> noise = Eigen::Matrix<double, 6, 6>::Identity();
++  noise(3, 3) = 1e-6;
++  const auto fused = estimator.ESKF(prior, observed, noise);
++  EXPECT_GT(fused.pos_end.x(), 0.09);
++  EXPECT_LT(fused.pos_end.y(), 0.002);
++  sio_test::ExpectSymmetric(fused.cov, 1e-12);
++  EXPECT_GT(fused.cov.selfadjointView<Eigen::Lower>().eigenvalues().minCoeff(), 0.0);
++}
++
+ TEST(StateEstimatorTest, EskfJosephOnParallelUsesMainGain) {
+   StateEstimator estimator;
+   ImuStatesGroup propagated;
+@@ -136,11 +245,8 @@ TEST(StateEstimatorTest, EskfJosephOnParallelUsesMainGain) {
+   H.block<3, 3>(0, 0).setIdentity();
+   H.block<3, 3>(3, 3).setIdentity();
+   const Eigen::Matrix<double, 6, 6> S = H * main_before * H.transpose() + R_obs;
+-  const double damping = 1e-6 * std::max(1.0, S.trace() / 6.0);
+-  const Eigen::Matrix<double, 6, 6> S_reg =
+-      S + damping * Eigen::Matrix<double, 6, 6>::Identity();
+   const Eigen::Matrix<double, 6, 6> S_inv =
+-      S_reg.ldlt().solve(Eigen::Matrix<double, 6, 6>::Identity());
++      S.ldlt().solve(Eigen::Matrix<double, 6, 6>::Identity());
+   const Eigen::Matrix<double, DIM_STATE, 6> K = main_before * H.transpose() * S_inv;
+   const Eigen::Matrix<double, DIM_STATE, DIM_STATE> I_KH =
+       Eigen::Matrix<double, DIM_STATE, DIM_STATE>::Identity() - K * H;
+diff --git a/tests/unit/test_stereo_gicp.cpp b/tests/unit/test_stereo_gicp.cpp
+index accbc24..48cd8ce 100644
+--- a/tests/unit/test_stereo_gicp.cpp
++++ b/tests/unit/test_stereo_gicp.cpp
+@@ -6,13 +6,13 @@
+ #include <gtest/gtest.h>
+ #include <limits>
+ 
+-TEST(StereoGicpTest, SearchRadiusGrowsAtNearRange) {
++TEST(StereoObservationCompatTest, SearchRadiusGrowsAtNearRange) {
+   EXPECT_EQ(sio_stereo_gicp::SearchRadiusPx(2.0, 500.0), 15);
+   EXPECT_EQ(sio_stereo_gicp::SearchRadiusPx(10.0, 500.0), 5);
+   EXPECT_EQ(sio_stereo_gicp::SearchRadiusPx(50.0, 500.0), sio_stereo_gicp::kSearchRadiusMinPx);
+ }
+ 
+-TEST(StereoGicpTest, HuberWeightDownweightsLargeMahalanobis) {
++TEST(StereoObservationCompatTest, HuberWeightDownweightsLargeMahalanobis) {
+   EXPECT_DOUBLE_EQ(sio_stereo_gicp::HuberWeight(0.0), 1.0);
+   EXPECT_DOUBLE_EQ(sio_stereo_gicp::HuberWeight(1.0), 1.0);
+   const double delta = sio_stereo_gicp::kHuberDelta;
+@@ -20,7 +20,7 @@ TEST(StereoGicpTest, HuberWeightDownweightsLargeMahalanobis) {
+   EXPECT_NEAR(sio_stereo_gicp::HuberWeight(mahalanobis_sq), 0.5, 1e-12);
+ }
+ 
+-TEST(StereoGicpTest, CovarianceHasLargerDepthVariance) {
++TEST(StereoObservationCompatTest, CovarianceHasLargerDepthVariance) {
+   const CameraIntrinsics camera{500.0f, 500.0f, 320.0f, 240.0f, 0.12f, 640, 480};
+   const Eigen::Matrix3d sigma =
+     sio_stereo_gicp::PointCovarianceFromXyz(Eigen::Vector3d(0.0, 0.0, 5.0), camera);
+@@ -29,7 +29,7 @@ TEST(StereoGicpTest, CovarianceHasLargerDepthVariance) {
+   sio_test::ExpectSymmetric(sigma, 1e-12);
+ }
+ 
+-TEST(StereoGicpTest, ProjectiveAssociateFindsSameRayTarget) {
++TEST(StereoObservationCompatTest, ProjectiveAssociateFindsSameRayTarget) {
+   const CameraIntrinsics camera{500.0f, 500.0f, 320.0f, 240.0f, 0.12f, 640, 480};
+   auto source = pcl::PointCloud<PointTypeRGB>::Ptr(new pcl::PointCloud<PointTypeRGB>());
+   source->push_back(sio_test::MakePoint(0.0f, 0.0f, 2.0f));
+@@ -55,7 +55,7 @@ TEST(StereoGicpTest, ProjectiveAssociateFindsSameRayTarget) {
+   EXPECT_NEAR(residual.z(), -0.05, 1e-3);
+ }
+ 
+-TEST(StereoGicpTest, ProjectiveAssociateKeepsPixelOffset) {
++TEST(StereoObservationCompatTest, ProjectiveAssociateKeepsPixelOffset) {
+   const CameraIntrinsics camera{500.0f, 500.0f, 320.0f, 240.0f, 0.12f, 640, 480};
+   // 落到像素中心旁 0.4 px，q 取像素中心光线，横向残差约 0.4 * z / fx。
+   const float z = 2.0f;
+@@ -80,60 +80,10 @@ TEST(StereoGicpTest, ProjectiveAssociateKeepsPixelOffset) {
+   EXPECT_NEAR(residual.z(), 0.0, 1e-6);
+ }
+ 
+-TEST(StereoGicpTest, CameraPoseToBodyIsIdentityWhenExtrinsicIsIdentity) {
++TEST(StereoObservationCompatTest, CameraPoseToBodyIsIdentityWhenExtrinsicIsIdentity) {
+   Eigen::Matrix4d T_cam = Eigen::Matrix4d::Identity();
+   T_cam(0, 3) = 0.1;
+   const Eigen::Matrix4d T_body =
+     sio_stereo_gicp::CameraPoseToBody(T_cam, Eigen::Matrix4d::Identity());
+   sio_test::ExpectMatrixNear(T_body, T_cam, 1e-12);
+ }
+-
+-TEST(StereoGicpTest, AlignProjectiveRecoversSmallTranslation) {
+-  const CameraIntrinsics camera{500.0f, 500.0f, 320.0f, 240.0f, 0.12f, 640, 480};
+-  constexpr float kPlaneZ = 2.0f;
+-  cv::Mat depth(480, 640, CV_32FC1, cv::Scalar(kPlaneZ));
+-
+-  auto source = pcl::PointCloud<PointTypeRGB>::Ptr(new pcl::PointCloud<PointTypeRGB>());
+-  for (int iy = -4; iy <= 4; ++iy) {
+-    for (int ix = -4; ix <= 4; ++ix) {
+-      source->push_back(sio_test::MakePoint(0.04f * static_cast<float>(ix),
+-                                            0.04f * static_cast<float>(iy), kPlaneZ));
+-    }
+-  }
+-  source->width = source->size();
+-  source->height = 1;
+-
+-  Eigen::Matrix4d T_true = Eigen::Matrix4d::Identity();
+-  T_true(2, 3) = 0.03;
+-  source = sio_test::TransformCloud(source, T_true.inverse().cast<float>());
+-
+-  const auto aligned = sio_stereo_gicp::AlignProjective(*source, camera, Eigen::Matrix4d::Identity(),
+-                                                        depth, nullptr, 20, 0.0f);
+-
+-  ASSERT_GE(aligned.num_inliers, 20);
+-  EXPECT_NEAR(aligned.T_target_source(2, 3), 0.03, 0.01);
+-  EXPECT_NEAR(aligned.T_target_source(0, 3), 0.0, 0.01);
+-  EXPECT_NEAR(aligned.T_target_source(1, 3), 0.0, 0.01);
+-  sio_test::ExpectMatrixFinite(aligned.covariance);
+-  sio_test::ExpectSymmetric(aligned.covariance, 1e-9);
+-}
+-
+-TEST(StereoGicpTest, AlignProjectiveUsesTargetCloudNotFullDepth) {
+-  const CameraIntrinsics camera{500.0f, 500.0f, 320.0f, 240.0f, 0.12f, 640, 480};
+-  auto target = pcl::PointCloud<PointTypeRGB>::Ptr(new pcl::PointCloud<PointTypeRGB>());
+-  for (int iy = -4; iy <= 4; ++iy) {
+-    for (int ix = -4; ix <= 4; ++ix) {
+-      target->push_back(sio_test::MakePoint(0.04f * static_cast<float>(ix),
+-                                            0.04f * static_cast<float>(iy), 2.0f));
+-    }
+-  }
+-  target->width = target->size();
+-  target->height = 1;
+-
+-  cv::Mat dynamic_depth(480, 640, CV_32FC1, cv::Scalar(1.0f));
+-  const auto aligned = sio_stereo_gicp::AlignProjective(
+-    *target, camera, Eigen::Matrix4d::Identity(), dynamic_depth, target.get(), 8, 0.0f);
+-
+-  ASSERT_GE(aligned.num_inliers, 20);
+-  EXPECT_NEAR(aligned.T_target_source(2, 3), 0.0, 0.01);
+-}
+diff --git a/tests/unit/test_utils.cpp b/tests/unit/test_utils.cpp
+index 60a79fd..471d1f7 100644
+--- a/tests/unit/test_utils.cpp
++++ b/tests/unit/test_utils.cpp
+@@ -2,11 +2,51 @@
+ #include "helpers/make_imu.h"
+ 
+ #include "utils.h"
++#include "registration/stereo_gicp.h"
+ 
+ #include <Eigen/Dense>
+ #include <cmath>
+ #include <gtest/gtest.h>
+ 
++namespace {
++Eigen::Matrix<double, 6, 6> NumericalPoseJacobian(
++    const Eigen::Matrix3d &anchor_rotation, const Eigen::Matrix4d &relative, bool left) {
++  Eigen::Matrix4d anchor = Eigen::Matrix4d::Identity();
++  anchor.block<3, 3>(0, 0) = anchor_rotation;
++  anchor.block<3, 1>(0, 3) = Eigen::Vector3d(.3, -.7, .2);
++  const Eigen::Matrix4d nominal = anchor * relative;
++  constexpr double step = 1e-6;
++  Eigen::Matrix<double, 6, 6> jacobian;
++  for (int axis = 0; axis < 6; ++axis) {
++    Eigen::Matrix<double, 6, 1> delta = Eigen::Matrix<double, 6, 1>::Zero();
++    delta(axis) = step;
++    const Eigen::Matrix4d perturbation = sio_stereo_gicp::Se3Exp(delta);
++    const Eigen::Matrix4d changed = anchor * (left ? perturbation * relative : relative * perturbation);
++    jacobian.col(axis).head<3>() = sio_utils::So3LogApprox(
++      nominal.block<3, 3>(0, 0).transpose() * changed.block<3, 3>(0, 0)) / step;
++    jacobian.col(axis).tail<3>() = (changed.block<3, 1>(0, 3) - nominal.block<3, 1>(0, 3)) / step;
++  }
++  return jacobian;
++}
++} // namespace
++
++TEST(UtilsTest, StereoCovarianceAlignmentMatchesLeftPerturbation) {
++  Eigen::Matrix<double, 6, 6> a = Eigen::Matrix<double, 6, 6>::Identity();
++  a.diagonal() << 1, 2, 3, 4, 5, 6;
++  a(0, 3) = .4; a(2, 5) = -.2;
++  const Eigen::Matrix<double, 6, 6> covariance = a * a.transpose();
++  const auto rotation = sio_utils::ExpSO3(Eigen::Vector3d(.2, -.3, .1));
++  Eigen::Matrix4d relative = Eigen::Matrix4d::Identity();
++  relative.block<3, 3>(0, 0) = sio_utils::ExpSO3(Eigen::Vector3d(-.1, .4, .3));
++  relative.block<3, 1>(0, 3) = Eigen::Vector3d(.4, -.2, .1);
++  const auto aligned = sio_utils::AlignStereoGicpCovarianceToEskfPose(covariance, rotation, relative);
++  sio_test::ExpectSymmetric(aligned, 1e-12);
++  const auto numerical = NumericalPoseJacobian(rotation, relative, true);
++  sio_test::ExpectMatrixNear(aligned, numerical * covariance * numerical.transpose(), 1e-5);
++  EXPECT_GT((aligned.block<3, 3>(0, 3).norm()), 0.0);
++  EXPECT_GT((aligned - covariance).norm(), 0.1);
++}
++
+ TEST(UtilsTest, MsgTimeSecUsesRosHeaderStamp) {
+   const auto imu = sio_test::MakeImu(12.345, Eigen::Vector3d::Zero(),
+                                     Eigen::Vector3d::Zero());
+@@ -59,6 +99,7 @@ TEST(UtilsTest, AlignGicpCovarianceUsesFullPoseJacobian) {
+ 
+   const Eigen::Matrix<double, 6, 6> J =
+       svio_utils::BuildGicpToEskfPoseJacobian(R_wk, T_kc);
++  sio_test::ExpectMatrixNear(J, NumericalPoseJacobian(R_wk, T_kc, false), 1e-7);
+   const Eigen::Matrix<double, 6, 6> expected = J * gicp_cov * J.transpose();
+   const Eigen::Matrix<double, 6, 6> aligned =
+       svio_utils::AlignGicpCovarianceToEskfPose(gicp_cov, R_wk, T_kc);
+@@ -70,7 +111,7 @@ TEST(UtilsTest, AlignGicpCovarianceUsesFullPoseJacobian) {
+   sio_test::ExpectMatrixNear(J.block<3, 3>(3, 3), R_wk * T_kc.block<3, 3>(0, 0), 1e-12);
+ }
+ 
+-TEST(UtilsTest, AlignGicpCovarianceCouplesRotationIntoTranslation) {
++TEST(UtilsTest, RightGicpRotationDoesNotMoveSourceOrigin) {
+   Eigen::Matrix<double, 6, 6> gicp_cov = Eigen::Matrix<double, 6, 6>::Zero();
+   gicp_cov.block<3, 3>(0, 0) = Eigen::Matrix3d::Identity() * 0.02;
+   const Eigen::Matrix3d R_wk = Eigen::Matrix3d::Identity();
+@@ -81,7 +122,8 @@ TEST(UtilsTest, AlignGicpCovarianceCouplesRotationIntoTranslation) {
+       svio_utils::AlignGicpCovarianceToEskfPose(gicp_cov, R_wk, T_kc);
+ 
+   const double rot_to_trans_coupling = aligned.block<3, 3>(3, 0).norm();
+-  EXPECT_GT(rot_to_trans_coupling, 0.0);
++  EXPECT_DOUBLE_EQ(rot_to_trans_coupling, 0.0);
++  EXPECT_DOUBLE_EQ((aligned.bottomRightCorner<3, 3>().norm()), 0.0);
+   sio_test::ExpectSymmetric(aligned, 1e-12);
+ }
+ 

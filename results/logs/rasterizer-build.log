@@ -1,0 +1,675 @@
+-- The CUDA compiler identification is NVIDIA 12.9.86
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting CUDA compiler ABI info
+-- Detecting CUDA compiler ABI info - done
+-- Check for working CUDA compiler: /usr/local/cuda-12.9/bin/nvcc - skipped
+-- Detecting CUDA compile features
+-- Detecting CUDA compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/build/rasterizer
+[1/4] Building CUDA object CMakeFiles/CudaRasterizer.dir/cuda_rasterizer/forward.cu.o
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_vec2.hpp(97): warning #20012-D: __device__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                   ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_vec2.hpp(97): warning #20012-D: __host__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_vec3.hpp(102): warning #20012-D: __device__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_vec3.hpp(102): warning #20012-D: __host__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_vec4.hpp(100): warning #20012-D: __device__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_vec4.hpp(100): warning #20012-D: __host__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_mat2x2.hpp(35): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_mat2x2.hpp(35): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat2x3.hpp(36): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat2x3.hpp(36): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat2x4.hpp(36): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat2x4.hpp(36): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat3x2.hpp(36): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat3x2.hpp(36): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat3x3.hpp(35): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat3x3.hpp(35): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat3x4.hpp(36): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat3x4.hpp(36): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat4x2.hpp(36): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat4x2.hpp(36): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat4x3.hpp(36): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat4x3.hpp(36): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat4x4.hpp(35): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat4x4.hpp(35): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/../detail/../detail/../detail/type_vec1.hpp(95): warning #20012-D: __device__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/../detail/../detail/../detail/type_vec1.hpp(95): warning #20012-D: __host__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_vec2.hpp(97): warning #20012-D: __device__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                   ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_vec2.hpp(97): warning #20012-D: __host__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_vec3.hpp(102): warning #20012-D: __device__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_vec3.hpp(102): warning #20012-D: __host__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_vec4.hpp(100): warning #20012-D: __device__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_vec4.hpp(100): warning #20012-D: __host__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_mat2x2.hpp(35): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_mat2x2.hpp(35): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat2x3.hpp(36): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat2x3.hpp(36): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat2x4.hpp(36): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat2x4.hpp(36): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat3x2.hpp(36): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat3x2.hpp(36): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat3x3.hpp(35): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat3x3.hpp(35): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat3x4.hpp(36): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat3x4.hpp(36): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat4x2.hpp(36): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat4x2.hpp(36): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat4x3.hpp(36): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat4x3.hpp(36): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat4x4.hpp(35): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat4x4.hpp(35): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/../detail/../detail/../detail/type_vec1.hpp(95): warning #20012-D: __device__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/../detail/../detail/../detail/type_vec1.hpp(95): warning #20012-D: __host__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/cuda_rasterizer/auxiliary.h(151): warning #177-D: variable "p_proj" was declared but never referenced
+   float3 p_proj = { p_hom.x * p_w, p_hom.y * p_w, p_hom.z * p_w };
+          ^
+
+[2/4] Building CUDA object CMakeFiles/CudaRasterizer.dir/cuda_rasterizer/backward.cu.o
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_vec2.hpp(97): warning #20012-D: __device__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                   ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_vec2.hpp(97): warning #20012-D: __host__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_vec3.hpp(102): warning #20012-D: __device__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_vec3.hpp(102): warning #20012-D: __host__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_vec4.hpp(100): warning #20012-D: __device__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_vec4.hpp(100): warning #20012-D: __host__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_mat2x2.hpp(35): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_mat2x2.hpp(35): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat2x3.hpp(36): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat2x3.hpp(36): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat2x4.hpp(36): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat2x4.hpp(36): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat3x2.hpp(36): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat3x2.hpp(36): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat3x3.hpp(35): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat3x3.hpp(35): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat3x4.hpp(36): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat3x4.hpp(36): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat4x2.hpp(36): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat4x2.hpp(36): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat4x3.hpp(36): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat4x3.hpp(36): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat4x4.hpp(35): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat4x4.hpp(35): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/../detail/../detail/../detail/type_vec1.hpp(95): warning #20012-D: __device__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/../detail/../detail/../detail/type_vec1.hpp(95): warning #20012-D: __host__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_vec2.hpp(97): warning #20012-D: __device__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                   ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_vec2.hpp(97): warning #20012-D: __host__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_vec3.hpp(102): warning #20012-D: __device__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_vec3.hpp(102): warning #20012-D: __host__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_vec4.hpp(100): warning #20012-D: __device__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_vec4.hpp(100): warning #20012-D: __host__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_mat2x2.hpp(35): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_mat2x2.hpp(35): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat2x3.hpp(36): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat2x3.hpp(36): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat2x4.hpp(36): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat2x4.hpp(36): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat3x2.hpp(36): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat3x2.hpp(36): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat3x3.hpp(35): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat3x3.hpp(35): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat3x4.hpp(36): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat3x4.hpp(36): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat4x2.hpp(36): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat4x2.hpp(36): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat4x3.hpp(36): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat4x3.hpp(36): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat4x4.hpp(35): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat4x4.hpp(35): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/../detail/../detail/../detail/type_vec1.hpp(95): warning #20012-D: __device__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/../detail/../detail/../detail/type_vec1.hpp(95): warning #20012-D: __host__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/cuda_rasterizer/auxiliary.h(151): warning #177-D: variable "p_proj" was declared but never referenced
+   float3 p_proj = { p_hom.x * p_w, p_hom.y * p_w, p_hom.z * p_w };
+          ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/cuda_rasterizer/backward.cu(486): warning #177-D: variable "c" was declared but never referenced
+   float c = proj_raw[10];
+         ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/cuda_rasterizer/backward.cu(487): warning #177-D: variable "d" was declared but never referenced
+   float d = proj_raw[14];
+         ^
+
+[3/4] Building CUDA object CMakeFiles/CudaRasterizer.dir/cuda_rasterizer/rasterizer_impl.cu.o
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_vec2.hpp(97): warning #20012-D: __device__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                   ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_vec2.hpp(97): warning #20012-D: __host__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_vec3.hpp(102): warning #20012-D: __device__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_vec3.hpp(102): warning #20012-D: __host__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_vec4.hpp(100): warning #20012-D: __device__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_vec4.hpp(100): warning #20012-D: __host__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_mat2x2.hpp(35): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_mat2x2.hpp(35): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat2x3.hpp(36): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat2x3.hpp(36): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat2x4.hpp(36): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat2x4.hpp(36): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat3x2.hpp(36): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat3x2.hpp(36): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat3x3.hpp(35): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat3x3.hpp(35): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat3x4.hpp(36): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat3x4.hpp(36): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat4x2.hpp(36): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat4x2.hpp(36): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat4x3.hpp(36): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat4x3.hpp(36): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat4x4.hpp(35): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat4x4.hpp(35): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/../detail/../detail/../detail/type_vec1.hpp(95): warning #20012-D: __device__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/../detail/../detail/../detail/type_vec1.hpp(95): warning #20012-D: __host__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_vec2.hpp(97): warning #20012-D: __device__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                   ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_vec2.hpp(97): warning #20012-D: __host__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_vec3.hpp(102): warning #20012-D: __device__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_vec3.hpp(102): warning #20012-D: __host__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_vec4.hpp(100): warning #20012-D: __device__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_vec4.hpp(100): warning #20012-D: __host__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_mat2x2.hpp(35): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/type_mat2x2.hpp(35): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat2x3.hpp(36): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat2x3.hpp(36): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat2x4.hpp(36): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat2x4.hpp(36): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat3x2.hpp(36): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat3x2.hpp(36): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat3x3.hpp(35): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat3x3.hpp(35): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat3x4.hpp(36): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat3x4.hpp(36): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat4x2.hpp(36): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat4x2.hpp(36): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat4x3.hpp(36): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat4x3.hpp(36): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat4x4.hpp(35): warning #20012-D: __device__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/.././ext/../detail/type_mat4x4.hpp(35): warning #20012-D: __host__ annotation is ignored on a function("mat") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr mat() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/../detail/../detail/../detail/type_vec1.hpp(95): warning #20012-D: __device__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                   ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/third_party/glm/glm/./ext/../detail/../detail/../detail/../detail/type_vec1.hpp(95): warning #20012-D: __host__ annotation is ignored on a function("vec") that is explicitly defaulted on its first declaration
+    __attribute__((device)) __attribute__((host)) constexpr vec() = default;
+                                           ^
+
+/home/ubuntu22/slam/SIO_SLAM/submodules/diff-gaussian-rasterization-w-pose-main/cuda_rasterizer/auxiliary.h(151): warning #177-D: variable "p_proj" was declared but never referenced
+   float3 p_proj = { p_hom.x * p_w, p_hom.y * p_w, p_hom.z * p_w };
+          ^
+
+[4/4] Linking CUDA static library libCudaRasterizer.a

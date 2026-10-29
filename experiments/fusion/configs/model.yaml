@@ -1,0 +1,6 @@
+# Actual supplied model; the CPU fusion process reads the exported disparity cache.
+extends: baseline.yaml
+depth:
+  provider: tensorrt
+  plan_file: models/tensorrt/disp_896x448_fp16.plan
+  onnx_file: models/disp.onnx

@@ -1,0 +1,5 @@
+[PASS] CUDA device: NVIDIA GeForce RTX 4060 Laptop GPU
+[PASS] OpenCV CUDA color conversion, split and merge
+[PASS] LibTorch CUDA matrix multiplication, backward and Adam
+[PASS] TensorRT engine build, deserialize and GPU inference
+[PASS] 3DGS CUDA visibility kernel

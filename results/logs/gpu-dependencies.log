@@ -1,0 +1,1251 @@
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/build/small_gicp
+ninja: no work to do.
+-- Install configuration: "Release"
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/points
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/points/traits.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/points/point_cloud.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/points/eigen.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/pcl
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/pcl/pcl_point_traits.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/pcl/pcl_registration.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/pcl/pcl_proxy.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/pcl/pcl_registration_impl.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/pcl/pcl_point.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/util
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/util/color_gradient_omp.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/util/sort_tbb.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/util/fast_floor.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/util/normal_estimation.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/util/downsampling_tbb.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/util/vector3i_hash.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/util/downsampling_omp.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/util/normal_estimation_tbb.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/util/lie.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/util/color_gradient_tbb.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/util/normal_estimation_omp.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/util/color_gradient.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/util/sort_omp.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/util/downsampling.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/benchmark
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/benchmark/benchmark_odom.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/benchmark/read_points.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/benchmark/benchmark.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/ros
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/ros/ros2.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/ros/ros1.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/ros/ros_impl.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/factors
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/factors/gicp_factor.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/factors/colored_icp_factor.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/factors/general_factor.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/factors/icp_factor.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/factors/plane_icp_factor.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/factors/robust_kernel.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/registration
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/registration/reduction.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/registration/reduction_omp.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/registration/registration.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/registration/termination_criteria.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/registration/registration_result.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/registration/rejector.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/registration/registration_helper.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/registration/reduction_tbb.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/registration/optimizer.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/ann
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/ann/gaussian_voxelmap.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/ann/flat_container.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/ann/traits.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/ann/knn_result.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/ann/kdtree_tbb.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/ann/incremental_voxelmap.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/ann/sequential_voxelmap_accessor.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/ann/projective_search.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/ann/kdtree.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/ann/projection.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/ann/kdtree_omp.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libsmall_gicp.so
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/cmake/small_gicp/small_gicp-targets.cmake
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/cmake/small_gicp/small_gicp-targets-release.cmake
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/cmake/small_gicp/small_gicp-config.cmake
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/cmake/small_gicp/small_gicp-config-version.cmake
+-- Detected processor: x86_64
+-- Looking for ccache - not found
+-- Could NOT find AVIF (missing: AVIF_LIBRARY AVIF_INCLUDE_DIR) 
+-- The imported target "openjpip" references the file
+   "/usr/lib/x86_64-linux-gnu/libopenjpip.so.2.4.0"
+but this file does not exist.  Possible reasons include:
+* The file was deleted, renamed, or moved to another location.
+* An install or uninstall procedure did not complete successfully.
+* The installation package was faulty and contained
+   "/usr/lib/x86_64-linux-gnu/openjpeg-2.1/OpenJPEGTargets.cmake"
+but not all the files it references.
+
+-- The imported target "opj_decompress" references the file
+   "/usr/bin/opj_decompress"
+but this file does not exist.  Possible reasons include:
+* The file was deleted, renamed, or moved to another location.
+* An install or uninstall procedure did not complete successfully.
+* The installation package was faulty and contained
+   "/usr/lib/x86_64-linux-gnu/openjpeg-2.1/OpenJPEGTargets.cmake"
+but not all the files it references.
+
+-- The imported target "opj_compress" references the file
+   "/usr/bin/opj_compress"
+but this file does not exist.  Possible reasons include:
+* The file was deleted, renamed, or moved to another location.
+* An install or uninstall procedure did not complete successfully.
+* The installation package was faulty and contained
+   "/usr/lib/x86_64-linux-gnu/openjpeg-2.1/OpenJPEGTargets.cmake"
+but not all the files it references.
+
+-- The imported target "opj_dump" references the file
+   "/usr/bin/opj_dump"
+but this file does not exist.  Possible reasons include:
+* The file was deleted, renamed, or moved to another location.
+* An install or uninstall procedure did not complete successfully.
+* The installation package was faulty and contained
+   "/usr/lib/x86_64-linux-gnu/openjpeg-2.1/OpenJPEGTargets.cmake"
+but not all the files it references.
+
+-- The imported target "opj_jpip_addxml" references the file
+   "/usr/bin/opj_jpip_addxml"
+but this file does not exist.  Possible reasons include:
+* The file was deleted, renamed, or moved to another location.
+* An install or uninstall procedure did not complete successfully.
+* The installation package was faulty and contained
+   "/usr/lib/x86_64-linux-gnu/openjpeg-2.1/OpenJPEGTargets.cmake"
+but not all the files it references.
+
+-- The imported target "opj_server" references the file
+   "/usr/bin/opj_server"
+but this file does not exist.  Possible reasons include:
+* The file was deleted, renamed, or moved to another location.
+* An install or uninstall procedure did not complete successfully.
+* The installation package was faulty and contained
+   "/usr/lib/x86_64-linux-gnu/openjpeg-2.1/OpenJPEGTargets.cmake"
+but not all the files it references.
+
+-- The imported target "opj_dec_server" references the file
+   "/usr/bin/opj_dec_server"
+but this file does not exist.  Possible reasons include:
+* The file was deleted, renamed, or moved to another location.
+* An install or uninstall procedure did not complete successfully.
+* The installation package was faulty and contained
+   "/usr/lib/x86_64-linux-gnu/openjpeg-2.1/OpenJPEGTargets.cmake"
+but not all the files it references.
+
+-- The imported target "opj_jpip_transcode" references the file
+   "/usr/bin/opj_jpip_transcode"
+but this file does not exist.  Possible reasons include:
+* The file was deleted, renamed, or moved to another location.
+* An install or uninstall procedure did not complete successfully.
+* The installation package was faulty and contained
+   "/usr/lib/x86_64-linux-gnu/openjpeg-2.1/OpenJPEGTargets.cmake"
+but not all the files it references.
+
+-- The imported target "opj_jpip_test" references the file
+   "/usr/bin/opj_jpip_test"
+but this file does not exist.  Possible reasons include:
+* The file was deleted, renamed, or moved to another location.
+* An install or uninstall procedure did not complete successfully.
+* The installation package was faulty and contained
+   "/usr/lib/x86_64-linux-gnu/openjpeg-2.1/OpenJPEGTargets.cmake"
+but not all the files it references.
+
+-- Found system OpenJPEG: openjp2 (found version "2.4.0")
+-- Found OpenEXR: /usr/lib/x86_64-linux-gnu/libIlmImf-2_5.so
+-- libva: missing va.h header (VA_INCLUDE_DIR)
+-- IPPICV: Downloading ippicv_2022.1.0_lnx_intel64_20250130_general.tgz from https://raw.githubusercontent.com/opencv/opencv_3rdparty/767426b2a40a011eb2fa7f44c677c13e60e205ad/ippicv/ippicv_2022.1.0_lnx_intel64_20250130_general.tgz
+-- Try 1 failed
+-- 
+=======================================================================
+  Couldn't connect to server from the Internet.
+  Perhaps direct connections are not allowed in the current network.
+  To use proxy please check/specify these environment variables:
+  - http_proxy/https_proxy
+  - and/or HTTP_PROXY/HTTPS_PROXY
+=======================================================================
+
+CMake Warning at cmake/OpenCVDownload.cmake:251 (message):
+  IPPICV: Download failed: 7;"Couldn't connect to server"
+
+  For details please refer to the download log file:
+
+  
+  /home/ubuntu22/slam/SIO_SLAM/build/dependencies/build/opencv/CMakeDownloadLog.txt
+
+
+Call Stack (most recent call first):
+  3rdparty/ippicv/ippicv.cmake:46 (ocv_download)
+  cmake/OpenCVFindIPP.cmake:272 (download_ippicv)
+  cmake/OpenCVFindLibsPerf.cmake:12 (include)
+  CMakeLists.txt:816 (include)
+
+
+-- CUDA detected: 12.9
+-- CUDA: Using CUDA_ARCH_BIN=8.9
+-- CUDA: NVCC target flags -gencode;arch=compute_89,code=sm_89;-D_FORCE_INLINES
+-- Could NOT find Atlas (missing: Atlas_CLAPACK_INCLUDE_DIR Atlas_CBLAS_LIBRARY Atlas_BLAS_LIBRARY) 
+-- Found VTK 9.1.0
+-- ADE: Downloading v0.1.2e.zip from https://github.com/opencv/ade/archive/v0.1.2e.zip
+-- Try 1 failed
+-- 
+=======================================================================
+  Couldn't connect to server from the Internet.
+  Perhaps direct connections are not allowed in the current network.
+  To use proxy please check/specify these environment variables:
+  - http_proxy/https_proxy
+  - and/or HTTP_PROXY/HTTPS_PROXY
+=======================================================================
+
+CMake Warning at cmake/OpenCVDownload.cmake:251 (message):
+  ADE: Download failed: 7;"Couldn't connect to server"
+
+  For details please refer to the download log file:
+
+  
+  /home/ubuntu22/slam/SIO_SLAM/build/dependencies/build/opencv/CMakeDownloadLog.txt
+
+
+Call Stack (most recent call first):
+  modules/gapi/cmake/DownloadADE.cmake:5 (ocv_download)
+  modules/gapi/cmake/init.cmake:20 (include)
+  cmake/OpenCVModule.cmake:298 (include)
+  cmake/OpenCVModule.cmake:361 (_add_modules_1)
+  cmake/OpenCVModule.cmake:408 (ocv_glob_modules)
+  CMakeLists.txt:1096 (ocv_register_modules)
+
+
+-- Checking for module 'gtk+-2.0'
+--   No package 'gtk+-2.0' found
+-- Checking for module 'libavresample'
+--   No package 'libavresample' found
+-- Checking for module 'gstreamer-base-1.0'
+--   No package 'gstreamer-base-1.0' found
+-- Checking for module 'gstreamer-app-1.0'
+--   No package 'gstreamer-app-1.0' found
+-- Checking for module 'gstreamer-riff-1.0'
+--   No package 'gstreamer-riff-1.0' found
+-- Checking for module 'gstreamer-pbutils-1.0'
+--   No package 'gstreamer-pbutils-1.0' found
+-- Checking for module 'gstreamer-video-1.0'
+--   No package 'gstreamer-video-1.0' found
+-- Checking for module 'gstreamer-audio-1.0'
+--   No package 'gstreamer-audio-1.0' found
+-- freetype2:   YES (ver 24.1.18)
+-- harfbuzz:    YES (ver 2.7.4)
+-- Julia not found. Not compiling Julia Bindings. 
+-- Module opencv_ovis disabled because OGRE3D was not found
+-- Checking for module 'tesseract'
+--   No package 'tesseract' found
+-- Tesseract:   NO
+-- Using whitelist: opencv_calib3d;opencv_core;opencv_cudaarithm;opencv_cudaimgproc;opencv_cudawarping;opencv_cudev;opencv_features2d;opencv_flann;opencv_highgui;opencv_imgcodecs;opencv_imgproc;opencv_videoio
+-- Module opencv_dnn disabled by whitelist
+-- Module opencv_java_bindings_generator disabled by whitelist
+-- Module opencv_js_bindings_generator disabled by whitelist
+-- Module opencv_ml disabled by whitelist
+-- Module opencv_objc_bindings_generator disabled by whitelist
+-- Module opencv_objdetect disabled by whitelist
+-- Module opencv_photo disabled by whitelist
+-- Module opencv_python_bindings_generator disabled by whitelist
+-- Module opencv_python_tests disabled by whitelist
+-- Module opencv_stitching disabled by whitelist
+-- Module opencv_video disabled by whitelist
+-- Module opencv_alphamat disabled by whitelist
+-- Module opencv_aruco disabled by whitelist
+-- Module opencv_bgsegm disabled by whitelist
+-- Module opencv_bioinspired disabled by whitelist
+-- Module opencv_ccalib disabled by whitelist
+-- Module opencv_cudabgsegm disabled by whitelist
+-- Module opencv_cudacodec disabled by whitelist
+-- Module opencv_cudafeatures2d disabled by whitelist
+-- Module opencv_cudafilters disabled by whitelist
+-- Module opencv_cudalegacy disabled by whitelist
+-- Module opencv_cudaobjdetect disabled by whitelist
+-- Module opencv_cudaoptflow disabled by whitelist
+-- Module opencv_cudastereo disabled by whitelist
+-- Module opencv_datasets disabled by whitelist
+-- Module opencv_dnn_objdetect disabled by whitelist
+-- Module opencv_dnn_superres disabled by whitelist
+-- Module opencv_dpm disabled by whitelist
+-- Module opencv_face disabled by whitelist
+-- Module opencv_freetype disabled by whitelist
+-- Module opencv_fuzzy disabled by whitelist
+-- Module opencv_hdf disabled by whitelist
+-- Module opencv_hfs disabled by whitelist
+-- Module opencv_img_hash disabled by whitelist
+-- Module opencv_intensity_transform disabled by whitelist
+-- Module opencv_line_descriptor disabled by whitelist
+-- Module opencv_mcc disabled by whitelist
+-- Module opencv_optflow disabled by whitelist
+-- Module opencv_phase_unwrapping disabled by whitelist
+-- Module opencv_plot disabled by whitelist
+-- Module opencv_quality disabled by whitelist
+-- Module opencv_rapid disabled by whitelist
+-- Module opencv_reg disabled by whitelist
+-- Module opencv_rgbd disabled by whitelist
+-- Module opencv_saliency disabled by whitelist
+-- Module opencv_sfm disabled by whitelist
+-- Module opencv_shape disabled by whitelist
+-- Module opencv_signal disabled by whitelist
+-- Module opencv_stereo disabled by whitelist
+-- Module opencv_structured_light disabled by whitelist
+-- Module opencv_superres disabled by whitelist
+-- Module opencv_surface_matching disabled by whitelist
+-- Module opencv_text disabled by whitelist
+-- Module opencv_tracking disabled by whitelist
+-- Module opencv_videostab disabled by whitelist
+-- Module opencv_viz disabled by whitelist
+-- Module opencv_wechat_qrcode disabled by whitelist
+-- Module opencv_xfeatures2d disabled by whitelist
+-- Module opencv_ximgproc disabled by whitelist
+-- Module opencv_xobjdetect disabled by whitelist
+-- Module opencv_xphoto disabled by whitelist
+-- Allocator metrics storage type: 'long long'
+-- Performing Test HAVE_CXX_WNO_UNUSED_BUT_SET_VARIABLE
+-- Performing Test HAVE_CXX_WNO_UNUSED_BUT_SET_VARIABLE - Success
+-- Excluding from source files list: modules/imgproc/src/imgwarp.lasx.cpp
+-- Excluding from source files list: modules/imgproc/src/resize.lasx.cpp
+-- highgui: using builtin backend: GTK3
+-- 
+-- General configuration for OpenCV 4.12.0 =====================================
+--   Version control:               fe6c34c-dirty
+-- 
+--   Extra modules:
+--     Location (extra):            /home/ubuntu22/slam/SIO_SLAM/build/dependencies/src/opencv_contrib-4.12.0/modules
+--     Version control (extra):     fe6c34c-dirty
+-- 
+--   Platform:
+--     Timestamp:                   2026-10-28T03:45:19Z
+--     Host:                        Linux 6.8.0-138-generic x86_64
+--     CMake:                       3.22.1
+--     CMake generator:             Ninja
+--     CMake build tool:            /usr/bin/ninja
+--     Configuration:               Release
+--     Algorithm Hint:              ALGO_HINT_ACCURATE
+-- 
+--   CPU/HW features:
+--     Baseline:                    SSE SSE2 SSE3
+--       requested:                 SSE3
+--     Dispatched code generation:  SSE4_1 SSE4_2 AVX FP16 AVX2 AVX512_SKX
+--       SSE4_1 (15 files):         + SSSE3 SSE4_1
+--       SSE4_2 (1 files):          + SSSE3 SSE4_1 POPCNT SSE4_2
+--       AVX (4 files):             + SSSE3 SSE4_1 POPCNT SSE4_2 AVX
+--       FP16 (0 files):            + SSSE3 SSE4_1 POPCNT SSE4_2 AVX FP16
+--       AVX2 (29 files):           + SSSE3 SSE4_1 POPCNT SSE4_2 AVX FP16 AVX2 FMA3
+--       AVX512_SKX (4 files):      + SSSE3 SSE4_1 POPCNT SSE4_2 AVX FP16 AVX2 FMA3 AVX_512F AVX512_COMMON AVX512_SKX
+-- 
+--   C/C++:
+--     Built as dynamic libs?:      YES
+--     C++ standard:                11
+--     C++ Compiler:                /usr/bin/c++  (ver 11.4.0)
+--     C++ flags (Release):         -fsigned-char -W -Wall -Wreturn-type -Wnon-virtual-dtor -Waddress -Wsequence-point -Wformat -Wformat-security -Wmissing-declarations -Wundef -Winit-self -Wpointer-arith -Wshadow -Wsign-promo -Wuninitialized -Wsuggest-override -Wno-delete-non-virtual-dtor -Wno-comment -Wimplicit-fallthrough=3 -Wno-strict-overflow -fdiagnostics-show-option -pthread -fomit-frame-pointer -ffunction-sections -fdata-sections  -msse3 -fvisibility=hidden -fvisibility-inlines-hidden -O3 -DNDEBUG  -DNDEBUG
+--     C++ flags (Debug):           -fsigned-char -W -Wall -Wreturn-type -Wnon-virtual-dtor -Waddress -Wsequence-point -Wformat -Wformat-security -Wmissing-declarations -Wundef -Winit-self -Wpointer-arith -Wshadow -Wsign-promo -Wuninitialized -Wsuggest-override -Wno-delete-non-virtual-dtor -Wno-comment -Wimplicit-fallthrough=3 -Wno-strict-overflow -fdiagnostics-show-option -pthread -fomit-frame-pointer -ffunction-sections -fdata-sections  -msse3 -fvisibility=hidden -fvisibility-inlines-hidden -g  -O0 -DDEBUG -D_DEBUG
+--     C Compiler:                  /usr/bin/cc
+--     C flags (Release):           -fsigned-char -W -Wall -Wreturn-type -Waddress -Wsequence-point -Wformat -Wformat-security -Wmissing-declarations -Wmissing-prototypes -Wstrict-prototypes -Wundef -Winit-self -Wpointer-arith -Wshadow -Wuninitialized -Wno-comment -Wimplicit-fallthrough=3 -Wno-strict-overflow -fdiagnostics-show-option -pthread -fomit-frame-pointer -ffunction-sections -fdata-sections  -msse3 -fvisibility=hidden -O3 -DNDEBUG  -DNDEBUG
+--     C flags (Debug):             -fsigned-char -W -Wall -Wreturn-type -Waddress -Wsequence-point -Wformat -Wformat-security -Wmissing-declarations -Wmissing-prototypes -Wstrict-prototypes -Wundef -Winit-self -Wpointer-arith -Wshadow -Wuninitialized -Wno-comment -Wimplicit-fallthrough=3 -Wno-strict-overflow -fdiagnostics-show-option -pthread -fomit-frame-pointer -ffunction-sections -fdata-sections  -msse3 -fvisibility=hidden -g  -O0 -DDEBUG -D_DEBUG
+--     Linker flags (Release):      -Wl,--gc-sections -Wl,--as-needed -Wl,--no-undefined  
+--     Linker flags (Debug):        -Wl,--gc-sections -Wl,--as-needed -Wl,--no-undefined  
+--     ccache:                      NO
+--     Precompiled headers:         NO
+--     Extra dependencies:          m pthread cudart_static dl rt nppc nppial nppicc nppidei nppif nppig nppim nppist nppisu nppitc npps cublas cufft -L/usr/local/cuda-12.9/lib64 -L/usr/lib/x86_64-linux-gnu
+--     3rdparty dependencies:
+-- 
+--   OpenCV modules:
+--     To be built:                 calib3d core cudaarithm cudaimgproc cudawarping cudev features2d flann highgui imgcodecs imgproc videoio
+--     Disabled:                    python3 world
+--     Disabled by dependency:      alphamat aruco bgsegm bioinspired ccalib cudabgsegm cudacodec cudafeatures2d cudafilters cudalegacy cudaobjdetect cudaoptflow cudastereo datasets dnn dnn_objdetect dnn_superres dpm face freetype fuzzy hdf hfs img_hash intensity_transform java_bindings_generator js_bindings_generator line_descriptor mcc ml objc_bindings_generator objdetect optflow phase_unwrapping photo plot python_bindings_generator python_tests quality rapid reg rgbd saliency sfm shape signal stereo stitching structured_light superres surface_matching text tracking video videostab viz wechat_qrcode xfeatures2d ximgproc xobjdetect xphoto
+--     Unavailable:                 cannops cvv fastcv gapi java julia matlab ovis python2 ts
+--     Applications:                apps
+--     Documentation:               NO
+--     Non-free algorithms:         NO
+-- 
+--   GUI:                           GTK3
+--     GTK+:                        YES (ver 3.24.33)
+--     VTK support:                 YES (ver 9.1.0)
+-- 
+--   Media I/O: 
+--     ZLib:                        /usr/lib/x86_64-linux-gnu/libz.so (ver 1.2.11)
+--     JPEG:                        /usr/lib/x86_64-linux-gnu/libjpeg.so (ver 80)
+--     WEBP:                        /usr/lib/x86_64-linux-gnu/libwebp.so (ver decoder: 0x0209, encoder: 0x020f, demux: 0x0107)
+--     AVIF:                        NO
+--     PNG:                         /usr/lib/x86_64-linux-gnu/libpng.so (ver 1.6.37)
+--     TIFF:                        /usr/lib/x86_64-linux-gnu/libtiff.so (ver 42 / 4.3.0)
+--     JPEG 2000:                   OpenJPEG (ver 2.4.0)
+--     OpenEXR:                     /usr/lib/x86_64-linux-gnu/libImath-2_5.so /usr/lib/x86_64-linux-gnu/libIlmImf-2_5.so /usr/lib/x86_64-linux-gnu/libIex-2_5.so /usr/lib/x86_64-linux-gnu/libHalf-2_5.so /usr/lib/x86_64-linux-gnu/libIlmThread-2_5.so (ver 2.5.7)
+--     GIF:                         YES
+--     HDR:                         YES
+--     SUNRASTER:                   YES
+--     PXM:                         YES
+--     PFM:                         YES
+-- 
+--   Video I/O:
+--     FFMPEG:                      YES
+--       avcodec:                   YES (58.134.100)
+--       avformat:                  YES (58.76.100)
+--       avutil:                    YES (56.70.100)
+--       swscale:                   YES (5.9.100)
+--       avresample:                NO
+--     GStreamer:                   NO
+--     v4l/v4l2:                    YES (linux/videodev2.h)
+-- 
+--   Parallel framework:            pthreads
+-- 
+--   Trace:                         YES (with Intel ITT(3.25.4))
+-- 
+--   Other third-party libraries:
+--     VA:                          NO
+--     Lapack:                      NO
+--     Eigen:                       YES (ver 3.4.0)
+--     Custom HAL:                  NO
+--     Protobuf:                    build (3.19.1)
+--     Flatbuffers:                 builtin/3rdparty (23.5.9)
+-- 
+--   NVIDIA CUDA:                   YES (ver 12.9, CUFFT CUBLAS)
+--     NVIDIA GPU arch:             89
+--     NVIDIA PTX archs:
+-- 
+--   OpenCL:                        YES (no extra features)
+--     Include path:                /home/ubuntu22/slam/SIO_SLAM/build/dependencies/src/opencv-4.12.0/3rdparty/include/opencl/1.2
+--     Link libraries:              Dynamic load
+-- 
+--   Python (for build):            /usr/bin/python3
+-- 
+--   Install to:                    /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install
+-- -----------------------------------------------------------------
+-- 
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/build/opencv
+[1/451] Generate opencv4.pc
+[2/451] Building C object 3rdparty/ittnotify/CMakeFiles/ittnotify.dir/src/ittnotify/jitprofiling.c.o
+[3/451] Building CXX object modules/cudev/CMakeFiles/opencv_cudev.dir/src/stub.cpp.o
+[4/451] Linking CXX shared library lib/libopencv_cudev.so.4.12.0
+[5/451] Creating library symlink lib/libopencv_cudev.so.412 lib/libopencv_cudev.so
+[6/451] Building C object 3rdparty/ittnotify/CMakeFiles/ittnotify.dir/src/ittnotify/ittnotify_static.c.o
+[7/451] Linking C static library 3rdparty/lib/libittnotify.a
+[8/451] Processing OpenCL kernels (core)
+[9/451] Building NVCC (Device) object modules/core/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_gpu_mat_nd.cu.o
+[10/451] Building NVCC (Device) object modules/core/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_gpu_mat.cu.o
+[11/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/alloc.cpp.o
+[12/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/algorithm.cpp.o
+[13/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/arithm.cpp.o
+[14/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/async.cpp.o
+[15/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/array.cpp.o
+[16/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/batch_distance.cpp.o
+[17/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/buffer_area.cpp.o
+[18/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/bindings_utils.cpp.o
+[19/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/arithm.dispatch.cpp.o
+[20/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/channels.cpp.o
+[21/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/check.cpp.o
+[22/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/conjugate_gradient.cpp.o
+[23/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/command_line_parser.cpp.o
+[24/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/convert_c.cpp.o
+[25/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/convert.dispatch.cpp.o
+[26/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/convert_scale.dispatch.cpp.o
+[27/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/copy.cpp.o
+[28/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/count_non_zero.dispatch.cpp.o
+[29/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/cuda_gpu_mat.cpp.o
+[30/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/cuda_gpu_mat_nd.cpp.o
+[31/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/cuda_host_mem.cpp.o
+[32/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/cuda_info.cpp.o
+[33/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/cuda_stream.cpp.o
+[34/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/directx.cpp.o
+[35/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/datastructs.cpp.o
+[36/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/downhill_simplex.cpp.o
+[37/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/gl_core_3_1.cpp.o
+[38/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/glob.cpp.o
+[39/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/hal_internal.cpp.o
+[40/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/dxt.cpp.o
+[41/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/has_non_zero.dispatch.cpp.o
+[42/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/kmeans.cpp.o
+[43/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/logger.cpp.o
+[44/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/lda.cpp.o
+[45/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/lpsolver.cpp.o
+[46/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/lut.cpp.o
+[47/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/mathfuncs_core.dispatch.cpp.o
+[48/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/mathfuncs.cpp.o
+[49/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/matrix.cpp.o
+[50/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/matrix_c.cpp.o
+[51/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/matrix_decomp.cpp.o
+[52/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/matrix_expressions.cpp.o
+[53/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/matmul.dispatch.cpp.o
+[54/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/matrix_iterator.cpp.o
+[55/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/lapack.cpp.o
+[56/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/matrix_sparse.cpp.o
+[57/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/matrix_transform.cpp.o
+[58/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/mean.dispatch.cpp.o
+[59/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/merge.dispatch.cpp.o
+[60/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/matrix_operations.cpp.o
+[61/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/matrix_wrap.cpp.o
+[62/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/opencl/runtime/opencl_clblas.cpp.o
+[63/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/minmax.cpp.o
+[64/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/norm.dispatch.cpp.o
+[65/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/opencl/runtime/opencl_clfft.cpp.o
+[66/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/opencl/runtime/opencl_core.cpp.o
+[67/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/opengl.cpp.o
+[68/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/ovx.cpp.o
+[69/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/out.cpp.o
+[70/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/parallel.cpp.o
+[71/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/parallel/parallel_openmp.cpp.o
+[72/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/ocl.cpp.o
+[73/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/parallel/parallel_tbb.cpp.o
+[74/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/pca.cpp.o
+[75/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/parallel/parallel.cpp.o
+[76/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/parallel_impl.cpp.o
+[77/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/persistence_base64_encoding.cpp.o
+[78/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/persistence_json.cpp.o
+[79/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/persistence_types.cpp.o
+[80/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/persistence.cpp.o
+[81/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/persistence_yml.cpp.o
+[82/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/persistence_xml.cpp.o
+[83/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/rand.cpp.o
+[84/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/softfloat.cpp.o
+[85/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/stat.dispatch.cpp.o
+[86/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/split.dispatch.cpp.o
+[87/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/stat_c.cpp.o
+[88/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/stl.cpp.o
+[89/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/sum.dispatch.cpp.o
+[90/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/tables.cpp.o
+[91/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/system.cpp.o
+[92/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/trace.cpp.o
+[93/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/types.cpp.o
+[94/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/umatrix.cpp.o
+[95/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/utils/datafile.cpp.o
+[96/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/utils/filesystem.cpp.o
+[97/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/utils/logtagconfigparser.cpp.o
+[98/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/opencl_kernels_core.cpp.o
+[99/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/utils/samples.cpp.o
+[100/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/utils/logtagmanager.cpp.o
+[101/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/src/va_intel.cpp.o
+[102/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/stat.sse4_2.cpp.o
+[103/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/norm.sse4_1.cpp.o
+[104/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/matmul.sse4_1.cpp.o
+[105/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/mathfuncs_core.avx.cpp.o
+[106/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/arithm.sse4_1.cpp.o
+[107/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/norm.avx.cpp.o
+[108/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/stat.avx2.cpp.o
+[109/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/mathfuncs_core.avx2.cpp.o
+[110/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/convert.avx2.cpp.o
+[111/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/count_non_zero.avx2.cpp.o
+[112/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/convert_scale.avx2.cpp.o
+[113/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/arithm.avx2.cpp.o
+[114/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/has_non_zero.avx2.cpp.o
+[115/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/mean.avx2.cpp.o
+[116/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/merge.avx2.cpp.o
+[117/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/split.avx2.cpp.o
+[118/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/matmul.avx2.cpp.o
+[119/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/sum.avx2.cpp.o
+[120/451] Building CXX object modules/flann/CMakeFiles/opencv_flann.dir/src/flann.cpp.o
+[121/451] Building CXX object apps/version/CMakeFiles/opencv_version.dir/opencv_version.cpp.o
+[122/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/norm.avx2.cpp.o
+[123/451] Building CXX object modules/core/CMakeFiles/opencv_core.dir/matmul.avx512_skx.cpp.o
+[124/451] Linking CXX shared library lib/libopencv_core.so.4.12.0
+[125/451] Creating library symlink lib/libopencv_core.so.412 lib/libopencv_core.so
+[126/451] Building NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_absdiff_mat.cu.o
+[127/451] Building NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_absdiff_scalar.cu.o
+[128/451] Building CXX object modules/flann/CMakeFiles/opencv_flann.dir/src/miniflann.cpp.o
+[129/451] Building NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_add_mat.cu.o
+[130/451] Building NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_bitwise_mat.cu.o
+[131/451] Building NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_bitwise_scalar.cu.o
+[132/451] Building NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_add_scalar.cu.o
+[133/451] Building NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_cmp_mat.cu.o
+[134/451] Building NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_add_weighted.cu.o
+[135/451] Building NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_cmp_scalar.cu.o
+[136/451] Building NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_copy_make_border.cu.o
+[137/451] Building NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_countnonzero.cu.o
+[138/451] Building NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_div_mat.cu.o
+[139/451] Building NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_in_range.cu.o
+[140/451] Building NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_integral.cu.o
+[141/451] Building NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_lut.cu.o
+[142/451] Building NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_div_scalar.cu.o
+[143/451] Building NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_minmax.cu.o
+[144/451] Building NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_math.cu.o
+[145/451] Building NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_minmax_mat.cu.o
+[146/451] Building NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_minmaxloc.cu.o
+[147/451] Building NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_mul_mat.cu.o
+[148/451] Building NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_mul_spectrums.cu.o
+[149/451] Building NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_mul_scalar.cu.o
+[150/451] Building NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_norm.cu.o
+[151/451] Building NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_polar_cart.cu.o
+[152/451] Building NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_normalize.cu.o
+[153/451] Building NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_split_merge.cu.o
+[154/451] Building NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_sub_mat.cu.o
+[155/451] Building NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_threshold.cu.o
+[156/451] Building NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_reduce.cu.o
+[157/451] Linking CXX shared library lib/libopencv_flann.so.4.12.0
+[158/451] Creating library symlink lib/libopencv_flann.so.412 lib/libopencv_flann.so
+[159/451] Processing OpenCL kernels (imgproc)
+[160/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/contours_link.cpp.o
+[161/451] Building NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_sum.cu.o
+[162/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/contours_new.cpp.o
+[163/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/convhull.cpp.o
+[164/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/corner.cpp.o
+[165/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/cornersubpix.cpp.o
+[166/451] Building NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_transpose.cu.o
+[167/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/demosaicing.cpp.o
+[168/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/accum.cpp.o
+[169/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/approx.cpp.o
+[170/451] Building NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_sub_scalar.cu.o
+[171/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/bilateral_filter.dispatch.cpp.o
+[172/451] Building CXX object modules/cudaarithm/CMakeFiles/opencv_cudaarithm.dir/src/reductions.cpp.o
+[173/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/accum.dispatch.cpp.o
+[174/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/blend.cpp.o
+[175/451] Building CXX object modules/cudaarithm/CMakeFiles/opencv_cudaarithm.dir/src/element_operations.cpp.o
+[176/451] Building CXX object modules/cudaarithm/CMakeFiles/opencv_cudaarithm.dir/src/core.cpp.o
+[177/451] Building CXX object modules/cudaarithm/CMakeFiles/opencv_cudaarithm.dir/src/lut.cpp.o
+[178/451] Building CXX object modules/cudaarithm/CMakeFiles/opencv_cudaarithm.dir/src/arithm.cpp.o
+[179/451] Linking CXX shared library lib/libopencv_cudaarithm.so.4.12.0
+[180/451] Creating library symlink lib/libopencv_cudaarithm.so.412 lib/libopencv_cudaarithm.so
+[181/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/clahe.cpp.o
+[182/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/canny.cpp.o
+[183/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/color.cpp.o
+[184/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/box_filter.dispatch.cpp.o
+[185/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/color_hsv.dispatch.cpp.o
+[186/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/color_rgb.dispatch.cpp.o
+[187/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/color_lab.cpp.o
+[188/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/colormap.cpp.o
+[189/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/contours_approx.cpp.o
+[190/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/contours.cpp.o
+[191/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/color_yuv.dispatch.cpp.o
+[192/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/contours_common.cpp.o
+[193/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/deriv.cpp.o
+[194/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/distransform.cpp.o
+[195/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/emd.cpp.o
+[196/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/emd_new.cpp.o
+[197/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/drawing.cpp.o
+[198/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/featureselect.cpp.o
+[199/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/gabor.cpp.o
+[200/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/floodfill.cpp.o
+[201/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/geometry.cpp.o
+[202/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/generalized_hough.cpp.o
+[203/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/hershey_fonts.cpp.o
+[204/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/grabcut.cpp.o
+[205/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/filter.dispatch.cpp.o
+[206/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/connectedcomponents.cpp.o
+[207/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/hough.cpp.o
+[208/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/histogram.cpp.o
+[209/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/intelligent_scissors.cpp.o
+[210/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/intersection.cpp.o
+[211/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/linefit.cpp.o
+[212/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/main.cpp.o
+[213/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/matchcontours.cpp.o
+[214/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/lsd.cpp.o
+[215/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/min_enclosing_triangle.cpp.o
+[216/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/moments.cpp.o
+[217/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/imgwarp.cpp.o
+[218/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/median_blur.dispatch.cpp.o
+[219/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/phasecorr.cpp.o
+[220/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/rotcalipers.cpp.o
+[221/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/pyramids.cpp.o
+[222/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/samplers.cpp.o
+[223/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/morph.dispatch.cpp.o
+[224/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/segmentation.cpp.o
+[225/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/shapedescr.cpp.o
+[226/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/spatialgradient.cpp.o
+[227/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/resize.cpp.o
+[228/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/subdivision2d.cpp.o
+[229/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/stackblur.cpp.o
+[230/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/tables.cpp.o
+[231/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/smooth.dispatch.cpp.o
+[232/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/sumpixels.dispatch.cpp.o
+[233/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/templmatch.cpp.o
+[234/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/opencl_kernels_imgproc.cpp.o
+[235/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/utils.cpp.o
+[236/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/resize.sse4_1.cpp.o
+[237/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/imgwarp.sse4_1.cpp.o
+[238/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/thresh.cpp.o
+[239/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/accum.sse4_1.cpp.o
+[240/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/color_hsv.sse4_1.cpp.o
+[241/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/box_filter.sse4_1.cpp.o
+[242/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/color_rgb.sse4_1.cpp.o
+[243/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/color_yuv.sse4_1.cpp.o
+[244/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/median_blur.sse4_1.cpp.o
+[245/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/filter.sse4_1.cpp.o
+[246/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/corner.avx.cpp.o
+[247/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/morph.sse4_1.cpp.o
+[248/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/resize.avx2.cpp.o
+[249/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/imgwarp.avx2.cpp.o
+[250/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/smooth.sse4_1.cpp.o
+[251/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/accum.avx.cpp.o
+[252/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/bilateral_filter.avx2.cpp.o
+[253/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/accum.avx2.cpp.o
+[254/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/box_filter.avx2.cpp.o
+[255/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/color_hsv.avx2.cpp.o
+[256/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/color_rgb.avx2.cpp.o
+[257/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/filter.avx2.cpp.o
+[258/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/median_blur.avx2.cpp.o
+[259/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/color_yuv.avx2.cpp.o
+[260/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/sumpixels.avx2.cpp.o
+[261/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/morph.avx2.cpp.o
+[262/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/median_blur.avx512_skx.cpp.o
+[263/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/sumpixels.avx512_skx.cpp.o
+[264/451] Building CXX object modules/imgcodecs/CMakeFiles/opencv_imgcodecs.dir/src/utils.cpp.o
+[265/451] Building CXX object modules/imgcodecs/CMakeFiles/opencv_imgcodecs.dir/src/grfmt_avif.cpp.o
+[266/451] Building CXX object modules/imgcodecs/CMakeFiles/opencv_imgcodecs.dir/src/loadsave.cpp.o
+[267/451] Building CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/smooth.avx2.cpp.o
+[268/451] Building CXX object modules/imgcodecs/CMakeFiles/opencv_imgcodecs.dir/src/grfmt_base.cpp.o
+[269/451] Linking CXX shared library lib/libopencv_imgproc.so.4.12.0
+[270/451] Building CXX object modules/imgcodecs/CMakeFiles/opencv_imgcodecs.dir/src/grfmt_bmp.cpp.o
+[271/451] Creating library symlink lib/libopencv_imgproc.so.412 lib/libopencv_imgproc.so
+[272/451] Building CXX object modules/imgcodecs/CMakeFiles/opencv_imgcodecs.dir/src/grfmt_exr.cpp.o
+[273/451] Building CXX object modules/imgcodecs/CMakeFiles/opencv_imgcodecs.dir/src/grfmt_gdal.cpp.o
+[274/451] Building CXX object modules/imgcodecs/CMakeFiles/opencv_imgcodecs.dir/src/grfmt_gdcm.cpp.o
+[275/451] Building NVCC (Device) object modules/cudaimgproc/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_blend.cu.o
+[276/451] Building NVCC (Device) object modules/cudaimgproc/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_build_point_list.cu.o
+[277/451] Building NVCC (Device) object modules/cudaimgproc/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_canny.cu.o
+[278/451] Building NVCC (Device) object modules/cudaimgproc/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_connectedcomponents.cu.o
+[279/451] Building NVCC (Device) object modules/cudaimgproc/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_bilateral_filter.cu.o
+[280/451] Building NVCC (Device) object modules/cudaimgproc/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_clahe.cu.o
+[281/451] Building NVCC (Device) object modules/cudaimgproc/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_corners.cu.o
+[282/451] Building NVCC (Device) object modules/cudaimgproc/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_debayer.cu.o
+[283/451] Building NVCC (Device) object modules/cudaimgproc/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_hist.cu.o
+[284/451] Building NVCC (Device) object modules/cudaimgproc/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_hough_circles.cu.o
+[285/451] Building NVCC (Device) object modules/cudaimgproc/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_generalized_hough.cu.o
+[286/451] Building NVCC (Device) object modules/cudaimgproc/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_gftt.cu.o
+[287/451] Building NVCC (Device) object modules/cudaimgproc/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_color.cu.o
+[288/451] Building NVCC (Device) object modules/cudaimgproc/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_hough_segments.cu.o
+[289/451] Building NVCC (Device) object modules/cudaimgproc/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_match_template.cu.o
+[290/451] Building NVCC (Device) object modules/cudaimgproc/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_mean_shift.cu.o
+[291/451] Building NVCC (Device) object modules/cudaimgproc/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_hough_lines.cu.o
+[292/451] Building NVCC (Device) object modules/cudawarping/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_pyr_down.cu.o
+[293/451] Building NVCC (Device) object modules/cudaimgproc/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_moments.cu.o
+[294/451] Building CXX object modules/cudaimgproc/CMakeFiles/opencv_cudaimgproc.dir/src/blend.cpp.o
+[295/451] Building NVCC (Device) object modules/cudawarping/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_pyr_up.cu.o
+[296/451] Building CXX object modules/cudaimgproc/CMakeFiles/opencv_cudaimgproc.dir/src/bilateral_filter.cpp.o
+[297/451] Building CXX object modules/cudaimgproc/CMakeFiles/opencv_cudaimgproc.dir/src/canny.cpp.o
+[298/451] Building CXX object modules/cudaimgproc/CMakeFiles/opencv_cudaimgproc.dir/src/connectedcomponents.cpp.o
+[299/451] Building CXX object modules/cudaimgproc/CMakeFiles/opencv_cudaimgproc.dir/src/color.cpp.o
+[300/451] Building CXX object modules/cudaimgproc/CMakeFiles/opencv_cudaimgproc.dir/src/corners.cpp.o
+[301/451] Building CXX object modules/cudaimgproc/CMakeFiles/opencv_cudaimgproc.dir/src/generalized_hough.cpp.o
+[302/451] Building CXX object modules/cudaimgproc/CMakeFiles/opencv_cudaimgproc.dir/src/gftt.cpp.o
+[303/451] Building NVCC (Device) object modules/cudawarping/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_resize.cu.o
+[304/451] Building CXX object modules/cudaimgproc/CMakeFiles/opencv_cudaimgproc.dir/src/hough_circles.cpp.o
+[305/451] Building CXX object modules/cudaimgproc/CMakeFiles/opencv_cudaimgproc.dir/src/histogram.cpp.o
+[306/451] Building CXX object modules/cudaimgproc/CMakeFiles/opencv_cudaimgproc.dir/src/hough_lines.cpp.o
+[307/451] Building CXX object modules/cudaimgproc/CMakeFiles/opencv_cudaimgproc.dir/src/hough_segments.cpp.o
+[308/451] Building CXX object modules/cudaimgproc/CMakeFiles/opencv_cudaimgproc.dir/src/match_template.cpp.o
+[309/451] Building CXX object modules/cudaimgproc/CMakeFiles/opencv_cudaimgproc.dir/src/mean_shift.cpp.o
+[310/451] Building CXX object modules/cudaimgproc/CMakeFiles/opencv_cudaimgproc.dir/src/moments.cpp.o
+[311/451] Processing OpenCL kernels (features2d)
+[312/451] Building CXX object modules/cudaimgproc/CMakeFiles/opencv_cudaimgproc.dir/src/mssegmentation.cpp.o
+[313/451] Linking CXX shared library lib/libopencv_cudaimgproc.so.4.12.0
+[314/451] Creating library symlink lib/libopencv_cudaimgproc.so.412 lib/libopencv_cudaimgproc.so
+[315/451] Building CXX object modules/features2d/CMakeFiles/opencv_features2d.dir/src/affine_feature.cpp.o
+[316/451] Building CXX object modules/features2d/CMakeFiles/opencv_features2d.dir/src/agast_score.cpp.o
+[317/451] Building CXX object modules/features2d/CMakeFiles/opencv_features2d.dir/src/agast.cpp.o
+[318/451] Building CXX object modules/features2d/CMakeFiles/opencv_features2d.dir/src/akaze.cpp.o
+[319/451] Building CXX object modules/features2d/CMakeFiles/opencv_features2d.dir/src/bagofwords.cpp.o
+[320/451] Building CXX object modules/features2d/CMakeFiles/opencv_features2d.dir/src/blobdetector.cpp.o
+[321/451] Building CXX object modules/features2d/CMakeFiles/opencv_features2d.dir/src/brisk.cpp.o
+[322/451] Building CXX object modules/features2d/CMakeFiles/opencv_features2d.dir/src/draw.cpp.o
+[323/451] Building CXX object modules/features2d/CMakeFiles/opencv_features2d.dir/src/dynamic.cpp.o
+[324/451] Building CXX object modules/features2d/CMakeFiles/opencv_features2d.dir/src/evaluation.cpp.o
+[325/451] Building CXX object modules/features2d/CMakeFiles/opencv_features2d.dir/src/fast.cpp.o
+[326/451] Building CXX object modules/features2d/CMakeFiles/opencv_features2d.dir/src/fast_score.cpp.o
+[327/451] Building CXX object modules/features2d/CMakeFiles/opencv_features2d.dir/src/feature2d.cpp.o
+[328/451] Building CXX object modules/features2d/CMakeFiles/opencv_features2d.dir/src/gftt.cpp.o
+[329/451] Building CXX object modules/features2d/CMakeFiles/opencv_features2d.dir/src/kaze.cpp.o
+[330/451] Building CXX object modules/features2d/CMakeFiles/opencv_features2d.dir/src/kaze/AKAZEFeatures.cpp.o
+[331/451] Building CXX object modules/features2d/CMakeFiles/opencv_features2d.dir/src/kaze/KAZEFeatures.cpp.o
+[332/451] Building CXX object modules/features2d/CMakeFiles/opencv_features2d.dir/src/kaze/fed.cpp.o
+[333/451] Building CXX object modules/features2d/CMakeFiles/opencv_features2d.dir/src/kaze/nldiffusion_functions.cpp.o
+[334/451] Building CXX object modules/features2d/CMakeFiles/opencv_features2d.dir/src/keypoint.cpp.o
+[335/451] Building CXX object modules/features2d/CMakeFiles/opencv_features2d.dir/src/main.cpp.o
+[336/451] Building CXX object modules/features2d/CMakeFiles/opencv_features2d.dir/src/mser.cpp.o
+[337/451] Building NVCC (Device) object modules/cudawarping/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_remap.cu.o
+[338/451] Building CXX object modules/features2d/CMakeFiles/opencv_features2d.dir/src/matchers.cpp.o
+[339/451] Building CXX object modules/features2d/CMakeFiles/opencv_features2d.dir/opencl_kernels_features2d.cpp.o
+[340/451] Building CXX object modules/features2d/CMakeFiles/opencv_features2d.dir/src/orb.cpp.o
+[341/451] Building CXX object modules/features2d/CMakeFiles/opencv_features2d.dir/src/sift.dispatch.cpp.o
+[342/451] Building CXX object modules/features2d/CMakeFiles/opencv_features2d.dir/sift.sse4_1.cpp.o
+[343/451] Building CXX object modules/features2d/CMakeFiles/opencv_features2d.dir/src/fast.avx2.cpp.o
+[344/451] Building CXX object modules/features2d/CMakeFiles/opencv_features2d.dir/sift.avx2.cpp.o
+[345/451] Building CXX object modules/features2d/CMakeFiles/opencv_features2d.dir/sift.avx512_skx.cpp.o
+[346/451] Linking CXX shared library lib/libopencv_features2d.so.4.12.0
+[347/451] Creating library symlink lib/libopencv_features2d.so.412 lib/libopencv_features2d.so
+[348/451] Building CXX object modules/imgcodecs/CMakeFiles/opencv_imgcodecs.dir/src/grfmt_hdr.cpp.o
+[349/451] Building CXX object modules/imgcodecs/CMakeFiles/opencv_imgcodecs.dir/src/grfmt_gif.cpp.o
+[350/451] Building CXX object modules/imgcodecs/CMakeFiles/opencv_imgcodecs.dir/src/grfmt_jpeg.cpp.o
+[351/451] Building CXX object modules/imgcodecs/CMakeFiles/opencv_imgcodecs.dir/src/grfmt_jpeg2000.cpp.o
+[352/451] Building CXX object modules/imgcodecs/CMakeFiles/opencv_imgcodecs.dir/src/grfmt_jpegxl.cpp.o
+[353/451] Building CXX object modules/imgcodecs/CMakeFiles/opencv_imgcodecs.dir/src/grfmt_jpeg2000_openjpeg.cpp.o
+[354/451] Building CXX object modules/imgcodecs/CMakeFiles/opencv_imgcodecs.dir/src/grfmt_pam.cpp.o
+[355/451] Building CXX object modules/imgcodecs/CMakeFiles/opencv_imgcodecs.dir/src/grfmt_pfm.cpp.o
+[356/451] Building CXX object modules/imgcodecs/CMakeFiles/opencv_imgcodecs.dir/src/grfmt_spng.cpp.o
+[357/451] Building CXX object modules/imgcodecs/CMakeFiles/opencv_imgcodecs.dir/src/grfmt_pxm.cpp.o
+[358/451] Building CXX object modules/imgcodecs/CMakeFiles/opencv_imgcodecs.dir/src/grfmt_png.cpp.o
+[359/451] Building CXX object modules/imgcodecs/CMakeFiles/opencv_imgcodecs.dir/src/grfmt_sunras.cpp.o
+[360/451] Building CXX object modules/imgcodecs/CMakeFiles/opencv_imgcodecs.dir/src/grfmt_webp.cpp.o
+[361/451] Building CXX object modules/imgcodecs/CMakeFiles/opencv_imgcodecs.dir/src/bitstrm.cpp.o
+[362/451] Building CXX object modules/imgcodecs/CMakeFiles/opencv_imgcodecs.dir/src/grfmt_tiff.cpp.o
+[363/451] Building CXX object modules/imgcodecs/CMakeFiles/opencv_imgcodecs.dir/src/rgbe.cpp.o
+[364/451] Building CXX object modules/imgcodecs/CMakeFiles/opencv_imgcodecs.dir/src/exif.cpp.o
+[365/451] Building CXX object modules/videoio/CMakeFiles/opencv_videoio.dir/src/videoio_c.cpp.o
+[366/451] Linking CXX shared library lib/libopencv_imgcodecs.so.4.12.0
+[367/451] Creating library symlink lib/libopencv_imgcodecs.so.412 lib/libopencv_imgcodecs.so
+[368/451] Building CXX object modules/videoio/CMakeFiles/opencv_videoio.dir/src/videoio_registry.cpp.o
+[369/451] Building CXX object modules/videoio/CMakeFiles/opencv_videoio.dir/src/cap_images.cpp.o
+[370/451] Building NVCC (Device) object modules/cudawarping/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_warp.cu.o
+[371/451] Building CXX object modules/videoio/CMakeFiles/opencv_videoio.dir/src/cap.cpp.o
+[372/451] Building CXX object modules/videoio/CMakeFiles/opencv_videoio.dir/src/cap_mjpeg_encoder.cpp.o
+[373/451] Building CXX object modules/videoio/CMakeFiles/opencv_videoio.dir/src/cap_mjpeg_decoder.cpp.o
+[374/451] Building CXX object modules/cudawarping/CMakeFiles/opencv_cudawarping.dir/src/pyramids.cpp.o
+[375/451] Building CXX object modules/cudawarping/CMakeFiles/opencv_cudawarping.dir/src/remap.cpp.o
+[376/451] Building CXX object modules/cudawarping/CMakeFiles/opencv_cudawarping.dir/src/resize.cpp.o
+[377/451] Building CXX object modules/cudawarping/CMakeFiles/opencv_cudawarping.dir/src/warp.cpp.o
+[378/451] Linking CXX shared library lib/libopencv_cudawarping.so.4.12.0
+[379/451] Creating library symlink lib/libopencv_cudawarping.so.412 lib/libopencv_cudawarping.so
+[380/451] Building CXX object modules/videoio/CMakeFiles/opencv_videoio.dir/src/backend_static.cpp.o
+[381/451] Building CXX object modules/videoio/CMakeFiles/opencv_videoio.dir/src/container_avi.cpp.o
+[382/451] Building CXX object modules/videoio/CMakeFiles/opencv_videoio.dir/src/backend_plugin.cpp.o
+[383/451] Building CXX object modules/videoio/CMakeFiles/opencv_videoio.dir/src/cap_obsensor_capture.cpp.o
+[384/451] Building CXX object modules/videoio/CMakeFiles/opencv_videoio.dir/src/cap_v4l.cpp.o
+[385/451] Building CXX object modules/videoio/CMakeFiles/opencv_videoio.dir/src/cap_obsensor/obsensor_uvc_stream_channel.cpp.o
+[386/451] Building CXX object modules/videoio/CMakeFiles/opencv_videoio.dir/src/cap_ffmpeg.cpp.o
+[387/451] Processing OpenCL kernels (calib3d)
+[388/451] Building CXX object modules/videoio/CMakeFiles/opencv_videoio.dir/src/cap_obsensor/obsensor_stream_channel_v4l2.cpp.o
+[389/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/src/ap3p.cpp.o
+[390/451] Building CXX object modules/highgui/CMakeFiles/opencv_highgui.dir/src/window.cpp.o
+[391/451] Linking CXX shared library lib/libopencv_videoio.so.4.12.0
+[392/451] Creating library symlink lib/libopencv_videoio.so.412 lib/libopencv_videoio.so
+[393/451] Building CXX object modules/highgui/CMakeFiles/opencv_highgui.dir/src/backend.cpp.o
+[394/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/src/calibration_base.cpp.o
+[395/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/src/calibration.cpp.o
+[396/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/src/calibration_handeye.cpp.o
+[397/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/src/checkchessboard.cpp.o
+[398/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/src/compat_ptsetreg.cpp.o
+[399/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/src/circlesgrid.cpp.o
+[400/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/src/calibinit.cpp.o
+[401/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/src/chessboard.cpp.o
+[402/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/src/epnp.cpp.o
+[403/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/src/fundam.cpp.o
+[404/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/src/fisheye.cpp.o
+[405/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/src/five-point.cpp.o
+[406/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/src/homography_decomp.cpp.o
+[407/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/src/ippe.cpp.o
+[408/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/src/levmarq.cpp.o
+[409/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/src/main.cpp.o
+[410/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/src/polynom_solver.cpp.o
+[411/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/src/p3p.cpp.o
+[412/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/src/dls.cpp.o
+[413/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/src/ptsetreg.cpp.o
+[414/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/src/quadsubpix.cpp.o
+[415/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/src/rho.cpp.o
+[416/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/src/stereo_geom.cpp.o
+[417/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/src/solvepnp.cpp.o
+[418/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/src/sqpnp.cpp.o
+[419/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/src/stereobm.cpp.o
+[420/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/src/triangulate.cpp.o
+[421/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/src/stereosgbm.cpp.o
+[422/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/src/upnp.cpp.o
+[423/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/src/usac/bundle.cpp.o
+[424/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/src/undistort.dispatch.cpp.o
+[425/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/src/usac/degeneracy.cpp.o
+[426/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/src/usac/estimator.cpp.o
+[427/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/src/usac/gamma_values.cpp.o
+[428/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/src/usac/fundamental_solver.cpp.o
+[429/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/src/usac/local_optimization.cpp.o
+[430/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/src/usac/homography_solver.cpp.o
+[431/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/src/usac/essential_solver.cpp.o
+[432/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/src/usac/dls_solver.cpp.o
+[433/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/src/usac/quality.cpp.o
+[434/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/src/usac/sampler.cpp.o
+[435/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/src/usac/termination.cpp.o
+[436/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/src/usac/pnp_solver.cpp.o
+[437/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/opencl_kernels_calib3d.cpp.o
+[438/451] Building CXX object modules/highgui/CMakeFiles/opencv_highgui.dir/src/roiSelector.cpp.o
+[439/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/undistort.avx2.cpp.o
+[440/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/src/usac/ransac_solvers.cpp.o
+[441/451] Building CXX object modules/calib3d/CMakeFiles/opencv_calib3d.dir/src/usac/utils.cpp.o
+[442/451] Linking CXX shared library lib/libopencv_calib3d.so.4.12.0
+[443/451] Creating library symlink lib/libopencv_calib3d.so.412 lib/libopencv_calib3d.so
+[444/451] Building CXX object apps/annotation/CMakeFiles/opencv_annotation.dir/opencv_annotation.cpp.o
+[445/451] Linking CXX executable bin/opencv_version
+[446/451] Building CXX object apps/visualisation/CMakeFiles/opencv_visualisation.dir/opencv_visualisation.cpp.o
+[447/451] Building CXX object modules/highgui/CMakeFiles/opencv_highgui.dir/src/window_gtk.cpp.o
+[448/451] Linking CXX shared library lib/libopencv_highgui.so.4.12.0
+[449/451] Creating library symlink lib/libopencv_highgui.so.412 lib/libopencv_highgui.so
+[450/451] Linking CXX executable bin/opencv_annotation
+[451/451] Linking CXX executable bin/opencv_visualisation
+-- Install configuration: "Release"
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/licenses/opencv4/flatbuffers-LICENSE.txt
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/licenses/opencv4/opencl-headers-LICENSE.txt
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cvconfig.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/opencv_modules.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/pkgconfig/opencv4.pc
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/cmake/opencv4/OpenCVModules.cmake
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/cmake/opencv4/OpenCVModules-release.cmake
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/cmake/opencv4/OpenCVConfig-version.cmake
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/cmake/opencv4/OpenCVConfig.cmake
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/bin/setup_vars_opencv4.sh
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/valgrind.supp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/valgrind_3rdparty.supp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/licenses/opencv4/protobuf-LICENSE
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/licenses/opencv4/protobuf-README.md
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/licenses/opencv4/ittnotify-BSD-3-Clause.txt
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/licenses/opencv4/ittnotify-GPL-2.0-only.txt
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/opencv.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_cudev.so.4.12.0
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_cudev.so.412
+-- Set runtime path of "/home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_cudev.so.4.12.0" to "/home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib:/usr/local/cuda-12.9/lib64"
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_cudev.so
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/block/block.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/block/detail/reduce.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/block/detail/reduce_key_val.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/block/dynamic_smem.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/block/reduce.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/block/scan.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/block/vec_distance.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/common.hpp
+-- Up-to-date: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/common.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/expr/binary_func.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/expr/binary_op.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/expr/color.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/expr/deriv.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/expr/expr.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/expr/per_element_func.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/expr/reduction.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/expr/unary_func.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/expr/unary_op.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/expr/warping.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/functional/color_cvt.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/functional/detail/color_cvt.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/functional/functional.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/functional/tuple_adapter.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/grid/copy.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/grid/detail/copy.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/grid/detail/histogram.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/grid/detail/integral.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/grid/detail/minmaxloc.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/grid/detail/pyr_down.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/grid/detail/pyr_up.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/grid/detail/reduce.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/grid/detail/reduce_to_column.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/grid/detail/reduce_to_row.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/grid/detail/split_merge.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/grid/detail/transform.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/grid/detail/transpose.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/grid/histogram.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/grid/integral.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/grid/pyramids.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/grid/reduce.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/grid/reduce_to_vec.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/grid/split_merge.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/grid/transform.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/grid/transpose.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/ptr2d/constant.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/ptr2d/deriv.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/ptr2d/detail/gpumat.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/ptr2d/extrapolation.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/ptr2d/glob.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/ptr2d/gpumat.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/ptr2d/interpolation.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/ptr2d/lut.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/ptr2d/mask.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/ptr2d/remap.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/ptr2d/resize.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/ptr2d/texture.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/ptr2d/traits.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/ptr2d/transform.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/ptr2d/warping.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/ptr2d/zip.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/util/atomic.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/util/detail/tuple.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/util/detail/type_traits.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/util/limits.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/util/saturate_cast.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/util/simd_functions.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/util/tuple.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/util/type_traits.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/util/vec_math.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/util/vec_traits.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/warp/detail/reduce.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/warp/detail/reduce_key_val.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/warp/reduce.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/warp/scan.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/warp/shuffle.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudev/warp/warp.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_core.so.4.12.0
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_core.so.412
+-- Set runtime path of "/home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_core.so.4.12.0" to "/home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib:/usr/local/cuda-12.9/lib64"
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_core.so
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/affine.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/async.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/base.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/bindings_utils.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/bufferpool.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/check.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/core.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/core_c.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda.inl.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/block.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/border_interpolate.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/color.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/common.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/datamov_utils.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/detail/color_detail.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/detail/reduce.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/detail/reduce_key_val.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/detail/transform_detail.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/detail/type_traits_detail.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/detail/vec_distance_detail.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/dynamic_smem.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/emulation.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/filters.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/funcattrib.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/functional.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/limits.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/reduce.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/saturate_cast.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/scan.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/simd_functions.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/transform.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/type_traits.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/utility.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/vec_distance.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/vec_math.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/vec_traits.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/warp.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/warp_reduce.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda/warp_shuffle.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda_stream_accessor.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cuda_types.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cv_cpu_dispatch.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cv_cpu_helper.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cvdef.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cvstd.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cvstd.inl.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/cvstd_wrapper.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/detail/async_promise.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/detail/dispatch_helper.impl.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/detail/exception_ptr.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/directx.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/dualquaternion.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/dualquaternion.inl.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/eigen.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/fast_math.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/hal/hal.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/hal/interface.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/hal/intrin.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/hal/intrin_avx.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/hal/intrin_avx512.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/hal/intrin_cpp.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/hal/intrin_forward.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/hal/intrin_lasx.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/hal/intrin_legacy_ops.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/hal/intrin_lsx.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/hal/intrin_math.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/hal/intrin_msa.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/hal/intrin_neon.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/hal/intrin_rvv071.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/hal/intrin_rvv_scalable.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/hal/intrin_sse.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/hal/intrin_sse_em.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/hal/intrin_vsx.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/hal/intrin_wasm.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/hal/msa_macros.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/hal/simd_utils.impl.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/mat.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/mat.inl.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/matx.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/matx.inl.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/neon_utils.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/ocl.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/ocl_genbase.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/opencl/ocl_defs.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/opencl/opencl_info.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/opencl/opencl_svm.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/opencl/runtime/autogenerated/opencl_clblas.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/opencl/runtime/autogenerated/opencl_clfft.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/opencl/runtime/autogenerated/opencl_core.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/opencl/runtime/autogenerated/opencl_core_wrappers.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/opencl/runtime/autogenerated/opencl_gl.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/opencl/runtime/autogenerated/opencl_gl_wrappers.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/opencl/runtime/opencl_clblas.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/opencl/runtime/opencl_clfft.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/opencl/runtime/opencl_core.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/opencl/runtime/opencl_core_wrappers.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/opencl/runtime/opencl_gl.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/opencl/runtime/opencl_gl_wrappers.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/opencl/runtime/opencl_svm_20.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/opencl/runtime/opencl_svm_definitions.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/opencl/runtime/opencl_svm_hsa_extension.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/opengl.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/operations.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/optim.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/ovx.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/parallel/backend/parallel_for.openmp.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/parallel/backend/parallel_for.tbb.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/parallel/parallel_backend.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/persistence.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/quaternion.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/quaternion.inl.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/saturate.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/simd_intrinsics.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/softfloat.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/sse_utils.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/traits.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/types.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/types_c.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/utility.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/utils/allocator_stats.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/utils/allocator_stats.impl.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/utils/filesystem.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/utils/fp_control_utils.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/utils/instrumentation.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/utils/logger.defines.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/utils/logger.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/utils/logtag.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/utils/tls.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/utils/trace.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/va_intel.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/version.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/core/vsx_utils.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/licenses/opencv4/SoftFloat-COPYING.txt
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_cudaarithm.so.4.12.0
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_cudaarithm.so.412
+-- Set runtime path of "/home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_cudaarithm.so.4.12.0" to "/home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib:/usr/local/cuda-12.9/lib64"
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_cudaarithm.so
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudaarithm.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_flann.so.4.12.0
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_flann.so.412
+-- Set runtime path of "/home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_flann.so.4.12.0" to "/home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib:/usr/local/cuda-12.9/lib64"
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_flann.so
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/all_indices.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/allocator.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/any.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/autotuned_index.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/composite_index.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/config.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/defines.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/dist.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/dummy.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/dynamic_bitset.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/flann.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/flann_base.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/general.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/ground_truth.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/heap.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/hierarchical_clustering_index.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/index_testing.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/kdtree_index.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/kdtree_single_index.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/kmeans_index.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/linear_index.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/logger.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/lsh_index.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/lsh_table.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/matrix.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/miniflann.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/nn_index.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/object_factory.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/params.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/random.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/result_set.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/sampling.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/saving.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/simplex_downhill.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/flann/timer.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_imgproc.so.4.12.0
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_imgproc.so.412
+-- Set runtime path of "/home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_imgproc.so.4.12.0" to "/home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib:/usr/local/cuda-12.9/lib64"
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_imgproc.so
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/imgproc.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/imgproc/bindings.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/imgproc/detail/gcgraph.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/imgproc/detail/legacy.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/imgproc/hal/hal.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/imgproc/hal/interface.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/imgproc/imgproc.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/imgproc/imgproc_c.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/imgproc/segmentation.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/imgproc/types_c.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_cudaimgproc.so.4.12.0
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_cudaimgproc.so.412
+-- Set runtime path of "/home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_cudaimgproc.so.4.12.0" to "/home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib:/usr/local/cuda-12.9/lib64"
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_cudaimgproc.so
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudaimgproc.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_cudawarping.so.4.12.0
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_cudawarping.so.412
+-- Set runtime path of "/home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_cudawarping.so.4.12.0" to "/home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib:/usr/local/cuda-12.9/lib64"
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_cudawarping.so
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudawarping.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_features2d.so.4.12.0
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_features2d.so.412
+-- Set runtime path of "/home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_features2d.so.4.12.0" to "/home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib:/usr/local/cuda-12.9/lib64"
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_features2d.so
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/features2d.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/features2d/features2d.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/features2d/hal/interface.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/licenses/opencv4/mscr-chi_table_LICENSE.txt
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_imgcodecs.so.4.12.0
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_imgcodecs.so.412
+-- Set runtime path of "/home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_imgcodecs.so.4.12.0" to "/home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib:/usr/local/cuda-12.9/lib64"
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_imgcodecs.so
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/imgcodecs.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/imgcodecs/imgcodecs.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/imgcodecs/imgcodecs_c.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/imgcodecs/ios.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/imgcodecs/legacy/constants_c.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/imgcodecs/macosx.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_videoio.so.4.12.0
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_videoio.so.412
+-- Set runtime path of "/home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_videoio.so.4.12.0" to "/home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib:/usr/local/cuda-12.9/lib64"
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_videoio.so
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/videoio.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/videoio/legacy/constants_c.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/videoio/registry.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/videoio/videoio.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/videoio/videoio_c.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_calib3d.so.4.12.0
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_calib3d.so.412
+-- Set runtime path of "/home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_calib3d.so.4.12.0" to "/home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib:/usr/local/cuda-12.9/lib64"
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_calib3d.so
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/calib3d.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/calib3d/calib3d.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/calib3d/calib3d_c.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_highgui.so.4.12.0
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_highgui.so.412
+-- Set runtime path of "/home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_highgui.so.4.12.0" to "/home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib:/usr/local/cuda-12.9/lib64"
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib/libopencv_highgui.so
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/highgui.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/highgui/highgui.hpp
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/highgui/highgui_c.h
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/haarcascades/haarcascade_eye.xml
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/haarcascades/haarcascade_eye_tree_eyeglasses.xml
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/haarcascades/haarcascade_frontalcatface.xml
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/haarcascades/haarcascade_frontalcatface_extended.xml
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/haarcascades/haarcascade_frontalface_alt.xml
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/haarcascades/haarcascade_frontalface_alt2.xml
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/haarcascades/haarcascade_frontalface_alt_tree.xml
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/haarcascades/haarcascade_frontalface_default.xml
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/haarcascades/haarcascade_fullbody.xml
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/haarcascades/haarcascade_lefteye_2splits.xml
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/haarcascades/haarcascade_license_plate_rus_16stages.xml
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/haarcascades/haarcascade_lowerbody.xml
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/haarcascades/haarcascade_profileface.xml
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/haarcascades/haarcascade_righteye_2splits.xml
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/haarcascades/haarcascade_russian_plate_number.xml
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/haarcascades/haarcascade_smile.xml
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/haarcascades/haarcascade_upperbody.xml
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/lbpcascades/lbpcascade_frontalcatface.xml
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/lbpcascades/lbpcascade_frontalface.xml
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/lbpcascades/lbpcascade_frontalface_improved.xml
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/lbpcascades/lbpcascade_profileface.xml
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/share/opencv4/lbpcascades/lbpcascade_silverware.xml
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/bin/opencv_annotation
+-- Set runtime path of "/home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/bin/opencv_annotation" to "/home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib:/usr/local/cuda-12.9/lib64"
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/bin/opencv_visualisation
+-- Set runtime path of "/home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/bin/opencv_visualisation" to "/home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib:/usr/local/cuda-12.9/lib64"
+-- Installing: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/bin/opencv_version
+-- Set runtime path of "/home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/bin/opencv_version" to "/home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/lib:/usr/local/cuda-12.9/lib64"
+curl: (7) Couldn't connect to server

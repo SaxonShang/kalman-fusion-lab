@@ -1,0 +1,27 @@
+Verified cost-volume model already exists: /home/ubuntu22/slam/SIO_SLAM/models/onnx/disp_cost_volume.onnx
+Building onnx/disp_cost_volume.onnx -> disp_896x448_fp16.plan; log: /home/ubuntu22/slam/SIO_SLAM/models/tensorrt/logs/disp-build.log
+[10/29/2026-10:26:25] [V] [TRT] Parsing node: /Unsqueeze_2881 [Unsqueeze]
+[10/29/2026-10:26:25] [V] [TRT] Searching for input: /ReduceSum_105_output_0
+[10/29/2026-10:26:25] [V] [TRT] Searching for input: /Constant_10122_output_0
+[10/29/2026-10:26:25] [V] [TRT] /Unsqueeze_2881 [Unsqueeze] inputs: [/ReduceSum_105_output_0 -> (1, 448, 896)[FLOAT]], [/Constant_10122_output_0 -> (1)[INT64]], 
+[10/29/2026-10:26:25] [V] [TRT] Registering layer: /Constant_10122_output_0 required by ONNX-TRT
+[10/29/2026-10:26:25] [V] [TRT] Registering layer: /Unsqueeze_2881 for ONNX node: /Unsqueeze_2881
+[10/29/2026-10:26:25] [V] [TRT] Registering tensor: /Unsqueeze_2881_output_0 for ONNX tensor: /Unsqueeze_2881_output_0
+[10/29/2026-10:26:25] [V] [TRT] /Unsqueeze_2881 [Unsqueeze] outputs: [/Unsqueeze_2881_output_0 -> (1, 1, 448, 896)[FLOAT]], 
+[10/29/2026-10:26:25] [V] [TRT] Static check for parsing node: /Cast_553 [Cast]
+[10/29/2026-10:26:25] [V] [TRT] Parsing node: /Cast_553 [Cast]
+[10/29/2026-10:26:25] [V] [TRT] Searching for input: /Unsqueeze_2881_output_0
+[10/29/2026-10:26:25] [V] [TRT] /Cast_553 [Cast] inputs: [/Unsqueeze_2881_output_0 -> (1, 1, 448, 896)[FLOAT]], 
+[10/29/2026-10:26:25] [V] [TRT] Casting to type: float32
+[10/29/2026-10:26:25] [V] [TRT] Registering layer: /Cast_553 for ONNX node: /Cast_553
+[10/29/2026-10:26:25] [V] [TRT] Registering tensor: disp_18602 for ONNX tensor: disp
+[10/29/2026-10:26:25] [V] [TRT] /Cast_553 [Cast] outputs: [disp -> (1, 1, 448, 896)[FLOAT]], 
+[10/29/2026-10:26:25] [V] [TRT] Marking disp_18602 as output: disp
+[10/29/2026-10:26:25] [I] Finished parsing network model. Parse time: 1.42231
+[10/29/2026-10:26:25] [V] [TRT] could not open /sys/fs/cgroup/memory/memory.limit_in_bytes or /sys/fs/cgroup/memory.max
+[10/29/2026-10:26:25] [E] Static model does not take explicit shapes since the shape of inference tensors will be determined by the model itself
+[10/29/2026-10:26:25] [E] Network And Config setup failed
+[10/29/2026-10:26:25] [E] Building engine failed
+[10/29/2026-10:26:25] [E] Failed to create engine from model or file.
+[10/29/2026-10:26:25] [E] Engine set up failed
+&&&& FAILED TensorRT.trtexec [TensorRT v101401] [b48] # trtexec --onnx=/home/ubuntu22/slam/SIO_SLAM/models/onnx/disp_cost_volume.onnx --saveEngine=/home/ubuntu22/slam/SIO_SLAM/models/tensorrt/disp_896x448_fp16.plan.building --fp16 --inputIOFormats=fp32:chw --outputIOFormats=fp32:chw --memPoolSize=workspace:2048 --builderOptimizationLevel=0 --timingCacheFile=/home/ubuntu22/slam/SIO_SLAM/models/tens

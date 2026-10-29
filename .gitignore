@@ -1,0 +1,15 @@
+# Published evidence is in results/ and must remain tracked.
+/build/
+/install/
+/log/
+/data/
+/models/
+/artifacts/
+/project_config.local.yaml
+/compile_commands.json
+/experiments/fusion/local/
+__pycache__/
+*.pyc
+.DS_Store
+.vscode/settings.local.json
+.idea/

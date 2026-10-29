@@ -1,0 +1,49 @@
+Building fusion targets (build/fusion-lab-build.log)
+Exporting model disparity for selected frames (no RAFT or backend).
+Freezing stereo inputs and pure-IMU priors; GT is reserved for reporting.
+Running standalone GICP; saving complete observations and covariances.
+Replaying fixed GICP observations through ESKF covariance variants.
+Running ESIKF from the same priors and point clouds.
+Report generated: 60 records, 100 Stereo / 52 ESIKF iterations; 60/60 eligible/updated
+Results: /home/ubuntu22/slam/SIO_SLAM/artifacts/fusion/20261029_103507_280291_up_all
+Report: /home/ubuntu22/slam/SIO_SLAM/artifacts/fusion/20261029_103507_280291_up_all/report.html
+Exporting model disparity for selected frames (no RAFT or backend).
+Freezing stereo inputs and pure-IMU priors; GT is reserved for reporting.
+Running standalone GICP; saving complete observations and covariances.
+Replaying fixed GICP observations through ESKF covariance variants.
+Running ESIKF from the same priors and point clouds.
+Report generated: 60 records, 100 Stereo / 50 ESIKF iterations; 60/60 eligible/updated
+Results: /home/ubuntu22/slam/SIO_SLAM/artifacts/fusion/20261029_103556_371563_forward_all
+Report: /home/ubuntu22/slam/SIO_SLAM/artifacts/fusion/20261029_103556_371563_forward_all/report.html
+Exporting model disparity for selected frames (no RAFT or backend).
+Freezing stereo inputs and pure-IMU priors; GT is reserved for reporting.
+Running standalone GICP; saving complete observations and covariances.
+Replaying fixed GICP observations through ESKF covariance variants.
+Running ESIKF from the same priors and point clouds.
+Report generated: 60 records, 100 Stereo / 48 ESIKF iterations; 60/60 eligible/updated
+Results: /home/ubuntu22/slam/SIO_SLAM/artifacts/fusion/20261029_103643_008432_right_all
+Report: /home/ubuntu22/slam/SIO_SLAM/artifacts/fusion/20261029_103643_008432_right_all/report.html
+Exporting model disparity for selected frames (no RAFT or backend).
+Freezing stereo inputs and pure-IMU priors; GT is reserved for reporting.
+Running standalone GICP; saving complete observations and covariances.
+Replaying fixed GICP observations through ESKF covariance variants.
+Running ESIKF from the same priors and point clouds.
+Report generated: 60 records, 100 Stereo / 52 ESIKF iterations; 60/60 eligible/updated
+Results: /home/ubuntu22/slam/SIO_SLAM/artifacts/fusion/20261029_103729_083755_yaw_left_all
+Report: /home/ubuntu22/slam/SIO_SLAM/artifacts/fusion/20261029_103729_083755_yaw_left_all/report.html
+Exporting model disparity for selected frames (no RAFT or backend).
+Freezing stereo inputs and pure-IMU priors; GT is reserved for reporting.
+Running standalone GICP; saving complete observations and covariances.
+Replaying fixed GICP observations through ESKF covariance variants.
+Running ESIKF from the same priors and point clouds.
+Report generated: 60 records, 100 Stereo / 52 ESIKF iterations; 60/60 eligible/updated
+Results: /home/ubuntu22/slam/SIO_SLAM/artifacts/fusion/20261029_103821_708691_pitch_up_all
+Report: /home/ubuntu22/slam/SIO_SLAM/artifacts/fusion/20261029_103821_708691_pitch_up_all/report.html
+Exporting model disparity for selected frames (no RAFT or backend).
+Freezing stereo inputs and pure-IMU priors; GT is reserved for reporting.
+Running standalone GICP; saving complete observations and covariances.
+Replaying fixed GICP observations through ESKF covariance variants.
+Running ESIKF from the same priors and point clouds.
+Report generated: 60 records, 100 Stereo / 48 ESIKF iterations; 60/60 eligible/updated
+Results: /home/ubuntu22/slam/SIO_SLAM/artifacts/fusion/20261029_103909_472994_roll_right_all
+Report: /home/ubuntu22/slam/SIO_SLAM/artifacts/fusion/20261029_103909_472994_roll_right_all/report.html

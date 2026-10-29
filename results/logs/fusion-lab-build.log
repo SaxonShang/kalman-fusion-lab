@@ -1,0 +1,481 @@
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- SIO Profiling: DISABLED
+-- Using TensorRT hints from project_config.local.yaml
+-- Found ament_cmake: 1.3.14 (/opt/ros/humble/share/ament_cmake/cmake)
+-- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+-- Found rclcpp: 16.0.21 (/opt/ros/humble/share/rclcpp/cmake)
+-- Found rosidl_generator_c: 3.1.9 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+-- Found rosidl_adapter: 3.1.9 (/opt/ros/humble/share/rosidl_adapter/cmake)
+-- Found rosidl_generator_cpp: 3.1.9 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found rmw_implementation_cmake: 6.1.4 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+-- Found rmw_fastrtps_cpp: 6.2.10 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+-- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  
+-- Found FastRTPS: /opt/ros/humble/include  
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- Found sensor_msgs: 4.9.2 (/opt/ros/humble/share/sensor_msgs/cmake)
+-- Found pcl_conversions: 2.4.5 (/opt/ros/humble/share/pcl_conversions/cmake)
+-- Checking for module 'eigen3'
+--   Found eigen3, version 3.4.0
+-- Found Eigen: /usr/include/eigen3 (Required is at least version "3.1") 
+-- Eigen found (include: /usr/include/eigen3, version: 3.4.0)
+-- Checking for module 'flann'
+--   Found flann, version 1.9.1
+-- Found FLANN: /usr/lib/x86_64-linux-gnu/libflann_cpp.so  
+-- FLANN found (include: /usr/include, lib: /usr/lib/x86_64-linux-gnu/libflann_cpp.so)
+-- Checking for module 'libusb-1.0'
+--   Found libusb-1.0, version 1.0.25
+-- Found libusb: /usr/lib/x86_64-linux-gnu/libusb-1.0.so  
+-- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+-- OpenNI2 found (version: 2.2.0.33, include: /usr/include/openni2, lib: /usr/lib/x86_64-linux-gnu/libOpenNI2.so;libusb::libusb)
+-- Eigen found (include: /usr/include/eigen3, version: 3.4.0)
+-- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+-- OpenNI2 found (version: 2.2.0.33, include: /usr/include/openni2, lib: /usr/lib/x86_64-linux-gnu/libOpenNI2.so;libusb::libusb)
+-- Found Qhull version 8.0.2
+-- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+-- Found PCL_COMMON: /usr/lib/x86_64-linux-gnu/libpcl_common.so  
+-- Found PCL_KDTREE: /usr/lib/x86_64-linux-gnu/libpcl_kdtree.so  
+-- Found PCL_OCTREE: /usr/lib/x86_64-linux-gnu/libpcl_octree.so  
+-- Found PCL_SEARCH: /usr/lib/x86_64-linux-gnu/libpcl_search.so  
+-- Found PCL_SAMPLE_CONSENSUS: /usr/lib/x86_64-linux-gnu/libpcl_sample_consensus.so  
+-- Found PCL_FILTERS: /usr/lib/x86_64-linux-gnu/libpcl_filters.so  
+-- Found PCL_2D: /usr/include/pcl-1.12  
+-- Found PCL_GEOMETRY: /usr/include/pcl-1.12  
+-- Found PCL_IO: /usr/lib/x86_64-linux-gnu/libpcl_io.so  
+-- Found PCL_FEATURES: /usr/lib/x86_64-linux-gnu/libpcl_features.so  
+-- Found PCL_ML: /usr/lib/x86_64-linux-gnu/libpcl_ml.so  
+-- Found PCL_SEGMENTATION: /usr/lib/x86_64-linux-gnu/libpcl_segmentation.so  
+-- Found PCL_VISUALIZATION: /usr/lib/x86_64-linux-gnu/libpcl_visualization.so  
+-- Found PCL_SURFACE: /usr/lib/x86_64-linux-gnu/libpcl_surface.so  
+-- Found PCL_REGISTRATION: /usr/lib/x86_64-linux-gnu/libpcl_registration.so  
+-- Found PCL_KEYPOINTS: /usr/lib/x86_64-linux-gnu/libpcl_keypoints.so  
+-- Found PCL_TRACKING: /usr/lib/x86_64-linux-gnu/libpcl_tracking.so  
+-- Found PCL_RECOGNITION: /usr/lib/x86_64-linux-gnu/libpcl_recognition.so  
+-- Found PCL_STEREO: /usr/lib/x86_64-linux-gnu/libpcl_stereo.so  
+-- Found PCL_APPS: /usr/lib/x86_64-linux-gnu/libpcl_apps.so  
+-- Found PCL_IN_HAND_SCANNER: /usr/include/pcl-1.12  
+-- Found PCL_MODELER: /usr/include/pcl-1.12  
+-- Found PCL_POINT_CLOUD_EDITOR: /usr/include/pcl-1.12  
+-- Found PCL_OUTOFCORE: /usr/lib/x86_64-linux-gnu/libpcl_outofcore.so  
+-- Found PCL_PEOPLE: /usr/lib/x86_64-linux-gnu/libpcl_people.so  
+-- Found CUDA: /usr/local/cuda-12.9 (found suitable exact version "12.9") 
+-- Found OpenCV: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install (found version "4.12.0") 
+CMake Warning (dev) at CMakeLists.txt:82 (find_package):
+  Policy CMP0074 is not set: find_package uses <PackageName>_ROOT variables.
+  Run "cmake --help-policy CMP0074" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  CMake variable PCL_ROOT is set to:
+
+    /usr
+
+  For compatibility, CMake is ignoring the variable.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Found OpenMP_C: -fopenmp (found version "4.5") 
+-- Found OpenMP_CXX: -fopenmp (found version "4.5") 
+-- Found OpenMP: TRUE (found version "4.5")  
+-- Found yaml-cpp: include=/usr/include, lib=/usr/lib/x86_64-linux-gnu/libyaml-cpp.so
+-- Found ament_cmake_gtest: 1.3.14 (/opt/ros/humble/share/ament_cmake_gtest/cmake)
+-- Found gtest sources under '/opt/ros/humble/src/gtest_vendor': C++ tests using 'Google Test' will be built
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/ubuntu22/slam/SIO_SLAM/build/local/fusion
+[1/49] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/dataset_loader.cpp.o
+[2/49] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/fusion_debug_logger.cpp.o
+[3/49] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/feature_processor.cpp.o
+[4/49] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/image_preprocessor.cpp.o
+[5/49] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/imu_debug_logger.cpp.o
+[6/49] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/imu_preprocessor.cpp.o
+[7/49] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/imu_integator.cpp.o
+[8/49] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/sio_stereo_geometry.cpp.o
+[9/49] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/keyframe_manager.cpp.o
+[10/49] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/profiler/simple_profiler.cpp.o
+[11/49] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/color_icp.cpp.o
+[12/49] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/stereo_gicp.cpp.o
+[13/49] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/sio_config.cpp.o
+[14/49] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/yaml.cpp.o
+[15/49] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/state_estimater.cpp.o
+[16/49] Building CXX object CMakeFiles/sio_fusion_lab.dir/experiments/fusion/src/main.cpp.o
+[17/49] Building CXX object CMakeFiles/sio_fusion_lab.dir/experiments/fusion/src/lab_prepare.cpp.o
+FAILED: CMakeFiles/sio_fusion_lab.dir/experiments/fusion/src/lab_prepare.cpp.o 
+/usr/bin/c++ -DBOOST_ALL_NO_LIB -DBOOST_DATE_TIME_DYN_LINK -DBOOST_FILESYSTEM_DYN_LINK -DBOOST_IOSTREAMS_DYN_LINK -DBOOST_SERIALIZATION_DYN_LINK -DBOOST_SYSTEM_DYN_LINK -DDEFAULT_RMW_IMPLEMENTATION=rmw_fastrtps_cpp -DDISABLE_PCAP -DFASTCDR_DYN_LINK -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -DRCUTILS_ENABLE_FAULT_INJECTION -DSIO_SLAM_PROJECT_CONFIG_PATH=\"/home/ubuntu22/slam/SIO_SLAM/project_config.yaml\" -Dkiss_fft_scalar=double -I/home/ubuntu22/slam/SIO_SLAM/include -I/home/ubuntu22/slam/SIO_SLAM/tests -I/opt/ros/humble/include/pcl_conversions -I/opt/ros/humble/include/message_filters -isystem /usr/include/pcl-1.12 -isystem /usr/include/eigen3 -isystem /opt/ros/humble/include/rclcpp -isystem /opt/ros/humble/include/sensor_msgs -isystem /opt/ros/humble/include/geometry_msgs -isystem /opt/ros/humble/include/pcl_msgs -isystem /opt/ros/humble/include/std_msgs -isystem /usr/include/ni -isystem /usr/include/openni2 -isystem /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4 -isystem /usr/include/vtk-9.1 -isystem /usr/include/jsoncpp -isystem /usr/include/freetype2 -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtOpenGL -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -isystem /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include -isystem /opt/ros/humble/include/ament_index_cpp -isystem /opt/ros/humble/include/libstatistics_collector -isystem /opt/ros/humble/include/builtin_interfaces -isystem /opt/ros/humble/include/rosidl_runtime_c -isystem /opt/ros/humble/include/rcutils -isystem /opt/ros/humble/include/rosidl_typesupport_interface -isystem /opt/ros/humble/include/fastcdr -isystem /opt/ros/humble/include/rosidl_runtime_cpp -isystem /opt/ros/humble/include/rosidl_typesupport_fastrtps_cpp -isystem /opt/ros/humble/include/rmw -isystem /opt/ros/humble/include/rosidl_typesupport_fastrtps_c -isystem /opt/ros/humble/include/rosidl_typesupport_introspection_c -isystem /opt/ros/humble/include/rosidl_typesupport_introspection_cpp -isystem /opt/ros/humble/include/rcl -isystem /opt/ros/humble/include/rcl_interfaces -isystem /opt/ros/humble/include/rcl_logging_interface -isystem /opt/ros/humble/include/rcl_yaml_param_parser -isystem /opt/ros/humble/include/libyaml_vendor -isystem /opt/ros/humble/include/tracetools -isystem /opt/ros/humble/include/rcpputils -isystem /opt/ros/humble/include/statistics_msgs -isystem /opt/ros/humble/include/rosgraph_msgs -isystem /opt/ros/humble/include/rosidl_typesupport_cpp -isystem /opt/ros/humble/include/rosidl_typesupport_c -g -O2 -Wno-deprecated-declarations -fPIC -fopenmp -std=gnu++17 -MD -MT CMakeFiles/sio_fusion_lab.dir/experiments/fusion/src/lab_prepare.cpp.o -MF CMakeFiles/sio_fusion_lab.dir/experiments/fusion/src/lab_prepare.cpp.o.d -o CMakeFiles/sio_fusion_lab.dir/experiments/fusion/src/lab_prepare.cpp.o -c /home/ubuntu22/slam/SIO_SLAM/experiments/fusion/src/lab_prepare.cpp
+/home/ubuntu22/slam/SIO_SLAM/experiments/fusion/src/lab_prepare.cpp: In function ‘void fusion_lab::Prepare(const YAML::Node&, const std::filesystem::__cxx11::path&)’:
+/home/ubuntu22/slam/SIO_SLAM/experiments/fusion/src/lab_prepare.cpp:89:3: error: ‘ImuPreprocessor’ was not declared in this scope; did you mean ‘ImagePreprocessor’?
+   89 |   ImuPreprocessor imu_preprocessor;
+      |   ^~~~~~~~~~~~~~~
+      |   ImagePreprocessor
+/home/ubuntu22/slam/SIO_SLAM/experiments/fusion/src/lab_prepare.cpp:90:3: error: ‘imu_preprocessor’ was not declared in this scope; did you mean ‘image_preprocessor’?
+   90 |   imu_preprocessor.LoadConfig(params.string());
+      |   ^~~~~~~~~~~~~~~~
+      |   image_preprocessor
+[18/49] Building CXX object CMakeFiles/sio_fusion_lab.dir/experiments/fusion/src/lab_io.cpp.o
+ninja: build stopped: subcommand failed.
+[1/33] Building CXX object CMakeFiles/sio_fusion_lab.dir/experiments/fusion/src/main.cpp.o
+[2/33] Building CXX object CMakeFiles/sio_fusion_lab.dir/experiments/fusion/src/lab_prepare.cpp.o
+[3/33] Building CXX object CMakeFiles/sio_unit_tests.dir/src/imu_preprocessor.cpp.o
+[4/33] Building CXX object CMakeFiles/sio_unit_tests.dir/src/fusion_debug_logger.cpp.o
+[5/33] Building CXX object CMakeFiles/sio_fusion_lab.dir/experiments/fusion/src/lab_run.cpp.o
+[6/33] Building CXX object CMakeFiles/sio_unit_tests.dir/src/image_preprocessor.cpp.o
+[7/33] Building CXX object CMakeFiles/sio_unit_tests.dir/src/imu_debug_logger.cpp.o
+[8/33] Building CXX object CMakeFiles/sio_unit_tests.dir/tests/unit/test_stereo_gicp.cpp.o
+[9/33] Building CXX object CMakeFiles/sio_unit_tests.dir/src/imu_integator.cpp.o
+[10/33] Building CXX object CMakeFiles/sio_unit_tests.dir/src/feature_processor.cpp.o
+[11/33] Building CXX object CMakeFiles/sio_unit_tests.dir/src/dataset_loader.cpp.o
+[12/33] Linking CXX executable sio_fusion_lab
+[13/33] Building CXX object CMakeFiles/sio_unit_tests.dir/src/state_estimater.cpp.o
+[14/33] Building CXX object CMakeFiles/sio_unit_tests.dir/src/profiler/simple_profiler.cpp.o
+[15/33] Building CXX object CMakeFiles/sio_unit_tests.dir/src/keyframe_manager.cpp.o
+[16/33] Building CXX object CMakeFiles/sio_unit_tests.dir/src/sio_config.cpp.o
+[17/33] Building CXX object CMakeFiles/sio_unit_tests.dir/src/sio_stereo_geometry.cpp.o
+[18/33] Building CXX object CMakeFiles/sio_unit_tests.dir/src/stereo_gicp.cpp.o
+[19/33] Building CXX object CMakeFiles/sio_unit_tests.dir/tests/unit/test_utils.cpp.o
+FAILED: CMakeFiles/sio_unit_tests.dir/tests/unit/test_utils.cpp.o 
+/usr/bin/c++ -DBOOST_ALL_NO_LIB -DBOOST_DATE_TIME_DYN_LINK -DBOOST_FILESYSTEM_DYN_LINK -DBOOST_IOSTREAMS_DYN_LINK -DBOOST_SERIALIZATION_DYN_LINK -DBOOST_SYSTEM_DYN_LINK -DDEFAULT_RMW_IMPLEMENTATION=rmw_fastrtps_cpp -DDISABLE_PCAP -DFASTCDR_DYN_LINK -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -DRCUTILS_ENABLE_FAULT_INJECTION -DSIO_SLAM_PROJECT_CONFIG_PATH=\"/home/ubuntu22/slam/SIO_SLAM/project_config.yaml\" -Dkiss_fft_scalar=double -I/home/ubuntu22/slam/SIO_SLAM/include -I/home/ubuntu22/slam/SIO_SLAM/tests -I/opt/ros/humble/include/pcl_conversions -I/opt/ros/humble/include/message_filters -isystem /usr/include/pcl-1.12 -isystem /usr/include/eigen3 -isystem /opt/ros/humble/src/gtest_vendor/include -isystem /opt/ros/humble/include/rclcpp -isystem /opt/ros/humble/include/sensor_msgs -isystem /opt/ros/humble/include/geometry_msgs -isystem /opt/ros/humble/include/pcl_msgs -isystem /opt/ros/humble/include/std_msgs -isystem /usr/include/ni -isystem /usr/include/openni2 -isystem /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4 -isystem /usr/include/vtk-9.1 -isystem /usr/include/jsoncpp -isystem /usr/include/freetype2 -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtOpenGL -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -isystem /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include -isystem /opt/ros/humble/include/ament_index_cpp -isystem /opt/ros/humble/include/libstatistics_collector -isystem /opt/ros/humble/include/builtin_interfaces -isystem /opt/ros/humble/include/rosidl_runtime_c -isystem /opt/ros/humble/include/rcutils -isystem /opt/ros/humble/include/rosidl_typesupport_interface -isystem /opt/ros/humble/include/fastcdr -isystem /opt/ros/humble/include/rosidl_runtime_cpp -isystem /opt/ros/humble/include/rosidl_typesupport_fastrtps_cpp -isystem /opt/ros/humble/include/rmw -isystem /opt/ros/humble/include/rosidl_typesupport_fastrtps_c -isystem /opt/ros/humble/include/rosidl_typesupport_introspection_c -isystem /opt/ros/humble/include/rosidl_typesupport_introspection_cpp -isystem /opt/ros/humble/include/rcl -isystem /opt/ros/humble/include/rcl_interfaces -isystem /opt/ros/humble/include/rcl_logging_interface -isystem /opt/ros/humble/include/rcl_yaml_param_parser -isystem /opt/ros/humble/include/libyaml_vendor -isystem /opt/ros/humble/include/tracetools -isystem /opt/ros/humble/include/rcpputils -isystem /opt/ros/humble/include/statistics_msgs -isystem /opt/ros/humble/include/rosgraph_msgs -isystem /opt/ros/humble/include/rosidl_typesupport_cpp -isystem /opt/ros/humble/include/rosidl_typesupport_c -g -O2 -Wno-deprecated-declarations -fPIC -fopenmp -std=gnu++17 -MD -MT CMakeFiles/sio_unit_tests.dir/tests/unit/test_utils.cpp.o -MF CMakeFiles/sio_unit_tests.dir/tests/unit/test_utils.cpp.o.d -o CMakeFiles/sio_unit_tests.dir/tests/unit/test_utils.cpp.o -c /home/ubuntu22/slam/SIO_SLAM/tests/unit/test_utils.cpp
+/home/ubuntu22/slam/SIO_SLAM/tests/unit/test_utils.cpp:22:50: error: macro "EXPECT_GT" passed 3 arguments, but takes just 2
+   22 |   EXPECT_GT(aligned.block<3, 3>(0, 3).norm(), 0.0);
+      |                                                  ^
+In file included from /home/ubuntu22/slam/SIO_SLAM/tests/helpers/assert_eigen.h:4,
+                 from /home/ubuntu22/slam/SIO_SLAM/tests/unit/test_utils.cpp:1:
+/opt/ros/humble/src/gtest_vendor/include/gtest/gtest.h:2037: note: macro "EXPECT_GT" defined here
+ 2037 | #define EXPECT_GT(val1, val2) \
+      | 
+/home/ubuntu22/slam/SIO_SLAM/tests/unit/test_utils.cpp: In member function ‘virtual void UtilsTest_StereoCovarianceAlignmentPreservesSpectrumAndCrossTerms_Test::TestBody()’:
+/home/ubuntu22/slam/SIO_SLAM/tests/unit/test_utils.cpp:22:3: error: ‘EXPECT_GT’ was not declared in this scope
+   22 |   EXPECT_GT(aligned.block<3, 3>(0, 3).norm(), 0.0);
+      |   ^~~~~~~~~
+[20/33] Building CXX object CMakeFiles/sio_unit_tests.dir/tests/unit/test_imu_integrator.cpp.o
+ninja: build stopped: subcommand failed.
+[1/14] Building CXX object CMakeFiles/sio_unit_tests.dir/tests/unit/test_keyframe_manager.cpp.o
+[2/14] Building CXX object CMakeFiles/sio_unit_tests.dir/tests/unit/test_utils.cpp.o
+[3/14] Building CXX object CMakeFiles/sio_unit_tests.dir/tests/unit/test_feature_processor.cpp.o
+[4/14] Building CXX object CMakeFiles/sio_unit_tests.dir/tests/unit/test_image_preprocessor.cpp.o
+[5/14] Building CXX object CMakeFiles/sio_unit_tests.dir/tests/unit/test_stereo_geometry.cpp.o
+[6/14] Building CXX object CMakeFiles/sio_unit_tests.dir/tests/unit/test_geo_flow_error.cpp.o
+[7/14] Building CXX object CMakeFiles/sio_unit_tests.dir/tests/unit/test_imu_preprocessor.cpp.o
+[8/14] Building CXX object CMakeFiles/sio_unit_tests.dir/tests/unit/test_debug_loggers.cpp.o
+[9/14] Building CXX object CMakeFiles/sio_unit_tests.dir/tests/unit/test_state_estimator.cpp.o
+[10/14] Building CXX object gtest/CMakeFiles/gtest.dir/src/gtest-all.cc.o
+[11/14] Linking CXX static library gtest/libgtest.a
+[12/14] Building CXX object gtest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o
+[13/14] Linking CXX static library gtest/libgtest_main.a
+[14/14] Linking CXX executable sio_unit_tests
+ninja: no work to do.
+[1/9] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/feature_processor.cpp.o
+[2/9] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/keyframe_manager.cpp.o
+[3/9] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/color_icp.cpp.o
+[4/9] Building CXX object CMakeFiles/sio_fusion_lab.dir/experiments/fusion/src/main.cpp.o
+[5/9] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/state_estimater.cpp.o
+[6/9] Building CXX object CMakeFiles/sio_fusion_lab.dir/experiments/fusion/src/lab_io.cpp.o
+[7/9] Building CXX object CMakeFiles/sio_fusion_lab.dir/experiments/fusion/src/lab_prepare.cpp.o
+[8/9] Building CXX object CMakeFiles/sio_fusion_lab.dir/experiments/fusion/src/lab_run.cpp.o
+[9/9] Linking CXX executable sio_fusion_lab
+[0/1] Re-running CMake...
+-- SIO Profiling: DISABLED
+-- Using TensorRT hints from project_config.local.yaml
+-- Found ament_cmake: 1.3.14 (/opt/ros/humble/share/ament_cmake/cmake)
+-- Found rclcpp: 16.0.21 (/opt/ros/humble/share/rclcpp/cmake)
+-- Found rosidl_generator_c: 3.1.9 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+-- Found rosidl_adapter: 3.1.9 (/opt/ros/humble/share/rosidl_adapter/cmake)
+-- Found rosidl_generator_cpp: 3.1.9 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found rmw_implementation_cmake: 6.1.4 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+-- Found rmw_fastrtps_cpp: 6.2.10 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- Found sensor_msgs: 4.9.2 (/opt/ros/humble/share/sensor_msgs/cmake)
+-- Found pcl_conversions: 2.4.5 (/opt/ros/humble/share/pcl_conversions/cmake)
+-- Eigen found (include: /usr/include/eigen3, version: 3.4.0)
+-- FLANN found (include: /usr/include, lib: /usr/lib/x86_64-linux-gnu/libflann_cpp.so)
+-- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+-- OpenNI2 found (version: 2.2.0.33, include: /usr/include/openni2, lib: /usr/lib/x86_64-linux-gnu/libOpenNI2.so;libusb::libusb)
+-- Eigen found (include: /usr/include/eigen3, version: 3.4.0)
+-- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+-- OpenNI2 found (version: 2.2.0.33, include: /usr/include/openni2, lib: /usr/lib/x86_64-linux-gnu/libOpenNI2.so;libusb::libusb)
+-- Found Qhull version 8.0.2
+-- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+CMake Warning (dev) at CMakeLists.txt:82 (find_package):
+  Policy CMP0074 is not set: find_package uses <PackageName>_ROOT variables.
+  Run "cmake --help-policy CMP0074" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  CMake variable PCL_ROOT is set to:
+
+    /usr
+
+  For compatibility, CMake is ignoring the variable.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Found yaml-cpp: include=/usr/include, lib=/usr/lib/x86_64-linux-gnu/libyaml-cpp.so
+-- Found ament_cmake_gtest: 1.3.14 (/opt/ros/humble/share/ament_cmake_gtest/cmake)
+-- Found gtest sources under '/opt/ros/humble/src/gtest_vendor': C++ tests using 'Google Test' will be built
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/ubuntu22/slam/SIO_SLAM/build/local/fusion
+[1/11] Building CXX object CMakeFiles/sio_unit_tests.dir/src/keyframe_manager.cpp.o
+[2/11] Building CXX object CMakeFiles/sio_unit_tests.dir/src/feature_processor.cpp.o
+[3/11] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/color_icp.cpp.o
+[4/11] Linking CXX executable sio_fusion_lab
+[5/11] Building CXX object CMakeFiles/sio_unit_tests.dir/src/state_estimater.cpp.o
+[6/11] Building CXX object CMakeFiles/sio_unit_tests.dir/tests/unit/test_color_icp_config.cpp.o
+[7/11] Building CXX object CMakeFiles/sio_unit_tests.dir/src/color_icp.cpp.o
+[8/11] Building CXX object CMakeFiles/sio_unit_tests.dir/tests/unit/test_keyframe_manager.cpp.o
+[9/11] Building CXX object CMakeFiles/sio_unit_tests.dir/tests/unit/test_feature_processor.cpp.o
+[10/11] Building CXX object CMakeFiles/sio_unit_tests.dir/tests/unit/test_state_estimator.cpp.o
+[11/11] Linking CXX executable sio_unit_tests
+[1/9] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/keyframe_manager.cpp.o
+[2/9] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/feature_processor.cpp.o
+[3/9] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/color_icp.cpp.o
+[4/9] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/state_estimater.cpp.o
+[5/9] Building CXX object CMakeFiles/sio_fusion_lab.dir/experiments/fusion/src/main.cpp.o
+[6/9] Building CXX object CMakeFiles/sio_fusion_lab.dir/experiments/fusion/src/lab_prepare.cpp.o
+[7/9] Building CXX object CMakeFiles/sio_fusion_lab.dir/experiments/fusion/src/lab_io.cpp.o
+[8/9] Building CXX object CMakeFiles/sio_fusion_lab.dir/experiments/fusion/src/lab_run.cpp.o
+[9/9] Linking CXX executable sio_fusion_lab
+ninja: no work to do.
+ninja: no work to do.
+ninja: no work to do.
+ninja: no work to do.
+ninja: no work to do.
+ninja: no work to do.
+ninja: no work to do.
+[0/1] Re-running CMake...
+-- SIO Profiling: DISABLED
+-- Using TensorRT hints from project_config.local.yaml
+-- Found ament_cmake: 1.3.14 (/opt/ros/humble/share/ament_cmake/cmake)
+-- Found rclcpp: 16.0.21 (/opt/ros/humble/share/rclcpp/cmake)
+-- Found rosidl_generator_c: 3.1.9 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+-- Found rosidl_adapter: 3.1.9 (/opt/ros/humble/share/rosidl_adapter/cmake)
+-- Found rosidl_generator_cpp: 3.1.9 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found rmw_implementation_cmake: 6.1.4 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+-- Found rmw_fastrtps_cpp: 6.2.10 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- Found sensor_msgs: 4.9.2 (/opt/ros/humble/share/sensor_msgs/cmake)
+-- Found pcl_conversions: 2.4.5 (/opt/ros/humble/share/pcl_conversions/cmake)
+-- Eigen found (include: /usr/include/eigen3, version: 3.4.0)
+-- FLANN found (include: /usr/include, lib: /usr/lib/x86_64-linux-gnu/libflann_cpp.so)
+-- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+-- OpenNI2 found (version: 2.2.0.33, include: /usr/include/openni2, lib: /usr/lib/x86_64-linux-gnu/libOpenNI2.so;libusb::libusb)
+-- Eigen found (include: /usr/include/eigen3, version: 3.4.0)
+-- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+-- OpenNI2 found (version: 2.2.0.33, include: /usr/include/openni2, lib: /usr/lib/x86_64-linux-gnu/libOpenNI2.so;libusb::libusb)
+-- Found Qhull version 8.0.2
+-- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+CMake Warning (dev) at CMakeLists.txt:82 (find_package):
+  Policy CMP0074 is not set: find_package uses <PackageName>_ROOT variables.
+  Run "cmake --help-policy CMP0074" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  CMake variable PCL_ROOT is set to:
+
+    /usr
+
+  For compatibility, CMake is ignoring the variable.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Found yaml-cpp: include=/usr/include, lib=/usr/lib/x86_64-linux-gnu/libyaml-cpp.so
+-- Found ament_cmake_gtest: 1.3.14 (/opt/ros/humble/share/ament_cmake_gtest/cmake)
+-- Found gtest sources under '/opt/ros/humble/src/gtest_vendor': C++ tests using 'Google Test' will be built
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/ubuntu22/slam/SIO_SLAM/build/local/fusion
+[1/50] Building CXX object CMakeFiles/sio_unit_tests.dir/src/image_preprocessor.cpp.o
+[2/50] Building CXX object CMakeFiles/sio_unit_tests.dir/src/fusion_debug_logger.cpp.o
+[3/50] Building CXX object CMakeFiles/sio_unit_tests.dir/src/imu_debug_logger.cpp.o
+[4/50] Building CXX object CMakeFiles/sio_unit_tests.dir/src/imu_integator.cpp.o
+[5/50] Building CXX object CMakeFiles/sio_unit_tests.dir/src/keyframe_manager.cpp.o
+[6/50] Building CXX object CMakeFiles/sio_unit_tests.dir/src/imu_preprocessor.cpp.o
+[7/50] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/stereo_gicp.cpp.o
+[8/50] Building CXX object CMakeFiles/sio_fusion_lab.dir/modules/registration/src/stereo_gicp.cpp.o
+[9/50] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/state_estimater.cpp.o
+[10/50] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/sio_stereo_geometry.cpp.o
+[11/50] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/sio_config.cpp.o
+[12/50] Building CXX object CMakeFiles/sio_fusion_lab.dir/experiments/fusion/src/main.cpp.o
+[13/50] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/yaml.cpp.o
+[14/50] Building CXX object CMakeFiles/sio_fusion_lab.dir/experiments/fusion/src/lab_io.cpp.o
+[15/50] Building CXX object CMakeFiles/sio_fusion_lab.dir/modules/registration/src/color_icp.cpp.o
+[16/50] Building CXX object CMakeFiles/sio_fusion_lab.dir/experiments/fusion/src/lab_prepare.cpp.o
+[17/50] Building CXX object CMakeFiles/sio_unit_tests.dir/src/dataset_loader.cpp.o
+[18/50] Building CXX object CMakeFiles/sio_fusion_lab.dir/experiments/fusion/src/lab_run.cpp.o
+[19/50] Building CXX object CMakeFiles/sio_unit_tests.dir/src/feature_processor.cpp.o
+[20/50] Building CXX object CMakeFiles/sio_unit_tests.dir/src/sio_config.cpp.o
+[21/50] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/fusion_debug_logger.cpp.o
+[22/50] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/image_preprocessor.cpp.o
+[23/50] Building CXX object CMakeFiles/sio_unit_tests.dir/modules/registration/src/stereo_gicp.cpp.o
+[24/50] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/imu_debug_logger.cpp.o
+[25/50] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/dataset_loader.cpp.o
+[26/50] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/feature_processor.cpp.o
+[27/50] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/imu_integator.cpp.o
+[28/50] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/imu_preprocessor.cpp.o
+[29/50] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/profiler/simple_profiler.cpp.o
+[30/50] Building CXX object CMakeFiles/sio_unit_tests.dir/src/profiler/simple_profiler.cpp.o
+[31/50] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/keyframe_manager.cpp.o
+[32/50] Linking CXX executable sio_fusion_lab
+[33/50] Building CXX object CMakeFiles/sio_unit_tests.dir/src/stereo_gicp.cpp.o
+[34/50] Building CXX object CMakeFiles/sio_unit_tests.dir/src/sio_stereo_geometry.cpp.o
+[35/50] Building CXX object CMakeFiles/sio_unit_tests.dir/src/state_estimater.cpp.o
+[36/50] Building CXX object CMakeFiles/sio_unit_tests.dir/modules/registration/tests/test_stereo_gicp.cpp.o
+[37/50] Building CXX object CMakeFiles/sio_unit_tests.dir/modules/registration/src/color_icp.cpp.o
+[38/50] Building CXX object CMakeFiles/sio_unit_tests.dir/tests/unit/test_color_icp_config.cpp.o
+[39/50] Building CXX object CMakeFiles/sio_unit_tests.dir/tests/unit/test_utils.cpp.o
+FAILED: CMakeFiles/sio_unit_tests.dir/tests/unit/test_utils.cpp.o 
+/usr/bin/c++ -DBOOST_ALL_NO_LIB -DBOOST_DATE_TIME_DYN_LINK -DBOOST_FILESYSTEM_DYN_LINK -DBOOST_IOSTREAMS_DYN_LINK -DBOOST_SERIALIZATION_DYN_LINK -DBOOST_SYSTEM_DYN_LINK -DDEFAULT_RMW_IMPLEMENTATION=rmw_fastrtps_cpp -DDISABLE_PCAP -DFASTCDR_DYN_LINK -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -DRCUTILS_ENABLE_FAULT_INJECTION -DSIO_SLAM_PROJECT_CONFIG_PATH=\"/home/ubuntu22/slam/SIO_SLAM/project_config.yaml\" -Dkiss_fft_scalar=double -I/home/ubuntu22/slam/SIO_SLAM/include -I/home/ubuntu22/slam/SIO_SLAM/modules/registration/include -I/home/ubuntu22/slam/SIO_SLAM/tests -I/opt/ros/humble/include/pcl_conversions -I/opt/ros/humble/include/message_filters -isystem /usr/include/pcl-1.12 -isystem /usr/include/eigen3 -isystem /opt/ros/humble/src/gtest_vendor/include -isystem /opt/ros/humble/include/rclcpp -isystem /opt/ros/humble/include/sensor_msgs -isystem /opt/ros/humble/include/geometry_msgs -isystem /opt/ros/humble/include/pcl_msgs -isystem /opt/ros/humble/include/std_msgs -isystem /usr/include/ni -isystem /usr/include/openni2 -isystem /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4 -isystem /usr/include/vtk-9.1 -isystem /usr/include/jsoncpp -isystem /usr/include/freetype2 -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtOpenGL -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -isystem /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include -isystem /opt/ros/humble/include/ament_index_cpp -isystem /opt/ros/humble/include/libstatistics_collector -isystem /opt/ros/humble/include/builtin_interfaces -isystem /opt/ros/humble/include/rosidl_runtime_c -isystem /opt/ros/humble/include/rcutils -isystem /opt/ros/humble/include/rosidl_typesupport_interface -isystem /opt/ros/humble/include/fastcdr -isystem /opt/ros/humble/include/rosidl_runtime_cpp -isystem /opt/ros/humble/include/rosidl_typesupport_fastrtps_cpp -isystem /opt/ros/humble/include/rmw -isystem /opt/ros/humble/include/rosidl_typesupport_fastrtps_c -isystem /opt/ros/humble/include/rosidl_typesupport_introspection_c -isystem /opt/ros/humble/include/rosidl_typesupport_introspection_cpp -isystem /opt/ros/humble/include/rcl -isystem /opt/ros/humble/include/rcl_interfaces -isystem /opt/ros/humble/include/rcl_logging_interface -isystem /opt/ros/humble/include/rcl_yaml_param_parser -isystem /opt/ros/humble/include/libyaml_vendor -isystem /opt/ros/humble/include/tracetools -isystem /opt/ros/humble/include/rcpputils -isystem /opt/ros/humble/include/statistics_msgs -isystem /opt/ros/humble/include/rosgraph_msgs -isystem /opt/ros/humble/include/rosidl_typesupport_cpp -isystem /opt/ros/humble/include/rosidl_typesupport_c -g -O2 -Wno-deprecated-declarations -fPIC -fopenmp -std=gnu++17 -MD -MT CMakeFiles/sio_unit_tests.dir/tests/unit/test_utils.cpp.o -MF CMakeFiles/sio_unit_tests.dir/tests/unit/test_utils.cpp.o.d -o CMakeFiles/sio_unit_tests.dir/tests/unit/test_utils.cpp.o -c /home/ubuntu22/slam/SIO_SLAM/tests/unit/test_utils.cpp
+/home/ubuntu22/slam/SIO_SLAM/tests/unit/test_utils.cpp:126:65: error: macro "EXPECT_DOUBLE_EQ" passed 3 arguments, but takes just 2
+  126 |   EXPECT_DOUBLE_EQ(aligned.bottomRightCorner<3, 3>().norm(), 0.0);
+      |                                                                 ^
+In file included from /home/ubuntu22/slam/SIO_SLAM/tests/helpers/assert_eigen.h:4,
+                 from /home/ubuntu22/slam/SIO_SLAM/tests/unit/test_utils.cpp:1:
+/opt/ros/humble/src/gtest_vendor/include/gtest/gtest.h:2132: note: macro "EXPECT_DOUBLE_EQ" defined here
+ 2132 | #define EXPECT_DOUBLE_EQ(val1, val2)\
+      | 
+/home/ubuntu22/slam/SIO_SLAM/tests/unit/test_utils.cpp: In member function ‘virtual void UtilsTest_RightGicpRotationDoesNotMoveSourceOrigin_Test::TestBody()’:
+/home/ubuntu22/slam/SIO_SLAM/tests/unit/test_utils.cpp:126:3: error: ‘EXPECT_DOUBLE_EQ’ was not declared in this scope
+  126 |   EXPECT_DOUBLE_EQ(aligned.bottomRightCorner<3, 3>().norm(), 0.0);
+      |   ^~~~~~~~~~~~~~~~
+[40/50] Building CXX object CMakeFiles/sio_unit_tests.dir/tests/unit/test_imu_integrator.cpp.o
+ninja: build stopped: subcommand failed.
+[1/25] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/keyframe_manager.cpp.o
+[2/25] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/feature_processor.cpp.o
+[3/25] Building CXX object CMakeFiles/sio_fusion_lab.dir/modules/registration/src/color_icp.cpp.o
+[4/25] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/state_estimater.cpp.o
+[5/25] Building CXX object CMakeFiles/sio_fusion_lab.dir/experiments/fusion/src/main.cpp.o
+[6/25] Building CXX object CMakeFiles/sio_fusion_lab.dir/experiments/fusion/src/lab_prepare.cpp.o
+[7/25] Building CXX object CMakeFiles/sio_fusion_lab.dir/experiments/fusion/src/lab_io.cpp.o
+[8/25] Building CXX object CMakeFiles/sio_fusion_lab.dir/experiments/fusion/src/lab_run.cpp.o
+[9/25] Building CXX object CMakeFiles/sio_unit_tests.dir/src/feature_processor.cpp.o
+[10/25] Linking CXX executable sio_fusion_lab
+[11/25] Building CXX object CMakeFiles/sio_unit_tests.dir/src/keyframe_manager.cpp.o
+[12/25] Building CXX object CMakeFiles/sio_unit_tests.dir/modules/registration/src/color_icp.cpp.o
+[13/25] Building CXX object CMakeFiles/sio_unit_tests.dir/src/state_estimater.cpp.o
+[14/25] Building CXX object CMakeFiles/sio_unit_tests.dir/tests/unit/test_color_icp_config.cpp.o
+[15/25] Building CXX object CMakeFiles/sio_unit_tests.dir/tests/unit/test_utils.cpp.o
+[16/25] Building CXX object CMakeFiles/sio_unit_tests.dir/tests/unit/test_keyframe_manager.cpp.o
+[17/25] Building CXX object CMakeFiles/sio_unit_tests.dir/tests/unit/test_feature_processor.cpp.o
+[18/25] Building CXX object CMakeFiles/sio_unit_tests.dir/tests/unit/test_image_preprocessor.cpp.o
+[19/25] Building CXX object CMakeFiles/sio_unit_tests.dir/tests/unit/test_stereo_geometry.cpp.o
+[20/25] Building CXX object CMakeFiles/sio_unit_tests.dir/tests/unit/test_stereo_gicp.cpp.o
+ninja: no work to do.
+[21/25] Building CXX object CMakeFiles/sio_unit_tests.dir/tests/unit/test_geo_flow_error.cpp.o
+[22/25] Building CXX object CMakeFiles/sio_unit_tests.dir/tests/unit/test_imu_preprocessor.cpp.o
+[23/25] Building CXX object CMakeFiles/sio_unit_tests.dir/tests/unit/test_debug_loggers.cpp.o
+[24/25] Building CXX object CMakeFiles/sio_unit_tests.dir/tests/unit/test_state_estimator.cpp.o
+[25/25] Linking CXX executable sio_unit_tests
+ninja: no work to do.
+ninja: no work to do.
+[0/1] Re-running CMake...
+-- SIO Profiling: DISABLED
+-- Using TensorRT hints from project_config.local.yaml
+-- Found ament_cmake: 1.3.14 (/opt/ros/humble/share/ament_cmake/cmake)
+-- Found rclcpp: 16.0.21 (/opt/ros/humble/share/rclcpp/cmake)
+-- Found rosidl_generator_c: 3.1.9 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+-- Found rosidl_adapter: 3.1.9 (/opt/ros/humble/share/rosidl_adapter/cmake)
+-- Found rosidl_generator_cpp: 3.1.9 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found rmw_implementation_cmake: 6.1.4 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+-- Found rmw_fastrtps_cpp: 6.2.10 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- Found sensor_msgs: 4.9.2 (/opt/ros/humble/share/sensor_msgs/cmake)
+-- Found pcl_conversions: 2.4.5 (/opt/ros/humble/share/pcl_conversions/cmake)
+-- Eigen found (include: /usr/include/eigen3, version: 3.4.0)
+-- FLANN found (include: /usr/include, lib: /usr/lib/x86_64-linux-gnu/libflann_cpp.so)
+-- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+-- OpenNI2 found (version: 2.2.0.33, include: /usr/include/openni2, lib: /usr/lib/x86_64-linux-gnu/libOpenNI2.so;libusb::libusb)
+-- Eigen found (include: /usr/include/eigen3, version: 3.4.0)
+-- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+-- OpenNI2 found (version: 2.2.0.33, include: /usr/include/openni2, lib: /usr/lib/x86_64-linux-gnu/libOpenNI2.so;libusb::libusb)
+-- Found Qhull version 8.0.2
+-- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+CMake Warning (dev) at CMakeLists.txt:82 (find_package):
+  Policy CMP0074 is not set: find_package uses <PackageName>_ROOT variables.
+  Run "cmake --help-policy CMP0074" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  CMake variable PCL_ROOT is set to:
+
+    /usr
+
+  For compatibility, CMake is ignoring the variable.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Found yaml-cpp: include=/usr/include, lib=/usr/lib/x86_64-linux-gnu/libyaml-cpp.so
+-- Found ament_cmake_gtest: 1.3.14 (/opt/ros/humble/share/ament_cmake_gtest/cmake)
+-- Found gtest sources under '/opt/ros/humble/src/gtest_vendor': C++ tests using 'Google Test' will be built
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/ubuntu22/slam/SIO_SLAM/build/local/fusion
+[1/2] Building CXX object CMakeFiles/sio_unit_tests.dir/tests/unit/test_stereo_gicp.cpp.o
+[2/2] Linking CXX executable sio_unit_tests
+ninja: no work to do.
+ninja: no work to do.
+ninja: no work to do.
+[1/3] Building CXX object CMakeFiles/sio_unit_tests.dir/tests/unit/test_imu_integrator.cpp.o
+[2/3] Building CXX object CMakeFiles/sio_unit_tests.dir/tests/unit/test_state_estimator.cpp.o
+[3/3] Linking CXX executable sio_unit_tests
+[1/38] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/dataset_loader.cpp.o
+[2/38] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/fusion_debug_logger.cpp.o
+[3/38] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/feature_processor.cpp.o
+[4/38] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/imu_debug_logger.cpp.o
+[5/38] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/imu_preprocessor.cpp.o
+[6/38] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/imu_integator.cpp.o
+[7/38] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/keyframe_manager.cpp.o
+[8/38] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/stereo_gicp.cpp.o
+[9/38] Building CXX object CMakeFiles/sio_fusion_lab.dir/modules/registration/src/stereo_gicp.cpp.o
+[10/38] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/state_estimater.cpp.o
+[11/38] Building CXX object CMakeFiles/sio_fusion_lab.dir/experiments/fusion/src/main.cpp.o
+[12/38] Building CXX object CMakeFiles/sio_fusion_lab.dir/experiments/fusion/src/lab_io.cpp.o
+[13/38] Building CXX object CMakeFiles/sio_fusion_lab.dir/modules/registration/src/color_icp.cpp.o
+[14/38] Building CXX object CMakeFiles/sio_fusion_lab.dir/experiments/fusion/src/lab_prepare.cpp.o
+[15/38] Building CXX object CMakeFiles/sio_unit_tests.dir/src/dataset_loader.cpp.o
+[16/38] Building CXX object CMakeFiles/sio_unit_tests.dir/src/imu_debug_logger.cpp.o
+[17/38] Building CXX object CMakeFiles/sio_fusion_lab.dir/experiments/fusion/src/lab_run.cpp.o
+[18/38] Building CXX object CMakeFiles/sio_unit_tests.dir/src/fusion_debug_logger.cpp.o
+[19/38] Building CXX object CMakeFiles/sio_unit_tests.dir/src/feature_processor.cpp.o
+[20/38] Building CXX object CMakeFiles/sio_unit_tests.dir/src/keyframe_manager.cpp.o
+[21/38] Building CXX object CMakeFiles/sio_unit_tests.dir/src/imu_preprocessor.cpp.o
+[22/38] Building CXX object CMakeFiles/sio_unit_tests.dir/src/imu_integator.cpp.o
+[23/38] Linking CXX executable sio_fusion_lab
+[24/38] Building CXX object CMakeFiles/sio_unit_tests.dir/src/stereo_gicp.cpp.o
+[25/38] Building CXX object CMakeFiles/sio_unit_tests.dir/modules/registration/src/stereo_gicp.cpp.o
+[26/38] Building CXX object CMakeFiles/sio_unit_tests.dir/src/state_estimater.cpp.o
+[27/38] Building CXX object CMakeFiles/sio_unit_tests.dir/modules/registration/tests/test_stereo_gicp.cpp.o
+[28/38] Building CXX object CMakeFiles/sio_unit_tests.dir/tests/unit/test_color_icp_config.cpp.o
+[29/38] Building CXX object CMakeFiles/sio_unit_tests.dir/modules/registration/src/color_icp.cpp.o
+[30/38] Building CXX object CMakeFiles/sio_unit_tests.dir/tests/unit/test_utils.cpp.o
+[31/38] Building CXX object CMakeFiles/sio_unit_tests.dir/tests/unit/test_imu_integrator.cpp.o
+[32/38] Building CXX object CMakeFiles/sio_unit_tests.dir/tests/unit/test_keyframe_manager.cpp.o
+[33/38] Building CXX object CMakeFiles/sio_unit_tests.dir/tests/unit/test_feature_processor.cpp.o
+[34/38] Building CXX object CMakeFiles/sio_unit_tests.dir/tests/unit/test_stereo_gicp.cpp.o
+[35/38] Building CXX object CMakeFiles/sio_unit_tests.dir/tests/unit/test_geo_flow_error.cpp.o
+[36/38] Building CXX object CMakeFiles/sio_unit_tests.dir/tests/unit/test_debug_loggers.cpp.o
+[37/38] Building CXX object CMakeFiles/sio_unit_tests.dir/tests/unit/test_state_estimator.cpp.o
+[38/38] Linking CXX executable sio_unit_tests
+ninja: no work to do.
+ninja: no work to do.
+ninja: no work to do.
+ninja: no work to do.
+ninja: no work to do.
+ninja: no work to do.
+ninja: no work to do.
+[1/2] Building CXX object CMakeFiles/sio_unit_tests.dir/tests/unit/test_state_estimator.cpp.o
+[2/2] Linking CXX executable sio_unit_tests
+ninja: no work to do.

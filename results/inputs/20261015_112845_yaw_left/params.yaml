@@ -1,0 +1,109 @@
+# Generated FR5 ZED X calibration; see metadata.json.
+camera intrinsic:
+  fx: 490.82
+  fy: 490.82
+  cx: 658.48
+  cy: 370.0933333333333
+  baseline: 0.12009399999999999
+  source_width: 1280
+  source_height: 720
+  inference_width: 896
+  inference_height: 448
+  distortion_coefficients:
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+imu parameters:
+  accel_noise_density: 0.0013500000350177288
+  gyro_noise_density: 8.239699153051037e-05
+T_imu_cam:
+  rotation:
+  - -1.4899999999999889e-07
+  - -4.2999998791686703e-08
+  - -0.01057152960933425
+  translation:
+  - -0.03564856798902175
+  - 0.00022986571292366498
+  - -1.511004215e-09
+slam parameters:
+  tracking_target_max_points: 50000
+  tracking_target_min_depth_m: 0.2
+  tracking_target_max_depth_m: 30.0
+  tracking_target_min_confidence: 0.0
+  tracking_target_voxel_size: 0.05
+  tracking_target_max_correspondence_distance: 0.1
+  esikf_max_correspondence_distance: 0.15
+  backend:
+    sliding_window_size: 10
+  keyframe_selection:
+    front_trans_thresh_m: 0.8
+    front_angle_thresh_deg: 10.0
+    front_time_thresh_s: 0.5
+    speed_ref_mps: 1.5
+    adaptive_scale_min: 0.5
+    adaptive_scale_max: 2.0
+    backend_min_frontend_kfs: 3
+    backend_queue_legacy_trigger: 5
+    backend_trans_thresh_m: 1.8
+    backend_angle_thresh_deg: 35.0
+    backend_time_thresh_s: 1.0
+dynamic_filter:
+  tau_px_fixed: 12.0
+  raft_noise_base_px: 2.0
+  raft_noise_near_px: 6.0
+  geo_flow_min_sq: 0.25
+debug:
+  fusion_csv: null
+  imu_csv: null
+  console: false
+  track_console: true
+  visualize: false
+  visualize_pause_ms: 0
+  visualize_voxel_m: 0.08
+  visualize_max_points: 8000
+imu_preprocessor:
+  enable: false
+  enable_lpf: true
+  enable_outlier_reject: true
+  sample_rate_hz: 200.0
+  lpf_cutoff_hz: 20.0
+  gyro_outlier_rad_s: 10.0
+  acc_outlier_mps2: 30.0
+image_preprocessor:
+  image_preprocess:
+    enable: true
+    dark_threshold: 70.0
+    bright_threshold: 170.0
+    luminance_percentile: 50.0
+    target_luminance: 70.0
+    gain_max: 1.8
+    denoise: true
+    denoise_ksize: 3
+    denoise_sigma: 0.8
+    auto_gamma: true
+    gamma_min: 0.55
+    gamma_midtone_dark: 15.0
+    highlight_aware: true
+    shadow_exclude_below: 10.0
+    highlight_exclude_above: 220.0
+    highlight_ceiling: 245.0
+    highlight_percentile: 99.0
+    highlight_knee: 220
+    highlight_slope: 0.45
+    bright_gamma: 1.15
+    saturation_enable: true
+    saturation_gain: 1.5
+    saturation_only_dark: true
+color_icp:
+  color_weight: srgb
+  num_threads: 8
+  gradient_min_neighbors: 5
+  gradient_max_neighbors: 24
+  nn_search_epsilon: 0.01
+  verbose_iteration: false
+  icp_max_iterations: 20
+  icp_transformation_epsilon: 1.0e-06
+  icp_max_corres_dist: 0.5
+  color_icp_lambda: 0.9

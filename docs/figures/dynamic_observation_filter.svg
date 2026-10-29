@@ -1,0 +1,165 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="560" viewBox="0 0 1600 560">
+<title>动态观测滤除</title>
+<defs>
+  <style>
+    text { font-family: "Noto Sans CJK SC", "Noto Sans CJK JP", sans-serif; }
+    .sub { font-size: 10px; }
+    .sup { font-size: 10px; }
+  </style>
+  <marker id="mk" viewBox="0 0 10 8" refX="9" refY="4" markerWidth="8" markerHeight="7" orient="auto">
+    <path d="M0 0 L10 4 L0 8 Z" fill="#1a1a1a"/>
+  </marker>
+  <marker id="mkb" viewBox="0 0 10 8" refX="9" refY="4" markerWidth="8" markerHeight="7" orient="auto">
+    <path d="M0 0 L10 4 L0 8 Z" fill="#3d6d8c"/>
+  </marker>
+</defs>
+<rect width="1600" height="560" fill="#ffffff"/>
+
+<text x="800" y="34" text-anchor="middle" font-size="26" font-weight="700" fill="#1a1a1a">动态观测滤除</text>
+<text x="32" y="62" font-size="13" font-weight="700" fill="#5c5c5c">时间顺序</text>
+
+<!-- I_k carried across the interval into the image pair -->
+<path d="M232 98 V70 H718" fill="none" stroke="#1a1a1a" stroke-width="1.4"/>
+<path d="M762 70 H898 V84" fill="none" stroke="#1a1a1a" stroke-width="1.4" marker-end="url(#mk)"/>
+<text x="732.0" y="66" font-size="13" fill="#1a1a1a">I</text>
+<text x="736.5" y="71" font-size="10" fill="#1a1a1a">k</text>
+
+<!-- 1 reference keyframe -->
+<rect x="32" y="84" width="200" height="122" rx="8" fill="#ffffff" stroke="#1a1a1a" stroke-width="1.5"/>
+<circle cx="52" cy="106" r="11" fill="#1a1a1a"/>
+<text x="52" y="110" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">1</text>
+<text x="70" y="111" font-size="15" font-weight="700" fill="#1a1a1a">参考关键帧</text>
+<text x="46" y="140" font-size="14" fill="#1a1a1a">双目图像 I<tspan class="sub" dy="4">k</tspan></text>
+<text x="46" y="164" font-size="14" fill="#1a1a1a">视差点 (u, v, Z)</text>
+<text x="46" y="190" font-size="13" fill="#3d6d8c">此刻并行协方差 = 0</text>
+
+<!-- 2a nominal pose -->
+<rect x="260" y="84" width="250" height="122" rx="8" fill="#ffffff" stroke="#1a1a1a" stroke-width="1.5"/>
+<circle cx="280" cy="106" r="11" fill="#1a1a1a"/>
+<text x="280" y="110" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">2</text>
+<text x="298" y="111" font-size="15" font-weight="700" fill="#1a1a1a">关键帧到当前帧</text>
+<text x="278" y="142" font-size="14" fill="#1a1a1a">IMU 积分名义位姿</text>
+<text x="278" y="166" font-size="14" fill="#1a1a1a">T<tspan class="sub" dy="4">c←k</tspan><tspan dy="-4">（均值）</tspan></text>
+<text x="278" y="190" font-size="13" fill="#5c5c5c">只用于投影</text>
+
+<!-- 3 current image -->
+<rect x="538" y="84" width="180" height="122" rx="8" fill="#ffffff" stroke="#1a1a1a" stroke-width="1.5"/>
+<circle cx="558" cy="106" r="11" fill="#1a1a1a"/>
+<text x="558" y="110" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">3</text>
+<text x="576" y="111" font-size="15" font-weight="700" fill="#1a1a1a">当前帧</text>
+<text x="556" y="148" font-size="14" fill="#1a1a1a">图像 I<tspan class="sub" dy="4">c</tspan><tspan dy="-4"> 到达</tspan></text>
+<text x="556" y="176" font-size="13" fill="#5c5c5c">与 I<tspan class="sub" dy="3">k</tspan><tspan dy="-3"> 成对</tspan></text>
+
+<!-- 4a RAFT -->
+<rect x="754" y="84" width="288" height="54" rx="8" fill="#ffffff" stroke="#1a1a1a" stroke-width="1.5"/>
+<text x="768" y="117" font-size="14" fill="#1a1a1a">(I<tspan class="sub" dy="4">k</tspan><tspan dy="-4">, I</tspan><tspan class="sub" dy="4">c</tspan><tspan dy="-4">) → RAFT → f</tspan><tspan class="sub" dy="4">raft</tspan></text>
+<text x="1024" y="117" text-anchor="end" font-size="13" fill="#5c5c5c">观测</text>
+
+<!-- 4b geometric flow -->
+<rect x="754" y="152" width="288" height="54" rx="8" fill="#ffffff" stroke="#1a1a1a" stroke-width="1.5"/>
+<text x="768" y="185" font-size="14" fill="#1a1a1a">T<tspan class="sub" dy="4">c←k</tspan><tspan dy="-4"> + (u, v, Z) → f</tspan><tspan class="sub" dy="4">geo</tspan></text>
+<text x="1024" y="185" text-anchor="end" font-size="13" fill="#5c5c5c">椭圆中心</text>
+
+<!-- residual -->
+<rect x="1074" y="84" width="230" height="122" rx="8" fill="#ffffff" stroke="#1a1a1a" stroke-width="1.5"/>
+<circle cx="1094" cy="106" r="11" fill="#1a1a1a"/>
+<text x="1094" y="110" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">4</text>
+<text x="1112" y="111" font-size="15" font-weight="700" fill="#1a1a1a">残差</text>
+<text x="1147.9" y="158" font-size="15" fill="#1a1a1a">r</text>
+<text x="1153.7" y="163" font-size="10" fill="#1a1a1a">f</text>
+<text x="1156.9" y="158" font-size="15" fill="#1a1a1a"> = </text>
+<text x="1172.0" y="158" font-size="15" fill="#1a1a1a">f</text>
+<text x="1176.9" y="163" font-size="10" fill="#1a1a1a">raft</text>
+<text x="1193.1" y="158" font-size="15" fill="#1a1a1a"> − </text>
+<text x="1208.2" y="158" font-size="15" fill="#1a1a1a">f</text>
+<text x="1213.0" y="163" font-size="10" fill="#1a1a1a">geo</text>
+
+<!-- time arrows -->
+<line x1="232" y1="145" x2="258" y2="145" stroke="#1a1a1a" stroke-width="1.4" marker-end="url(#mk)"/>
+<line x1="510" y1="145" x2="536" y2="145" stroke="#1a1a1a" stroke-width="1.4" marker-end="url(#mk)"/>
+<line x1="718" y1="145" x2="752" y2="111" stroke="#1a1a1a" stroke-width="1.4" marker-end="url(#mk)"/>
+<line x1="1042" y1="111" x2="1072" y2="111" stroke="#1a1a1a" stroke-width="1.4" marker-end="url(#mk)"/>
+<line x1="1042" y1="179" x2="1072" y2="179" stroke="#1a1a1a" stroke-width="1.4" marker-end="url(#mk)"/>
+
+<!-- pose mean and reference points into f_geo -->
+<path d="M190 206 V224 H898 V206" fill="none" stroke="#1a1a1a" stroke-width="1.4" marker-end="url(#mk)"/>
+<line x1="470" y1="206" x2="470" y2="224" stroke="#1a1a1a" stroke-width="1.4"/>
+<text x="597.4" y="244" font-size="13" fill="#5c5c5c">T</text>
+<text x="605.2" y="249" font-size="10" fill="#5c5c5c">c←k</text>
+<text x="625.8" y="244" font-size="13" fill="#5c5c5c"> + (u, v, Z)</text>
+
+<!-- parallel covariance during the same interval; not the same box as the mean -->
+<rect x="260" y="258" width="250" height="70" rx="8" fill="#f3f8fb" stroke="#3d6d8c" stroke-width="1.5"/>
+<text x="385" y="286" text-anchor="middle" font-size="14" font-weight="700" fill="#1a1a1a">并行协方差</text>
+<text x="385" y="310" text-anchor="middle" font-size="13" fill="#3d6d8c">与上方同一间隔，同步更新</text>
+
+<!-- band 2 -->
+<text x="538" y="348" font-size="13" font-weight="700" fill="#5c5c5c">协方差到门控</text>
+
+<line x1="100" y1="206" x2="100" y2="358" stroke="#3d6d8c" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#mkb)"/>
+<text x="108" y="286" font-size="12" fill="#3d6d8c">置零</text>
+<line x1="385" y1="328" x2="385" y2="358" stroke="#3d6d8c" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#mkb)"/>
+<line x1="1189" y1="206" x2="1189" y2="358" stroke="#1a1a1a" stroke-width="1.4" marker-end="url(#mk)"/>
+<text x="1198" y="286" font-size="13" fill="#1a1a1a">r</text>
+<text x="1204" y="291" font-size="10" fill="#1a1a1a">f</text>
+
+<!-- five-step chain -->
+<rect x="32" y="360" width="200" height="100" rx="8" fill="#ffffff" stroke="#3d6d8c" stroke-width="1.5"/>
+<circle cx="52" cy="378" r="11" fill="#3d6d8c"/>
+<text x="52" y="382" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">1</text>
+<text x="132" y="408" text-anchor="middle" font-size="14" fill="#1a1a1a">关键帧置零</text>
+<text x="132" y="440" text-anchor="middle" font-size="13" fill="#5c5c5c">并行协方差 = 0</text>
+
+<rect x="260" y="360" width="250" height="100" rx="8" fill="#ffffff" stroke="#3d6d8c" stroke-width="1.5"/>
+<circle cx="280" cy="378" r="11" fill="#3d6d8c"/>
+<text x="280" y="382" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">2</text>
+<text x="385" y="408" text-anchor="middle" font-size="14" fill="#1a1a1a">主滤波同步 IMU、GICP</text>
+<text x="385" y="440" text-anchor="middle" font-size="13" fill="#5c5c5c">相对位姿协方差，非绝对</text>
+
+<rect x="538" y="360" width="260" height="100" rx="8" fill="#ffffff" stroke="#3d6d8c" stroke-width="1.5"/>
+<circle cx="558" cy="378" r="11" fill="#3d6d8c"/>
+<text x="558" y="382" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">3</text>
+<text x="601.5" y="408" font-size="14" fill="#1a1a1a">外参与杠杆臂 → P</text>
+<text x="714.6" y="413" font-size="10" fill="#1a1a1a">cam</text>
+<text x="668" y="442" text-anchor="middle" font-size="13" fill="#5c5c5c">平移对角有地板，交叉项保留</text>
+
+<rect x="826" y="360" width="220" height="100" rx="8" fill="#ffffff" stroke="#3d6d8c" stroke-width="1.5"/>
+<circle cx="846" cy="378" r="11" fill="#3d6d8c"/>
+<text x="846" y="382" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">4</text>
+<text x="893.3" y="408" font-size="14" fill="#1a1a1a">J</text>
+<text x="900.8" y="413" font-size="10" fill="#1a1a1a">f</text>
+<text x="904.0" y="408" font-size="14" fill="#1a1a1a">：P</text>
+<text x="926.9" y="413" font-size="10" fill="#1a1a1a">cam</text>
+<text x="946.8" y="408" font-size="14" fill="#1a1a1a"> → Σ</text>
+<text x="975.5" y="413" font-size="10" fill="#1a1a1a">f</text>
+<text x="936" y="442" text-anchor="middle" font-size="13" fill="#5c5c5c">再加各向同性脊</text>
+
+<rect x="1074" y="360" width="230" height="100" rx="8" fill="#ffffff" stroke="#3d6d8c" stroke-width="1.5"/>
+<circle cx="1094" cy="378" r="11" fill="#3d6d8c"/>
+<text x="1094" y="382" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">5</text>
+<text x="1157.4" y="408" font-size="14" fill="#1a1a1a">s = r</text>
+<text x="1183.4" y="400" font-size="10" fill="#1a1a1a">T</text>
+<text x="1189.4" y="408" font-size="14" fill="#1a1a1a"> Σ</text>
+<text x="1200.9" y="400" font-size="10" fill="#1a1a1a">−1</text>
+<text x="1212.0" y="408" font-size="14" fill="#1a1a1a"> r</text>
+<text x="1189" y="442" text-anchor="middle" font-size="13" fill="#5c5c5c">s ≥ 1，椭圆外为动态</text>
+
+<line x1="232" y1="410" x2="258" y2="410" stroke="#3d6d8c" stroke-width="1.5" marker-end="url(#mkb)"/>
+<line x1="510" y1="410" x2="536" y2="410" stroke="#3d6d8c" stroke-width="1.5" marker-end="url(#mkb)"/>
+<line x1="798" y1="410" x2="824" y2="410" stroke="#3d6d8c" stroke-width="1.5" marker-end="url(#mkb)"/>
+<line x1="1046" y1="410" x2="1072" y2="410" stroke="#3d6d8c" stroke-width="1.5" marker-end="url(#mkb)"/>
+<line x1="1304" y1="410" x2="1354" y2="410" stroke="#3d6d8c" stroke-width="1.5" marker-end="url(#mkb)"/>
+
+<!-- gate ellipse: interior static, one arrow leaving as dynamic -->
+<ellipse cx="1458" cy="410" rx="102" ry="48" fill="#e7f2f8" stroke="#3d6d8c" stroke-width="1.8"/>
+<circle cx="1458" cy="410" r="3.5" fill="#1a1a1a"/>
+<text x="1476" y="400" font-size="13" fill="#1a1a1a">f</text>
+<text x="1481" y="405" font-size="10" fill="#1a1a1a">geo</text>
+<text x="1458" y="436" text-anchor="middle" font-size="14" fill="#1a1a1a">静态</text>
+<line x1="1458" y1="362" x2="1458" y2="292" stroke="#1a1a1a" stroke-width="1.5" marker-end="url(#mk)"/>
+<text x="1458" y="280" text-anchor="middle" font-size="14" font-weight="700" fill="#1a1a1a">动态</text>
+
+<line x1="1458" y1="458" x2="1458" y2="486" stroke="#1a1a1a" stroke-width="1.4" marker-end="url(#mk)"/>
+<text x="1458" y="508" text-anchor="middle" font-size="14" fill="#1a1a1a">静态索引 S → 配准目标</text>
+<text x="560" y="508" text-anchor="middle" font-size="13" fill="#5c5c5c">两路光流都很小时，跳过检验</text>
+</svg>

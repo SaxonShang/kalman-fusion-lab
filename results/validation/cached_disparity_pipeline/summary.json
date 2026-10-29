@@ -1,0 +1,134 @@
+[
+  {
+    "stage": "esikf",
+    "method": "esikf",
+    "variant": "geometry_weight_0.5",
+    "valid": 1,
+    "total": 1,
+    "prior_translation_rmse_m": 0.0018856966153954415,
+    "result_translation_rmse_m": 0.007583142537869613,
+    "prior_rotation_rmse_deg": 0.015354614420465975,
+    "result_rotation_rmse_deg": 0.1566959209867186
+  },
+  {
+    "stage": "esikf",
+    "method": "esikf",
+    "variant": "geometry_weight_1",
+    "valid": 1,
+    "total": 1,
+    "prior_translation_rmse_m": 0.0018856966153954415,
+    "result_translation_rmse_m": 0.007587839092274344,
+    "prior_rotation_rmse_deg": 0.015354614420465975,
+    "result_rotation_rmse_deg": 0.15665893463140776
+  },
+  {
+    "stage": "eskf",
+    "method": "small_gicp",
+    "variant": "R_fixed",
+    "valid": 1,
+    "total": 1,
+    "prior_translation_rmse_m": 0.0018856966153954415,
+    "result_translation_rmse_m": 0.01727270677238916,
+    "prior_rotation_rmse_deg": 0.015354614420465975,
+    "result_rotation_rmse_deg": 0.3581112895313157
+  },
+  {
+    "stage": "eskf",
+    "method": "small_gicp",
+    "variant": "R_x0.1",
+    "valid": 1,
+    "total": 1,
+    "prior_translation_rmse_m": 0.0018856966153954415,
+    "result_translation_rmse_m": 0.01730299615214533,
+    "prior_rotation_rmse_deg": 0.015354614420465975,
+    "result_rotation_rmse_deg": 0.4155349722277247
+  },
+  {
+    "stage": "eskf",
+    "method": "small_gicp",
+    "variant": "R_x1",
+    "valid": 1,
+    "total": 1,
+    "prior_translation_rmse_m": 0.0018856966153954415,
+    "result_translation_rmse_m": 0.017306173619599834,
+    "prior_rotation_rmse_deg": 0.015354614420465975,
+    "result_rotation_rmse_deg": 0.41504239687690364
+  },
+  {
+    "stage": "eskf",
+    "method": "small_gicp",
+    "variant": "R_x10",
+    "valid": 1,
+    "total": 1,
+    "prior_translation_rmse_m": 0.0018856966153954415,
+    "result_translation_rmse_m": 0.017336677236007816,
+    "prior_rotation_rmse_deg": 0.015354614420465975,
+    "result_rotation_rmse_deg": 0.410323940284601
+  },
+  {
+    "stage": "eskf",
+    "method": "stereo",
+    "variant": "R_fixed",
+    "valid": 1,
+    "total": 1,
+    "prior_translation_rmse_m": 0.0018856966153954415,
+    "result_translation_rmse_m": 0.0026696059641294003,
+    "prior_rotation_rmse_deg": 0.015354614420465975,
+    "result_rotation_rmse_deg": 0.022165620109208323
+  },
+  {
+    "stage": "eskf",
+    "method": "stereo",
+    "variant": "R_x0.1",
+    "valid": 1,
+    "total": 1,
+    "prior_translation_rmse_m": 0.0018856966153954415,
+    "result_translation_rmse_m": 0.002671966652477679,
+    "prior_rotation_rmse_deg": 0.015354614420465975,
+    "result_rotation_rmse_deg": 0.02349924975004439
+  },
+  {
+    "stage": "eskf",
+    "method": "stereo",
+    "variant": "R_x1",
+    "valid": 1,
+    "total": 1,
+    "prior_translation_rmse_m": 0.0018856966153954415,
+    "result_translation_rmse_m": 0.0026719644366379955,
+    "prior_rotation_rmse_deg": 0.015354614420465975,
+    "result_rotation_rmse_deg": 0.023499165904821033
+  },
+  {
+    "stage": "eskf",
+    "method": "stereo",
+    "variant": "R_x10",
+    "valid": 1,
+    "total": 1,
+    "prior_translation_rmse_m": 0.0018856966153954415,
+    "result_translation_rmse_m": 0.0026719422834595888,
+    "prior_rotation_rmse_deg": 0.015354614420465975,
+    "result_rotation_rmse_deg": 0.02349832752919452
+  },
+  {
+    "stage": "gicp",
+    "method": "small_gicp",
+    "variant": "registration",
+    "valid": 1,
+    "total": 1,
+    "prior_translation_rmse_m": 0.0018856966153954415,
+    "result_translation_rmse_m": 0.01730264209288278,
+    "prior_rotation_rmse_deg": 0.015354614420465975,
+    "result_rotation_rmse_deg": 0.4155939401131992
+  },
+  {
+    "stage": "gicp",
+    "method": "stereo",
+    "variant": "registration",
+    "valid": 1,
+    "total": 1,
+    "prior_translation_rmse_m": 0.0018856966153954415,
+    "result_translation_rmse_m": 0.0026719672747456584,
+    "prior_rotation_rmse_deg": 0.015354614420465975,
+    "result_rotation_rmse_deg": 0.02349924891252421
+  }
+]

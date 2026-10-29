@@ -1,0 +1,186 @@
+{
+  "session": "..\\data\\recordings_highspeed\\20261015_112659_forward\\save_data",
+  "handeye": {
+    "path": "handeye_s003_result.json",
+    "sha256": "a8212d4873ba6521c18b04f8c4c3a4b91806c5a3dfa3c1726bccef566a896217",
+    "source": "calibration result.json",
+    "method": "Park+pixel_refinement",
+    "status": "accepted",
+    "frames": {
+      "pose_moving": "flange",
+      "pose_reference": "base",
+      "camera": "zed_left_rectified_optical",
+      "board": "kalibr_aprilgrid",
+      "basis": "declared_with_joint_check"
+    },
+    "flange_T_left_camera": [
+      [
+        0.999660953447201,
+        0.0007843776424874251,
+        0.02602619650942236,
+        -0.058960616228020075
+      ],
+      [
+        -0.0007566244143297974,
+        0.9999991346690702,
+        -0.0010761879977619043,
+        -0.07159469739308227
+      ],
+      [
+        -0.026027018125954093,
+        0.001056131064239924,
+        0.999660681888933,
+        0.09927925870705787
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ]
+  },
+  "arm_packets": 4351,
+  "arm_dropped_duplicates": 0,
+  "clock_fit": {
+    "c0_ctrl_unix_ms": 1792034950873.0,
+    "offset_ms": -130988.32363034491,
+    "drift_ppm": 253.8987096560558,
+    "windows": 22,
+    "windows_used": 22,
+    "window_residual_ms_max": 1.0278098683047574,
+    "latency_above_floor_ms": {
+      "min": -1.097629562849761,
+      "median": 2.3450060504837893,
+      "p99": 4.935926028549147
+    },
+    "warnings": [
+      "时钟拟合残差超过 1 ms，可能有时钟跳变"
+    ]
+  },
+  "gyro_bias_deg_s": [
+    0.0029008899999999997,
+    0.009112869999999999,
+    0.031693620000000006
+  ],
+  "static_intervals": 5,
+  "arm_peak_angular_speed_deg_s": 22.933136300032036,
+  "time_offset": {
+    "dt_ms": 2.3039117988966096,
+    "peak_corr": 0.990560008093281,
+    "corr_at_pm10ms": [
+      0.9841700311685238,
+      0.9842597200581328
+    ],
+    "at_search_edge": false,
+    "source": "gyro cross-correlation",
+    "segments": {
+      "first_40pct": {
+        "dt_ms": 3.1194860503587294,
+        "peak_corr": 0.9915094121917883,
+        "corr_at_pm10ms": [
+          0.9852308263831501,
+          0.9853136409810808
+        ],
+        "at_search_edge": false
+      },
+      "last_40pct": {
+        "dt_ms": 1.5578497480183182,
+        "peak_corr": 0.9981460132238553,
+        "corr_at_pm10ms": [
+          0.9916663244139657,
+          0.9919039741016976
+        ],
+        "at_search_edge": false
+      }
+    },
+    "segment_diff_ms": 1.5616363023404112
+  },
+  "exposure_centre": {
+    "offset_ms": 0.7729355210911716,
+    "sd_ms": 1.201316455048638,
+    "frames": 303,
+    "median_flagged_span_ms": 5.037109375,
+    "source": "image_sync_trigger",
+    "applied_ms": 0.7729355210911716,
+    "exposure_ms": 2.5
+  },
+  "time_correction": {
+    "applied_ms": 3.75,
+    "source": "TIME_CORRECTION_MS",
+    "exposure_ms": 2.5
+  },
+  "travel_scale": {
+    "factor": 1.0043,
+    "source": "TRAVEL_SCALE",
+    "path_set": "fast2",
+    "direction": "forward",
+    "origin_flange_m": [
+      0.26262045815974083,
+      0.02195044820127736,
+      0.41089958852405284
+    ],
+    "axis_base": [
+      0.9999999999993426,
+      -1.1467057177004766e-06,
+      0.0
+    ]
+  },
+  "rotation_scale": {
+    "factor": 1.0,
+    "source": "none",
+    "note": "不是旋转录制（或没有 motion_log.json），不放大转角"
+  },
+  "end_pose_correction": {
+    "source": "END_POSE_CORRECTION",
+    "delta_rotvec_deg_mm": [
+      0.0776,
+      0.0759,
+      0.0545,
+      -0.91,
+      -1.1,
+      1.89
+    ],
+    "path_set": "fast2",
+    "direction": "forward",
+    "kind": "translate",
+    "start_flange": [
+      262.62045815974085,
+      21.95044820127736,
+      410.89958852405283,
+      -90.06051188245783,
+      0.04494153306731838,
+      -88.50870562814397
+    ],
+    "end_flange": [
+      778.2111699891524,
+      21.94985697046011,
+      410.89958852405283,
+      -90.06051188245783,
+      0.04494153306731838,
+      -88.50870562814397
+    ],
+    "axis_base": null
+  },
+  "images": {
+    "total": 683,
+    "with_groundtruth": 683,
+    "duplicate_timestamp": 0,
+    "outside_arm_data": 0,
+    "in_arm_gap": 0,
+    "robot_error": 0
+  },
+  "warnings": [
+    "时钟拟合残差超过 1 ms，可能有时钟跳变"
+  ],
+  "conventions": [
+    "时间戳：ZED / Box 系统时间（Unix 秒）。机械臂样本时刻 = 映射后的控制器时间 + time_offset.dt_ms - time_correction.applied_ms。",
+    "每张图的真值取在曝光中心 = 图像时间戳 + exposure_centre.applied_ms；输出时间戳仍是图像时间戳。",
+    "法兰平移沿 travel_scale.axis_base、相对 travel_scale.origin_flange_m 放大 travel_scale.factor 倍（机械臂实际行程比报告的长）。",
+    "法兰姿态相对 rotation_scale.origin_flange、绕 rotation_scale.axis_base 的转角放大 rotation_scale.factor 倍，绕 rotation_scale.pivot_m 转（机械臂实际转角比报告的大）。",
+    "有 end_pose_correction 时，法兰位姿再左乘 exp(s·log ΔT)（基坐标系），ΔT = delta_rotvec_deg_mm（转动向量 °、平移 mm），s 是运动进度（起点 0、终点 1）。groundtruth_tum_uncorrected.txt 不加这些修正。",
+    "位姿：ZED 左目（校正后光学坐标系）在 FR5 基坐标系下，TUM 顺序 tx ty tz qx qy qz qw，单位 m。",
+    "base_T_camera = base_T_flange · flange_T_left_camera；FR5 姿态 R = Rz(rz)·Ry(ry)·Rx(rx)。",
+    "假设 ZED 图像与 IMU 在同一时钟上、image_sync_trigger 正确标出采集期间，且相机安装自手眼标定后没有变动。"
+  ]
+}

@@ -1,0 +1,90 @@
+[
+  {
+    "stage": "eskf",
+    "method": "small_gicp",
+    "variant": "R_fixed",
+    "valid": 5,
+    "total": 5,
+    "prior_translation_rmse_m": 0.013496094900985288,
+    "result_translation_rmse_m": 0.021409239490446992,
+    "prior_rotation_rmse_deg": 0.04027174559702653,
+    "result_rotation_rmse_deg": 0.468561261546329
+  },
+  {
+    "stage": "eskf",
+    "method": "small_gicp",
+    "variant": "R_x0.1",
+    "valid": 5,
+    "total": 5,
+    "prior_translation_rmse_m": 0.013496094900985288,
+    "result_translation_rmse_m": 0.021568720651210845,
+    "prior_rotation_rmse_deg": 0.04027174559702653,
+    "result_rotation_rmse_deg": 0.47485541945634724
+  },
+  {
+    "stage": "eskf",
+    "method": "small_gicp",
+    "variant": "R_x1",
+    "valid": 5,
+    "total": 5,
+    "prior_translation_rmse_m": 0.013496094900985288,
+    "result_translation_rmse_m": 0.021562973409103927,
+    "prior_rotation_rmse_deg": 0.04027174559702653,
+    "result_rotation_rmse_deg": 0.4746533738306838
+  },
+  {
+    "stage": "eskf",
+    "method": "small_gicp",
+    "variant": "R_x10",
+    "valid": 5,
+    "total": 5,
+    "prior_translation_rmse_m": 0.013496094900985288,
+    "result_translation_rmse_m": 0.02150704860167966,
+    "prior_rotation_rmse_deg": 0.04027174559702653,
+    "result_rotation_rmse_deg": 0.47269418633770194
+  },
+  {
+    "stage": "eskf",
+    "method": "stereo",
+    "variant": "R_fixed",
+    "valid": 5,
+    "total": 5,
+    "prior_translation_rmse_m": 0.013496094900985288,
+    "result_translation_rmse_m": 0.014972514982586678,
+    "prior_rotation_rmse_deg": 0.04027174559702653,
+    "result_rotation_rmse_deg": 0.09082090245341135
+  },
+  {
+    "stage": "eskf",
+    "method": "stereo",
+    "variant": "R_x0.1",
+    "valid": 5,
+    "total": 5,
+    "prior_translation_rmse_m": 0.013496094900985288,
+    "result_translation_rmse_m": 0.014983893907607128,
+    "prior_rotation_rmse_deg": 0.04027174559702653,
+    "result_rotation_rmse_deg": 0.091056021162051
+  },
+  {
+    "stage": "eskf",
+    "method": "stereo",
+    "variant": "R_x1",
+    "valid": 5,
+    "total": 5,
+    "prior_translation_rmse_m": 0.013496094900985288,
+    "result_translation_rmse_m": 0.01498389358830212,
+    "prior_rotation_rmse_deg": 0.04027174559702653,
+    "result_rotation_rmse_deg": 0.0910559660968488
+  },
+  {
+    "stage": "eskf",
+    "method": "stereo",
+    "variant": "R_x10",
+    "valid": 5,
+    "total": 5,
+    "prior_translation_rmse_m": 0.013496094900985288,
+    "result_translation_rmse_m": 0.014983890395452448,
+    "prior_rotation_rmse_deg": 0.04027174559702653,
+    "result_rotation_rmse_deg": 0.09105541549422944
+  }
+]

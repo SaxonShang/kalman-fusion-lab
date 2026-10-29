@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "llvm-vs-code-extensions.vscode-clangd",
+    "ms-vscode.cmake-tools",
+    "ms-vscode.cpptools",
+    "ms-iot.vscode-ros",
+    "redhat.vscode-yaml",
+    "twxs.cmake"
+  ]
+}

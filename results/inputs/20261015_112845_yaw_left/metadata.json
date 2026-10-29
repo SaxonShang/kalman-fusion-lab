@@ -1,0 +1,51 @@
+{
+  "generator": "SIO_SLAM/scripts/prepare_fr5_dataset.py",
+  "format_version": 1,
+  "source": "/home/ubuntu22/slam/SIO_SLAM/data/recordings/recordings_highspeed/20261015_112845_yaw_left/save_data",
+  "raw_frames": 680,
+  "skipped_frames": 60,
+  "frames": 620,
+  "imu_samples": 3884,
+  "frame_lag_ms": -4.872164226742939,
+  "image_to_imu_td_ms": 4.872164226742939,
+  "imu_time_shift_ns": -4872164,
+  "time_convention": "Images and GT unchanged; IMU aligned seconds = raw IMU seconds + lag_ms/1000; intervals (previous_image, image]",
+  "imu_units_in_csv": {
+    "acceleration": "m/s^2",
+    "angular_velocity": "deg/s"
+  },
+  "imu_measurement_frame": "SDK IMU IMAGE axes; not rotated to camera axes",
+  "imu_gap_median_ms": 5.04,
+  "imu_gap_max_ms": 7.82,
+  "last_image_minus_last_imu_ms": 5.469164,
+  "initialization_200th_sample_s_from_raw_first_image": 3.020460836,
+  "groundtruth": "Corrected source poses copied verbatim for selected images; no additional exposure, lag, scale or endpoint correction",
+  "groundtruth_warnings": [],
+  "calibration": {
+    "input_sha256": {
+      "data/recordings/recordings_highspeed/calib/camera_s003_refit.yaml": "0dc2cdaece5bcf197afda14a84449470e2e2da00b16a5d6d87ca439b5458acf8",
+      "data/recordings/recordings_highspeed/calib/camera_imu.yaml": "86a3b7f7127be2f66c553f06767e9ef17283ce94ebff50d94613997bc222dc38",
+      "data/recordings/recordings_highspeed/calib/SN49953548.conf": "4eb2d1fe55a29524fd32c21a535002301f58e4fe38eb162e9b68c03e58444049",
+      "config/params.yaml": "c05b6ac8ed43cce11d32f3040485bea7072e0cd80c30964b61009b07b827e916"
+    },
+    "camera_serial": 49953548,
+    "raw_image_size": [
+      1920,
+      1080
+    ],
+    "working_image_size": [
+      1280,
+      720
+    ],
+    "crop_image_size": [
+      1280,
+      640
+    ],
+    "inference_image_size": [
+      896,
+      448
+    ],
+    "extrinsic": "T_imu_cam = inverse(SDK camera_imu_transform)",
+    "noise_parameters": "SDK nominal values; YAML noise fields are not currently consumed by the core IMU integrator"
+  }
+}

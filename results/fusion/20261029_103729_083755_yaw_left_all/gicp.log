@@ -1,0 +1,10 @@
+[gicp] static_start small_gicp eligible inliers=23497 converged=1
+[gicp] static_start stereo eligible inliers=23319 converged=1
+[gicp] sync_motion small_gicp eligible inliers=23054 converged=1
+[gicp] sync_motion stereo eligible inliers=22195 converged=1
+[gicp] main_motion small_gicp eligible inliers=18299 converged=1
+[gicp] main_motion stereo eligible inliers=16663 converged=1
+[gicp] main_motion_long small_gicp eligible inliers=13264 converged=1
+[gicp] main_motion_long stereo eligible inliers=12001 converged=1
+[gicp] static_end small_gicp eligible inliers=11656 converged=1
+[gicp] static_end stereo eligible inliers=6994 converged=1

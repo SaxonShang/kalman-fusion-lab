@@ -1,0 +1,82 @@
+# SIO-SLAM 学习率调度器配置示例
+#
+# 学习率调度支持的策略及其使用方法：
+# 
+# 1. constant（恒定学习率，默认值）
+#    示例：pose_lr_scheduler: "constant"
+#
+# 2. linear_decay（线性衰减：lr = base_lr * (1 - iteration / max_iterations)）
+#    示例：pose_lr_scheduler: "linear_decay:max_iterations=1000"
+#
+# 3. exponential_decay（指数衰减：lr = base_lr * decay_rate^(iteration / decay_steps)）
+#    示例：pose_lr_scheduler: "exponential_decay:decay_rate=0.5:decay_steps=100"
+#    说明：每隔 decay_steps 次迭代，学习率衰减为原来的 decay_rate 倍
+#
+# 4. step_decay（分段衰减：在指定迭代数处降低学习率）
+#    示例：pose_lr_scheduler: "step_decay:milestones=100,200,300:decay_rates=0.1,0.01,0.001"
+#    说明：
+#      - 第 0-99 迭代：使用基础学习率
+#      - 第 100-199 迭代：使用 base_lr * 0.1
+#      - 第 200-299 迭代：使用 base_lr * 0.1 * 0.01 = base_lr * 0.001
+#      - 第 300+ 迭代：使用 base_lr * 0.1 * 0.01 * 0.001 = base_lr * 0.00001
+#
+# 5. cosine_annealing（余弦退火：提高收敛速度，常用于深度学习）
+#    示例：pose_lr_scheduler: "cosine_annealing:max_iterations=1000:min_lr_ratio=0.1"
+#    说明：
+#      - 学习率从 base_lr 平滑下降到 base_lr * 0.1
+#      - 使用余弦函数进行插值，加快收敛
+#
+# 6. polynomial_decay（多项式衰减：lr = base_lr * (1 - iteration / max_iterations)^power）
+#    示例：pose_lr_scheduler: "polynomial_decay:max_iterations=1000:power=2.0"
+#    说明：power=1.0 时为线性衰减，power>1 时衰减更快
+#
+# 7. multistage（多阶段：不同阶段使用不同的学习率）
+#    示例：gs_param_lr_scheduler: "multistage:stages=100,200:ratios=1.0,0.5"
+#    说明：
+#      - 第 0-99 迭代：使用 base_lr * 1.0
+#      - 第 100-199 迭代：使用 base_lr * 0.5
+#      - 第 200+ 迭代：使用 base_lr * 0.5
+#
+# ════════════════════════════════════════════════════════════════════
+
+# 示例 1：早期快速收敛 + 后期精细优化
+# 前 100 步快速优化，之后逐步降低学习率
+pose_lr_scheduler: "step_decay:milestones=100,300:decay_rates=0.5,0.1"
+bias_lr_scheduler: "step_decay:milestones=100,300:decay_rates=0.5,0.1"
+gs_pose_lr_scheduler: "step_decay:milestones=100,300:decay_rates=0.5,0.1"
+gs_param_lr_scheduler: "step_decay:milestones=100,300:decay_rates=0.5,0.1"
+
+# 示例 2：余弦退火（推荐用于 SLAM 优化）
+# 平滑下降学习率，加快收敛
+pose_lr_scheduler: "cosine_annealing:max_iterations=500:min_lr_ratio=0.05"
+bias_lr_scheduler: "cosine_annealing:max_iterations=500:min_lr_ratio=0.05"
+gs_pose_lr_scheduler: "cosine_annealing:max_iterations=500:min_lr_ratio=0.1"
+gs_param_lr_scheduler: "cosine_annealing:max_iterations=500:min_lr_ratio=0.1"
+
+# 示例 3：指数衰减
+# 快速衰减早期，稳定衰减晚期
+pose_lr_scheduler: "exponential_decay:decay_rate=0.7:decay_steps=50"
+bias_lr_scheduler: "exponential_decay:decay_rate=0.7:decay_steps=50"
+gs_pose_lr_scheduler: "exponential_decay:decay_rate=0.8:decay_steps=50"
+gs_param_lr_scheduler: "exponential_decay:decay_rate=0.8:decay_steps=50"
+
+# 示例 4：保守的多阶段学习率
+# 三个阶段，逐步降低学习率
+pose_lr_scheduler: "multistage:stages=100,250:ratios=1.0,0.5"
+bias_lr_scheduler: "multistage:stages=100,250:ratios=1.0,0.5"
+gs_pose_lr_scheduler: "multistage:stages=150,350:ratios=1.0,0.3"
+gs_param_lr_scheduler: "multistage:stages=150,350:ratios=1.0,0.3"
+
+# ════════════════════════════════════════════════════════════════════
+# 基础学习率设置（与调度器配合使用）
+# ════════════════════════════════════════════════════════════════════
+
+# IMU 零偏学习率（更新陀螺仪和加速度计偏置）
+imu_bias_gyr_lr: 0.15
+imu_bias_acc_lr: 0.10
+
+# 高斯球位姿学习率（微调整个高斯点云）
+gs_pose_lr: 0.08
+
+# 高斯球参数学习率（优化每个高斯的不透明度/方差）
+gs_opacity_lr: 0.20

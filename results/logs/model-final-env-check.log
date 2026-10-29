@@ -1,0 +1,19 @@
+Workspace: /home/ubuntu22/slam/SIO_SLAM
+ROS: humble
+[OK] cmake: /usr/bin/cmake
+[OK] g++: /usr/bin/g++
+[OK] ninja: /usr/bin/ninja
+[OK] colcon: /usr/bin/colcon
+[OK] small_gicp: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/small_gicp/registration/registration_helper.hpp
+NVIDIA GeForce RTX 4060 Laptop GPU, 595.99.02
+[OK] NVIDIA driver responds
+[OK] nvcc: /usr/local/cuda-12.9/bin/nvcc
+[OK] TensorRT: /usr/include/x86_64-linux-gnu/NvInfer.h
+[OK] OpenCV-CUDA: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4/opencv2/cudaarithm.hpp
+[OK] LibTorch: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/libtorch/share/cmake/Torch/TorchConfig.cmake
+[OK] Rasterizer: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/build/rasterizer/libCudaRasterizer.a
+[PRESENT] dataset_dir: /home/ubuntu22/slam/SIO_SLAM/data/datasets/fr5_highspeed/20261015_112553_up
+[PRESENT] imu_file: /home/ubuntu22/slam/SIO_SLAM/data/datasets/fr5_highspeed/20261015_112553_up/imu.csv
+[PRESENT] plan_disp: /home/ubuntu22/slam/SIO_SLAM/models/tensorrt/disp_896x448_fp16.plan
+[PRESENT] plan_raft: /home/ubuntu22/slam/SIO_SLAM/models/tensorrt/raft_large_896x448_iter6.plan
+Compilation prerequisites found. Model/data availability is listed separately.

@@ -1,0 +1,27 @@
+Building fusion targets (build/fusion-lab-build.log)
+Error: Command failed (1); log: /home/ubuntu22/slam/SIO_SLAM/build/fusion-lab-tests.log
+
+[----------] 3 tests from ImuPreprocessorTest
+[ RUN      ] ImuPreprocessorTest.DisabledReturnsClone
+[       OK ] ImuPreprocessorTest.DisabledReturnsClone (0 ms)
+[ RUN      ] ImuPreprocessorTest.OutlierReplaceKeepsSampleRate
+[       OK ] ImuPreprocessorTest.OutlierReplaceKeepsSampleRate (0 ms)
+[ RUN      ] ImuPreprocessorTest.ProcessBatchPreservesCount
+[       OK ] ImuPreprocessorTest.ProcessBatchPreservesCount (0 ms)
+[----------] 3 tests from ImuPreprocessorTest (0 ms total)
+
+[----------] 2 tests from DebugLoggerTest
+[ RUN      ] DebugLoggerTest.ImuDebugWritesCsvHeaderAndRow
+[       OK ] DebugLoggerTest.ImuDebugWritesCsvHeaderAndRow (0 ms)
+[ RUN      ] DebugLoggerTest.FusionDebugFormatsConsoleLine
+[       OK ] DebugLoggerTest.FusionDebugFormatsConsoleLine (0 ms)
+[----------] 2 tests from DebugLoggerTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 92 tests from 14 test suites ran. (51 ms total)
+[  PASSED  ] 90 tests.
+[  FAILED  ] 2 tests, listed below:
+[  FAILED  ] ImuIntegratorTest.DefaultPriorIsIsotropicWithinPhysicalStateBlocks
+[  FAILED  ] StateEstimatorTest.EskfAngularGainIsIndependentOfUncorrelatedPositionVariance
+
+ 2 FAILED TESTS

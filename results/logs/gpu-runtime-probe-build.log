@@ -1,0 +1,46 @@
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found CUDAToolkit: /usr/local/cuda-12.9/include (found version "12.9.86") 
+-- Looking for C++ include pthread.h
+-- Looking for C++ include pthread.h - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- Found CUDA: /usr/local/cuda-12.9 (found suitable exact version "12.9") 
+-- Found OpenCV: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install (found version "4.12.0") found components: core cudaarithm cudaimgproc 
+-- Found CUDA: /usr/local/cuda-12.9 (found version "12.9") 
+-- The CUDA compiler identification is NVIDIA 12.9.86
+-- Detecting CUDA compiler ABI info
+-- Detecting CUDA compiler ABI info - done
+-- Check for working CUDA compiler: /usr/local/cuda-12.9/bin/nvcc - skipped
+-- Detecting CUDA compile features
+-- Detecting CUDA compile features - done
+-- Found CUDAToolkit: /usr/local/cuda-12.9/include (found version "12.9.86") 
+-- PyTorch: CUDA detected: 12.9
+-- PyTorch: CUDA nvcc is: /usr/local/cuda-12.9/bin/nvcc
+-- PyTorch: CUDA toolkit directory: /usr/local/cuda-12.9
+-- PyTorch: Header version is: 12.9
+-- Found Python: /usr/bin/python3.10 (found version "3.10.12") found components: Interpreter 
+CMake Warning at /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/libtorch/share/cmake/Caffe2/public/cuda.cmake:140 (message):
+  Failed to compute shorthash for libnvrtc.so
+Call Stack (most recent call first):
+  /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/libtorch/share/cmake/Caffe2/Caffe2Config.cmake:86 (include)
+  /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/libtorch/share/cmake/Torch/TorchConfig.cmake:68 (find_package)
+  CMakeLists.txt:6 (find_package)
+
+
+-- USE_CUDNN is set to 0. Compiling without cuDNN support
+-- USE_CUSPARSELT is set to 0. Compiling without cuSPARSELt support
+-- USE_CUDSS is set to 0. Compiling without cuDSS support
+-- USE_CUFILE is set to 0. Compiling without cuFile support
+-- Added CUDA NVCC flags for: -gencode;arch=compute_89,code=sm_89
+-- Found Torch: /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/libtorch/lib/libtorch.so  
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/ubuntu22/slam/SIO_SLAM/build/gpu-runtime-probe/build
+[1/2] Building CXX object CMakeFiles/gpu_runtime_probe.dir/main.cpp.o
+[2/2] Linking CXX executable gpu_runtime_probe

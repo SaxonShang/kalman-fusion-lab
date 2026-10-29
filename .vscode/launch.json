@@ -1,0 +1,76 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "run_frontend (Debug)",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/local/gpu/run_frontend",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "environment": [
+        {
+          "name": "LD_LIBRARY_PATH",
+          "value": "${workspaceFolder}/build/dependencies/install/lib:${workspaceFolder}/build/dependencies/install/libtorch/lib:/opt/ros/humble/lib:/usr/local/cuda-12.9/lib64:${env:LD_LIBRARY_PATH}"
+        },
+        {
+          "name": "AMENT_PREFIX_PATH",
+          "value": "/opt/ros/humble:${env:AMENT_PREFIX_PATH}"
+        }
+      ],
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    },
+    {
+      "name": "Fusion: GICP and observation covariance",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/local/fusion/sio_fusion_lab",
+      "args": ["gicp", "${workspaceFolder}/experiments/fusion/local/debug.yaml", "@config"],
+      "cwd": "${workspaceFolder}",
+      "preLaunchTask": "Fusion: prepare GICP debugger",
+      "environment": [
+        {"name": "LD_LIBRARY_PATH", "value": "${workspaceFolder}/build/dependencies/install/lib:/opt/ros/humble/lib:/usr/local/cuda-12.9/lib64:${env:LD_LIBRARY_PATH}"},
+        {"name": "OMP_NUM_THREADS", "value": "4"}
+      ],
+      "MIMode": "gdb",
+      "setupCommands": [{"text": "-enable-pretty-printing", "ignoreFailures": true}]
+    },
+    {
+      "name": "Fusion: ESKF frozen observations",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/local/fusion/sio_fusion_lab",
+      "args": ["eskf", "${workspaceFolder}/experiments/fusion/local/debug.yaml", "@config"],
+      "cwd": "${workspaceFolder}",
+      "preLaunchTask": "Fusion: prepare ESKF debugger",
+      "environment": [
+        {"name": "LD_LIBRARY_PATH", "value": "${workspaceFolder}/build/dependencies/install/lib:/opt/ros/humble/lib:/usr/local/cuda-12.9/lib64:${env:LD_LIBRARY_PATH}"},
+        {"name": "OMP_NUM_THREADS", "value": "4"}
+      ],
+      "MIMode": "gdb",
+      "setupCommands": [{"text": "-enable-pretty-printing", "ignoreFailures": true}]
+    },
+    {
+      "name": "Fusion: ESIKF direct point observations",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/local/fusion/sio_fusion_lab",
+      "args": ["esikf", "${workspaceFolder}/experiments/fusion/local/debug.yaml", "@config"],
+      "cwd": "${workspaceFolder}",
+      "preLaunchTask": "Fusion: prepare ESIKF debugger",
+      "environment": [
+        {"name": "LD_LIBRARY_PATH", "value": "${workspaceFolder}/build/dependencies/install/lib:/opt/ros/humble/lib:/usr/local/cuda-12.9/lib64:${env:LD_LIBRARY_PATH}"},
+        {"name": "OMP_NUM_THREADS", "value": "4"}
+      ],
+      "MIMode": "gdb",
+      "setupCommands": [{"text": "-enable-pretty-printing", "ignoreFailures": true}]
+    }
+  ]
+}

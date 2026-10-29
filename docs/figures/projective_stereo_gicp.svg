@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="910" viewBox="0 0 1600 910">
+<title>投影 Stereo-GICP</title>
+<defs>
+  <marker id="ahBlue" markerUnits="userSpaceOnUse" viewBox="0 0 12 10" refX="11" refY="5" markerWidth="12" markerHeight="10" orient="auto">
+    <path d="M0 0 L12 5 L0 10 Z" fill="#3d6d8c"/>
+  </marker>
+  <marker id="ahBlack" markerUnits="userSpaceOnUse" viewBox="0 0 14 12" refX="12.5" refY="6" markerWidth="14" markerHeight="12" orient="auto">
+    <path d="M0 0 L14 6 L0 12 Z" fill="#1c1c1c"/>
+  </marker>
+</defs>
+<rect width="1600" height="910" fill="#ffffff"/>
+<style>text { font-family: "Noto Sans CJK SC", "Noto Sans CJK JP", sans-serif; }</style>
+
+<text x="800" y="50" text-anchor="middle" font-size="34" font-weight="600" fill="#1c1c1c">投影 Stereo-GICP</text>
+
+<!-- 左：投影关联 -->
+<rect x="32" y="80" width="752" height="700" rx="10" ry="10" fill="#ffffff" stroke="#1c1c1c" stroke-width="1.5"/>
+<text x="408" y="116" text-anchor="middle" font-size="24" font-weight="600" fill="#1c1c1c">投影关联</text>
+
+<!-- 像平面、像素、中心光线 -->
+<line x1="348" y1="258" x2="348" y2="658" stroke="#1c1c1c" stroke-width="1.7" stroke-linecap="round"/>
+<rect x="330" y="407" width="36" height="30" rx="2" fill="#e7f2f8" stroke="#3d6d8c" stroke-width="1.7"/>
+<line x1="172" y1="545" x2="598" y2="247" stroke="#1c1c1c" stroke-width="1.7" stroke-linecap="round"/>
+
+<!-- 目标相机 -->
+<rect x="84" y="519" width="74" height="52" rx="6" fill="#ffffff" stroke="#1c1c1c" stroke-width="1.6"/>
+<circle cx="172" cy="545" r="13" fill="#ffffff" stroke="#1c1c1c" stroke-width="1.6"/>
+<circle cx="172" cy="545" r="3.4" fill="#1c1c1c"/>
+<text x="121" y="504" text-anchor="middle" font-size="16" fill="#1c1c1c">目标相机</text>
+<text x="172" y="612" text-anchor="middle" font-size="16" fill="#1c1c1c">光心</text>
+
+<text x="332" y="286" text-anchor="end" font-size="16" fill="#1c1c1c">像平面</text>
+<text x="322" y="400" text-anchor="end" font-size="16" fill="#1c1c1c">像素</text>
+<text x="392" y="342" text-anchor="middle" font-size="16" fill="#1c1c1c">中心光线</text>
+
+<!-- q_j 在中心光线上 -->
+<circle cx="533" cy="293" r="5.5" fill="#1c1c1c"/>
+<text x="492" y="268" font-size="18" fill="#1c1c1c">q<tspan font-size="12" dy="5">j</tspan></text>
+
+<!-- p' 不在光线上，蓝色关联到 q_j -->
+<circle cx="688" cy="440" r="5.5" fill="#1c1c1c"/>
+<text x="704" y="432" font-size="18" fill="#1c1c1c">p′</text>
+<line x1="676" y1="428" x2="546" y2="306" stroke="#3d6d8c" stroke-width="1.9" stroke-linecap="round" marker-end="url(#ahBlue)"/>
+<text x="636" y="356" font-size="16" fill="#3d6d8c">关联</text>
+
+<!-- 被拒绝的三维最近邻 -->
+<line x1="684" y1="452" x2="664" y2="508" stroke="#8a8a8a" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="5 4"/>
+<circle cx="660" cy="520" r="8" fill="#ffffff" stroke="#8a8a8a" stroke-width="1.5"/>
+<line x1="655" y1="515" x2="665" y2="525" stroke="#8a8a8a" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="665" y1="515" x2="655" y2="525" stroke="#8a8a8a" stroke-width="1.5" stroke-linecap="round"/>
+<text x="660" y="552" text-anchor="middle" font-size="16" fill="#1c1c1c">不取三维最近邻</text>
+
+<text x="408" y="738" text-anchor="middle" font-size="16" fill="#1c1c1c">目标点在该像素的中心光线上</text>
+
+<!-- 右：残差 -->
+<rect x="816" y="80" width="752" height="700" rx="10" ry="10" fill="#ffffff" stroke="#1c1c1c" stroke-width="1.5"/>
+<text x="1192" y="116" text-anchor="middle" font-size="24" font-weight="600" fill="#1c1c1c">残差</text>
+
+<line x1="910" y1="480" x2="1510" y2="390" stroke="#9a9a9a" stroke-width="1.5" stroke-linecap="round"/>
+<text x="1496" y="372" text-anchor="end" font-size="16" fill="#4a4a4a">视线</text>
+
+<circle cx="1120" cy="448" r="5.5" fill="#1c1c1c"/>
+<circle cx="1385" cy="250" r="5.5" fill="#1c1c1c"/>
+<line x1="1134" y1="438" x2="1370" y2="262" stroke="#1c1c1c" stroke-width="2.1" stroke-linecap="round" marker-end="url(#ahBlack)"/>
+
+<text x="1094" y="498" font-size="18" fill="#1c1c1c">q<tspan font-size="12" dy="5">j</tspan></text>
+<text x="1385" y="226" text-anchor="middle" font-size="18" fill="#1c1c1c">p′</text>
+<text x="1200" y="314" text-anchor="middle" font-size="20" fill="#1c1c1c">e</text>
+
+<text x="1141" y="562" font-size="24" fill="#1c1c1c">e  =  p′  −  q<tspan font-size="14" dy="7">j</tspan></text>
+<text x="1154" y="628" font-size="24" fill="#1c1c1c">e<tspan font-size="14" dy="-12">T</tspan><tspan font-size="24" dy="12"> C</tspan><tspan font-size="14" dy="-12">−1</tspan><tspan font-size="24" dy="12"> e</tspan></text>
+<text x="1124" y="696" font-size="22" fill="#1c1c1c">C  =  RΣ<tspan font-size="14" dy="7">i</tspan><tspan font-size="22" dy="-7"> R</tspan><tspan font-size="14" dy="-12">T</tspan><tspan font-size="22" dy="12"> + Σ</tspan><tspan font-size="14" dy="7">j</tspan></text>
+<text x="1192" y="752" text-anchor="middle" font-size="16" fill="#1c1c1c">源点协方差见立体点协方差图，长轴沿视线，该方向降权</text>
+
+<!-- 底栏 -->
+<rect x="32" y="800" width="1536" height="70" rx="10" ry="10" fill="#ffffff" stroke="#1c1c1c" stroke-width="1.5"/>
+<text x="643" y="836" text-anchor="middle" font-size="24" fill="#1c1c1c">T  ←  exp(δξ) T</text>
+<text x="857" y="836" font-size="24" fill="#1c1c1c">J<tspan font-size="14" dy="8">left</tspan><tspan font-size="24" dy="-8">  =  [ −[p′]</tspan><tspan font-size="14" dy="8">×</tspan><tspan font-size="24" dy="-8"> | I ]</tspan></text>
+</svg>

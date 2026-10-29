@@ -1,0 +1,10 @@
+Breakpoint 1 at 0x6c8e0: file /home/ubuntu22/slam/SIO_SLAM/src/state_estimater.cpp, line 1068.
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+
+Breakpoint 1, StateEstimator::ESKF (this=this@entry=0x7fffffff581f, imu_propagated=..., T_gicp=..., R_gicp=..., flow_gate_cov=flow_gate_cov@entry=0x0, debug_out=0x7fffffffce20) at /home/ubuntu22/slam/SIO_SLAM/src/state_estimater.cpp:1068
+1068	    ESKFDebugSummary *debug_out) {
+#0  StateEstimator::ESKF (this=this@entry=0x7fffffff581f, imu_propagated=..., T_gicp=..., R_gicp=..., flow_gate_cov=flow_gate_cov@entry=0x0, debug_out=0x7fffffffce20) at /home/ubuntu22/slam/SIO_SLAM/src/state_estimater.cpp:1068
+#1  0x000055555565649c in fusion_lab::RunEskf (cfg=..., output=filesystem::path "/home/ubuntu22/slam/SIO_SLAM/artifacts/fusion/20261028_160218_602875_20261015_112553_up_debug_eskf" = {...}) at /usr/include/eigen3/Eigen/src/Core/CoreEvaluators.h:122
+#2  0x0000555555573e70 in main (argc=<optimized out>, argv=<optimized out>) at /home/ubuntu22/slam/SIO_SLAM/experiments/fusion/src/main.cpp:24
+[Inferior 1 (process 18675) exited normally]

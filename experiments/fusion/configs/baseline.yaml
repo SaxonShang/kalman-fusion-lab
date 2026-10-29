@@ -1,0 +1,52 @@
+# Pair ids are ORIGINAL recording frame numbers, before skipping the first 60.
+# GT is read by the report tool only, never by prediction or either filter.
+sequence: up
+pairs:
+  - {name: static_start, anchor: 110, current: 111}
+  - {name: sync_motion, anchor: 185, current: 186}
+  - {name: main_motion, anchor: 340, current: 341}
+  - {name: main_motion_long, anchor: 340, current: 346}
+  - {name: static_end, anchor: 640, current: 641}
+
+depth:
+  provider: sgbm             # sgbm (bootstrap) or disparity_cache (model output)
+  disparity_dir: ''         # <original image timestamp ms>.yml[.gz], key: disparity
+  min_m: 0.5
+  max_m: 15.0
+  pixel_stride: 2
+  sgbm_num_disparities: 128  # multiple of 16; disparity unit is pixels
+  sgbm_block_size: 5
+
+gicp:
+  methods: [small_gicp, stereo] # robotic-front main defaults to Euclidean GICP
+  voxel_m: 0.05
+  max_correspondence_m: 0.10
+  max_iterations: 20
+  min_inliers: 20
+  require_convergence: false  # record convergence separately, like current frontend
+  stereo_solver:             # applied through ConfigureStereoGicpSolver
+    gn_rot_eps: 1.0e-6
+    gn_trans_eps: 1.0e-6
+    cov_floor_trans_m: 0.0
+    cov_floor_rot_deg: 0.0
+  stereo_options:            # main defaults; point-plane is an explicit experiment
+    stereo_point_plane: false
+    stereo_disparity_normals: false
+    stereo_source_voxel_representative: false
+    stereo_plane_gate_sigma: 0.0
+    stereo_measurement_scale: 1.0
+    stereo_robust_delta: 0.0
+
+eskf:
+  prior_covariance_scale: 1.0 # controlled P sweep; 1 keeps the frozen IMU covariance
+  covariance_scales: [0.1, 1.0, 10.0]
+  fixed_rotation_sigma_deg: 0.5
+  fixed_position_sigma_m: 0.02
+
+esikf:
+  prior_covariance_scale: 1.0
+  geometry_weights: [1.0, 0.5] # geometry only, then geometry + photometry
+  voxel_m: 0.05
+  max_correspondence_m: 0.15
+
+threads: 4

@@ -1,0 +1,72 @@
+{
+  "purpose": "Recording overview for readers; no inference or filtering",
+  "display": "Original left JPEGs, converted BGR to RGB and resized for display; no crop or enhancement",
+  "images": [
+    {
+      "sequence": "20261015_112553_up",
+      "source_frame_id": 340,
+      "timestamp_ms": "1792034784265",
+      "left_image": "data/recordings/recordings_highspeed/20261015_112553_up/save_data/left/1792034784265.jpg",
+      "sha256": "2490f62fda72f8ccc3dd1a94f6f6888507a11c48b38f2b4078851c9627340157",
+      "original_size": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "sequence": "20261015_112659_forward",
+      "source_frame_id": 340,
+      "timestamp_ms": "1792034850470",
+      "left_image": "data/recordings/recordings_highspeed/20261015_112659_forward/save_data/left/1792034850470.jpg",
+      "sha256": "d0be411081a18fce7de847f0341f983803ad9614c8d885ae7288e6342252ab59",
+      "original_size": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "sequence": "20261015_112757_right",
+      "source_frame_id": 340,
+      "timestamp_ms": "1792034906106",
+      "left_image": "data/recordings/recordings_highspeed/20261015_112757_right/save_data/left/1792034906106.jpg",
+      "sha256": "e2d9524a63790e926eefb96668571d3bca9ff67ea544969e65faf828d6fe7294",
+      "original_size": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "sequence": "20261015_112845_yaw_left",
+      "source_frame_id": 340,
+      "timestamp_ms": "1792034959391",
+      "left_image": "data/recordings/recordings_highspeed/20261015_112845_yaw_left/save_data/left/1792034959391.jpg",
+      "sha256": "6dcf753b3ffc1dd6390b744a561ccedbe98795cf41e24104feab3a3d1a9bff81",
+      "original_size": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "sequence": "20261015_112940_pitch_up",
+      "source_frame_id": 340,
+      "timestamp_ms": "1792035005211",
+      "left_image": "data/recordings/recordings_highspeed/20261015_112940_pitch_up/save_data/left/1792035005211.jpg",
+      "sha256": "d640e5e93e24aeb24ddd0e4aa3f7e5d8be25e1fec9805eb9c62afccdf7bee78b",
+      "original_size": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "sequence": "20261015_113028_roll_right",
+      "source_frame_id": 340,
+      "timestamp_ms": "1792035053997",
+      "left_image": "data/recordings/recordings_highspeed/20261015_113028_roll_right/save_data/left/1792035053997.jpg",
+      "sha256": "6836f9d8b1e9af57c691bf6cad5ab16f87973ef9324b3eadeb6aafeda5b13356",
+      "original_size": [
+        1920,
+        1080
+      ]
+    }
+  ]
+}
