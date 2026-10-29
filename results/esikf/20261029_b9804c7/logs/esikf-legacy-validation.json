@@ -1,0 +1,44 @@
+[
+  {
+    "sequence": "20261015_112553_up",
+    "old_run": "results/fusion/20261029_105248_723192_20261015_112553_up_all",
+    "new_run": "artifacts/fusion/20261029_160920_125459_up_esikf",
+    "max_state_matrix_abs_diff": 1.0191500421363742e-15,
+    "matrix_comparisons": 180
+  },
+  {
+    "sequence": "20261015_112659_forward",
+    "old_run": "results/fusion/20261029_105322_190109_20261015_112659_forward_all",
+    "new_run": "artifacts/fusion/20261029_161026_640083_forward_esikf",
+    "max_state_matrix_abs_diff": 5.551115123125783e-16,
+    "matrix_comparisons": 180
+  },
+  {
+    "sequence": "20261015_112757_right",
+    "old_run": "results/fusion/20261029_105351_743799_20261015_112757_right_all",
+    "new_run": "artifacts/fusion/20261029_161127_940646_right_esikf",
+    "max_state_matrix_abs_diff": 7.554720737878995e-16,
+    "matrix_comparisons": 180
+  },
+  {
+    "sequence": "20261015_112845_yaw_left",
+    "old_run": "results/fusion/20261029_105422_774626_20261015_112845_yaw_left_all",
+    "new_run": "artifacts/fusion/20261029_161231_332787_yaw_left_esikf",
+    "max_state_matrix_abs_diff": 1.6670692604137116e-15,
+    "matrix_comparisons": 180
+  },
+  {
+    "sequence": "20261015_112940_pitch_up",
+    "old_run": "results/fusion/20261029_105457_866101_20261015_112940_pitch_up_all",
+    "new_run": "artifacts/fusion/20261029_161338_415338_pitch_up_esikf",
+    "max_state_matrix_abs_diff": 2.5587171270657905e-16,
+    "matrix_comparisons": 180
+  },
+  {
+    "sequence": "20261015_113028_roll_right",
+    "old_run": "results/fusion/20261029_105530_173588_20261015_113028_roll_right_all",
+    "new_run": "artifacts/fusion/20261029_161441_854169_roll_right_esikf",
+    "max_state_matrix_abs_diff": 1.1717894449897459e-14,
+    "matrix_comparisons": 180
+  }
+]

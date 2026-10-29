@@ -1,6 +1,8 @@
 # 本机工作区与环境
 
-本机是 Ubuntu 22.04 x86_64，显卡为 RTX 4060。原工作区保留本地；按 2026-10-29 的新要求，另外准备独立实验仓库，由用户执行创建和上传，见 [发布步骤](PUBLISH_NEW_REPOSITORY.md)。
+本机是 Ubuntu 22.04 x86_64，显卡为 RTX 4060。原工作区保留本地。正式实验仓库为 `SaxonShang/kalman-fusion-lab`，本机位于 `/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab`；后续代码同步和结果上传使用此仓库，原仓库不推送。
+
+2026-10-29：在新仓库代码 `b9804c7` 上完成 ESIKF E0–E7 三阶段共 1236 条记录，111 项单测通过。模型和依赖通过被 Git 忽略的本机符号链接复用原工作区，CPU 实验程序及 GPU 视差导出工具从新仓库源码重新编译。完整 SLAM 未在该提交上重跑。结果见 [本轮审阅包](../results/esikf/20261029_b9804c7/README.md)。
 
 ## 本机验证进度（2026-10-28）
 

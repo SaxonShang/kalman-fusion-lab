@@ -1,0 +1,22 @@
+diff --git a/tests/unit/test_imu_integrator.cpp b/tests/unit/test_imu_integrator.cpp
+index 4a13159..9ab61e0 100644
+--- a/tests/unit/test_imu_integrator.cpp
++++ b/tests/unit/test_imu_integrator.cpp
+@@ -203,7 +203,7 @@ TEST(ImuIntegratorTest, AnchorConditionedPoseUncertaintyVanishesWithoutMotion) {
+   // 没有传播时当前位姿就是锚点位姿：位姿块为 0，速度等仍保留剩余不确定度
+   sio_test::ExpectMatrixNear(conditioned.block<6, 6>(0, 0), Eigen::Matrix<double, 6, 6>::Zero(),
+                              1e-12);
+-  EXPECT_GT(conditioned.block<3, 3>(6, 6).trace(), 1e-6);
++  EXPECT_GT((conditioned.block<3, 3>(6, 6).trace()), 1e-6);
+ }
+ 
+ TEST(ImuIntegratorTest, GyroScaleUncertaintyGrowsWithRotationAngle) {
+@@ -213,7 +213,7 @@ TEST(ImuIntegratorTest, GyroScaleUncertaintyGrowsWithRotationAngle) {
+   AddGyroScaleUncertainty(cov, Eigen::Matrix3d::Identity(), R_current, 0.015);
+   const double expected = std::pow(0.015 * 0.2, 2);
+   sio_test::ExpectMatrixNear(cov.block<3, 3>(0, 0), Eigen::Matrix3d::Identity() * expected, 1e-15);
+-  EXPECT_DOUBLE_EQ(cov.block<18, 18>(3, 3).norm(), 0.0);
++  EXPECT_DOUBLE_EQ((cov.block<18, 18>(3, 3).norm()), 0.0);
+ 
+   Mat21 unchanged = Mat21::Zero();
+   AddGyroScaleUncertainty(unchanged, Eigen::Matrix3d::Identity(), Eigen::Matrix3d::Identity(), 0.015);

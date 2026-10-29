@@ -1,0 +1,635 @@
+[INFO] [1793261963.638978830] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261963.644742122] [StateEstimator]: ESIKF voxel downsampling: 100352 -> 25610 points (leaf=0.05m)
+[INFO] [1793261963.733431738] [StateEstimator]: ESIKF iter 0: corr=23377 r_v=2.509603e-03 delta_pose=2.521512e-03 delta_state=1.031027e-02
+[INFO] [1793261963.819814228] [StateEstimator]: ESIKF iter 1: corr=23379 r_v=1.115358e-03 delta_pose=1.113958e-03 delta_state=4.457906e-03
+[INFO] [1793261963.903849157] [StateEstimator]: ESIKF iter 2: corr=23390 r_v=7.800341e-04 delta_pose=7.680337e-04 delta_state=3.094526e-03
+[INFO] [1793261963.903877731] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793261963.905268771] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261963.910610387] [StateEstimator]: ESIKF voxel downsampling: 100352 -> 25610 points (leaf=0.05m)
+[INFO] [1793261963.999492802] [StateEstimator]: ESIKF iter 0: corr=23377 r_v=2.508834e-03 delta_pose=2.525658e-03 delta_state=1.032540e-02
+[INFO] [1793261964.083731430] [StateEstimator]: ESIKF iter 1: corr=23379 r_v=1.120495e-03 delta_pose=1.117213e-03 delta_state=4.470051e-03
+[INFO] [1793261964.167584080] [StateEstimator]: ESIKF iter 2: corr=23389 r_v=7.787608e-04 delta_pose=7.647810e-04 delta_state=3.079671e-03
+[INFO] [1793261964.167603356] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793261964.169152200] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261964.173903717] [StateEstimator]: ESIKF voxel downsampling: 100352 -> 25610 points (leaf=0.05m)
+[INFO] [1793261964.260157357] [StateEstimator]: ESIKF iter 0: corr=23377 r_v=2.509603e-03 delta_pose=2.521512e-03 delta_state=1.031027e-02
+[INFO] [1793261964.344033080] [StateEstimator]: ESIKF iter 1: corr=23379 r_v=1.115358e-03 delta_pose=1.112170e-03 delta_state=4.457906e-03
+[INFO] [1793261964.429254649] [StateEstimator]: ESIKF iter 2: corr=23389 r_v=7.774663e-04 delta_pose=7.750189e-04 delta_state=3.100428e-03
+[INFO] [1793261964.517935118] [StateEstimator]: ESIKF iter 3: corr=23393 r_v=6.595216e-04 delta_pose=6.458198e-04 delta_state=2.632420e-03
+[INFO] [1793261964.600856914] [StateEstimator]: ESIKF iter 4: corr=23397 r_v=5.728470e-04 delta_pose=5.296017e-04 delta_state=2.268762e-03
+[INFO] [1793261964.686147632] [StateEstimator]: ESIKF iter 5: corr=23403 r_v=4.337661e-04 delta_pose=3.489712e-04 delta_state=1.619217e-03
+[INFO] [1793261964.769795881] [StateEstimator]: ESIKF iter 6: corr=23406 r_v=3.129581e-04 delta_pose=2.017756e-04 delta_state=1.117980e-03
+[INFO] [1793261964.856536648] [StateEstimator]: ESIKF iter 7: corr=23400 r_v=1.869886e-04 delta_pose=8.208862e-05 delta_state=5.990852e-04
+[INFO] [1793261964.856554351] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793261964.859017537] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261964.864146607] [StateEstimator]: ESIKF voxel downsampling: 100352 -> 25610 points (leaf=0.05m)
+[INFO] [1793261964.953511801] [StateEstimator]: ESIKF iter 0: corr=23377 r_v=2.509603e-03 delta_pose=7.999812e-04 delta_state=7.458498e-02
+[INFO] [1793261965.037497198] [StateEstimator]: ESIKF iter 1: corr=23376 r_v=1.861323e-03 delta_pose=1.877075e-05 delta_state=3.743376e-02
+[INFO] [1793261965.037606321] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793261965.039830923] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261965.046817101] [StateEstimator]: ESIKF voxel downsampling: 100352 -> 25610 points (leaf=0.05m)
+[INFO] [1793261965.132515016] [StateEstimator]: ESIKF iter 0: corr=23377 r_v=2.509603e-03 delta_pose=7.999836e-04 delta_state=7.458516e-02
+[INFO] [1793261965.216569311] [StateEstimator]: ESIKF iter 1: corr=23376 r_v=1.861304e-03 delta_pose=1.877263e-05 delta_state=3.743634e-02
+[INFO] [1793261965.216585031] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793261965.217774515] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261965.221888405] [StateEstimator]: ESIKF voxel downsampling: 100352 -> 25610 points (leaf=0.05m)
+[INFO] [1793261965.304341509] [StateEstimator]: ESIKF iter 0: corr=23377 r_v=2.509357e-03 delta_pose=6.951486e-04 delta_state=6.478128e-02
+[INFO] [1793261965.389236659] [StateEstimator]: ESIKF iter 1: corr=23377 r_v=1.947322e-03 delta_pose=1.497499e-05 delta_state=3.519220e-02
+[INFO] [1793261965.389252850] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793261965.391270656] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261965.396238787] [StateEstimator]: ESIKF voxel downsampling: 100352 -> 25610 points (leaf=0.05m)
+[INFO] [1793261965.484041862] [StateEstimator]: ESIKF iter 0: corr=23377 r_v=2.508865e-03 delta_pose=5.558894e-04 delta_state=5.178027e-02
+[INFO] [1793261965.566889921] [StateEstimator]: ESIKF iter 1: corr=23377 r_v=2.069035e-03 delta_pose=1.117899e-05 delta_state=3.177484e-02
+[INFO] [1793261965.566908957] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793261965.568039682] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261965.574081551] [StateEstimator]: ESIKF voxel downsampling: 100352 -> 25610 points (leaf=0.05m)
+[INFO] [1793261965.660354477] [StateEstimator]: ESIKF iter 0: corr=23377 r_v=2.507392e-03 delta_pose=3.520777e-04 delta_state=3.278174e-02
+[INFO] [1793261965.742955867] [StateEstimator]: ESIKF iter 1: corr=23377 r_v=2.208937e-03 delta_pose=1.461321e-06 delta_state=2.398113e-02
+[INFO] [1793261965.742972959] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793261965.745024369] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261965.749732665] [StateEstimator]: ESIKF voxel downsampling: 100352 -> 25610 points (leaf=0.05m)
+[INFO] [1793261965.835434438] [StateEstimator]: ESIKF iter 0: corr=23377 r_v=5.690136e-01 delta_pose=3.765340e-04 delta_state=3.507925e-02
+[INFO] [1793261965.919965711] [StateEstimator]: ESIKF iter 1: corr=23378 r_v=5.608056e-01 delta_pose=7.313480e-06 delta_state=3.106840e-02
+[INFO] [1793261965.919981069] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793261965.921160535] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261965.925292158] [StateEstimator]: ESIKF voxel downsampling: 100352 -> 25610 points (leaf=0.05m)
+[INFO] [1793261966.009715250] [StateEstimator]: ESIKF iter 0: corr=23377 r_v=4.656302e-03 delta_pose=2.244006e-04 delta_state=2.097365e-02
+[INFO] [1793261966.093585081] [StateEstimator]: ESIKF iter 1: corr=23377 r_v=4.544487e-03 delta_pose=5.086030e-06 delta_state=1.873857e-02
+[INFO] [1793261966.093602453] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793261966.095361709] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261966.100651188] [StateEstimator]: ESIKF voxel downsampling: 100352 -> 25610 points (leaf=0.05m)
+[INFO] [1793261966.188303532] [StateEstimator]: ESIKF iter 0: corr=23377 r_v=2.509603e-03 delta_pose=3.146185e-05 delta_state=2.928683e-03
+[INFO] [1793261966.188322006] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793261966.189463141] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261966.193550682] [StateEstimator]: ESIKF voxel downsampling: 100352 -> 25610 points (leaf=0.05m)
+[INFO] [1793261966.278651415] [StateEstimator]: ESIKF iter 0: corr=23377 r_v=2.508865e-03 delta_pose=3.137771e-05 delta_state=2.920858e-03
+[INFO] [1793261966.278683114] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793261966.280869334] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261966.285651419] [StateEstimator]: ESIKF voxel downsampling: 100352 -> 25610 points (leaf=0.05m)
+[INFO] [1793261966.372011246] [StateEstimator]: ESIKF iter 0: corr=23377 r_v=5.690136e-01 delta_pose=5.095319e-06 delta_state=4.747057e-04
+[INFO] [1793261966.372029099] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793261966.373114440] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261966.377215306] [StateEstimator]: ESIKF voxel downsampling: 100352 -> 25610 points (leaf=0.05m)
+[INFO] [1793261966.461214728] [StateEstimator]: ESIKF iter 0: corr=23377 r_v=4.656302e-03 delta_pose=1.180637e-05 delta_state=1.099326e-03
+[INFO] [1793261966.461248802] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793261966.912174181] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261966.917121482] [StateEstimator]: ESIKF voxel downsampling: 100352 -> 25804 points (leaf=0.05m)
+[INFO] [1793261967.002169628] [StateEstimator]: ESIKF iter 0: corr=23334 r_v=3.923324e-03 delta_pose=3.921461e-03 delta_state=5.345837e-03
+[INFO] [1793261967.088872063] [StateEstimator]: ESIKF iter 1: corr=23363 r_v=3.078253e-03 delta_pose=3.077142e-03 delta_state=4.903447e-03
+[INFO] [1793261967.177162835] [StateEstimator]: ESIKF iter 2: corr=23385 r_v=1.875293e-03 delta_pose=1.874571e-03 delta_state=3.017267e-03
+[INFO] [1793261967.270438349] [StateEstimator]: ESIKF iter 3: corr=23384 r_v=1.215707e-03 delta_pose=1.215272e-03 delta_state=1.878694e-03
+[INFO] [1793261967.362635164] [StateEstimator]: ESIKF iter 4: corr=23401 r_v=1.023933e-03 delta_pose=1.023083e-03 delta_state=1.473583e-03
+[INFO] [1793261967.454628962] [StateEstimator]: ESIKF iter 5: corr=23395 r_v=7.615709e-04 delta_pose=7.612786e-04 delta_state=1.012540e-03
+[INFO] [1793261967.454664217] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793261967.458271554] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261967.465313856] [StateEstimator]: ESIKF voxel downsampling: 100352 -> 25804 points (leaf=0.05m)
+[INFO] [1793261967.559452437] [StateEstimator]: ESIKF iter 0: corr=23334 r_v=3.918778e-03 delta_pose=3.915497e-03 delta_state=5.335331e-03
+[INFO] [1793261967.647921953] [StateEstimator]: ESIKF iter 1: corr=23361 r_v=3.054331e-03 delta_pose=3.052130e-03 delta_state=4.860534e-03
+[INFO] [1793261967.734125278] [StateEstimator]: ESIKF iter 2: corr=23386 r_v=1.888304e-03 delta_pose=1.886762e-03 delta_state=3.023931e-03
+[INFO] [1793261967.821512539] [StateEstimator]: ESIKF iter 3: corr=23384 r_v=1.233664e-03 delta_pose=1.232655e-03 delta_state=1.934894e-03
+[INFO] [1793261967.906158875] [StateEstimator]: ESIKF iter 4: corr=23401 r_v=1.023664e-03 delta_pose=1.022043e-03 delta_state=1.465155e-03
+[INFO] [1793261967.992109961] [StateEstimator]: ESIKF iter 5: corr=23396 r_v=7.506424e-04 delta_pose=7.503669e-04 delta_state=1.000438e-03
+[INFO] [1793261967.992126923] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793261967.993937073] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261967.999071613] [StateEstimator]: ESIKF voxel downsampling: 100352 -> 25804 points (leaf=0.05m)
+[INFO] [1793261968.086923438] [StateEstimator]: ESIKF iter 0: corr=23334 r_v=3.923324e-03 delta_pose=3.921461e-03 delta_state=5.345837e-03
+[INFO] [1793261968.172762616] [StateEstimator]: ESIKF iter 1: corr=23363 r_v=3.078253e-03 delta_pose=3.076975e-03 delta_state=4.903447e-03
+[INFO] [1793261968.260693388] [StateEstimator]: ESIKF iter 2: corr=23386 r_v=1.841442e-03 delta_pose=1.838163e-03 delta_state=2.972681e-03
+[INFO] [1793261968.347403617] [StateEstimator]: ESIKF iter 3: corr=23385 r_v=1.213101e-03 delta_pose=1.206981e-03 delta_state=1.866041e-03
+[INFO] [1793261968.432472771] [StateEstimator]: ESIKF iter 4: corr=23398 r_v=1.044536e-03 delta_pose=1.029883e-03 delta_state=1.475833e-03
+[INFO] [1793261968.522286339] [StateEstimator]: ESIKF iter 5: corr=23397 r_v=7.409377e-04 delta_pose=7.387101e-04 delta_state=1.003137e-03
+[INFO] [1793261968.606655018] [StateEstimator]: ESIKF iter 6: corr=23396 r_v=5.816779e-04 delta_pose=5.845397e-04 delta_state=7.511642e-04
+[INFO] [1793261968.694068747] [StateEstimator]: ESIKF iter 7: corr=23395 r_v=4.399187e-04 delta_pose=4.296912e-04 delta_state=5.550680e-04
+[WARN] [1793261968.694085188] [StateEstimator]: ESIKF stopped without convergence: max_iterations (last_corr=23395 last_r_v=4.399187e-04 last_delta_pose=4.296912e-04 last_delta_state=5.550680e-04).
+[INFO] [1793261968.696391062] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261968.703424097] [StateEstimator]: ESIKF voxel downsampling: 100352 -> 25804 points (leaf=0.05m)
+[INFO] [1793261968.793502728] [StateEstimator]: ESIKF iter 0: corr=23334 r_v=3.923324e-03 delta_pose=2.016552e-03 delta_state=7.827233e-02
+[INFO] [1793261968.880343189] [StateEstimator]: ESIKF iter 1: corr=23317 r_v=3.852684e-03 delta_pose=6.040632e-04 delta_state=4.972044e-02
+[INFO] [1793261968.965373982] [StateEstimator]: ESIKF iter 2: corr=23331 r_v=3.729607e-03 delta_pose=1.707959e-04 delta_state=4.022651e-02
+[INFO] [1793261969.050739307] [StateEstimator]: ESIKF iter 3: corr=23333 r_v=3.684606e-03 delta_pose=4.062063e-05 delta_state=3.762810e-02
+[INFO] [1793261969.050757801] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793261969.052675071] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261969.057547593] [StateEstimator]: ESIKF voxel downsampling: 100352 -> 25804 points (leaf=0.05m)
+[INFO] [1793261969.147496623] [StateEstimator]: ESIKF iter 0: corr=23334 r_v=3.923324e-03 delta_pose=1.595679e-03 delta_state=5.939948e-02
+[INFO] [1793261969.232676002] [StateEstimator]: ESIKF iter 1: corr=23338 r_v=4.155718e-03 delta_pose=6.963013e-04 delta_state=5.554959e-02
+[INFO] [1793261969.318056344] [StateEstimator]: ESIKF iter 2: corr=23352 r_v=3.961219e-03 delta_pose=1.984888e-04 delta_state=5.057385e-02
+[INFO] [1793261969.403195959] [StateEstimator]: ESIKF iter 3: corr=23349 r_v=3.953271e-03 delta_pose=8.306278e-05 delta_state=5.017413e-02
+[INFO] [1793261969.403224703] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793261969.405660949] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261969.411721734] [StateEstimator]: ESIKF voxel downsampling: 100352 -> 25804 points (leaf=0.05m)
+[INFO] [1793261969.501814952] [StateEstimator]: ESIKF iter 0: corr=23334 r_v=3.921801e-03 delta_pose=1.387168e-03 delta_state=5.113147e-02
+[INFO] [1793261969.589194277] [StateEstimator]: ESIKF iter 1: corr=23341 r_v=4.209005e-03 delta_pose=5.514378e-04 delta_state=4.747380e-02
+[INFO] [1793261969.675002767] [StateEstimator]: ESIKF iter 2: corr=23349 r_v=4.129351e-03 delta_pose=1.533965e-04 delta_state=4.413130e-02
+[INFO] [1793261969.759630168] [StateEstimator]: ESIKF iter 3: corr=23348 r_v=4.098646e-03 delta_pose=4.704042e-05 delta_state=4.334586e-02
+[INFO] [1793261969.759649614] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793261969.761554881] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261969.766870889] [StateEstimator]: ESIKF voxel downsampling: 100352 -> 25804 points (leaf=0.05m)
+[INFO] [1793261969.856962495] [StateEstimator]: ESIKF iter 0: corr=23334 r_v=3.918758e-03 delta_pose=1.127976e-03 delta_state=4.089666e-02
+[INFO] [1793261969.941948383] [StateEstimator]: ESIKF iter 1: corr=23333 r_v=4.277841e-03 delta_pose=3.847610e-04 delta_state=3.722587e-02
+[INFO] [1793261970.030845294] [StateEstimator]: ESIKF iter 2: corr=23342 r_v=4.269005e-03 delta_pose=9.660880e-05 delta_state=3.528706e-02
+[INFO] [1793261970.030892922] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793261970.033001498] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261970.038927853] [StateEstimator]: ESIKF voxel downsampling: 100352 -> 25804 points (leaf=0.05m)
+[INFO] [1793261970.130341309] [StateEstimator]: ESIKF iter 0: corr=23334 r_v=3.909653e-03 delta_pose=7.755709e-04 delta_state=2.723414e-02
+[INFO] [1793261970.215987536] [StateEstimator]: ESIKF iter 1: corr=23341 r_v=4.253706e-03 delta_pose=1.843967e-04 delta_state=2.331116e-02
+[INFO] [1793261970.302113237] [StateEstimator]: ESIKF iter 2: corr=23336 r_v=4.334612e-03 delta_pose=4.248988e-05 delta_state=2.267539e-02
+[INFO] [1793261970.302231477] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793261970.305293348] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261970.311334216] [StateEstimator]: ESIKF voxel downsampling: 100352 -> 25804 points (leaf=0.05m)
+[INFO] [1793261970.399640536] [StateEstimator]: ESIKF iter 0: corr=23334 r_v=8.240273e-01 delta_pose=3.026391e-04 delta_state=1.180074e-02
+[INFO] [1793261970.484648075] [StateEstimator]: ESIKF iter 1: corr=23314 r_v=8.183532e-01 delta_pose=3.940632e-05 delta_state=1.093671e-02
+[INFO] [1793261970.484689171] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793261970.486797647] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261970.491937808] [StateEstimator]: ESIKF voxel downsampling: 100352 -> 25804 points (leaf=0.05m)
+[INFO] [1793261970.583110155] [StateEstimator]: ESIKF iter 0: corr=23334 r_v=6.904024e-03 delta_pose=9.994093e-04 delta_state=3.275339e-02
+[INFO] [1793261970.670446389] [StateEstimator]: ESIKF iter 1: corr=23321 r_v=5.531112e-03 delta_pose=1.734429e-04 delta_state=2.170912e-02
+[INFO] [1793261970.755911960] [StateEstimator]: ESIKF iter 2: corr=23322 r_v=5.607595e-03 delta_pose=4.888850e-05 delta_state=2.132870e-02
+[INFO] [1793261970.755933290] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793261970.757983267] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261970.762834449] [StateEstimator]: ESIKF voxel downsampling: 100352 -> 25804 points (leaf=0.05m)
+[INFO] [1793261970.853075993] [StateEstimator]: ESIKF iter 0: corr=23334 r_v=3.923324e-03 delta_pose=1.172112e-04 delta_state=3.699444e-03
+[INFO] [1793261970.853097223] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793261970.854788522] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261970.859947698] [StateEstimator]: ESIKF voxel downsampling: 100352 -> 25804 points (leaf=0.05m)
+[INFO] [1793261970.949271393] [StateEstimator]: ESIKF iter 0: corr=23334 r_v=3.918758e-03 delta_pose=1.169675e-04 delta_state=3.690318e-03
+[INFO] [1793261970.949305306] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793261970.951258333] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261970.958164241] [StateEstimator]: ESIKF voxel downsampling: 100352 -> 25804 points (leaf=0.05m)
+[INFO] [1793261971.046030122] [StateEstimator]: ESIKF iter 0: corr=23334 r_v=8.240273e-01 delta_pose=3.920868e-06 delta_state=1.550213e-04
+[INFO] [1793261971.046048806] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793261971.047856652] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261971.052649827] [StateEstimator]: ESIKF voxel downsampling: 100352 -> 25804 points (leaf=0.05m)
+[INFO] [1793261971.145742650] [StateEstimator]: ESIKF iter 0: corr=23334 r_v=6.904024e-03 delta_pose=6.088153e-05 delta_state=2.095744e-03
+[INFO] [1793261971.145763869] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793261971.580864617] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261971.586713006] [StateEstimator]: ESIKF voxel downsampling: 96035 -> 21907 points (leaf=0.05m)
+[INFO] [1793261971.662739332] [StateEstimator]: ESIKF iter 0: corr=17521 r_v=1.794719e-03 delta_pose=1.789539e-03 delta_state=7.101801e-03
+[INFO] [1793261971.736815637] [StateEstimator]: ESIKF iter 1: corr=17520 r_v=1.280507e-03 delta_pose=1.277746e-03 delta_state=5.160092e-03
+[INFO] [1793261971.813575869] [StateEstimator]: ESIKF iter 2: corr=17556 r_v=1.022462e-03 delta_pose=1.018851e-03 delta_state=4.905449e-03
+[INFO] [1793261971.888338783] [StateEstimator]: ESIKF iter 3: corr=17571 r_v=8.581303e-04 delta_pose=8.554852e-04 delta_state=3.920319e-03
+[INFO] [1793261971.888356586] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793261971.889271980] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261971.892908331] [StateEstimator]: ESIKF voxel downsampling: 96035 -> 21907 points (leaf=0.05m)
+[INFO] [1793261971.966694215] [StateEstimator]: ESIKF iter 0: corr=17521 r_v=1.792986e-03 delta_pose=1.782906e-03 delta_state=7.077693e-03
+[INFO] [1793261972.041472788] [StateEstimator]: ESIKF iter 1: corr=17521 r_v=1.270028e-03 delta_pose=1.264441e-03 delta_state=5.116262e-03
+[INFO] [1793261972.118377870] [StateEstimator]: ESIKF iter 2: corr=17558 r_v=1.026820e-03 delta_pose=1.019539e-03 delta_state=4.920175e-03
+[INFO] [1793261972.191767646] [StateEstimator]: ESIKF iter 3: corr=17569 r_v=8.560783e-04 delta_pose=8.509563e-04 delta_state=3.843878e-03
+[INFO] [1793261972.191784658] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793261972.203498789] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261972.207692006] [StateEstimator]: ESIKF voxel downsampling: 96035 -> 21907 points (leaf=0.05m)
+[INFO] [1793261972.281839534] [StateEstimator]: ESIKF iter 0: corr=17521 r_v=1.794719e-03 delta_pose=1.789539e-03 delta_state=7.101801e-03
+[INFO] [1793261972.354760287] [StateEstimator]: ESIKF iter 1: corr=17520 r_v=1.280507e-03 delta_pose=1.273955e-03 delta_state=5.160092e-03
+[INFO] [1793261972.428184918] [StateEstimator]: ESIKF iter 2: corr=17558 r_v=1.030484e-03 delta_pose=1.016012e-03 delta_state=4.931634e-03
+[INFO] [1793261972.504081312] [StateEstimator]: ESIKF iter 3: corr=17570 r_v=8.813667e-04 delta_pose=8.645595e-04 delta_state=4.014303e-03
+[INFO] [1793261972.578180139] [StateEstimator]: ESIKF iter 4: corr=17572 r_v=7.877765e-04 delta_pose=7.628935e-04 delta_state=3.567400e-03
+[INFO] [1793261972.652695601] [StateEstimator]: ESIKF iter 5: corr=17592 r_v=5.595945e-04 delta_pose=5.193316e-04 delta_state=1.648296e-03
+[INFO] [1793261972.727040075] [StateEstimator]: ESIKF iter 6: corr=17614 r_v=4.202390e-04 delta_pose=3.903871e-04 delta_state=1.285171e-03
+[INFO] [1793261972.801379109] [StateEstimator]: ESIKF iter 7: corr=17614 r_v=3.629787e-04 delta_pose=3.414221e-04 delta_state=9.681141e-04
+[WARN] [1793261972.801418232] [StateEstimator]: ESIKF stopped without convergence: max_iterations (last_corr=17614 last_r_v=3.629787e-04 last_delta_pose=3.414221e-04 last_delta_state=9.681141e-04).
+[INFO] [1793261972.803184050] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261972.808639768] [StateEstimator]: ESIKF voxel downsampling: 96035 -> 21907 points (leaf=0.05m)
+[INFO] [1793261972.885416020] [StateEstimator]: ESIKF iter 0: corr=17521 r_v=1.794719e-03 delta_pose=1.306464e-03 delta_state=4.238566e-02
+[INFO] [1793261972.960748935] [StateEstimator]: ESIKF iter 1: corr=17526 r_v=1.679389e-03 delta_pose=7.719824e-04 delta_state=2.721251e-02
+[INFO] [1793261973.034307986] [StateEstimator]: ESIKF iter 2: corr=17546 r_v=1.696718e-03 delta_pose=4.645166e-04 delta_state=1.860199e-02
+[INFO] [1793261973.107587317] [StateEstimator]: ESIKF iter 3: corr=17543 r_v=1.608418e-03 delta_pose=2.677300e-04 delta_state=1.339651e-02
+[INFO] [1793261973.183033262] [StateEstimator]: ESIKF iter 4: corr=17548 r_v=1.629345e-03 delta_pose=1.933960e-04 delta_state=1.163295e-02
+[INFO] [1793261973.260990001] [StateEstimator]: ESIKF iter 5: corr=17545 r_v=1.607396e-03 delta_pose=1.147649e-04 delta_state=9.546842e-03
+[INFO] [1793261973.334317041] [StateEstimator]: ESIKF iter 6: corr=17544 r_v=1.631457e-03 delta_pose=6.235517e-05 delta_state=8.094291e-03
+[INFO] [1793261973.334403311] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793261973.336275798] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261973.340527034] [StateEstimator]: ESIKF voxel downsampling: 96035 -> 21907 points (leaf=0.05m)
+[INFO] [1793261973.415757056] [StateEstimator]: ESIKF iter 0: corr=17521 r_v=1.794719e-03 delta_pose=1.145484e-03 delta_state=2.884190e-02
+[INFO] [1793261973.490041378] [StateEstimator]: ESIKF iter 1: corr=17513 r_v=1.458595e-03 delta_pose=6.684389e-04 delta_state=2.420695e-02
+[INFO] [1793261973.563646736] [StateEstimator]: ESIKF iter 2: corr=17540 r_v=1.251153e-03 delta_pose=4.733606e-04 delta_state=2.128838e-02
+[INFO] [1793261973.636638611] [StateEstimator]: ESIKF iter 3: corr=17547 r_v=1.622200e-03 delta_pose=4.356095e-04 delta_state=2.628921e-02
+[INFO] [1793261973.711073794] [StateEstimator]: ESIKF iter 4: corr=17561 r_v=1.455240e-03 delta_pose=2.116905e-04 delta_state=2.367860e-02
+[INFO] [1793261973.784979531] [StateEstimator]: ESIKF iter 5: corr=17565 r_v=1.472464e-03 delta_pose=1.832113e-04 delta_state=2.293037e-02
+[INFO] [1793261973.861493695] [StateEstimator]: ESIKF iter 6: corr=17559 r_v=1.539698e-03 delta_pose=1.496256e-04 delta_state=2.440377e-02
+[INFO] [1793261973.935410943] [StateEstimator]: ESIKF iter 7: corr=17559 r_v=1.481125e-03 delta_pose=1.389646e-04 delta_state=2.426153e-02
+[WARN] [1793261973.935427324] [StateEstimator]: ESIKF stopped without convergence: max_iterations (last_corr=17559 last_r_v=1.481125e-03 last_delta_pose=1.389646e-04 last_delta_state=2.426153e-02).
+[INFO] [1793261973.937111139] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261973.942250568] [StateEstimator]: ESIKF voxel downsampling: 96035 -> 21907 points (leaf=0.05m)
+[INFO] [1793261974.015551489] [StateEstimator]: ESIKF iter 0: corr=17521 r_v=1.794129e-03 delta_pose=1.057479e-03 delta_state=2.652995e-02
+[INFO] [1793261974.092396628] [StateEstimator]: ESIKF iter 1: corr=17513 r_v=1.507937e-03 delta_pose=6.549181e-04 delta_state=2.237695e-02
+[INFO] [1793261974.166030829] [StateEstimator]: ESIKF iter 2: corr=17535 r_v=1.271176e-03 delta_pose=4.577029e-04 delta_state=1.966045e-02
+[INFO] [1793261974.240323146] [StateEstimator]: ESIKF iter 3: corr=17545 r_v=1.730491e-03 delta_pose=4.028966e-04 delta_state=2.441502e-02
+[INFO] [1793261974.315648927] [StateEstimator]: ESIKF iter 4: corr=17548 r_v=1.740595e-03 delta_pose=2.497322e-04 delta_state=2.444807e-02
+[INFO] [1793261974.390338233] [StateEstimator]: ESIKF iter 5: corr=17558 r_v=1.402794e-03 delta_pose=1.934592e-04 delta_state=2.009477e-02
+[INFO] [1793261974.463417711] [StateEstimator]: ESIKF iter 6: corr=17566 r_v=1.507193e-03 delta_pose=1.068009e-04 delta_state=2.113180e-02
+[INFO] [1793261974.463435965] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793261974.465266553] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261974.469637422] [StateEstimator]: ESIKF voxel downsampling: 96035 -> 21907 points (leaf=0.05m)
+[INFO] [1793261974.545121608] [StateEstimator]: ESIKF iter 0: corr=17521 r_v=1.792950e-03 delta_pose=9.482186e-04 delta_state=2.395221e-02
+[INFO] [1793261974.621979361] [StateEstimator]: ESIKF iter 1: corr=17519 r_v=1.551008e-03 delta_pose=6.061548e-04 delta_state=1.937217e-02
+[INFO] [1793261974.696306943] [StateEstimator]: ESIKF iter 2: corr=17531 r_v=1.445628e-03 delta_pose=4.269813e-04 delta_state=1.835166e-02
+[INFO] [1793261974.769716947] [StateEstimator]: ESIKF iter 3: corr=17542 r_v=1.557859e-03 delta_pose=2.908540e-04 delta_state=1.857019e-02
+[INFO] [1793261974.845524234] [StateEstimator]: ESIKF iter 4: corr=17549 r_v=1.766060e-03 delta_pose=1.838339e-04 delta_state=2.013486e-02
+[INFO] [1793261974.921926740] [StateEstimator]: ESIKF iter 5: corr=17540 r_v=1.841658e-03 delta_pose=1.369626e-04 delta_state=2.020588e-02
+[INFO] [1793261974.997048771] [StateEstimator]: ESIKF iter 6: corr=17546 r_v=1.698246e-03 delta_pose=8.518645e-05 delta_state=1.867439e-02
+[INFO] [1793261974.997091270] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793261974.998874079] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261975.003817413] [StateEstimator]: ESIKF voxel downsampling: 96035 -> 21907 points (leaf=0.05m)
+[INFO] [1793261975.079223433] [StateEstimator]: ESIKF iter 0: corr=17521 r_v=1.789423e-03 delta_pose=8.120235e-04 delta_state=2.151044e-02
+[INFO] [1793261975.153372202] [StateEstimator]: ESIKF iter 1: corr=17524 r_v=1.624905e-03 delta_pose=5.232674e-04 delta_state=1.625314e-02
+[INFO] [1793261975.230152712] [StateEstimator]: ESIKF iter 2: corr=17526 r_v=1.482040e-03 delta_pose=3.134631e-04 delta_state=1.427664e-02
+[INFO] [1793261975.306825089] [StateEstimator]: ESIKF iter 3: corr=17530 r_v=1.562632e-03 delta_pose=1.783030e-04 delta_state=1.314448e-02
+[INFO] [1793261975.384957325] [StateEstimator]: ESIKF iter 4: corr=17527 r_v=1.581236e-03 delta_pose=1.146945e-04 delta_state=1.320614e-02
+[INFO] [1793261975.460741079] [StateEstimator]: ESIKF iter 5: corr=17531 r_v=1.620034e-03 delta_pose=5.788633e-05 delta_state=1.280876e-02
+[INFO] [1793261975.460772387] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793261975.462766460] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261975.468994696] [StateEstimator]: ESIKF voxel downsampling: 96035 -> 21907 points (leaf=0.05m)
+[INFO] [1793261975.546351859] [StateEstimator]: ESIKF iter 0: corr=17521 r_v=9.458334e-01 delta_pose=2.095753e-03 delta_state=6.776237e-02
+[INFO] [1793261975.622840104] [StateEstimator]: ESIKF iter 1: corr=17554 r_v=8.973739e-01 delta_pose=6.572304e-04 delta_state=3.571022e-02
+[INFO] [1793261975.700873716] [StateEstimator]: ESIKF iter 2: corr=17550 r_v=9.080015e-01 delta_pose=2.808341e-04 delta_state=3.656338e-02
+[INFO] [1793261975.778892000] [StateEstimator]: ESIKF iter 3: corr=17545 r_v=9.211045e-01 delta_pose=1.903588e-04 delta_state=3.245102e-02
+[INFO] [1793261975.855461516] [StateEstimator]: ESIKF iter 4: corr=17565 r_v=9.326489e-01 delta_pose=1.890131e-04 delta_state=2.917773e-02
+[INFO] [1793261975.932233991] [StateEstimator]: ESIKF iter 5: corr=17566 r_v=9.359393e-01 delta_pose=2.794328e-05 delta_state=2.970252e-02
+[INFO] [1793261975.932340659] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793261975.934406426] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261975.938335551] [StateEstimator]: ESIKF voxel downsampling: 96035 -> 21907 points (leaf=0.05m)
+[INFO] [1793261976.014978003] [StateEstimator]: ESIKF iter 0: corr=17521 r_v=5.616707e-03 delta_pose=2.036962e-03 delta_state=6.524100e-02
+[INFO] [1793261976.090469652] [StateEstimator]: ESIKF iter 1: corr=17573 r_v=3.734498e-03 delta_pose=2.469605e-04 delta_state=3.938785e-02
+[INFO] [1793261976.166101773] [StateEstimator]: ESIKF iter 2: corr=17564 r_v=3.454052e-03 delta_pose=8.343599e-05 delta_state=3.636985e-02
+[INFO] [1793261976.166132921] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793261976.167559788] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261976.172172887] [StateEstimator]: ESIKF voxel downsampling: 96035 -> 21907 points (leaf=0.05m)
+[INFO] [1793261976.247720410] [StateEstimator]: ESIKF iter 0: corr=17521 r_v=1.794719e-03 delta_pose=3.057403e-04 delta_state=9.152338e-03
+[INFO] [1793261976.324530665] [StateEstimator]: ESIKF iter 1: corr=17517 r_v=1.808695e-03 delta_pose=6.909516e-05 delta_state=8.056627e-03
+[INFO] [1793261976.324554970] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793261976.325844070] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261976.330078965] [StateEstimator]: ESIKF voxel downsampling: 96035 -> 21907 points (leaf=0.05m)
+[INFO] [1793261976.403724867] [StateEstimator]: ESIKF iter 0: corr=17521 r_v=1.792950e-03 delta_pose=3.054520e-04 delta_state=9.142175e-03
+[INFO] [1793261976.478085450] [StateEstimator]: ESIKF iter 1: corr=17517 r_v=1.805481e-03 delta_pose=6.896621e-05 delta_state=8.048103e-03
+[INFO] [1793261976.478100879] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793261976.479301725] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261976.483624143] [StateEstimator]: ESIKF voxel downsampling: 96035 -> 21907 points (leaf=0.05m)
+[INFO] [1793261976.557364462] [StateEstimator]: ESIKF iter 0: corr=17521 r_v=9.458334e-01 delta_pose=7.092227e-05 delta_state=2.309356e-03
+[INFO] [1793261976.557380782] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793261976.558645677] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261976.562531132] [StateEstimator]: ESIKF voxel downsampling: 96035 -> 21907 points (leaf=0.05m)
+[INFO] [1793261976.635486929] [StateEstimator]: ESIKF iter 0: corr=17521 r_v=5.616707e-03 delta_pose=1.826803e-04 delta_state=5.707488e-03
+[INFO] [1793261976.709743338] [StateEstimator]: ESIKF iter 1: corr=17525 r_v=5.455441e-03 delta_pose=1.003647e-05 delta_state=5.233525e-03
+[INFO] [1793261976.709780979] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793261977.143319811] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261977.148312707] [StateEstimator]: ESIKF voxel downsampling: 95503 -> 18567 points (leaf=0.05m)
+[INFO] [1793261977.207407366] [StateEstimator]: ESIKF iter 0: corr=13015 r_v=3.012133e-03 delta_pose=2.976028e-03 delta_state=3.824897e-03
+[INFO] [1793261977.265597160] [StateEstimator]: ESIKF iter 1: corr=13011 r_v=2.115563e-03 delta_pose=2.104275e-03 delta_state=2.682822e-03
+[INFO] [1793261977.325011435] [StateEstimator]: ESIKF iter 2: corr=12998 r_v=3.193896e-03 delta_pose=3.191199e-03 delta_state=7.130280e-03
+[INFO] [1793261977.382877236] [StateEstimator]: ESIKF iter 3: corr=12971 r_v=2.060301e-03 delta_pose=2.058358e-03 delta_state=4.829969e-03
+[INFO] [1793261977.440366636] [StateEstimator]: ESIKF iter 4: corr=12966 r_v=1.897214e-03 delta_pose=1.893928e-03 delta_state=5.553864e-03
+[INFO] [1793261977.499086357] [StateEstimator]: ESIKF iter 5: corr=12975 r_v=1.344220e-03 delta_pose=1.342934e-03 delta_state=3.571958e-03
+[INFO] [1793261977.557949455] [StateEstimator]: ESIKF iter 6: corr=12965 r_v=8.867871e-04 delta_pose=8.861591e-04 delta_state=2.474270e-03
+[INFO] [1793261977.557965084] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793261977.559389216] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261977.563026859] [StateEstimator]: ESIKF voxel downsampling: 95503 -> 18567 points (leaf=0.05m)
+[INFO] [1793261977.620493326] [StateEstimator]: ESIKF iter 0: corr=13015 r_v=3.009834e-03 delta_pose=2.938630e-03 delta_state=3.791617e-03
+[INFO] [1793261977.680314588] [StateEstimator]: ESIKF iter 1: corr=13014 r_v=2.112778e-03 delta_pose=2.090774e-03 delta_state=2.698105e-03
+[INFO] [1793261977.737941986] [StateEstimator]: ESIKF iter 2: corr=12997 r_v=3.211656e-03 delta_pose=3.206217e-03 delta_state=7.191188e-03
+[INFO] [1793261977.795727127] [StateEstimator]: ESIKF iter 3: corr=12973 r_v=2.066240e-03 delta_pose=2.062410e-03 delta_state=4.747582e-03
+[INFO] [1793261977.854433934] [StateEstimator]: ESIKF iter 4: corr=12963 r_v=1.893355e-03 delta_pose=1.886400e-03 delta_state=5.617076e-03
+[INFO] [1793261977.915328173] [StateEstimator]: ESIKF iter 5: corr=12972 r_v=1.282877e-03 delta_pose=1.280654e-03 delta_state=3.367503e-03
+[INFO] [1793261977.973081355] [StateEstimator]: ESIKF iter 6: corr=12965 r_v=9.002747e-04 delta_pose=8.985339e-04 delta_state=2.497223e-03
+[INFO] [1793261977.973095080] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793261977.974283543] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261977.979082889] [StateEstimator]: ESIKF voxel downsampling: 95503 -> 18567 points (leaf=0.05m)
+[INFO] [1793261978.036793010] [StateEstimator]: ESIKF iter 0: corr=13015 r_v=3.012133e-03 delta_pose=2.976028e-03 delta_state=3.824897e-03
+[INFO] [1793261978.094509584] [StateEstimator]: ESIKF iter 1: corr=13011 r_v=2.115563e-03 delta_pose=2.086812e-03 delta_state=2.682822e-03
+[INFO] [1793261978.153110503] [StateEstimator]: ESIKF iter 2: corr=12997 r_v=3.215350e-03 delta_pose=3.216162e-03 delta_state=7.234962e-03
+[INFO] [1793261978.213349603] [StateEstimator]: ESIKF iter 3: corr=12973 r_v=2.059328e-03 delta_pose=2.056334e-03 delta_state=4.735428e-03
+[INFO] [1793261978.270986858] [StateEstimator]: ESIKF iter 4: corr=12963 r_v=1.902079e-03 delta_pose=1.893788e-03 delta_state=5.698311e-03
+[INFO] [1793261978.328517586] [StateEstimator]: ESIKF iter 5: corr=12975 r_v=1.276063e-03 delta_pose=1.264719e-03 delta_state=3.346186e-03
+[INFO] [1793261978.386964318] [StateEstimator]: ESIKF iter 6: corr=12969 r_v=9.450460e-04 delta_pose=9.408251e-04 delta_state=2.985862e-03
+[INFO] [1793261978.445706200] [StateEstimator]: ESIKF iter 7: corr=12948 r_v=8.061204e-04 delta_pose=7.932893e-04 delta_state=2.375515e-03
+[WARN] [1793261978.445720266] [StateEstimator]: ESIKF stopped without convergence: max_iterations (last_corr=12948 last_r_v=8.061204e-04 last_delta_pose=7.932893e-04 last_delta_state=2.375515e-03).
+[INFO] [1793261978.447472579] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261978.451091768] [StateEstimator]: ESIKF voxel downsampling: 95503 -> 18567 points (leaf=0.05m)
+[INFO] [1793261978.514416433] [StateEstimator]: ESIKF iter 0: corr=13015 r_v=3.012133e-03 delta_pose=1.133889e-03 delta_state=6.537411e-03
+[INFO] [1793261978.574156573] [StateEstimator]: ESIKF iter 1: corr=13018 r_v=2.055896e-03 delta_pose=1.611438e-03 delta_state=9.198065e-03
+[INFO] [1793261978.632284843] [StateEstimator]: ESIKF iter 2: corr=13018 r_v=2.947460e-03 delta_pose=2.625472e-03 delta_state=1.554317e-02
+[INFO] [1793261978.691688848] [StateEstimator]: ESIKF iter 3: corr=13018 r_v=2.733726e-03 delta_pose=2.188788e-03 delta_state=1.350277e-02
+[INFO] [1793261978.750801430] [StateEstimator]: ESIKF iter 4: corr=13026 r_v=2.403089e-03 delta_pose=1.640188e-03 delta_state=1.040544e-02
+[INFO] [1793261978.810786357] [StateEstimator]: ESIKF iter 5: corr=13015 r_v=1.869406e-03 delta_pose=1.248756e-03 delta_state=7.951661e-03
+[INFO] [1793261978.869524322] [StateEstimator]: ESIKF iter 6: corr=13003 r_v=1.859174e-03 delta_pose=1.053026e-03 delta_state=6.841939e-03
+[INFO] [1793261978.929416105] [StateEstimator]: ESIKF iter 7: corr=13006 r_v=1.827807e-03 delta_pose=9.024766e-04 delta_state=6.135240e-03
+[WARN] [1793261978.929429790] [StateEstimator]: ESIKF stopped without convergence: max_iterations (last_corr=13006 last_r_v=1.827807e-03 last_delta_pose=9.024766e-04 last_delta_state=6.135240e-03).
+[INFO] [1793261978.931052111] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261978.934973172] [StateEstimator]: ESIKF voxel downsampling: 95503 -> 18567 points (leaf=0.05m)
+[INFO] [1793261978.994224462] [StateEstimator]: ESIKF iter 0: corr=13015 r_v=3.012133e-03 delta_pose=2.955814e-03 delta_state=1.562750e-02
+[INFO] [1793261979.055347107] [StateEstimator]: ESIKF iter 1: corr=13011 r_v=2.126477e-03 delta_pose=2.071911e-03 delta_state=1.136697e-02
+[INFO] [1793261979.114242395] [StateEstimator]: ESIKF iter 2: corr=13000 r_v=3.220656e-03 delta_pose=3.166705e-03 delta_state=1.758174e-02
+[INFO] [1793261979.172023688] [StateEstimator]: ESIKF iter 3: corr=12972 r_v=2.093930e-03 delta_pose=2.019673e-03 delta_state=1.132986e-02
+[INFO] [1793261979.234218719] [StateEstimator]: ESIKF iter 4: corr=12964 r_v=1.957315e-03 delta_pose=1.840648e-03 delta_state=1.022110e-02
+[INFO] [1793261979.292976471] [StateEstimator]: ESIKF iter 5: corr=12974 r_v=1.354139e-03 delta_pose=1.232094e-03 delta_state=7.070826e-03
+[INFO] [1793261979.355422159] [StateEstimator]: ESIKF iter 6: corr=12972 r_v=1.004615e-03 delta_pose=8.887453e-04 delta_state=4.999500e-03
+[INFO] [1793261979.414498764] [StateEstimator]: ESIKF iter 7: corr=12947 r_v=8.634618e-04 delta_pose=7.351100e-04 delta_state=4.255868e-03
+[WARN] [1793261979.414523390] [StateEstimator]: ESIKF stopped without convergence: max_iterations (last_corr=12947 last_r_v=8.634618e-04 last_delta_pose=7.351100e-04 last_delta_state=4.255868e-03).
+[INFO] [1793261979.416544874] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261979.421485152] [StateEstimator]: ESIKF voxel downsampling: 95503 -> 18567 points (leaf=0.05m)
+[INFO] [1793261979.481318556] [StateEstimator]: ESIKF iter 0: corr=13015 r_v=3.011368e-03 delta_pose=2.936757e-03 delta_state=1.552412e-02
+[INFO] [1793261979.541978489] [StateEstimator]: ESIKF iter 1: corr=13011 r_v=2.128912e-03 delta_pose=2.057193e-03 delta_state=1.133841e-02
+[INFO] [1793261979.603869344] [StateEstimator]: ESIKF iter 2: corr=12997 r_v=3.213741e-03 delta_pose=3.143217e-03 delta_state=1.746906e-02
+[INFO] [1793261979.665334878] [StateEstimator]: ESIKF iter 3: corr=12971 r_v=2.090351e-03 delta_pose=1.998692e-03 delta_state=1.132365e-02
+[INFO] [1793261979.727705837] [StateEstimator]: ESIKF iter 4: corr=12968 r_v=1.954822e-03 delta_pose=1.807733e-03 delta_state=1.016218e-02
+[INFO] [1793261979.786412383] [StateEstimator]: ESIKF iter 5: corr=12976 r_v=1.410342e-03 delta_pose=1.244069e-03 delta_state=7.295942e-03
+[INFO] [1793261979.848808819] [StateEstimator]: ESIKF iter 6: corr=12973 r_v=9.855774e-04 delta_pose=8.416597e-04 delta_state=4.828754e-03
+[INFO] [1793261979.912018440] [StateEstimator]: ESIKF iter 7: corr=12946 r_v=8.865681e-04 delta_pose=7.214089e-04 delta_state=4.392943e-03
+[WARN] [1793261979.912038216] [StateEstimator]: ESIKF stopped without convergence: max_iterations (last_corr=12946 last_r_v=8.865681e-04 last_delta_pose=7.214089e-04 last_delta_state=4.392943e-03).
+[INFO] [1793261979.913685173] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261979.918784417] [StateEstimator]: ESIKF voxel downsampling: 95503 -> 18567 points (leaf=0.05m)
+[INFO] [1793261979.980712832] [StateEstimator]: ESIKF iter 0: corr=13015 r_v=3.009838e-03 delta_pose=2.899340e-03 delta_state=1.532111e-02
+[INFO] [1793261980.042018818] [StateEstimator]: ESIKF iter 1: corr=13013 r_v=2.116702e-03 delta_pose=2.009738e-03 delta_state=1.117107e-02
+[INFO] [1793261980.099784072] [StateEstimator]: ESIKF iter 2: corr=12996 r_v=3.198550e-03 delta_pose=3.094510e-03 delta_state=1.725266e-02
+[INFO] [1793261980.158392395] [StateEstimator]: ESIKF iter 3: corr=12973 r_v=2.123556e-03 delta_pose=1.989032e-03 delta_state=1.139179e-02
+[INFO] [1793261980.219655491] [StateEstimator]: ESIKF iter 4: corr=12969 r_v=1.944550e-03 delta_pose=1.745458e-03 delta_state=1.015486e-02
+[INFO] [1793261980.279643994] [StateEstimator]: ESIKF iter 5: corr=12985 r_v=1.316952e-03 delta_pose=1.097337e-03 delta_state=6.655584e-03
+[INFO] [1793261980.339548821] [StateEstimator]: ESIKF iter 6: corr=12978 r_v=1.072051e-03 delta_pose=8.436212e-04 delta_state=5.268282e-03
+[INFO] [1793261980.398540698] [StateEstimator]: ESIKF iter 7: corr=12943 r_v=9.713354e-04 delta_pose=7.093279e-04 delta_state=4.754620e-03
+[WARN] [1793261980.398632068] [StateEstimator]: ESIKF stopped without convergence: max_iterations (last_corr=12943 last_r_v=9.713354e-04 last_delta_pose=7.093279e-04 last_delta_state=4.754620e-03).
+[INFO] [1793261980.401211370] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261980.406249090] [StateEstimator]: ESIKF voxel downsampling: 95503 -> 18567 points (leaf=0.05m)
+[INFO] [1793261980.466627539] [StateEstimator]: ESIKF iter 0: corr=13015 r_v=3.005257e-03 delta_pose=2.792350e-03 delta_state=1.474041e-02
+[INFO] [1793261980.525397844] [StateEstimator]: ESIKF iter 1: corr=13015 r_v=2.123311e-03 delta_pose=1.911617e-03 delta_state=1.092065e-02
+[INFO] [1793261980.584386816] [StateEstimator]: ESIKF iter 2: corr=13001 r_v=3.126420e-03 delta_pose=2.954991e-03 delta_state=1.653834e-02
+[INFO] [1793261980.643017150] [StateEstimator]: ESIKF iter 3: corr=12973 r_v=2.194131e-03 delta_pose=1.957235e-03 delta_state=1.164001e-02
+[INFO] [1793261980.700981844] [StateEstimator]: ESIKF iter 4: corr=12975 r_v=2.076346e-03 delta_pose=1.725226e-03 delta_state=1.060636e-02
+[INFO] [1793261980.760684014] [StateEstimator]: ESIKF iter 5: corr=12972 r_v=1.389724e-03 delta_pose=1.051234e-03 delta_state=6.981522e-03
+[INFO] [1793261980.820943712] [StateEstimator]: ESIKF iter 6: corr=12980 r_v=1.415155e-03 delta_pose=8.962967e-04 delta_state=6.690959e-03
+[INFO] [1793261980.881023725] [StateEstimator]: ESIKF iter 7: corr=12959 r_v=1.243949e-03 delta_pose=7.322844e-04 delta_state=5.747105e-03
+[WARN] [1793261980.881039224] [StateEstimator]: ESIKF stopped without convergence: max_iterations (last_corr=12959 last_r_v=1.243949e-03 last_delta_pose=7.322844e-04 last_delta_state=5.747105e-03).
+[INFO] [1793261980.882648701] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261980.886636416] [StateEstimator]: ESIKF voxel downsampling: 95503 -> 18567 points (leaf=0.05m)
+[INFO] [1793261980.945570155] [StateEstimator]: ESIKF iter 0: corr=13015 r_v=4.457946e-01 delta_pose=5.037424e-03 delta_state=1.840256e-02
+[INFO] [1793261981.004523670] [StateEstimator]: ESIKF iter 1: corr=13000 r_v=4.942564e-01 delta_pose=1.334347e-02 delta_state=7.449164e-02
+[INFO] [1793261981.065578438] [StateEstimator]: ESIKF iter 2: corr=12978 r_v=5.146460e-01 delta_pose=1.633716e-02 delta_state=8.408568e-02
+[INFO] [1793261981.128092704] [StateEstimator]: ESIKF iter 3: corr=13030 r_v=4.604623e-01 delta_pose=1.630426e-02 delta_state=8.795808e-02
+[INFO] [1793261981.187999043] [StateEstimator]: ESIKF iter 4: corr=13012 r_v=5.257480e-01 delta_pose=1.513595e-02 delta_state=7.824382e-02
+[INFO] [1793261981.249233576] [StateEstimator]: ESIKF iter 5: corr=13032 r_v=4.660378e-01 delta_pose=1.440289e-02 delta_state=7.780351e-02
+[INFO] [1793261981.309179680] [StateEstimator]: ESIKF iter 6: corr=13012 r_v=5.203423e-01 delta_pose=1.374246e-02 delta_state=7.069890e-02
+[INFO] [1793261981.367203715] [StateEstimator]: ESIKF iter 7: corr=13047 r_v=4.746637e-01 delta_pose=1.293642e-02 delta_state=7.017964e-02
+[WARN] [1793261981.367218492] [StateEstimator]: ESIKF stopped without convergence: max_iterations (last_corr=13047 last_r_v=4.746637e-01 last_delta_pose=1.293642e-02 last_delta_state=7.017964e-02).
+[INFO] [1793261981.369070881] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261981.372747477] [StateEstimator]: ESIKF voxel downsampling: 95503 -> 18567 points (leaf=0.05m)
+[INFO] [1793261981.431937583] [StateEstimator]: ESIKF iter 0: corr=13015 r_v=6.545949e-03 delta_pose=6.254695e-03 delta_state=3.286523e-02
+[INFO] [1793261981.490501373] [StateEstimator]: ESIKF iter 1: corr=12981 r_v=4.015981e-03 delta_pose=3.967387e-03 delta_state=2.215222e-02
+[INFO] [1793261981.553945660] [StateEstimator]: ESIKF iter 2: corr=12976 r_v=2.069369e-03 delta_pose=1.997450e-03 delta_state=1.104147e-02
+[INFO] [1793261981.614164942] [StateEstimator]: ESIKF iter 3: corr=12988 r_v=1.685075e-03 delta_pose=1.616211e-03 delta_state=7.303550e-03
+[INFO] [1793261981.675302023] [StateEstimator]: ESIKF iter 4: corr=12944 r_v=2.465272e-03 delta_pose=1.837753e-03 delta_state=1.139340e-02
+[INFO] [1793261981.738878346] [StateEstimator]: ESIKF iter 5: corr=12926 r_v=1.636927e-03 delta_pose=1.307987e-03 delta_state=7.174071e-03
+[INFO] [1793261981.800230177] [StateEstimator]: ESIKF iter 6: corr=12909 r_v=1.262494e-03 delta_pose=6.632917e-04 delta_state=5.738109e-03
+[INFO] [1793261981.861498373] [StateEstimator]: ESIKF iter 7: corr=12917 r_v=1.275410e-03 delta_pose=5.374994e-04 delta_state=5.728899e-03
+[WARN] [1793261981.861612816] [StateEstimator]: ESIKF stopped without convergence: max_iterations (last_corr=12917 last_r_v=1.275410e-03 last_delta_pose=5.374994e-04 last_delta_state=5.728899e-03).
+[INFO] [1793261981.863875428] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261981.869549443] [StateEstimator]: ESIKF voxel downsampling: 95503 -> 18567 points (leaf=0.05m)
+[INFO] [1793261981.929580956] [StateEstimator]: ESIKF iter 0: corr=13015 r_v=3.012133e-03 delta_pose=1.428833e-03 delta_state=7.354302e-03
+[INFO] [1793261981.991084159] [StateEstimator]: ESIKF iter 1: corr=13019 r_v=1.927558e-03 delta_pose=9.062547e-04 delta_state=5.878311e-03
+[INFO] [1793261982.050701690] [StateEstimator]: ESIKF iter 2: corr=13004 r_v=2.452767e-03 delta_pose=1.618974e-03 delta_state=9.791971e-03
+[INFO] [1793261982.111509969] [StateEstimator]: ESIKF iter 3: corr=12992 r_v=3.025788e-03 delta_pose=1.803622e-03 delta_state=1.186264e-02
+[INFO] [1793261982.173781442] [StateEstimator]: ESIKF iter 4: corr=12985 r_v=2.743961e-03 delta_pose=1.172756e-03 delta_state=1.062821e-02
+[INFO] [1793261982.237543922] [StateEstimator]: ESIKF iter 5: corr=12993 r_v=2.679625e-03 delta_pose=8.721799e-04 delta_state=9.340743e-03
+[INFO] [1793261982.299354407] [StateEstimator]: ESIKF iter 6: corr=12983 r_v=2.443201e-03 delta_pose=5.616393e-04 delta_state=8.481895e-03
+[INFO] [1793261982.360264765] [StateEstimator]: ESIKF iter 7: corr=12970 r_v=2.612398e-03 delta_pose=5.078939e-04 delta_state=8.554507e-03
+[WARN] [1793261982.360279944] [StateEstimator]: ESIKF stopped without convergence: max_iterations (last_corr=12970 last_r_v=2.612398e-03 last_delta_pose=5.078939e-04 last_delta_state=8.554507e-03).
+[INFO] [1793261982.361910169] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261982.365634744] [StateEstimator]: ESIKF voxel downsampling: 95503 -> 18567 points (leaf=0.05m)
+[INFO] [1793261982.427540436] [StateEstimator]: ESIKF iter 0: corr=13015 r_v=3.009838e-03 delta_pose=1.426117e-03 delta_state=7.336175e-03
+[INFO] [1793261982.486588187] [StateEstimator]: ESIKF iter 1: corr=13019 r_v=1.923963e-03 delta_pose=9.063963e-04 delta_state=5.864452e-03
+[INFO] [1793261982.549853651] [StateEstimator]: ESIKF iter 2: corr=13004 r_v=2.445840e-03 delta_pose=1.622801e-03 delta_state=9.780301e-03
+[INFO] [1793261982.609937120] [StateEstimator]: ESIKF iter 3: corr=12992 r_v=3.030901e-03 delta_pose=1.806401e-03 delta_state=1.188493e-02
+[INFO] [1793261982.668847265] [StateEstimator]: ESIKF iter 4: corr=12985 r_v=2.735100e-03 delta_pose=1.161200e-03 delta_state=1.057574e-02
+[INFO] [1793261982.728726203] [StateEstimator]: ESIKF iter 5: corr=12994 r_v=2.682569e-03 delta_pose=8.324282e-04 delta_state=9.248393e-03
+[INFO] [1793261982.787610740] [StateEstimator]: ESIKF iter 6: corr=12982 r_v=2.441227e-03 delta_pose=5.821321e-04 delta_state=8.491345e-03
+[INFO] [1793261982.846269567] [StateEstimator]: ESIKF iter 7: corr=12971 r_v=2.602342e-03 delta_pose=5.319687e-04 delta_state=8.584347e-03
+[WARN] [1793261982.846285206] [StateEstimator]: ESIKF stopped without convergence: max_iterations (last_corr=12971 last_r_v=2.602342e-03 last_delta_pose=5.319687e-04 last_delta_state=8.584347e-03).
+[INFO] [1793261982.848189782] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261982.851777292] [StateEstimator]: ESIKF voxel downsampling: 95503 -> 18567 points (leaf=0.05m)
+[INFO] [1793261982.911409711] [StateEstimator]: ESIKF iter 0: corr=13015 r_v=4.457946e-01 delta_pose=2.090487e-03 delta_state=1.195900e-02
+[INFO] [1793261982.970042950] [StateEstimator]: ESIKF iter 1: corr=13019 r_v=5.191662e-01 delta_pose=9.145643e-04 delta_state=8.897415e-03
+[INFO] [1793261983.030173718] [StateEstimator]: ESIKF iter 2: corr=13013 r_v=5.679808e-01 delta_pose=3.057138e-04 delta_state=7.552380e-03
+[INFO] [1793261983.091390076] [StateEstimator]: ESIKF iter 3: corr=13008 r_v=5.807692e-01 delta_pose=1.250976e-04 delta_state=7.158259e-03
+[INFO] [1793261983.151569073] [StateEstimator]: ESIKF iter 4: corr=13007 r_v=5.817150e-01 delta_pose=5.652373e-05 delta_state=6.838247e-03
+[INFO] [1793261983.151584652] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793261983.152963479] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261983.156576907] [StateEstimator]: ESIKF voxel downsampling: 95503 -> 18567 points (leaf=0.05m)
+[INFO] [1793261983.216292552] [StateEstimator]: ESIKF iter 0: corr=13015 r_v=6.545949e-03 delta_pose=4.315735e-03 delta_state=2.448917e-02
+[INFO] [1793261983.278401162] [StateEstimator]: ESIKF iter 1: corr=13009 r_v=4.289103e-03 delta_pose=2.661111e-03 delta_state=1.842376e-02
+[INFO] [1793261983.337147491] [StateEstimator]: ESIKF iter 2: corr=13018 r_v=4.162351e-03 delta_pose=1.728047e-03 delta_state=1.587110e-02
+[INFO] [1793261983.395903428] [StateEstimator]: ESIKF iter 3: corr=13006 r_v=3.534238e-03 delta_pose=5.730240e-04 delta_state=1.030272e-02
+[INFO] [1793261983.456069181] [StateEstimator]: ESIKF iter 4: corr=12998 r_v=3.618475e-03 delta_pose=2.802834e-04 delta_state=9.733764e-03
+[INFO] [1793261983.514711757] [StateEstimator]: ESIKF iter 5: corr=12998 r_v=3.107249e-03 delta_pose=3.405391e-04 delta_state=9.081307e-03
+[INFO] [1793261983.575083683] [StateEstimator]: ESIKF iter 6: corr=12999 r_v=3.306681e-03 delta_pose=1.878012e-04 delta_state=9.279099e-03
+[INFO] [1793261983.633553879] [StateEstimator]: ESIKF iter 7: corr=12999 r_v=3.421650e-03 delta_pose=2.785011e-04 delta_state=8.176624e-03
+[WARN] [1793261983.633568776] [StateEstimator]: ESIKF stopped without convergence: max_iterations (last_corr=12999 last_r_v=3.421650e-03 last_delta_pose=2.785011e-04 last_delta_state=8.176624e-03).
+[INFO] [1793261984.066695192] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261984.071421983] [StateEstimator]: ESIKF voxel downsampling: 97537 -> 13762 points (leaf=0.05m)
+[INFO] [1793261984.131266247] [StateEstimator]: ESIKF iter 0: corr=9393 r_v=1.544196e-02 delta_pose=1.540589e-02 delta_state=3.459208e-02
+[INFO] [1793261984.189020198] [StateEstimator]: ESIKF iter 1: corr=9351 r_v=7.957482e-03 delta_pose=7.943370e-03 delta_state=1.883428e-02
+[INFO] [1793261984.247807314] [StateEstimator]: ESIKF iter 2: corr=9301 r_v=4.647310e-03 delta_pose=4.639444e-03 delta_state=6.696340e-03
+[INFO] [1793261984.307681483] [StateEstimator]: ESIKF iter 3: corr=9276 r_v=3.306331e-03 delta_pose=3.303590e-03 delta_state=1.080434e-02
+[INFO] [1793261984.365266009] [StateEstimator]: ESIKF iter 4: corr=9257 r_v=1.925628e-03 delta_pose=1.922818e-03 delta_state=6.760406e-03
+[INFO] [1793261984.423033606] [StateEstimator]: ESIKF iter 5: corr=9231 r_v=1.283175e-03 delta_pose=1.280338e-03 delta_state=1.511676e-03
+[INFO] [1793261984.485717487] [StateEstimator]: ESIKF iter 6: corr=9222 r_v=7.855036e-04 delta_pose=7.837991e-04 delta_state=3.117775e-03
+[INFO] [1793261984.485767560] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793261984.487278964] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261984.491702801] [StateEstimator]: ESIKF voxel downsampling: 97537 -> 13762 points (leaf=0.05m)
+[INFO] [1793261984.553833491] [StateEstimator]: ESIKF iter 0: corr=9393 r_v=1.545140e-02 delta_pose=1.537959e-02 delta_state=3.451292e-02
+[INFO] [1793261984.612729089] [StateEstimator]: ESIKF iter 1: corr=9350 r_v=7.991547e-03 delta_pose=7.963325e-03 delta_state=1.920137e-02
+[INFO] [1793261984.672818258] [StateEstimator]: ESIKF iter 2: corr=9299 r_v=4.653066e-03 delta_pose=4.637395e-03 delta_state=6.458096e-03
+[INFO] [1793261984.730371466] [StateEstimator]: ESIKF iter 3: corr=9280 r_v=3.298471e-03 delta_pose=3.293013e-03 delta_state=1.133263e-02
+[INFO] [1793261984.790079265] [StateEstimator]: ESIKF iter 4: corr=9251 r_v=1.961527e-03 delta_pose=1.955647e-03 delta_state=6.110682e-03
+[INFO] [1793261984.848845903] [StateEstimator]: ESIKF iter 5: corr=9229 r_v=1.279197e-03 delta_pose=1.273519e-03 delta_state=1.562248e-03
+[INFO] [1793261984.906827989] [StateEstimator]: ESIKF iter 6: corr=9220 r_v=7.647251e-04 delta_pose=7.614009e-04 delta_state=2.900080e-03
+[INFO] [1793261984.906861792] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793261984.908347589] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261984.912726692] [StateEstimator]: ESIKF voxel downsampling: 97537 -> 13762 points (leaf=0.05m)
+[INFO] [1793261984.970352284] [StateEstimator]: ESIKF iter 0: corr=9393 r_v=1.544196e-02 delta_pose=1.540589e-02 delta_state=3.459208e-02
+[INFO] [1793261985.028743042] [StateEstimator]: ESIKF iter 1: corr=9351 r_v=7.957482e-03 delta_pose=7.913458e-03 delta_state=1.883428e-02
+[INFO] [1793261985.087872664] [StateEstimator]: ESIKF iter 2: corr=9303 r_v=4.659640e-03 delta_pose=4.607052e-03 delta_state=6.486653e-03
+[INFO] [1793261985.145599495] [StateEstimator]: ESIKF iter 3: corr=9281 r_v=3.442033e-03 delta_pose=3.387922e-03 delta_state=1.067277e-02
+[INFO] [1793261985.204174606] [StateEstimator]: ESIKF iter 4: corr=9248 r_v=1.925449e-03 delta_pose=1.867423e-03 delta_state=6.842405e-03
+[INFO] [1793261985.261959064] [StateEstimator]: ESIKF iter 5: corr=9226 r_v=1.335732e-03 delta_pose=1.273147e-03 delta_state=1.539569e-03
+[INFO] [1793261985.319503796] [StateEstimator]: ESIKF iter 6: corr=9216 r_v=8.119592e-04 delta_pose=7.497562e-04 delta_state=2.959486e-03
+[INFO] [1793261985.378286713] [StateEstimator]: ESIKF iter 7: corr=9224 r_v=6.590076e-04 delta_pose=5.941502e-04 delta_state=9.654356e-04
+[WARN] [1793261985.378315998] [StateEstimator]: ESIKF stopped without convergence: max_iterations (last_corr=9224 last_r_v=6.590076e-04 last_delta_pose=5.941502e-04 last_delta_state=9.654356e-04).
+[INFO] [1793261985.380068411] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261985.384560765] [StateEstimator]: ESIKF voxel downsampling: 97537 -> 13762 points (leaf=0.05m)
+[INFO] [1793261985.443186269] [StateEstimator]: ESIKF iter 0: corr=9393 r_v=1.544196e-02 delta_pose=5.533018e-03 delta_state=1.719825e-01
+[INFO] [1793261985.503689460] [StateEstimator]: ESIKF iter 1: corr=9280 r_v=1.386951e-02 delta_pose=4.549147e-03 delta_state=1.427769e-01
+[INFO] [1793261985.566914267] [StateEstimator]: ESIKF iter 2: corr=9184 r_v=1.111595e-02 delta_pose=3.671536e-03 delta_state=1.160836e-01
+[INFO] [1793261985.624647430] [StateEstimator]: ESIKF iter 3: corr=9143 r_v=8.020937e-03 delta_pose=2.811932e-03 delta_state=8.959250e-02
+[INFO] [1793261985.685442093] [StateEstimator]: ESIKF iter 4: corr=9231 r_v=6.927158e-03 delta_pose=2.649246e-03 delta_state=8.502822e-02
+[INFO] [1793261985.748792394] [StateEstimator]: ESIKF iter 5: corr=9317 r_v=5.379642e-03 delta_pose=1.661694e-03 delta_state=5.428987e-02
+[INFO] [1793261985.812982299] [StateEstimator]: ESIKF iter 6: corr=9260 r_v=4.473677e-03 delta_pose=1.278968e-03 delta_state=4.273208e-02
+[INFO] [1793261985.872699024] [StateEstimator]: ESIKF iter 7: corr=9131 r_v=3.988803e-03 delta_pose=1.408709e-03 delta_state=4.689900e-02
+[WARN] [1793261985.872729181] [StateEstimator]: ESIKF stopped without convergence: max_iterations (last_corr=9131 last_r_v=3.988803e-03 last_delta_pose=1.408709e-03 last_delta_state=4.689900e-02).
+[INFO] [1793261985.874883572] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261985.879185522] [StateEstimator]: ESIKF voxel downsampling: 97537 -> 13762 points (leaf=0.05m)
+[INFO] [1793261985.940981579] [StateEstimator]: ESIKF iter 0: corr=9393 r_v=1.544196e-02 delta_pose=5.533161e-03 delta_state=1.719870e-01
+[INFO] [1793261985.999712119] [StateEstimator]: ESIKF iter 1: corr=9280 r_v=1.386937e-02 delta_pose=4.549149e-03 delta_state=1.427812e-01
+[INFO] [1793261986.059736497] [StateEstimator]: ESIKF iter 2: corr=9184 r_v=1.111581e-02 delta_pose=3.671506e-03 delta_state=1.160868e-01
+[INFO] [1793261986.118559830] [StateEstimator]: ESIKF iter 3: corr=9143 r_v=8.020827e-03 delta_pose=2.811897e-03 delta_state=8.959419e-02
+[INFO] [1793261986.178703580] [StateEstimator]: ESIKF iter 4: corr=9231 r_v=6.927086e-03 delta_pose=2.649227e-03 delta_state=8.502948e-02
+[INFO] [1793261986.238658270] [StateEstimator]: ESIKF iter 5: corr=9317 r_v=5.379597e-03 delta_pose=1.661691e-03 delta_state=5.429061e-02
+[INFO] [1793261986.298992785] [StateEstimator]: ESIKF iter 6: corr=9260 r_v=4.473852e-03 delta_pose=1.278944e-03 delta_state=4.273212e-02
+[INFO] [1793261986.356521097] [StateEstimator]: ESIKF iter 7: corr=9131 r_v=3.988788e-03 delta_pose=1.408719e-03 delta_state=4.690012e-02
+[WARN] [1793261986.356603350] [StateEstimator]: ESIKF stopped without convergence: max_iterations (last_corr=9131 last_r_v=3.988788e-03 last_delta_pose=1.408719e-03 last_delta_state=4.690012e-02).
+[INFO] [1793261986.358854411] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261986.362603972] [StateEstimator]: ESIKF voxel downsampling: 97537 -> 13762 points (leaf=0.05m)
+[INFO] [1793261986.423506806] [StateEstimator]: ESIKF iter 0: corr=9393 r_v=1.544509e-02 delta_pose=5.522522e-03 delta_state=1.716564e-01
+[INFO] [1793261986.481015872] [StateEstimator]: ESIKF iter 1: corr=9280 r_v=1.390852e-02 delta_pose=4.543620e-03 delta_state=1.426782e-01
+[INFO] [1793261986.538534896] [StateEstimator]: ESIKF iter 2: corr=9185 r_v=1.111866e-02 delta_pose=3.661051e-03 delta_state=1.159933e-01
+[INFO] [1793261986.596357775] [StateEstimator]: ESIKF iter 3: corr=9143 r_v=8.029734e-03 delta_pose=2.809261e-03 delta_state=8.990109e-02
+[INFO] [1793261986.653804885] [StateEstimator]: ESIKF iter 4: corr=9234 r_v=6.929627e-03 delta_pose=2.624266e-03 delta_state=8.483569e-02
+[INFO] [1793261986.711308871] [StateEstimator]: ESIKF iter 5: corr=9319 r_v=5.430139e-03 delta_pose=1.671982e-03 delta_state=5.523656e-02
+[INFO] [1793261986.768839216] [StateEstimator]: ESIKF iter 6: corr=9258 r_v=4.558634e-03 delta_pose=1.257422e-03 delta_state=4.290579e-02
+[INFO] [1793261986.825660451] [StateEstimator]: ESIKF iter 7: corr=9144 r_v=3.969051e-03 delta_pose=1.335228e-03 delta_state=4.548395e-02
+[WARN] [1793261986.825682181] [StateEstimator]: ESIKF stopped without convergence: max_iterations (last_corr=9144 last_r_v=3.969051e-03 last_delta_pose=1.335228e-03 last_delta_state=4.548395e-02).
+[INFO] [1793261986.827357571] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261986.830944940] [StateEstimator]: ESIKF voxel downsampling: 97537 -> 13762 points (leaf=0.05m)
+[INFO] [1793261986.888841998] [StateEstimator]: ESIKF iter 0: corr=9393 r_v=1.545136e-02 delta_pose=5.506888e-03 delta_state=1.711706e-01
+[INFO] [1793261986.947647737] [StateEstimator]: ESIKF iter 1: corr=9279 r_v=1.399150e-02 delta_pose=4.539975e-03 delta_state=1.428679e-01
+[INFO] [1793261987.006491077] [StateEstimator]: ESIKF iter 2: corr=9184 r_v=1.112680e-02 delta_pose=3.641511e-03 delta_state=1.160280e-01
+[INFO] [1793261987.063063949] [StateEstimator]: ESIKF iter 3: corr=9134 r_v=7.989447e-03 delta_pose=2.735463e-03 delta_state=8.851902e-02
+[INFO] [1793261987.120563887] [StateEstimator]: ESIKF iter 4: corr=9225 r_v=6.993440e-03 delta_pose=2.588876e-03 delta_state=8.492328e-02
+[INFO] [1793261987.178379183] [StateEstimator]: ESIKF iter 5: corr=9313 r_v=5.514284e-03 delta_pose=1.693174e-03 delta_state=5.747248e-02
+[INFO] [1793261987.236015144] [StateEstimator]: ESIKF iter 6: corr=9264 r_v=4.620774e-03 delta_pose=1.225730e-03 delta_state=4.368218e-02
+[INFO] [1793261987.293240210] [StateEstimator]: ESIKF iter 7: corr=9162 r_v=4.045898e-03 delta_pose=1.284310e-03 delta_state=4.557728e-02
+[WARN] [1793261987.293259246] [StateEstimator]: ESIKF stopped without convergence: max_iterations (last_corr=9162 last_r_v=4.045898e-03 last_delta_pose=1.284310e-03 last_delta_state=4.557728e-02).
+[INFO] [1793261987.295076750] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261987.298547181] [StateEstimator]: ESIKF voxel downsampling: 97537 -> 13762 points (leaf=0.05m)
+[INFO] [1793261987.356847660] [StateEstimator]: ESIKF iter 0: corr=9393 r_v=1.547011e-02 delta_pose=5.471559e-03 delta_state=1.700730e-01
+[INFO] [1793261987.414619445] [StateEstimator]: ESIKF iter 1: corr=9281 r_v=1.406671e-02 delta_pose=4.470197e-03 delta_state=1.419179e-01
+[INFO] [1793261987.472027181] [StateEstimator]: ESIKF iter 2: corr=9183 r_v=1.136978e-02 delta_pose=3.609735e-03 delta_state=1.172436e-01
+[INFO] [1793261987.530840965] [StateEstimator]: ESIKF iter 3: corr=9131 r_v=8.225454e-03 delta_pose=2.687633e-03 delta_state=8.995482e-02
+[INFO] [1793261987.589845735] [StateEstimator]: ESIKF iter 4: corr=9211 r_v=6.883395e-03 delta_pose=2.368266e-03 delta_state=8.187450e-02
+[INFO] [1793261987.650074054] [StateEstimator]: ESIKF iter 5: corr=9303 r_v=5.716871e-03 delta_pose=1.719985e-03 delta_state=6.271442e-02
+[INFO] [1793261987.709808182] [StateEstimator]: ESIKF iter 6: corr=9278 r_v=4.909058e-03 delta_pose=1.129635e-03 delta_state=4.539787e-02
+[INFO] [1793261987.767368893] [StateEstimator]: ESIKF iter 7: corr=9214 r_v=4.119628e-03 delta_pose=9.274351e-04 delta_state=3.966959e-02
+[WARN] [1793261987.767401463] [StateEstimator]: ESIKF stopped without convergence: max_iterations (last_corr=9214 last_r_v=4.119628e-03 last_delta_pose=9.274351e-04 last_delta_state=3.966959e-02).
+[INFO] [1793261987.769207917] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261987.772499285] [StateEstimator]: ESIKF voxel downsampling: 97537 -> 13762 points (leaf=0.05m)
+[INFO] [1793261987.831270210] [StateEstimator]: ESIKF iter 0: corr=9393 r_v=3.831707e-01 delta_pose=1.188708e-02 delta_state=3.694481e-01
+[INFO] [1793261987.888754418] [StateEstimator]: ESIKF iter 1: corr=9149 r_v=6.095776e-01 delta_pose=7.481739e-03 delta_state=2.498915e-01
+[INFO] [1793261987.947618286] [StateEstimator]: ESIKF iter 2: corr=9259 r_v=7.463914e-01 delta_pose=3.054653e-03 delta_state=1.249291e-01
+[INFO] [1793261988.005033336] [StateEstimator]: ESIKF iter 3: corr=9180 r_v=7.460173e-01 delta_pose=1.960818e-03 delta_state=9.410988e-02
+[INFO] [1793261988.061713027] [StateEstimator]: ESIKF iter 4: corr=9051 r_v=7.841705e-01 delta_pose=3.851314e-04 delta_state=4.795032e-02
+[INFO] [1793261988.118881067] [StateEstimator]: ESIKF iter 5: corr=9010 r_v=7.865775e-01 delta_pose=2.159807e-04 delta_state=3.594540e-02
+[INFO] [1793261988.175553134] [StateEstimator]: ESIKF iter 6: corr=9020 r_v=7.947294e-01 delta_pose=1.908926e-04 delta_state=3.555998e-02
+[INFO] [1793261988.231991375] [StateEstimator]: ESIKF iter 7: corr=9031 r_v=7.916265e-01 delta_pose=2.318374e-04 delta_state=3.319849e-02
+[WARN] [1793261988.232009298] [StateEstimator]: ESIKF stopped without convergence: max_iterations (last_corr=9031 last_r_v=7.916265e-01 last_delta_pose=2.318374e-04 last_delta_state=3.319849e-02).
+[INFO] [1793261988.233903345] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261988.238891732] [StateEstimator]: ESIKF voxel downsampling: 97537 -> 13762 points (leaf=0.05m)
+[INFO] [1793261988.297831010] [StateEstimator]: ESIKF iter 0: corr=9393 r_v=2.122942e-02 delta_pose=1.908821e-02 delta_state=5.932894e-01
+[INFO] [1793261988.356497130] [StateEstimator]: ESIKF iter 1: corr=9268 r_v=8.330709e-03 delta_pose=8.447993e-03 delta_state=2.792284e-01
+[INFO] [1793261988.413095038] [StateEstimator]: ESIKF iter 2: corr=8689 r_v=3.924426e-03 delta_pose=3.177245e-03 delta_state=1.254508e-01
+[INFO] [1793261988.469497242] [StateEstimator]: ESIKF iter 3: corr=8737 r_v=4.897883e-03 delta_pose=6.819123e-04 delta_state=4.612340e-02
+[INFO] [1793261988.525970599] [StateEstimator]: ESIKF iter 4: corr=8741 r_v=5.057329e-03 delta_pose=2.841979e-04 delta_state=3.610199e-02
+[INFO] [1793261988.582223185] [StateEstimator]: ESIKF iter 5: corr=8742 r_v=4.841983e-03 delta_pose=1.528980e-04 delta_state=3.254001e-02
+[INFO] [1793261988.639939646] [StateEstimator]: ESIKF iter 6: corr=8743 r_v=4.905084e-03 delta_pose=4.068106e-05 delta_state=3.181246e-02
+[INFO] [1793261988.639974791] [StateEstimator]: ESIKF successfully converged.
+[esikf] static_start legacy_w1 updated (converged)
+[esikf] static_start legacy_w05 updated (converged)
+[esikf] static_start e1_prior_residual updated (converged)
+[esikf] static_start e2_anchor_prior updated (converged)
+[esikf] static_start e2_e4_gyro_scale updated (converged)
+[esikf] static_start e6_photometric_w075 updated (converged)
+[esikf] static_start e6_photometric_w05 updated (converged)
+[esikf] static_start e6_photometric_w025 updated (converged)
+[esikf] static_start e7_ray updated (converged)
+[esikf] static_start e7_point_to_plane updated (converged)
+[esikf] static_start e3_point_to_point updated (converged)
+[esikf] static_start e3_photometric_w05 updated (converged)
+[esikf] static_start e3_ray updated (converged)
+[esikf] static_start e3_point_to_plane updated (converged)
+[esikf] sync_motion legacy_w1 updated (converged)
+[esikf] sync_motion legacy_w05 updated (converged)
+[esikf] sync_motion e1_prior_residual updated_not_converged (max_iterations)
+[esikf] sync_motion e2_anchor_prior updated (converged)
+[esikf] sync_motion e2_e4_gyro_scale updated (converged)
+[esikf] sync_motion e6_photometric_w075 updated (converged)
+[esikf] sync_motion e6_photometric_w05 updated (converged)
+[esikf] sync_motion e6_photometric_w025 updated (converged)
+[esikf] sync_motion e7_ray updated (converged)
+[esikf] sync_motion e7_point_to_plane updated (converged)
+[esikf] sync_motion e3_point_to_point updated (converged)
+[esikf] sync_motion e3_photometric_w05 updated (converged)
+[esikf] sync_motion e3_ray updated (converged)
+[esikf] sync_motion e3_point_to_plane updated (converged)
+[esikf] main_motion legacy_w1 updated (converged)
+[esikf] main_motion legacy_w05 updated (converged)
+[esikf] main_motion e1_prior_residual updated_not_converged (max_iterations)
+[esikf] main_motion e2_anchor_prior updated (converged)
+[esikf] main_motion e2_e4_gyro_scale updated_not_converged (max_iterations)
+[esikf] main_motion e6_photometric_w075 updated (converged)
+[esikf] main_motion e6_photometric_w05 updated (converged)
+[esikf] main_motion e6_photometric_w025 updated (converged)
+[esikf] main_motion e7_ray updated (converged)
+[esikf] main_motion e7_point_to_plane updated (converged)
+[esikf] main_motion e3_point_to_point updated (converged)
+[esikf] main_motion e3_photometric_w05 updated (converged)
+[esikf] main_motion e3_ray updated (converged)
+[esikf] main_motion e3_point_to_plane updated (converged)
+[esikf] main_motion_long legacy_w1 updated (converged)
+[esikf] main_motion_long legacy_w05 updated (converged)
+[esikf] main_motion_long e1_prior_residual updated_not_converged (max_iterations)
+[esikf] main_motion_long e2_anchor_prior updated_not_converged (max_iterations)
+[esikf] main_motion_long e2_e4_gyro_scale updated_not_converged (max_iterations)
+[esikf] main_motion_long e6_photometric_w075 updated_not_converged (max_iterations)
+[esikf] main_motion_long e6_photometric_w05 updated_not_converged (max_iterations)
+[esikf] main_motion_long e6_photometric_w025 updated_not_converged (max_iterations)
+[esikf] main_motion_long e7_ray updated_not_converged (max_iterations)
+[esikf] main_motion_long e7_point_to_plane updated_not_converged (max_iterations)
+[esikf] main_motion_long e3_point_to_point updated_not_converged (max_iterations)
+[esikf] main_motion_long e3_photometric_w05 updated_not_converged (max_iterations)
+[esikf] main_motion_long e3_ray updated (converged)
+[esikf] main_motion_long e3_point_to_plane updated_not_converged (max_iterations)
+[esikf] static_end legacy_w1 updated (converged)
+[esikf] static_end legacy_w05 updated (converged)
+[esikf] static_end e1_prior_residual updated_not_converged (max_iterations)
+[esikf] static_end e2_anchor_prior updated_not_converged (max_iterations)
+[esikf] static_end e2_e4_gyro_scale updated_not_converged (max_iterations)
+[esikf] static_end e6_photometric_w075 updated_not_converged (max_iterations)
+[esikf] static_end e6_photometric_w05 updated_not_converged (max_iterations)
+[esikf] static_end e6_photometric_w025 updated_not_converged (max_iterations)
+[esikf] static_end e7_ray updated_not_converged (max_iterations)
+[esikf] stat[INFO] [1793261988.641639040] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261988.645863015] [StateEstimator]: ESIKF voxel downsampling: 97537 -> 13762 points (leaf=0.05m)
+[INFO] [1793261988.704848478] [StateEstimator]: ESIKF iter 0: corr=9393 r_v=1.544196e-02 delta_pose=4.130313e-03 delta_state=1.283828e-01
+[INFO] [1793261988.762291961] [StateEstimator]: ESIKF iter 1: corr=9305 r_v=1.449935e-02 delta_pose=2.754070e-03 delta_state=1.113373e-01
+[INFO] [1793261988.821409892] [StateEstimator]: ESIKF iter 2: corr=9265 r_v=1.309090e-02 delta_pose=1.922868e-03 delta_state=1.016470e-01
+[INFO] [1793261988.880966419] [StateEstimator]: ESIKF iter 3: corr=9221 r_v=1.158913e-02 delta_pose=1.328327e-03 delta_state=9.361235e-02
+[INFO] [1793261988.938558378] [StateEstimator]: ESIKF iter 4: corr=9162 r_v=1.021966e-02 delta_pose=6.855699e-04 delta_state=7.941071e-02
+[INFO] [1793261988.995246324] [StateEstimator]: ESIKF iter 5: corr=9163 r_v=9.651590e-03 delta_pose=5.299183e-04 delta_state=7.755199e-02
+[INFO] [1793261989.053830310] [StateEstimator]: ESIKF iter 6: corr=9174 r_v=9.433619e-03 delta_pose=3.855034e-04 delta_state=7.526437e-02
+[INFO] [1793261989.111556409] [StateEstimator]: ESIKF iter 7: corr=9173 r_v=9.374902e-03 delta_pose=2.987202e-04 delta_state=7.523352e-02
+[WARN] [1793261989.111587127] [StateEstimator]: ESIKF stopped without convergence: max_iterations (last_corr=9173 last_r_v=9.374902e-03 last_delta_pose=2.987202e-04 last_delta_state=7.523352e-02).
+[INFO] [1793261989.113549580] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261989.117877428] [StateEstimator]: ESIKF voxel downsampling: 97537 -> 13762 points (leaf=0.05m)
+[INFO] [1793261989.175260669] [StateEstimator]: ESIKF iter 0: corr=9393 r_v=1.545136e-02 delta_pose=4.127234e-03 delta_state=1.282872e-01
+[INFO] [1793261989.233985807] [StateEstimator]: ESIKF iter 1: corr=9305 r_v=1.447683e-02 delta_pose=2.742047e-03 delta_state=1.109830e-01
+[INFO] [1793261989.291484753] [StateEstimator]: ESIKF iter 2: corr=9268 r_v=1.310835e-02 delta_pose=1.929466e-03 delta_state=1.018190e-01
+[INFO] [1793261989.351395760] [StateEstimator]: ESIKF iter 3: corr=9217 r_v=1.155029e-02 delta_pose=1.320460e-03 delta_state=9.336852e-02
+[INFO] [1793261989.409279142] [StateEstimator]: ESIKF iter 4: corr=9161 r_v=1.021672e-02 delta_pose=6.761052e-04 delta_state=7.913938e-02
+[INFO] [1793261989.466829565] [StateEstimator]: ESIKF iter 5: corr=9163 r_v=9.672902e-03 delta_pose=5.336587e-04 delta_state=7.780095e-02
+[INFO] [1793261989.524216512] [StateEstimator]: ESIKF iter 6: corr=9177 r_v=9.437057e-03 delta_pose=3.983600e-04 delta_state=7.540850e-02
+[INFO] [1793261989.583089886] [StateEstimator]: ESIKF iter 7: corr=9172 r_v=9.357399e-03 delta_pose=2.938685e-04 delta_state=7.507689e-02
+[WARN] [1793261989.583126665] [StateEstimator]: ESIKF stopped without convergence: max_iterations (last_corr=9172 last_r_v=9.357399e-03 last_delta_pose=2.938685e-04 last_delta_state=7.507689e-02).
+[INFO] [1793261989.585144361] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261989.589644670] [StateEstimator]: ESIKF voxel downsampling: 97537 -> 13762 points (leaf=0.05m)
+[INFO] [1793261989.647972509] [StateEstimator]: ESIKF iter 0: corr=9393 r_v=3.831707e-01 delta_pose=2.232753e-03 delta_state=6.940054e-02
+[INFO] [1793261989.707757271] [StateEstimator]: ESIKF iter 1: corr=9348 r_v=3.845497e-01 delta_pose=3.907965e-04 delta_state=6.788647e-02
+[INFO] [1793261989.769404109] [StateEstimator]: ESIKF iter 2: corr=9322 r_v=3.747235e-01 delta_pose=1.728328e-04 delta_state=6.874268e-02
+[INFO] [1793261989.826863702] [StateEstimator]: ESIKF iter 3: corr=9322 r_v=3.863822e-01 delta_pose=2.886505e-05 delta_state=6.694916e-02
+[INFO] [1793261989.826897555] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793261989.828350220] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793261989.834957742] [StateEstimator]: ESIKF voxel downsampling: 97537 -> 13762 points (leaf=0.05m)
+[INFO] [1793261989.895042391] [StateEstimator]: ESIKF iter 0: corr=9393 r_v=2.122942e-02 delta_pose=1.029931e-02 delta_state=3.200957e-01
+[INFO] [1793261989.955072531] [StateEstimator]: ESIKF iter 1: corr=9179 r_v=1.382550e-02 delta_pose=2.461298e-03 delta_state=2.264889e-01
+[INFO] [1793261990.013786369] [StateEstimator]: ESIKF iter 2: corr=9197 r_v=1.245368e-02 delta_pose=5.755780e-04 delta_state=2.011646e-01
+[INFO] [1793261990.074500471] [StateEstimator]: ESIKF iter 3: corr=9215 r_v=1.211211e-02 delta_pose=1.762563e-04 delta_state=1.979810e-01
+[INFO] [1793261990.135873069] [StateEstimator]: ESIKF iter 4: corr=9203 r_v=1.194794e-02 delta_pose=5.171552e-05 delta_state=1.956644e-01
+[INFO] [1793261990.135895621] [StateEstimator]: ESIKF successfully converged.
+ic_end e7_point_to_plane updated (converged)
+[esikf] static_end e3_point_to_point updated_not_converged (max_iterations)
+[esikf] static_end e3_photometric_w05 updated_not_converged (max_iterations)
+[esikf] static_end e3_ray updated (converged)
+[esikf] static_end e3_point_to_plane updated (converged)

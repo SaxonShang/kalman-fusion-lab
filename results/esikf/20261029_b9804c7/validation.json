@@ -1,0 +1,47 @@
+{
+  "esikf_calibrated": {
+    "records": 420,
+    "valid": 420,
+    "status": {
+      "converged": 298,
+      "max_iterations": 122
+    },
+    "flagged_pairs": [
+      [
+        "20261015_113028_roll_right",
+        "static_end"
+      ]
+    ],
+    "posterior_min_eig": -6.239405312691614e-10,
+    "max_posterior_asymmetry": 4.725572113251e-13
+  },
+  "esikf_prior_model": {
+    "records": 420,
+    "valid": 420,
+    "status": {
+      "converged": 286,
+      "max_iterations": 134
+    },
+    "flagged_pairs": [
+      [
+        "20261015_113028_roll_right",
+        "static_end"
+      ]
+    ],
+    "posterior_min_eig": 2.4408186619688805e-11,
+    "max_posterior_asymmetry": 2.106387980704838e-15
+  },
+  "esikf_static": {
+    "records": 396,
+    "valid": 396,
+    "status": {
+      "max_iterations": 152,
+      "converged": 178,
+      "correspondences_lost": 66
+    },
+    "flagged_pairs": [],
+    "posterior_min_eig": 1.4443661669515287e-11,
+    "max_posterior_asymmetry": 1.4210854715202004e-14
+  },
+  "prior_model_max_prior_error_change": 0.0
+}

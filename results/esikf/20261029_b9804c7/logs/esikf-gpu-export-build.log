@@ -1,0 +1,6 @@
+[1/6] Building CXX object CMakeFiles/sio_export_disparity.dir/src/sio_config.cpp.o
+[2/6] Building CXX object CMakeFiles/sio_export_disparity.dir/apps/export_disparity.cpp.o
+[3/6] Building CXX object CMakeFiles/sio_export_disparity.dir/src/sio_stereo_geometry.cpp.o
+[4/6] Building CXX object CMakeFiles/sio_export_disparity.dir/src/image_preprocessor.cpp.o
+[5/6] Building CXX object CMakeFiles/sio_export_disparity.dir/src/dataset_loader.cpp.o
+[6/6] Linking CXX executable sio_export_disparity

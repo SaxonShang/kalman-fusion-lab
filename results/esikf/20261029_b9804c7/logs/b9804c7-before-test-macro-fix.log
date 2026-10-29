@@ -1,0 +1,52 @@
+ninja: no work to do.
+[1/29] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/fusion_debug_logger.cpp.o
+[2/29] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/feature_processor.cpp.o
+[3/29] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/imu_debug_logger.cpp.o
+[4/29] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/imu_preprocessor.cpp.o
+[5/29] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/keyframe_manager.cpp.o
+[6/29] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/imu_integator.cpp.o
+[7/29] Building CXX object CMakeFiles/sio_fusion_lab.dir/src/state_estimater.cpp.o
+[8/29] Building CXX object CMakeFiles/sio_fusion_lab.dir/modules/registration/src/color_icp.cpp.o
+[9/29] Building CXX object CMakeFiles/sio_fusion_lab.dir/experiments/fusion/src/main.cpp.o
+[10/29] Building CXX object CMakeFiles/sio_fusion_lab.dir/experiments/fusion/src/lab_prepare.cpp.o
+[11/29] Building CXX object CMakeFiles/sio_fusion_lab.dir/experiments/fusion/src/lab_io.cpp.o
+[12/29] Building CXX object CMakeFiles/sio_fusion_lab.dir/experiments/fusion/src/lab_run.cpp.o
+[13/29] Building CXX object CMakeFiles/sio_unit_tests.dir/src/imu_preprocessor.cpp.o
+[14/29] Building CXX object CMakeFiles/sio_unit_tests.dir/src/fusion_debug_logger.cpp.o
+[15/29] Building CXX object CMakeFiles/sio_unit_tests.dir/src/keyframe_manager.cpp.o
+[16/29] Building CXX object CMakeFiles/sio_unit_tests.dir/src/feature_processor.cpp.o
+[17/29] Building CXX object CMakeFiles/sio_unit_tests.dir/src/imu_integator.cpp.o
+[18/29] Linking CXX executable sio_fusion_lab
+[19/29] Building CXX object CMakeFiles/sio_unit_tests.dir/src/imu_debug_logger.cpp.o
+[20/29] Building CXX object CMakeFiles/sio_unit_tests.dir/modules/registration/src/color_icp.cpp.o
+[21/29] Building CXX object CMakeFiles/sio_unit_tests.dir/src/state_estimater.cpp.o
+[22/29] Building CXX object CMakeFiles/sio_unit_tests.dir/tests/unit/test_utils.cpp.o
+[23/29] Building CXX object CMakeFiles/sio_unit_tests.dir/tests/unit/test_imu_integrator.cpp.o
+FAILED: CMakeFiles/sio_unit_tests.dir/tests/unit/test_imu_integrator.cpp.o 
+/usr/bin/c++ -DBOOST_ALL_NO_LIB -DBOOST_DATE_TIME_DYN_LINK -DBOOST_FILESYSTEM_DYN_LINK -DBOOST_IOSTREAMS_DYN_LINK -DBOOST_SERIALIZATION_DYN_LINK -DBOOST_SYSTEM_DYN_LINK -DDEFAULT_RMW_IMPLEMENTATION=rmw_fastrtps_cpp -DDISABLE_PCAP -DFASTCDR_DYN_LINK -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -DRCUTILS_ENABLE_FAULT_INJECTION -DSIO_SLAM_PROJECT_CONFIG_PATH=\"/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/project_config.yaml\" -Dkiss_fft_scalar=double -I/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/include -I/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/modules/registration/include -I/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/tests -I/opt/ros/humble/include/pcl_conversions -I/opt/ros/humble/include/message_filters -isystem /usr/include/pcl-1.12 -isystem /usr/include/eigen3 -isystem /opt/ros/humble/src/gtest_vendor/include -isystem /opt/ros/humble/include/rclcpp -isystem /opt/ros/humble/include/sensor_msgs -isystem /opt/ros/humble/include/geometry_msgs -isystem /opt/ros/humble/include/pcl_msgs -isystem /opt/ros/humble/include/std_msgs -isystem /usr/include/ni -isystem /usr/include/openni2 -isystem /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include/opencv4 -isystem /usr/include/vtk-9.1 -isystem /usr/include/jsoncpp -isystem /usr/include/freetype2 -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtOpenGL -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -isystem /home/ubuntu22/slam/SIO_SLAM/build/dependencies/install/include -isystem /opt/ros/humble/include/ament_index_cpp -isystem /opt/ros/humble/include/libstatistics_collector -isystem /opt/ros/humble/include/builtin_interfaces -isystem /opt/ros/humble/include/rosidl_runtime_c -isystem /opt/ros/humble/include/rcutils -isystem /opt/ros/humble/include/rosidl_typesupport_interface -isystem /opt/ros/humble/include/fastcdr -isystem /opt/ros/humble/include/rosidl_runtime_cpp -isystem /opt/ros/humble/include/rosidl_typesupport_fastrtps_cpp -isystem /opt/ros/humble/include/rmw -isystem /opt/ros/humble/include/rosidl_typesupport_fastrtps_c -isystem /opt/ros/humble/include/rosidl_typesupport_introspection_c -isystem /opt/ros/humble/include/rosidl_typesupport_introspection_cpp -isystem /opt/ros/humble/include/rcl -isystem /opt/ros/humble/include/rcl_interfaces -isystem /opt/ros/humble/include/rcl_logging_interface -isystem /opt/ros/humble/include/rcl_yaml_param_parser -isystem /opt/ros/humble/include/libyaml_vendor -isystem /opt/ros/humble/include/tracetools -isystem /opt/ros/humble/include/rcpputils -isystem /opt/ros/humble/include/statistics_msgs -isystem /opt/ros/humble/include/rosgraph_msgs -isystem /opt/ros/humble/include/rosidl_typesupport_cpp -isystem /opt/ros/humble/include/rosidl_typesupport_c -g -O2 -Wno-deprecated-declarations -fPIC -fopenmp -std=gnu++17 -MD -MT CMakeFiles/sio_unit_tests.dir/tests/unit/test_imu_integrator.cpp.o -MF CMakeFiles/sio_unit_tests.dir/tests/unit/test_imu_integrator.cpp.o.d -o CMakeFiles/sio_unit_tests.dir/tests/unit/test_imu_integrator.cpp.o -c /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/tests/unit/test_imu_integrator.cpp
+/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/tests/unit/test_imu_integrator.cpp:206:56: error: macro "EXPECT_GT" passed 3 arguments, but takes just 2
+  206 |   EXPECT_GT(conditioned.block<3, 3>(6, 6).trace(), 1e-6);
+      |                                                        ^
+In file included from /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/tests/helpers/assert_eigen.h:4,
+                 from /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/tests/unit/test_imu_integrator.cpp:1:
+/opt/ros/humble/src/gtest_vendor/include/gtest/gtest.h:2037: note: macro "EXPECT_GT" defined here
+ 2037 | #define EXPECT_GT(val1, val2) \
+      | 
+/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/tests/unit/test_imu_integrator.cpp:216:55: error: macro "EXPECT_DOUBLE_EQ" passed 3 arguments, but takes just 2
+  216 |   EXPECT_DOUBLE_EQ(cov.block<18, 18>(3, 3).norm(), 0.0);
+      |                                                       ^
+In file included from /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/tests/helpers/assert_eigen.h:4,
+                 from /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/tests/unit/test_imu_integrator.cpp:1:
+/opt/ros/humble/src/gtest_vendor/include/gtest/gtest.h:2132: note: macro "EXPECT_DOUBLE_EQ" defined here
+ 2132 | #define EXPECT_DOUBLE_EQ(val1, val2)\
+      | 
+/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/tests/unit/test_imu_integrator.cpp: In member function ‘virtual void ImuIntegratorTest_AnchorConditionedPoseUncertaintyVanishesWithoutMotion_Test::TestBody()’:
+/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/tests/unit/test_imu_integrator.cpp:206:3: error: ‘EXPECT_GT’ was not declared in this scope
+  206 |   EXPECT_GT(conditioned.block<3, 3>(6, 6).trace(), 1e-6);
+      |   ^~~~~~~~~
+/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/tests/unit/test_imu_integrator.cpp: In member function ‘virtual void ImuIntegratorTest_GyroScaleUncertaintyGrowsWithRotationAngle_Test::TestBody()’:
+/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/tests/unit/test_imu_integrator.cpp:216:3: error: ‘EXPECT_DOUBLE_EQ’ was not declared in this scope
+  216 |   EXPECT_DOUBLE_EQ(cov.block<18, 18>(3, 3).norm(), 0.0);
+      |   ^~~~~~~~~~~~~~~~
+[24/29] Building CXX object CMakeFiles/sio_unit_tests.dir/tests/unit/test_feature_processor.cpp.o
+ninja: build stopped: subcommand failed.

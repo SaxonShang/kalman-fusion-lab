@@ -1,0 +1,208 @@
+# 由 scripts/esikf_eval.py calibrate 生成：静止帧对（真实运动为零，不用真值）上
+# 每种观测模型的 mean(eᵀR⁻¹e/3) 作为旋转 / 平移观测协方差的放大倍数，追加 e3_* 变体。
+extends: esikf_improvements.yaml
+esikf:
+  observation_calibration:
+    generated_by: scripts/esikf_eval.py calibrate
+    generated_at: '2026-10-29T16:07:33'
+    statistic: mean of zero-motion e^T R^-1 e per degree of freedom on static pairs
+    runs:
+    - /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261029_160019_854103_up_esikf
+    - /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261029_160122_894541_forward_esikf
+    - /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261029_160235_733595_right_esikf
+    - /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261029_160346_751644_yaw_left_esikf
+    - /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261029_160456_227028_pitch_up_esikf
+    - /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261029_160552_691337_roll_right_esikf
+    models:
+      obs_photometric_w05:
+        rotation: 27.37
+        translation: 29.64
+        statistic: mean
+        mean_estimate:
+        - 27.37
+        - 29.64
+        median_estimate:
+        - 11.11
+        - 14.21
+        pairs: 66
+        sequences:
+        - 20261015_112553_up
+        - 20261015_112659_forward
+        - 20261015_112757_right
+        - 20261015_112845_yaw_left
+        - 20261015_112940_pitch_up
+        - 20261015_113028_roll_right
+      obs_point_to_plane:
+        rotation: 49.27
+        translation: 30.15
+        statistic: mean
+        mean_estimate:
+        - 49.27
+        - 30.15
+        median_estimate:
+        - 36.17
+        - 18.82
+        pairs: 66
+        sequences:
+        - 20261015_112553_up
+        - 20261015_112659_forward
+        - 20261015_112757_right
+        - 20261015_112845_yaw_left
+        - 20261015_112940_pitch_up
+        - 20261015_113028_roll_right
+      obs_point_to_point:
+        rotation: 54.75
+        translation: 59.16
+        statistic: mean
+        mean_estimate:
+        - 54.75
+        - 59.16
+        median_estimate:
+        - 21.95
+        - 28.75
+        pairs: 66
+        sequences:
+        - 20261015_112553_up
+        - 20261015_112659_forward
+        - 20261015_112757_right
+        - 20261015_112845_yaw_left
+        - 20261015_112940_pitch_up
+        - 20261015_113028_roll_right
+      obs_ray:
+        rotation: 88.53
+        translation: 87.35
+        statistic: mean
+        mean_estimate:
+        - 88.53
+        - 87.35
+        median_estimate:
+        - 66.9
+        - 24.18
+        pairs: 66
+        sequences:
+        - 20261015_112553_up
+        - 20261015_112659_forward
+        - 20261015_112757_right
+        - 20261015_112845_yaw_left
+        - 20261015_112940_pitch_up
+        - 20261015_113028_roll_right
+  variants:
+  - name: legacy_w1
+    geometry_weight: 1.0
+  - name: legacy_w05
+    geometry_weight: 0.5
+  - name: e1_prior_residual
+    geometry_weight: 1.0
+    prior_residual: true
+    stop_rotation_rad: 0.0001
+    stop_translation_m: 0.0001
+    max_iterations: 8
+  - name: e2_anchor_prior
+    geometry_weight: 1.0
+    prior_residual: true
+    stop_rotation_rad: 0.0001
+    stop_translation_m: 0.0001
+    max_iterations: 8
+    prior_covariance: anchor_conditioned
+  - name: e2_e4_gyro_scale
+    geometry_weight: 1.0
+    prior_residual: true
+    stop_rotation_rad: 0.0001
+    stop_translation_m: 0.0001
+    max_iterations: 8
+    prior_covariance: anchor_conditioned
+    gyro_scale_sigma: 0.015
+  - name: e6_photometric_w075
+    geometry_weight: 0.75
+    prior_residual: true
+    stop_rotation_rad: 0.0001
+    stop_translation_m: 0.0001
+    max_iterations: 8
+    prior_covariance: anchor_conditioned
+    gyro_scale_sigma: 0.015
+    uniform_luminance: true
+    attribute_max_distance_m: 0.05
+  - name: e6_photometric_w05
+    geometry_weight: 0.5
+    prior_residual: true
+    stop_rotation_rad: 0.0001
+    stop_translation_m: 0.0001
+    max_iterations: 8
+    prior_covariance: anchor_conditioned
+    gyro_scale_sigma: 0.015
+    uniform_luminance: true
+    attribute_max_distance_m: 0.05
+  - name: e6_photometric_w025
+    geometry_weight: 0.25
+    prior_residual: true
+    stop_rotation_rad: 0.0001
+    stop_translation_m: 0.0001
+    max_iterations: 8
+    prior_covariance: anchor_conditioned
+    gyro_scale_sigma: 0.015
+    uniform_luminance: true
+    attribute_max_distance_m: 0.05
+  - name: e7_ray
+    geometry_weight: 1.0
+    prior_residual: true
+    stop_rotation_rad: 0.0001
+    stop_translation_m: 0.0001
+    max_iterations: 8
+    prior_covariance: anchor_conditioned
+    gyro_scale_sigma: 0.015
+    geometry_residual: ray
+  - name: e7_point_to_plane
+    geometry_weight: 1.0
+    prior_residual: true
+    stop_rotation_rad: 0.0001
+    stop_translation_m: 0.0001
+    max_iterations: 8
+    prior_covariance: anchor_conditioned
+    gyro_scale_sigma: 0.015
+    geometry_residual: point_to_plane
+    attribute_max_distance_m: 0.05
+  - name: e3_point_to_point
+    geometry_weight: 1.0
+    prior_residual: true
+    stop_rotation_rad: 0.0001
+    stop_translation_m: 0.0001
+    max_iterations: 8
+    prior_covariance: anchor_conditioned
+    gyro_scale_sigma: 0.015
+    observation_scale_rotation: 54.75
+    observation_scale_translation: 59.16
+  - name: e3_photometric_w05
+    geometry_weight: 0.5
+    prior_residual: true
+    stop_rotation_rad: 0.0001
+    stop_translation_m: 0.0001
+    max_iterations: 8
+    prior_covariance: anchor_conditioned
+    gyro_scale_sigma: 0.015
+    uniform_luminance: true
+    attribute_max_distance_m: 0.05
+    observation_scale_rotation: 27.37
+    observation_scale_translation: 29.64
+  - name: e3_ray
+    geometry_weight: 1.0
+    prior_residual: true
+    stop_rotation_rad: 0.0001
+    stop_translation_m: 0.0001
+    max_iterations: 8
+    prior_covariance: anchor_conditioned
+    gyro_scale_sigma: 0.015
+    geometry_residual: ray
+    observation_scale_rotation: 88.53
+    observation_scale_translation: 87.35
+  - name: e3_point_to_plane
+    geometry_weight: 1.0
+    prior_residual: true
+    stop_rotation_rad: 0.0001
+    stop_translation_m: 0.0001
+    max_iterations: 8
+    prior_covariance: anchor_conditioned
+    gyro_scale_sigma: 0.015
+    geometry_residual: point_to_plane
+    attribute_max_distance_m: 0.05
+    observation_scale_rotation: 49.27
+    observation_scale_translation: 30.15

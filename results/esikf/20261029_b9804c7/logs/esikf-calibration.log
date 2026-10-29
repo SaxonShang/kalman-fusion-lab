@@ -1,0 +1,11 @@
+using esikf_static / 20261015_112553_up: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261029_160019_854103_up_esikf
+using esikf_static / 20261015_112659_forward: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261029_160122_894541_forward_esikf
+using esikf_static / 20261015_112757_right: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261029_160235_733595_right_esikf
+using esikf_static / 20261015_112845_yaw_left: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261029_160346_751644_yaw_left_esikf
+using esikf_static / 20261015_112940_pitch_up: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261029_160456_227028_pitch_up_esikf
+using esikf_static / 20261015_113028_roll_right: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261029_160552_691337_roll_right_esikf
+obs_photometric_w05: 66 static pairs; rotation scale 27.37, translation scale 29.64 (mean); mean estimate [27.37, 29.64], median estimate [11.11, 14.21]
+obs_point_to_plane: 66 static pairs; rotation scale 49.27, translation scale 30.15 (mean); mean estimate [49.27, 30.15], median estimate [36.17, 18.82]
+obs_point_to_point: 66 static pairs; rotation scale 54.75, translation scale 59.16 (mean); mean estimate [54.75, 59.16], median estimate [21.95, 28.75]
+obs_ray: 66 static pairs; rotation scale 88.53, translation scale 87.35 (mean); mean estimate [88.53, 87.35], median estimate [66.9, 24.18]
+Wrote /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/experiments/fusion/configs/esikf_calibrated.yaml

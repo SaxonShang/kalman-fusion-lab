@@ -1,0 +1,120 @@
+INPUT left fp32 1 3 448 896
+INPUT right fp32 1 3 448 896
+OUTPUT disp fp32 1 1 448 896
+[DatasetLoader] Loaded 623 frames from frames.csv
+[DatasetLoader] Loaded 3884 IMU samples for 623 frame ids
+[ImagePreprocessor] Image preprocess config loaded from /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261029_160122_894541_forward_esikf/params.yaml
+[DatasetLoader] Grabbed frame 0, imu count = 5
+[DatasetLoader] Grabbed frame 1, imu count = 6
+[DatasetLoader] Grabbed frame 2, imu count = 5
+[DatasetLoader] Grabbed frame 3, imu count = 6
+[DatasetLoader] Grabbed frame 4, imu count = 7
+[DatasetLoader] Grabbed frame 5, imu count = 5
+[DatasetLoader] Grabbed frame 6, imu count = 7
+[DatasetLoader] Grabbed frame 7, imu count = 6
+[DatasetLoader] Grabbed frame 8, imu count = 6
+[DatasetLoader] Grabbed frame 9, imu count = 6
+[DatasetLoader] Grabbed frame 10, imu count = 7
+[DatasetLoader] Grabbed frame 11, imu count = 5
+[DatasetLoader] Grabbed frame 12, imu count = 6
+[DatasetLoader] Grabbed frame 13, imu count = 7
+[DatasetLoader] Grabbed frame 14, imu count = 6
+[DatasetLoader] Grabbed frame 15, imu count = 7
+[DatasetLoader] Grabbed frame 16, imu count = 7
+[DatasetLoader] Grabbed frame 17, imu count = 5
+[DatasetLoader] Grabbed frame 18, imu count = 7
+[DatasetLoader] Grabbed frame 19, imu count = 6
+[DatasetLoader] Grabbed frame 20, imu count = 6
+[DatasetLoader] Grabbed frame 21, imu count = 7
+[DatasetLoader] Grabbed frame 22, imu count = 7
+[DatasetLoader] Grabbed frame 23, imu count = 5
+[DatasetLoader] Grabbed frame 24, imu count = 7
+[DatasetLoader] Grabbed frame 25, imu count = 7
+[DatasetLoader] Grabbed frame 26, imu count = 6
+[DatasetLoader] Grabbed frame 27, imu count = 7
+[DatasetLoader] Grabbed frame 28, imu count = 6
+[DatasetLoader] Grabbed frame 29, imu count = 7
+[DatasetLoader] Grabbed frame 30, imu count = 7
+[DatasetLoader] Grabbed frame 31, imu count = 5
+[DatasetLoader] Grabbed frame 32, imu count = 6
+[DatasetLoader] Grabbed frame 33, imu count = 7
+[DatasetLoader] Grabbed frame 34, imu count = 6
+[DatasetLoader] Grabbed frame 35, imu count = 7
+[DatasetLoader] Grabbed frame 36, imu count = 7
+[TRT] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[disparity] frame=96 min=6.09766 max=60.2812 positive=401408 inference_ms=631.715 export_ms=741.089
+[DatasetLoader] Grabbed frame 37, imu count = 5
+[disparity] frame=97 min=6.12891 max=58.5938 positive=401408 inference_ms=594.46 export_ms=710.488
+[DatasetLoader] Grabbed frame 38, imu count = 5
+[DatasetLoader] Grabbed frame 39, imu count = 6
+[DatasetLoader] Grabbed frame 40, imu count = 6
+[disparity] frame=100 min=5.95703 max=60.125 positive=401408 inference_ms=597.187 export_ms=706.372
+[DatasetLoader] Grabbed frame 41, imu count = 9
+[disparity] frame=101 min=6.11328 max=59.3438 positive=401408 inference_ms=598.298 export_ms=707.392
+[DatasetLoader] Grabbed frame 42, imu count = 4
+[DatasetLoader] Grabbed frame 43, imu count = 7
+[DatasetLoader] Grabbed frame 44, imu count = 6
+[disparity] frame=104 min=6.00781 max=58.6875 positive=401408 inference_ms=598.893 export_ms=707.783
+[DatasetLoader] Grabbed frame 45, imu count = 7
+[disparity] frame=105 min=6.08594 max=58.6562 positive=401408 inference_ms=598.63 export_ms=707.939
+[DatasetLoader] Grabbed frame 46, imu count = 5
+[DatasetLoader] Grabbed frame 47, imu count = 6
+[DatasetLoader] Grabbed frame 48, imu count = 6
+[disparity] frame=108 min=6.10547 max=58.6875 positive=401408 inference_ms=598.863 export_ms=706.823
+[DatasetLoader] Grabbed frame 49, imu count = 5
+[disparity] frame=109 min=6.03906 max=58.6562 positive=401408 inference_ms=595.375 export_ms=706.13
+[DatasetLoader] Grabbed frame 50, imu count = 6
+[DatasetLoader] Grabbed frame 51, imu count = 6
+[DatasetLoader] Grabbed frame 52, imu count = 7
+[disparity] frame=112 min=6.10156 max=59.0312 positive=401408 inference_ms=598.517 export_ms=706.989
+[DatasetLoader] Grabbed frame 53, imu count = 7
+[disparity] frame=113 min=6.09375 max=59.2188 positive=401408 inference_ms=598.062 export_ms=707.263
+[DatasetLoader] Grabbed frame 54, imu count = 5
+[DatasetLoader] Grabbed frame 55, imu count = 6
+[DatasetLoader] Grabbed frame 56, imu count = 6
+[disparity] frame=116 min=6.05859 max=60.25 positive=401408 inference_ms=599.042 export_ms=708.202
+[DatasetLoader] Grabbed frame 57, imu count = 5
+[disparity] frame=117 min=6.11719 max=58.875 positive=401408 inference_ms=594.17 export_ms=703.284
+[DatasetLoader] Grabbed frame 58, imu count = 6
+[DatasetLoader] Grabbed frame 59, imu count = 6
+[DatasetLoader] Grabbed frame 60, imu count = 6
+[disparity] frame=120 min=6.10547 max=59.1562 positive=401408 inference_ms=603.327 export_ms=711.847
+[DatasetLoader] Grabbed frame 61, imu count = 6
+[disparity] frame=121 min=6.10156 max=59.4062 positive=401408 inference_ms=595.402 export_ms=709.388
+[DatasetLoader] Grabbed frame 62, imu count = 6
+[DatasetLoader] Grabbed frame 63, imu count = 6
+[DatasetLoader] Grabbed frame 64, imu count = 6
+[disparity] frame=124 min=6 max=58.9062 positive=401408 inference_ms=602.94 export_ms=712.115
+[DatasetLoader] Grabbed frame 65, imu count = 7
+[disparity] frame=125 min=6.07812 max=59.0625 positive=401408 inference_ms=601.269 export_ms=709.933
+[DatasetLoader] Grabbed frame 66, imu count = 6
+[DatasetLoader] Grabbed frame 67, imu count = 7
+[DatasetLoader] Grabbed frame 68, imu count = 6
+[disparity] frame=128 min=6.04688 max=58.75 positive=401408 inference_ms=602.451 export_ms=710.876
+[DatasetLoader] Grabbed frame 69, imu count = 6
+[DatasetLoader] Grabbed frame 70, imu count = 7
+[DatasetLoader] Grabbed frame 71, imu count = 7
+[DatasetLoader] Grabbed frame 72, imu count = 5
+[DatasetLoader] Grabbed frame 73, imu count = 6
+[DatasetLoader] Grabbed frame 74, imu count = 7
+[disparity] frame=134 min=6.05859 max=58.6875 positive=401408 inference_ms=606.293 export_ms=715.15
+[DatasetLoader] Grabbed frame 75, imu count = 5
+[DatasetLoader] Grabbed frame 76, imu count = 6
+[disparity] frame=136 min=6.05469 max=58.75 positive=401408 inference_ms=596.808 export_ms=704.467
+[DatasetLoader] Grabbed frame 77, imu count = 6
+[DatasetLoader] Grabbed frame 78, imu count = 7
+[DatasetLoader] Grabbed frame 79, imu count = 6
+[DatasetLoader] Grabbed frame 80, imu count = 5
+[DatasetLoader] Grabbed frame 81, imu count = 7
+[DatasetLoader] Grabbed frame 82, imu count = 7
+[disparity] frame=142 min=6.10938 max=59.75 positive=401408 inference_ms=598.356 export_ms=708.34
+[DatasetLoader] Grabbed frame 83, imu count = 5
+[DatasetLoader] Grabbed frame 84, imu count = 7
+[disparity] frame=144 min=6.0625 max=59.25 positive=401408 inference_ms=602.905 export_ms=712.355
+[DatasetLoader] Grabbed frame 85, imu count = 7
+[DatasetLoader] Grabbed frame 86, imu count = 6
+[DatasetLoader] Grabbed frame 87, imu count = 7
+[DatasetLoader] Grabbed frame 88, imu count = 5
+[DatasetLoader] Grabbed frame 89, imu count = 6
+[DatasetLoader] Grabbed frame 90, imu count = 6
+[disparity] frame=150 min=6.07031 max=59.25 positive=401408 inference_ms=606.823 export_ms=716.039
