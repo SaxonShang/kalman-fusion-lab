@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Freeze completed E0–E7 runs and make a review bundle; never rerun/tune the filter.
 
-Run after the six-sequence static, calibrated and prior-model experiments. Raw run
-files retain their original bytes and local paths. MANIFEST.json maps those paths
+Run after the six-sequence static, calibrated and prior-model experiments. Raw
+numeric files retain their bytes and local paths; compact HTML reports point to
+the included iteration traces and final matrices. MANIFEST.json maps local paths
 to the portable archive and records the tested commit and input/cache identities.
 """
 
@@ -36,6 +37,15 @@ def write_csv(path, rows):
         writer = csv.DictWriter(stream, list(rows[0]))
         writer.writeheader()
         writer.writerows(rows)
+
+
+def compact_report_links(path):
+    text = path.read_text()
+    text = text.replace("<a href='esikf_iterations.csv'>ESIKF 逐轮 CSV</a>",
+                        "<a href='iteration_trace.csv'>ESIKF 逐轮轨迹 CSV</a> · "
+                        "<a href='last_iteration.csv'>末轮 H / R / K_pose 矩阵 CSV</a>")
+    text = text.replace("R / P / K 矩阵 CSV", "R / P 矩阵 CSV")
+    path.write_text(text)
 
 
 def plot_summary(target):
@@ -85,6 +95,7 @@ def archive(args):
     manifest = {"created_at": datetime.now().astimezone().isoformat(timespec="seconds"),
                 "tested_commit": args.commit, "configs": CONFIGS,
                 "full_matrices": args.full_matrices,
+                "html_links": "Compact reports link to included scalar traces and last-iteration matrices.",
                 "local_patch": "Two GTest macro arguments parenthesized for Eigen template commas; no algorithm edits.",
                 "evaluation": "Independent fixed pairs; anchor-conditioned relative pose errors, not trajectory ATE.",
                 "runs": []}
@@ -124,6 +135,7 @@ def archive(args):
                 write_csv(destination / "iteration_trace.csv", [{k: row[k] for k in fields} for row in iterations])
                 last = {(row["case"], row["variant"]): row for row in iterations}
                 write_csv(destination / "last_iteration.csv", list(last.values()))
+            compact_report_links(destination / "report.html")
         provenance = destination / "cache_provenance"
         provenance.mkdir()
         shutil.copy2(cache / "complete.json", provenance / "frozen_inputs.json")

@@ -83,6 +83,8 @@ IMU 先验：25.754 mm / 0.0596117°。每格均为相同 30 帧对的条件 RMS
 | logs/ | 三阶段执行、标定、构建和测试日志，含测试宏编译失败及修正补丁 |
 | [SHA256SUMS](SHA256SUMS) | 本次审阅包的独立校验；不会覆盖首次发布快照 |
 
+分序列 HTML 的迭代入口已改为本包中的逐轮轨迹与末轮 H/R/K_pose；原始数值 CSV 保持不变。
+
 本审阅包保留所有指标、最终位姿矩阵与逐轮标量记录；原始 21 维状态转储及每轮完整矩阵仍在本机 `artifacts/fusion/`，其位置、大小及 SHA256 已写入 MANIFEST。原始点云、132 帧新增静止视差和模型权重未重复上传。需要完整矩阵归档时，可用 `scripts/archive_esikf_results.py --full-matrices` 生成另一份目录，旧结果保持不变。
 
 可从本目录校验：`sha256sum -c SHA256SUMS`。按 [MANIFEST.json](MANIFEST.json) 定位各个原始执行；绝对路径是执行来源记录，CSV 的 `run` 列和归档路径可跨机器定位。

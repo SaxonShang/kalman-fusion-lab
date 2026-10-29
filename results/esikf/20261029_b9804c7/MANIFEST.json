@@ -388,5 +388,6 @@
       "frozen_cache": "32a9eed5ee535952fc7b",
       "disparity_cache": "61b36f0cb5aa15252757"
     }
-  ]
+  ],
+  "html_links": "Compact reports link to included scalar traces and last-iteration matrices."
 }
