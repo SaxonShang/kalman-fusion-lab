@@ -4,6 +4,8 @@
 
 2026-10-29 已修正初始 P 的轴索引与 ESKF 混合量纲阻尼问题，93 项单测通过。新增固定观测/同一 P、重传播 P、P/R 敏感性三组共 960 条对照。精度并未因此全部改善；诊断结论见 [实验记录.md 第 4 节](../../实验记录.md#4-2026-10-29-初始-p-与-eskf-求解修复)。
 
+2026-10-30 第二轮 F0–F5 已完成：实测 `1b88c05`，115 项测试、18 次运行、1092 条记录。重点检查相对先验、旋转冻结、NIS 与静止标定，见 [完整审阅包](../../results/esikf/20261030_1b88c05/README.md) 和 [实验记录第 7 节](../../实验记录.md#7-2026-10-30-第二轮-f0f5已运行)。
+
 配准模块采用 [robotic-front main 提交 `744ac2d`](https://github.com/Ben-cpy/robotic-front/commit/744ac2d993ae629b0cc44a3b1d995e04ab4fad48)，默认欧氏 GICP；投影 Stereo-GICP 作为独立对照。算法源码和适配说明见 [registration/README.md](../../modules/registration/README.md)。版本信息随实验配置保存，升级前的结果保留原样。
 
 ```mermaid

@@ -1,0 +1,63 @@
+{
+  "commit": "1b88c05e0496f8e8790f79a26f857c7c5e54bf35",
+  "records": 20,
+  "valid": 20,
+  "frozen_rotation_checks": [
+    {
+      "case": "static_start",
+      "variant": "f3s_point_to_plane_trans",
+      "rotation_max_abs_change": 0.0,
+      "rotation_cov_max_abs_change": 0.0
+    },
+    {
+      "case": "static_start",
+      "variant": "f0_f3s_point_to_plane_trans",
+      "rotation_max_abs_change": 0.0,
+      "rotation_cov_max_abs_change": 0.0
+    },
+    {
+      "case": "main_motion_long",
+      "variant": "f3s_point_to_plane_trans",
+      "rotation_max_abs_change": 0.0,
+      "rotation_cov_max_abs_change": 0.0
+    },
+    {
+      "case": "main_motion_long",
+      "variant": "f0_f3s_point_to_plane_trans",
+      "rotation_max_abs_change": 0.0,
+      "rotation_cov_max_abs_change": 0.0
+    }
+  ],
+  "relative_prior_checks": [
+    {
+      "case": "static_start",
+      "variant": "f0_relative_prior",
+      "covariance_max_abs_difference": 0.0
+    },
+    {
+      "case": "static_start",
+      "variant": "f0_f3_point_to_plane_trans",
+      "covariance_max_abs_difference": 0.0
+    },
+    {
+      "case": "static_start",
+      "variant": "f0_f3s_point_to_plane_trans",
+      "covariance_max_abs_difference": 0.0
+    },
+    {
+      "case": "main_motion_long",
+      "variant": "f0_relative_prior",
+      "covariance_max_abs_difference": 0.0
+    },
+    {
+      "case": "main_motion_long",
+      "variant": "f0_f3_point_to_plane_trans",
+      "covariance_max_abs_difference": 0.0
+    },
+    {
+      "case": "main_motion_long",
+      "variant": "f0_f3s_point_to_plane_trans",
+      "covariance_max_abs_difference": 0.0
+    }
+  ]
+}

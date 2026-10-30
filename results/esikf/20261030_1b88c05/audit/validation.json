@@ -1,0 +1,256 @@
+{
+  "tested_commit": "1b88c05e0496f8e8790f79a26f857c7c5e54bf35",
+  "runs": 18,
+  "records": 1092,
+  "checks": {
+    "prior_mean_max_abs_difference_from_round1": 0,
+    "e2_result_max_abs_difference_from_round1": 1.3322676295501878e-15,
+    "e2_P0_max_abs_difference_from_round1": 0,
+    "e2_P1_max_abs_difference_from_round1": 1.328147661294743e-17,
+    "round1_e2_control_records": 60,
+    "relative_records": 240,
+    "prior_mean_max_abs_difference_between_models": 0,
+    "f3s_records": 180
+  },
+  "negative_eigenvalue_definition": "strictly below zero; magnitude reported to distinguish roundoff",
+  "covariance_groups": [
+    {
+      "config": "esikf_round2_calibrated",
+      "variant": "e2_anchor_prior",
+      "records": 30,
+      "negative_full_posterior_eigenvalues": 5,
+      "min_full_posterior_eigenvalue": -6.239405312506189e-10
+    },
+    {
+      "config": "esikf_round2_calibrated",
+      "variant": "f0_e3_point_to_point",
+      "records": 30,
+      "negative_full_posterior_eigenvalues": 0,
+      "min_full_posterior_eigenvalue": 1.3384317787375335e-11
+    },
+    {
+      "config": "esikf_round2_calibrated",
+      "variant": "f0_f3_point_to_plane_trans",
+      "records": 30,
+      "negative_full_posterior_eigenvalues": 0,
+      "min_full_posterior_eigenvalue": 1.3383813778772173e-11
+    },
+    {
+      "config": "esikf_round2_calibrated",
+      "variant": "f0_f3s_point_to_plane_trans",
+      "records": 30,
+      "negative_full_posterior_eigenvalues": 0,
+      "min_full_posterior_eigenvalue": 1.3383823387236868e-11
+    },
+    {
+      "config": "esikf_round2_calibrated",
+      "variant": "f0_relative_prior",
+      "records": 30,
+      "negative_full_posterior_eigenvalues": 0,
+      "min_full_posterior_eigenvalue": 1.3381167149117002e-11
+    },
+    {
+      "config": "esikf_round2_calibrated",
+      "variant": "f2_e3_point_to_plane",
+      "records": 30,
+      "negative_full_posterior_eigenvalues": 5,
+      "min_full_posterior_eigenvalue": -6.229702275785672e-10
+    },
+    {
+      "config": "esikf_round2_calibrated",
+      "variant": "f2_e3_point_to_point",
+      "records": 30,
+      "negative_full_posterior_eigenvalues": 5,
+      "min_full_posterior_eigenvalue": -6.229620419941456e-10
+    },
+    {
+      "config": "esikf_round2_calibrated",
+      "variant": "f2_point_to_plane",
+      "records": 30,
+      "negative_full_posterior_eigenvalues": 5,
+      "min_full_posterior_eigenvalue": -6.23661721662425e-10
+    },
+    {
+      "config": "esikf_round2_calibrated",
+      "variant": "f2_ray",
+      "records": 30,
+      "negative_full_posterior_eigenvalues": 5,
+      "min_full_posterior_eigenvalue": -6.233553077321449e-10
+    },
+    {
+      "config": "esikf_round2_calibrated",
+      "variant": "f3_e3_point_to_plane_trans",
+      "records": 30,
+      "negative_full_posterior_eigenvalues": 5,
+      "min_full_posterior_eigenvalue": -6.229691158074403e-10
+    },
+    {
+      "config": "esikf_round2_calibrated",
+      "variant": "f3_point_to_plane_trans",
+      "records": 30,
+      "negative_full_posterior_eigenvalues": 5,
+      "min_full_posterior_eigenvalue": -6.236853045956347e-10
+    },
+    {
+      "config": "esikf_round2_calibrated",
+      "variant": "f3_point_to_point_trans",
+      "records": 30,
+      "negative_full_posterior_eigenvalues": 5,
+      "min_full_posterior_eigenvalue": -6.241220393432343e-10
+    },
+    {
+      "config": "esikf_round2_calibrated",
+      "variant": "f3s_e3_point_to_plane_trans",
+      "records": 30,
+      "negative_full_posterior_eigenvalues": 5,
+      "min_full_posterior_eigenvalue": -6.229680230767657e-10
+    },
+    {
+      "config": "esikf_round2_calibrated",
+      "variant": "f3s_point_to_plane_trans",
+      "records": 30,
+      "negative_full_posterior_eigenvalues": 5,
+      "min_full_posterior_eigenvalue": -6.236867020585806e-10
+    },
+    {
+      "config": "esikf_round2_calibrated",
+      "variant": "f4_e3_point_to_point_iter20",
+      "records": 30,
+      "negative_full_posterior_eigenvalues": 5,
+      "min_full_posterior_eigenvalue": -6.229621368366768e-10
+    },
+    {
+      "config": "esikf_round2_calibrated",
+      "variant": "f4_point_to_plane_iter20",
+      "records": 30,
+      "negative_full_posterior_eigenvalues": 5,
+      "min_full_posterior_eigenvalue": -6.236302464947526e-10
+    },
+    {
+      "config": "esikf_round2_prior_model",
+      "variant": "e2_anchor_prior",
+      "records": 30,
+      "negative_full_posterior_eigenvalues": 0,
+      "min_full_posterior_eigenvalue": 2.4408197373479164e-11
+    },
+    {
+      "config": "esikf_round2_prior_model",
+      "variant": "f0_e3_point_to_point",
+      "records": 30,
+      "negative_full_posterior_eigenvalues": 0,
+      "min_full_posterior_eigenvalue": 2.4487931015943162e-11
+    },
+    {
+      "config": "esikf_round2_prior_model",
+      "variant": "f0_f3_point_to_plane_trans",
+      "records": 30,
+      "negative_full_posterior_eigenvalues": 0,
+      "min_full_posterior_eigenvalue": 2.4486231981666786e-11
+    },
+    {
+      "config": "esikf_round2_prior_model",
+      "variant": "f0_f3s_point_to_plane_trans",
+      "records": 30,
+      "negative_full_posterior_eigenvalues": 0,
+      "min_full_posterior_eigenvalue": 2.448623299255023e-11
+    },
+    {
+      "config": "esikf_round2_prior_model",
+      "variant": "f0_relative_prior",
+      "records": 30,
+      "negative_full_posterior_eigenvalues": 0,
+      "min_full_posterior_eigenvalue": 2.4477308151924366e-11
+    },
+    {
+      "config": "esikf_round2_prior_model",
+      "variant": "f2_e3_point_to_plane",
+      "records": 30,
+      "negative_full_posterior_eigenvalues": 0,
+      "min_full_posterior_eigenvalue": 2.4418859560978038e-11
+    },
+    {
+      "config": "esikf_round2_prior_model",
+      "variant": "f2_e3_point_to_point",
+      "records": 30,
+      "negative_full_posterior_eigenvalues": 0,
+      "min_full_posterior_eigenvalue": 2.4418782689394523e-11
+    },
+    {
+      "config": "esikf_round2_prior_model",
+      "variant": "f2_point_to_plane",
+      "records": 30,
+      "negative_full_posterior_eigenvalues": 0,
+      "min_full_posterior_eigenvalue": 2.4417089733072285e-11
+    },
+    {
+      "config": "esikf_round2_prior_model",
+      "variant": "f2_ray",
+      "records": 30,
+      "negative_full_posterior_eigenvalues": 0,
+      "min_full_posterior_eigenvalue": 2.441874074480348e-11
+    },
+    {
+      "config": "esikf_round2_prior_model",
+      "variant": "f3_e3_point_to_plane_trans",
+      "records": 30,
+      "negative_full_posterior_eigenvalues": 0,
+      "min_full_posterior_eigenvalue": 2.4418859549075836e-11
+    },
+    {
+      "config": "esikf_round2_prior_model",
+      "variant": "f3_point_to_plane_trans",
+      "records": 30,
+      "negative_full_posterior_eigenvalues": 0,
+      "min_full_posterior_eigenvalue": 2.4417099122912794e-11
+    },
+    {
+      "config": "esikf_round2_prior_model",
+      "variant": "f3_point_to_point_trans",
+      "records": 30,
+      "negative_full_posterior_eigenvalues": 0,
+      "min_full_posterior_eigenvalue": 2.4408253268101818e-11
+    },
+    {
+      "config": "esikf_round2_prior_model",
+      "variant": "f3s_e3_point_to_plane_trans",
+      "records": 30,
+      "negative_full_posterior_eigenvalues": 0,
+      "min_full_posterior_eigenvalue": 2.441885955182289e-11
+    },
+    {
+      "config": "esikf_round2_prior_model",
+      "variant": "f3s_point_to_plane_trans",
+      "records": 30,
+      "negative_full_posterior_eigenvalues": 0,
+      "min_full_posterior_eigenvalue": 2.4417099236898e-11
+    },
+    {
+      "config": "esikf_round2_prior_model",
+      "variant": "f4_e3_point_to_point_iter20",
+      "records": 30,
+      "negative_full_posterior_eigenvalues": 0,
+      "min_full_posterior_eigenvalue": 2.4418782698947823e-11
+    },
+    {
+      "config": "esikf_round2_prior_model",
+      "variant": "f4_point_to_plane_iter20",
+      "records": 30,
+      "negative_full_posterior_eigenvalues": 0,
+      "min_full_posterior_eigenvalue": 2.4417089761948343e-11
+    },
+    {
+      "config": "esikf_round2_static",
+      "variant": "obs_point_to_plane",
+      "records": 66,
+      "negative_full_posterior_eigenvalues": 0,
+      "min_full_posterior_eigenvalue": 2.670146902091259e-08
+    },
+    {
+      "config": "esikf_round2_static",
+      "variant": "obs_point_to_point",
+      "records": 66,
+      "negative_full_posterior_eigenvalues": 0,
+      "min_full_posterior_eigenvalue": 1.8755324138505727e-09
+    }
+  ]
+}

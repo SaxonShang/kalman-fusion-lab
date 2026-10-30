@@ -1,0 +1,13 @@
+using esikf_round2_static / 20261015_112553_up: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_104226_822558_up_esikf
+using esikf_round2_static / 20261015_112659_forward: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_104332_221449_forward_esikf
+using esikf_round2_static / 20261015_112757_right: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_104444_082213_right_esikf
+using esikf_round2_static / 20261015_112845_yaw_left: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_104556_550993_yaw_left_esikf
+using esikf_round2_static / 20261015_112940_pitch_up: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_104657_231930_pitch_up_esikf
+using esikf_round2_static / 20261015_113028_roll_right: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_104752_090411_roll_right_esikf
+obs_point_to_plane [all]: 66/66 pairs; rotation/translation scale mean [58.43, 35.92], median [40.26, 21.46]
+obs_point_to_plane [usable]: 66/66 pairs; rotation/translation scale mean [58.43, 35.92], median [40.26, 21.46]
+obs_point_to_plane [converged]: 38/66 pairs; rotation/translation scale mean [48.06, 29.13], median [29.14, 16.61]
+obs_point_to_point [all]: 66/66 pairs; rotation/translation scale mean [111.18, 83.18], median [32.99, 37.31]
+obs_point_to_point [usable]: 66/66 pairs; rotation/translation scale mean [111.18, 83.18], median [32.99, 37.31]
+obs_point_to_point [converged]: 52/66 pairs; rotation/translation scale mean [34.37, 54.88], median [23.86, 23.11]
+Wrote /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/experiments/fusion/configs/esikf_round2_calibrated.yaml

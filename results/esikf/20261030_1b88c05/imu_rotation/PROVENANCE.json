@@ -1,0 +1,9 @@
+{
+  "tested_commit": "1b88c05e0496f8e8790f79a26f857c7c5e54bf35",
+  "script": "scripts/imu_rotation_check.py",
+  "script_sha256": "317f69e45170a10d893775b9b13555520ea6fa43cf44ebf6b093823f850fb7b2",
+  "input_directory": "results/inputs",
+  "raw_windows_csv_sha256": "0efd7477a02902a26e4446f6ebb76adcd2d46f4b50dc2fba3b79d440ad1acf5f",
+  "raw_windows_csv_bytes": 839178,
+  "fitted_model_applied_to_filter": false
+}

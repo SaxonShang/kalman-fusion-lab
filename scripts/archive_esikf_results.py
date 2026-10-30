@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Freeze completed E0–E7 runs and make a review bundle; never rerun/tune the filter.
+"""Freeze completed ESIKF runs and make a review bundle; never rerun/tune the filter.
 
 Run after the six-sequence static, calibrated and prior-model experiments. Raw
 numeric files retain their bytes and local paths; compact HTML reports point to
@@ -48,7 +48,7 @@ def compact_report_links(path):
     path.write_text(text)
 
 
-def plot_summary(target):
+def plot_summary(target, configs, title):
     os.environ.setdefault("MPLCONFIGDIR", str(ROOT / "build/matplotlib-cache"))
     import matplotlib
     matplotlib.use("Agg")
@@ -56,29 +56,31 @@ def plot_summary(target):
     import numpy as np
 
     rows = list(csv.DictReader((target / "summary.csv").open()))
-    variants = [r["variant"] for r in rows if r["config"] == "esikf_calibrated"]
-    fig, axes = plt.subplots(1, 3, figsize=(18, 6.5), layout="constrained")
+    calibrated, prior_model = configs[1:]
+    variants = [r["variant"] for r in rows if r["config"] == calibrated]
+    fig, axes = plt.subplots(1, 3, figsize=(19, max(6.5, len(variants) * .42)), layout="constrained")
     y = np.arange(len(variants))
     for config, offset, color, label in [
-        ("esikf_calibrated", -0.17, "#3264a8", "Original IMU model"),
-        ("esikf_prior_model", 0.17, "#cb7628", "SDK noise + observability P")]:
+        (calibrated, -0.17, "#3264a8", "Original IMU model"),
+        (prior_model, 0.17, "#cb7628", "SDK noise + observability P")]:
         group = {r["variant"]: r for r in rows if r["config"] == config}
         for ax, key in zip(axes, ["trans_rmse_mm", "rot_rmse_deg", "trans_rmse_unflagged_mm"]):
             ax.barh(y + offset, [float(group[v][key]) for v in variants],
                     height=0.32, color=color, label=label)
         for ax, key in zip(axes[:2], ["prior_trans_rmse_mm", "prior_rot_rmse_deg"]):
             ax.axvline(float(group[variants[0]][key]), color=color, linestyle="--", linewidth=1)
-    for ax, title in zip(axes, ["Translation RMSE (mm), 30 pairs", "Rotation RMSE (deg), 30 pairs",
+    for ax, panel_title in zip(axes, ["Translation RMSE (mm), 30 pairs", "Rotation RMSE (deg), 30 pairs",
                               "Translation RMSE (mm), prior error <= 50 mm"]):
-        ax.set_title(title, fontsize=10)
+        ax.set_title(panel_title, fontsize=10)
         ax.set_yticks(y, variants)
         ax.invert_yaxis()
         ax.grid(axis="x", alpha=0.25)
-    axes[0].legend(fontsize=8)
-    fig.suptitle("ESIKF E0–E7: frozen pairs, conditional pose error (not trajectory ATE)\n"
+    handles, labels = axes[0].get_legend_handles_labels()
+    fig.legend(handles, labels, fontsize=9, loc="lower center", bbox_to_anchor=(.5, -.035), ncol=2)
+    fig.suptitle(f"{title}: frozen pairs, conditional pose error (not trajectory ATE)\n"
                  "Dashed lines: IMU prior. R scales fitted on separate static pairs without GT.", fontsize=12)
-    fig.savefig(target / "comparison.png", dpi=160)
-    fig.savefig(target / "comparison.svg")
+    fig.savefig(target / "comparison.png", dpi=160, bbox_inches="tight")
+    fig.savefig(target / "comparison.svg", bbox_inches="tight")
     plt.close(fig)
 
 
@@ -86,17 +88,22 @@ def archive(args):
     target = args.destination.resolve()
     if target.exists():
         raise SystemExit(f"Refusing to overwrite existing archive: {target}")
-    runs = find_runs([args.runs], CONFIGS)
+    configs = args.config
+    if len(configs) != 3:
+        raise SystemExit("Supply static, calibrated and prior-model config stems in that order")
+    runs = find_runs([args.runs], configs)
     if len(runs) != 18:
         raise SystemExit(f"Expected 18 finished sequence runs, got {len(runs)}")
-    for config in CONFIGS:
+    for config in configs:
         if {cfg["sequence"] for _, cfg, c in runs if c == config} != SEQUENCES:
             raise SystemExit(f"Missing or unexpected sequences for {config}")
     manifest = {"created_at": datetime.now().astimezone().isoformat(timespec="seconds"),
-                "tested_commit": args.commit, "configs": CONFIGS,
+                "tested_commit": args.commit, "configs": configs,
                 "full_matrices": args.full_matrices,
                 "html_links": "Compact reports link to included scalar traces and last-iteration matrices.",
-                "local_patch": "Two GTest macro arguments parenthesized for Eigen template commas; no algorithm edits.",
+                "local_patch": args.local_patch,
+                "report_processing_sha256": {name: sha(ROOT / "scripts" / name) for name in
+                    ("fusion_report.py", "esikf_eval.py", "archive_esikf_results.py")},
                 "evaluation": "Independent fixed pairs; anchor-conditioned relative pose errors, not trajectory ATE.",
                 "runs": []}
     all_rows = []
@@ -157,20 +164,22 @@ def archive(args):
     write_csv(target / "metrics.csv", all_rows)
     (target / "metrics.csv.gz").write_bytes(gzip.compress((target / "metrics.csv").read_bytes(), mtime=0))
     (target / "metrics.csv").unlink()
-    summarize(argparse.Namespace(directories=[target / "runs"], config=CONFIGS, csv=target / "summary.csv"))
+    summarize(argparse.Namespace(directories=[target / "runs"], config=configs, csv=target / "summary.csv"))
     (target / "MANIFEST.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n")
-    plot_summary(target)
+    plot_summary(target, configs, args.title)
     logs = target / "logs"
     logs.mkdir()
-    for name in ["fusion-lab-tests.log", "b9804c7-before-test-macro-fix.log", "esikf-gpu-configure.log",
+    log_names = args.log if args.log is not None else ["fusion-lab-tests.log", "b9804c7-before-test-macro-fix.log", "esikf-gpu-configure.log",
                  "esikf-gpu-export-build.log", "esikf-static.log", "esikf-calibration.log",
                  "esikf-calibrated.log", "esikf-prior-model.log", "esikf-summary.log", "esikf-environment.log",
-                 "esikf-legacy-validation.json"]:
+                 "esikf-legacy-validation.json"]
+    for name in log_names:
         source = ROOT / "build" / name
         if source.is_file():
             shutil.copy2(source, logs / name)
-    patch = subprocess.check_output(["git", "diff", args.commit, "--", "tests/unit/test_imu_integrator.cpp"], cwd=ROOT)
-    (logs / "test-build-fix.patch").write_bytes(patch)
+    if args.local_patch:
+        patch = subprocess.check_output(["git", "diff", args.commit, "--", "tests/unit/test_imu_integrator.cpp"], cwd=ROOT)
+        (logs / "test-build-fix.patch").write_bytes(patch)
     print(f"Archived {len(runs)} runs / {len(all_rows)} records to {target}")
     print("Add the review README and finalize SHA256SUMS after writing the narrative.")
 
@@ -180,6 +189,12 @@ if __name__ == "__main__":
     parser.add_argument("--runs", type=Path, default=ROOT / "artifacts/fusion")
     parser.add_argument("--destination", type=Path, required=True)
     parser.add_argument("--commit", required=True)
+    parser.add_argument("--config", nargs="+", default=CONFIGS,
+                        help="Static, calibrated and prior-model config stems, in that order")
+    parser.add_argument("--title", default="ESIKF E0–E7")
+    parser.add_argument("--local-patch", default=None,
+                        help="Describe any local patch to the tested commit (default: none)")
+    parser.add_argument("--log", nargs="+", help="Log filenames under build/ to include")
     parser.add_argument("--full-matrices", action="store_true",
                         help="Also copy full 21-state/iteration matrix dumps (default: final P/R/K CSV + scalar traces).")
     archive(parser.parse_args())

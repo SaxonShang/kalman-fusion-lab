@@ -1,0 +1,120 @@
+[DatasetLoader] Loaded 623 frames from frames.csv
+[DatasetLoader] Loaded 3884 IMU samples for 623 frame ids
+[ImagePreprocessor] Image preprocess config loaded from /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_104332_221449_forward_esikf/params.yaml
+[DatasetLoader] Grabbed frame 0, imu count = 5
+[DatasetLoader] Grabbed frame 1, imu count = 6
+[DatasetLoader] Grabbed frame 2, imu count = 5
+[DatasetLoader] Grabbed frame 3, imu count = 6
+[DatasetLoader] Grabbed frame 4, imu count = 7
+[DatasetLoader] Grabbed frame 5, imu count = 5
+[DatasetLoader] Grabbed frame 6, imu count = 7
+[DatasetLoader] Grabbed frame 7, imu count = 6
+[DatasetLoader] Grabbed frame 8, imu count = 6
+[DatasetLoader] Grabbed frame 9, imu count = 6
+[DatasetLoader] Grabbed frame 10, imu count = 7
+[DatasetLoader] Grabbed frame 11, imu count = 5
+[DatasetLoader] Grabbed frame 12, imu count = 6
+[DatasetLoader] Grabbed frame 13, imu count = 7
+[DatasetLoader] Grabbed frame 14, imu count = 6
+[DatasetLoader] Grabbed frame 15, imu count = 7
+[DatasetLoader] Grabbed frame 16, imu count = 7
+[DatasetLoader] Grabbed frame 17, imu count = 5
+[DatasetLoader] Grabbed frame 18, imu count = 7
+[DatasetLoader] Grabbed frame 19, imu count = 6
+[DatasetLoader] Grabbed frame 20, imu count = 6
+[DatasetLoader] Grabbed frame 21, imu count = 7
+[DatasetLoader] Grabbed frame 22, imu count = 7
+[DatasetLoader] Grabbed frame 23, imu count = 5
+[DatasetLoader] Grabbed frame 24, imu count = 7
+[DatasetLoader] Grabbed frame 25, imu count = 7
+[DatasetLoader] Grabbed frame 26, imu count = 6
+[DatasetLoader] Grabbed frame 27, imu count = 7
+[DatasetLoader] Grabbed frame 28, imu count = 6
+[DatasetLoader] Grabbed frame 29, imu count = 7
+[DatasetLoader] Grabbed frame 30, imu count = 7
+[DatasetLoader] Grabbed frame 31, imu count = 5
+[DatasetLoader] Grabbed frame 32, imu count = 6
+[ImuInit] done. gyro_bias=0.000195228 0.000114579 0.000277075  gravity_norm=9.84965  rot_end=
+   0.999914  -0.0092731  0.00931514
+ -0.0092731  0.00456592    0.999947
+-0.00931514   -0.999947  0.00447953
+[DatasetLoader] Grabbed frame 33, imu count = 7
+[DatasetLoader] Grabbed frame 34, imu count = 6
+[DatasetLoader] Grabbed frame 35, imu count = 7
+[DatasetLoader] Grabbed frame 36, imu count = 7
+[freeze] source_frame=96 points=100352
+[DatasetLoader] Grabbed frame 37, imu count = 5
+[freeze] source_frame=97 points=100352
+[DatasetLoader] Grabbed frame 38, imu count = 5
+[DatasetLoader] Grabbed frame 39, imu count = 6
+[DatasetLoader] Grabbed frame 40, imu count = 6
+[freeze] source_frame=100 points=100352
+[DatasetLoader] Grabbed frame 41, imu count = 9
+[freeze] source_frame=101 points=100352
+[DatasetLoader] Grabbed frame 42, imu count = 4
+[DatasetLoader] Grabbed frame 43, imu count = 7
+[DatasetLoader] Grabbed frame 44, imu count = 6
+[freeze] source_frame=104 points=100352
+[DatasetLoader] Grabbed frame 45, imu count = 7
+[freeze] source_frame=105 points=100352
+[DatasetLoader] Grabbed frame 46, imu count = 5
+[DatasetLoader] Grabbed frame 47, imu count = 6
+[DatasetLoader] Grabbed frame 48, imu count = 6
+[freeze] source_frame=108 points=100352
+[DatasetLoader] Grabbed frame 49, imu count = 5
+[freeze] source_frame=109 points=100352
+[DatasetLoader] Grabbed frame 50, imu count = 6
+[DatasetLoader] Grabbed frame 51, imu count = 6
+[DatasetLoader] Grabbed frame 52, imu count = 7
+[freeze] source_frame=112 points=100352
+[DatasetLoader] Grabbed frame 53, imu count = 7
+[freeze] source_frame=113 points=100352
+[DatasetLoader] Grabbed frame 54, imu count = 5
+[DatasetLoader] Grabbed frame 55, imu count = 6
+[DatasetLoader] Grabbed frame 56, imu count = 6
+[freeze] source_frame=116 points=100352
+[DatasetLoader] Grabbed frame 57, imu count = 5
+[freeze] source_frame=117 points=100352
+[DatasetLoader] Grabbed frame 58, imu count = 6
+[DatasetLoader] Grabbed frame 59, imu count = 6
+[DatasetLoader] Grabbed frame 60, imu count = 6
+[freeze] source_frame=120 points=100352
+[DatasetLoader] Grabbed frame 61, imu count = 6
+[freeze] source_frame=121 points=100352
+[DatasetLoader] Grabbed frame 62, imu count = 6
+[DatasetLoader] Grabbed frame 63, imu count = 6
+[DatasetLoader] Grabbed frame 64, imu count = 6
+[freeze] source_frame=124 points=100352
+[DatasetLoader] Grabbed frame 65, imu count = 7
+[freeze] source_frame=125 points=100352
+[DatasetLoader] Grabbed frame 66, imu count = 6
+[DatasetLoader] Grabbed frame 67, imu count = 7
+[DatasetLoader] Grabbed frame 68, imu count = 6
+[freeze] source_frame=128 points=100352
+[DatasetLoader] Grabbed frame 69, imu count = 6
+[DatasetLoader] Grabbed frame 70, imu count = 7
+[DatasetLoader] Grabbed frame 71, imu count = 7
+[DatasetLoader] Grabbed frame 72, imu count = 5
+[DatasetLoader] Grabbed frame 73, imu count = 6
+[DatasetLoader] Grabbed frame 74, imu count = 7
+[freeze] source_frame=134 points=100352
+[DatasetLoader] Grabbed frame 75, imu count = 5
+[DatasetLoader] Grabbed frame 76, imu count = 6
+[freeze] source_frame=136 points=100352
+[DatasetLoader] Grabbed frame 77, imu count = 6
+[DatasetLoader] Grabbed frame 78, imu count = 7
+[DatasetLoader] Grabbed frame 79, imu count = 6
+[DatasetLoader] Grabbed frame 80, imu count = 5
+[DatasetLoader] Grabbed frame 81, imu count = 7
+[DatasetLoader] Grabbed frame 82, imu count = 7
+[freeze] source_frame=142 points=100352
+[DatasetLoader] Grabbed frame 83, imu count = 5
+[DatasetLoader] Grabbed frame 84, imu count = 7
+[freeze] source_frame=144 points=100352
+[DatasetLoader] Grabbed frame 85, imu count = 7
+[DatasetLoader] Grabbed frame 86, imu count = 6
+[DatasetLoader] Grabbed frame 87, imu count = 7
+[DatasetLoader] Grabbed frame 88, imu count = 5
+[DatasetLoader] Grabbed frame 89, imu count = 6
+[DatasetLoader] Grabbed frame 90, imu count = 6
+[freeze] source_frame=150 points=100352

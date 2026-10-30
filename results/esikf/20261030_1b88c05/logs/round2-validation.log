@@ -1,0 +1,34 @@
+using esikf_round2_calibrated / 20261015_112553_up: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_104849_880607_up_esikf
+using esikf_round2_calibrated / 20261015_112659_forward: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_104959_415573_forward_esikf
+using esikf_round2_calibrated / 20261015_112757_right: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_105107_688939_right_esikf
+using esikf_round2_calibrated / 20261015_112845_yaw_left: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_105215_392301_yaw_left_esikf
+using esikf_round2_calibrated / 20261015_112940_pitch_up: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_105325_521489_pitch_up_esikf
+using esikf_round2_calibrated / 20261015_113028_roll_right: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_105431_872094_roll_right_esikf
+using esikf_round2_prior_model / 20261015_112553_up: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_105530_975305_up_esikf
+using esikf_round2_prior_model / 20261015_112659_forward: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_105620_916055_forward_esikf
+using esikf_round2_prior_model / 20261015_112757_right: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_105712_045031_right_esikf
+using esikf_round2_prior_model / 20261015_112845_yaw_left: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_105801_677957_yaw_left_esikf
+using esikf_round2_prior_model / 20261015_112940_pitch_up: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_105852_582964_pitch_up_esikf
+using esikf_round2_prior_model / 20261015_113028_roll_right: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_105936_843028_roll_right_esikf
+using esikf_round2_static / 20261015_112553_up: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_104226_822558_up_esikf
+using esikf_round2_static / 20261015_112659_forward: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_104332_221449_forward_esikf
+using esikf_round2_static / 20261015_112757_right: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_104444_082213_right_esikf
+using esikf_round2_static / 20261015_112845_yaw_left: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_104556_550993_yaw_left_esikf
+using esikf_round2_static / 20261015_112940_pitch_up: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_104657_231930_pitch_up_esikf
+using esikf_round2_static / 20261015_113028_roll_right: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_104752_090411_roll_right_esikf
+{
+  "tested_commit": "1b88c05e0496f8e8790f79a26f857c7c5e54bf35",
+  "runs": 18,
+  "records": 1092,
+  "checks": {
+    "prior_mean_max_abs_difference_from_round1": 0,
+    "e2_result_max_abs_difference_from_round1": 1.3322676295501878e-15,
+    "e2_P0_max_abs_difference_from_round1": 0,
+    "e2_P1_max_abs_difference_from_round1": 1.328147661294743e-17,
+    "round1_e2_control_records": 60,
+    "relative_records": 240,
+    "prior_mean_max_abs_difference_between_models": 0,
+    "f3s_records": 180
+  },
+  "negative_eigenvalue_definition": "strictly below zero; magnitude reported to distinguish roundoff"
+}

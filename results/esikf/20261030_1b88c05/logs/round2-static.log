@@ -1,0 +1,37 @@
+Building fusion targets (build/fusion-lab-build.log)
+Exporting model disparity for selected frames (no RAFT or backend).
+Freezing stereo inputs and pure-IMU priors; GT is reserved for reporting.
+Running ESIKF from the same priors and point clouds.
+Report generated: 22 records, 0 Stereo / 335 ESIKF iterations; 22/22 eligible/updated
+Results: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_104226_822558_up_esikf
+Report: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_104226_822558_up_esikf/report.html
+Exporting model disparity for selected frames (no RAFT or backend).
+Freezing stereo inputs and pure-IMU priors; GT is reserved for reporting.
+Running ESIKF from the same priors and point clouds.
+Report generated: 22 records, 0 Stereo / 362 ESIKF iterations; 22/22 eligible/updated
+Results: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_104332_221449_forward_esikf
+Report: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_104332_221449_forward_esikf/report.html
+Exporting model disparity for selected frames (no RAFT or backend).
+Freezing stereo inputs and pure-IMU priors; GT is reserved for reporting.
+Running ESIKF from the same priors and point clouds.
+Report generated: 22 records, 0 Stereo / 395 ESIKF iterations; 22/22 eligible/updated
+Results: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_104444_082213_right_esikf
+Report: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_104444_082213_right_esikf/report.html
+Exporting model disparity for selected frames (no RAFT or backend).
+Freezing stereo inputs and pure-IMU priors; GT is reserved for reporting.
+Running ESIKF from the same priors and point clouds.
+Report generated: 22 records, 0 Stereo / 188 ESIKF iterations; 22/22 eligible/updated
+Results: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_104556_550993_yaw_left_esikf
+Report: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_104556_550993_yaw_left_esikf/report.html
+Exporting model disparity for selected frames (no RAFT or backend).
+Freezing stereo inputs and pure-IMU priors; GT is reserved for reporting.
+Running ESIKF from the same priors and point clouds.
+Report generated: 22 records, 0 Stereo / 286 ESIKF iterations; 22/22 eligible/updated
+Results: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_104657_231930_pitch_up_esikf
+Report: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_104657_231930_pitch_up_esikf/report.html
+Exporting model disparity for selected frames (no RAFT or backend).
+Freezing stereo inputs and pure-IMU priors; GT is reserved for reporting.
+Running ESIKF from the same priors and point clouds.
+Report generated: 22 records, 0 Stereo / 251 ESIKF iterations; 22/22 eligible/updated
+Results: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_104752_090411_roll_right_esikf
+Report: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_104752_090411_roll_right_esikf/report.html

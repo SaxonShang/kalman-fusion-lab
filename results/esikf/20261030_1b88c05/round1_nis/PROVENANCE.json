@@ -1,0 +1,135 @@
+{
+  "source_manifest_sha256": "b2cf9ea357f071c228bfcab08da9da45f580eb18e4ee5174becb14c526bc1ba1",
+  "tested_commit": "b9804c77a503dc1f4891b1ddc263870f04efb8b5",
+  "report_commit": "1b88c05e0496f8e8790f79a26f857c7c5e54bf35",
+  "report_sha256": "fb09ded1facca594b281faaa0fae742ad52ee444f749ab60a4a4368aad7d1c07",
+  "description": "Derived diagnostics only; original C++ results unchanged; no rerun.",
+  "runs": [
+    {
+      "source": "/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261029_160019_854103_up_esikf",
+      "records": 66,
+      "raw_sha256": "19570113eadb0ea3d7071f686e76555ad7203a71e6545b95e627b2c995506525",
+      "original_metrics_sha256": "58511074d01be6b7c7ccebe40d5473adc1167eaf9fc20a69d38a8bef868790a3",
+      "max_pose_metric_change": 0.0
+    },
+    {
+      "source": "/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261029_160122_894541_forward_esikf",
+      "records": 66,
+      "raw_sha256": "567629745212e997cc6864306225c73bd750d828b254e2ae74a2f40ff2d43bda",
+      "original_metrics_sha256": "9ec65ff0f2e380696cadb913ab96b21c76572f253591e8dc65a0a63e446dadac",
+      "max_pose_metric_change": 0.0
+    },
+    {
+      "source": "/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261029_160235_733595_right_esikf",
+      "records": 66,
+      "raw_sha256": "37d1a9562bbe6ab7705d31a5cf02e53647bd09cddfe1706aec8a58eb0e500041",
+      "original_metrics_sha256": "cea734ecf6fcf6af403e57f4249fa0755b06afb070fa1701eaad12da9041a4a3",
+      "max_pose_metric_change": 0.0
+    },
+    {
+      "source": "/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261029_160346_751644_yaw_left_esikf",
+      "records": 66,
+      "raw_sha256": "00c2cc3f50be031a688fa9717c2a545e9402211326748fc7d8f09cd10eba8cf5",
+      "original_metrics_sha256": "b3aab9234c8fcb17ffad9aa49a1c20f77dc16003389faffd69fe6fb6c7e9a9f5",
+      "max_pose_metric_change": 0.0
+    },
+    {
+      "source": "/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261029_160456_227028_pitch_up_esikf",
+      "records": 66,
+      "raw_sha256": "cd18ad27f8090ae4fb945eebe262573806dd592f8cda993e96675876b5a29b7b",
+      "original_metrics_sha256": "e746a21c2c78b780d5160e06944d4a925a71078db45fb1af6006bae64312f5d8",
+      "max_pose_metric_change": 0.0
+    },
+    {
+      "source": "/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261029_160552_691337_roll_right_esikf",
+      "records": 66,
+      "raw_sha256": "ad821ff0538501bc1cebb60d49a7fc47d65b5f25674a30d3051aa34dfcbf8a43",
+      "original_metrics_sha256": "3bf187dfdf0ca5ecb72c7a6cd92154ca6cb395c3aa6216ca93277de1dc085ec5",
+      "max_pose_metric_change": 0.0
+    },
+    {
+      "source": "/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261029_160920_125459_up_esikf",
+      "records": 70,
+      "raw_sha256": "8bf94daea7867dedac0473ac2b4e6e9399406b656a607e39655bef6118287596",
+      "original_metrics_sha256": "0c683ddd3d8484dac25452ea1f0acfd785c31542f61e7114a8f7bfa3137818d0",
+      "max_pose_metric_change": 0.0
+    },
+    {
+      "source": "/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261029_161026_640083_forward_esikf",
+      "records": 70,
+      "raw_sha256": "8c8534b7de411b097c3316d8fa32ed55df350f940df3aec24f0bfb082ad13a18",
+      "original_metrics_sha256": "350a96963ed72e88834be35e03fe428a24ee28b254bcbde73728b9ddba2b76e2",
+      "max_pose_metric_change": 0.0
+    },
+    {
+      "source": "/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261029_161127_940646_right_esikf",
+      "records": 70,
+      "raw_sha256": "8fd9c17250cd297b8da87052684db74efd30adc66a0c5c49d188d10685f21f34",
+      "original_metrics_sha256": "96426f72c834e3ea7773103fcdfa0070cb2d085482f247d3d03461faed5f70a9",
+      "max_pose_metric_change": 0.0
+    },
+    {
+      "source": "/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261029_161231_332787_yaw_left_esikf",
+      "records": 70,
+      "raw_sha256": "3c947c41e1967f983a56b41ae1a2cb067e4f86a9e5ae968ca769c0d7312609cf",
+      "original_metrics_sha256": "cfb9163f57aabd875d26eef50c1931224e7cac00c2e54d1bc079e25ade633259",
+      "max_pose_metric_change": 0.0
+    },
+    {
+      "source": "/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261029_161338_415338_pitch_up_esikf",
+      "records": 70,
+      "raw_sha256": "6bb790a20bf3ce927c2b7fb7d460e1a3c1c32b18ea5e050114d55854144ab931",
+      "original_metrics_sha256": "351cdf7f7010ba91d691a364ef4e6e2047d386ae5bddab30a43f3c2952995202",
+      "max_pose_metric_change": 0.0
+    },
+    {
+      "source": "/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261029_161441_854169_roll_right_esikf",
+      "records": 70,
+      "raw_sha256": "32cba469cd3a26b3318ef70123c99fe35bf7fa777e9d61f042e9ffc1c385e604",
+      "original_metrics_sha256": "ce7ad272e83e7cf8f0cb70fdd96ac628c48169ef1ff5b494aca71d79cc64a722",
+      "max_pose_metric_change": 0.0
+    },
+    {
+      "source": "/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261029_161650_238919_up_esikf",
+      "records": 70,
+      "raw_sha256": "a36d98cae35b0d6ff2f64ae574463727ef687445e6f83828ad8ecf5242108bc5",
+      "original_metrics_sha256": "c0ff1a151e4afe8e2ade0439a57c53f52c35fd050f15bfaf066e8c1103ed5fa0",
+      "max_pose_metric_change": 0.0
+    },
+    {
+      "source": "/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261029_161735_347027_forward_esikf",
+      "records": 70,
+      "raw_sha256": "ac2162754ae4431d5c7a2a59a48c48e511e05ebbeb64edf5749a3cf1343ad78b",
+      "original_metrics_sha256": "a7257f472d4bc5db74f100714b3bca54641d4bdec14f1d1c84dc3bf8d1119267",
+      "max_pose_metric_change": 0.0
+    },
+    {
+      "source": "/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261029_161818_637836_right_esikf",
+      "records": 70,
+      "raw_sha256": "1b3bb73d1337ccad4d14088d913bda7daeb456372863f9f36be6e9bcbcce87d5",
+      "original_metrics_sha256": "813a6bfb657d5227cd133c3bb26a2718510db8cd62509b2269b0cbc3e737bb46",
+      "max_pose_metric_change": 0.0
+    },
+    {
+      "source": "/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261029_161904_904874_yaw_left_esikf",
+      "records": 70,
+      "raw_sha256": "dfe4137d73c8d0cd4d61018083347acdd7c22e4b149d1ec8415b4fc7400c66ec",
+      "original_metrics_sha256": "e1fc615074b928fa96c188d3558d4b5365b36cd117875d6f015eca2921d630e1",
+      "max_pose_metric_change": 0.0
+    },
+    {
+      "source": "/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261029_161951_766056_pitch_up_esikf",
+      "records": 70,
+      "raw_sha256": "fb2b94cc8c0df5952c6c83137d0523c06e8f3f94c6425310556a1342c7daf1c8",
+      "original_metrics_sha256": "cc32e594f41035891aa2bfa0773bb14694c4904d2718e3b2ebe21b555e70a60d",
+      "max_pose_metric_change": 0.0
+    },
+    {
+      "source": "/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261029_162033_173408_roll_right_esikf",
+      "records": 70,
+      "raw_sha256": "17c962d412fcf505bff51f70b0dc3c2d925ad9c1e69ddcd9ee9cc58f44bb2203",
+      "original_metrics_sha256": "cfe474a3e67186fc7109a62daf670a09ff6ca3f3e9669c2baf77b32bb5bc9694",
+      "max_pose_metric_change": 0.0
+    }
+  ]
+}

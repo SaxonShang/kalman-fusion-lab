@@ -1,0 +1,454 @@
+{
+  "created_at": "2026-10-30T11:01:00+08:00",
+  "tested_commit": "1b88c05e0496f8e8790f79a26f857c7c5e54bf35",
+  "configs": [
+    "esikf_round2_static",
+    "esikf_round2_calibrated",
+    "esikf_round2_prior_model"
+  ],
+  "full_matrices": false,
+  "html_links": "Compact reports link to included scalar traces and last-iteration matrices.",
+  "local_patch": null,
+  "report_processing_sha256": {
+    "fusion_report.py": "fb09ded1facca594b281faaa0fae742ad52ee444f749ab60a4a4368aad7d1c07",
+    "esikf_eval.py": "4bba29ad3828fb982f38a2592dc761e50ec9defad60944345af0bd273af2be18",
+    "archive_esikf_results.py": "fc49f0cfc3cf036a5553bf67b6847191725017276d79cf3a1aa34abfcabdbdb5"
+  },
+  "evaluation": "Independent fixed pairs; anchor-conditioned relative pose errors, not trajectory ATE.",
+  "runs": [
+    {
+      "config": "esikf_round2_static",
+      "sequence": "20261015_112553_up",
+      "source": "/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_104226_822558_up_esikf",
+      "archive": "runs/20261030_104226_822558_up_esikf",
+      "records": 22,
+      "valid": 22,
+      "local_full_matrix_files": {
+        "esikf_iterations.csv": {
+          "bytes": 607073,
+          "sha256": "a2971e99da4c37355cc208a9ffb305416ae683695c80e48b026f7d055dd53daf"
+        },
+        "esikf.yml.gz": {
+          "bytes": 409281,
+          "sha256": "65bfc9e7d1c3e10e98918670f57697bce72b4f1eaeb0659a981301363e5afbd4"
+        }
+      },
+      "binary_sha256": "f98331fd1f19697299c462e396b6f3a1b75fbe8b263080abed5eb57cbc31d26e",
+      "frozen_cache": "09b0727d403ce2fc3546",
+      "disparity_cache": "92649d4cf1d5c6a65d54"
+    },
+    {
+      "config": "esikf_round2_static",
+      "sequence": "20261015_112659_forward",
+      "source": "/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_104332_221449_forward_esikf",
+      "archive": "runs/20261030_104332_221449_forward_esikf",
+      "records": 22,
+      "valid": 22,
+      "local_full_matrix_files": {
+        "esikf_iterations.csv": {
+          "bytes": 654186,
+          "sha256": "36cdf23dac7ca26f66588f2efb7ad653d142a5e20dd21dff815db8a6d0385d31"
+        },
+        "esikf.yml.gz": {
+          "bytes": 432872,
+          "sha256": "793ce370d8193cdd4d2cbb1f2d397b707ed6c9cb3818480320f492bfe5f34ee9"
+        }
+      },
+      "binary_sha256": "f98331fd1f19697299c462e396b6f3a1b75fbe8b263080abed5eb57cbc31d26e",
+      "frozen_cache": "c5dafbee74234a148682",
+      "disparity_cache": "9bfcb7e4f41812729fa8"
+    },
+    {
+      "config": "esikf_round2_static",
+      "sequence": "20261015_112757_right",
+      "source": "/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_104444_082213_right_esikf",
+      "archive": "runs/20261030_104444_082213_right_esikf",
+      "records": 22,
+      "valid": 22,
+      "local_full_matrix_files": {
+        "esikf_iterations.csv": {
+          "bytes": 714664,
+          "sha256": "6870badd05da83ae253b037bbfcdf5078e61dee7ab575cf8b7ffc8934261499d"
+        },
+        "esikf.yml.gz": {
+          "bytes": 460883,
+          "sha256": "71d40508da0f050a677f7f704ffcccc4a3ff53d4375898e828ce6ffec004cb2f"
+        }
+      },
+      "binary_sha256": "f98331fd1f19697299c462e396b6f3a1b75fbe8b263080abed5eb57cbc31d26e",
+      "frozen_cache": "a8857fede779f785dfed",
+      "disparity_cache": "418b3a3277c1981c3c93"
+    },
+    {
+      "config": "esikf_round2_static",
+      "sequence": "20261015_112845_yaw_left",
+      "source": "/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_104556_550993_yaw_left_esikf",
+      "archive": "runs/20261030_104556_550993_yaw_left_esikf",
+      "records": 22,
+      "valid": 22,
+      "local_full_matrix_files": {
+        "esikf_iterations.csv": {
+          "bytes": 339943,
+          "sha256": "3944d41e60d20263e1b9a84b6340bae302d9656d4bc61b76e9026a550c02846d"
+        },
+        "esikf.yml.gz": {
+          "bytes": 280945,
+          "sha256": "169c23e0441095930e594212254f0bfbce2a458f843af7edeca8cbde87151cc5"
+        }
+      },
+      "binary_sha256": "f98331fd1f19697299c462e396b6f3a1b75fbe8b263080abed5eb57cbc31d26e",
+      "frozen_cache": "6fe6fad09ad4fd67ea2c",
+      "disparity_cache": "5ff4cc858ab9b3e9e330"
+    },
+    {
+      "config": "esikf_round2_static",
+      "sequence": "20261015_112940_pitch_up",
+      "source": "/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_104657_231930_pitch_up_esikf",
+      "archive": "runs/20261030_104657_231930_pitch_up_esikf",
+      "records": 22,
+      "valid": 22,
+      "local_full_matrix_files": {
+        "esikf_iterations.csv": {
+          "bytes": 517375,
+          "sha256": "1f46f2e17bd41f4d6ae8f438f8ae324c69262035dd6a8c07aebc6f62b97104a7"
+        },
+        "esikf.yml.gz": {
+          "bytes": 364727,
+          "sha256": "dfc3c486151ba59f7e3b85115f2b6948962d715730fbd9822b7994108321138c"
+        }
+      },
+      "binary_sha256": "f98331fd1f19697299c462e396b6f3a1b75fbe8b263080abed5eb57cbc31d26e",
+      "frozen_cache": "f1e916b5dc2c9d145a67",
+      "disparity_cache": "0016fcbd10ccaa9822a9"
+    },
+    {
+      "config": "esikf_round2_static",
+      "sequence": "20261015_113028_roll_right",
+      "source": "/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_104752_090411_roll_right_esikf",
+      "archive": "runs/20261030_104752_090411_roll_right_esikf",
+      "records": 22,
+      "valid": 22,
+      "local_full_matrix_files": {
+        "esikf_iterations.csv": {
+          "bytes": 453712,
+          "sha256": "a806b3246542524b45b58ecfe4821f36f922e93725f06ee189ebc5217bc48900"
+        },
+        "esikf.yml.gz": {
+          "bytes": 329018,
+          "sha256": "507b6d31ef645275c0648c8353bcf7fc78f414d73ac96f5dad8a64af5be54ffd"
+        }
+      },
+      "binary_sha256": "f98331fd1f19697299c462e396b6f3a1b75fbe8b263080abed5eb57cbc31d26e",
+      "frozen_cache": "3d0e1f08cf2bbbc7aa49",
+      "disparity_cache": "51b5dc8bcccf2994fc37"
+    },
+    {
+      "config": "esikf_round2_calibrated",
+      "sequence": "20261015_112553_up",
+      "source": "/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_104849_880607_up_esikf",
+      "archive": "runs/20261030_104849_880607_up_esikf",
+      "records": 80,
+      "valid": 80,
+      "local_full_matrix_files": {
+        "esikf_iterations.csv": {
+          "bytes": 896453,
+          "sha256": "432fbd9c38ecec3c76a2109f899d547337d026edc745a1210d92eab75b374c73"
+        },
+        "esikf.yml.gz": {
+          "bytes": 1222630,
+          "sha256": "3a081ccce7692b0796123749d4fe5aa77c3ba5e3bba3b18b31f1b4486fe42f75"
+        }
+      },
+      "binary_sha256": "f98331fd1f19697299c462e396b6f3a1b75fbe8b263080abed5eb57cbc31d26e",
+      "frozen_cache": "a27ae1bec31d0f980549",
+      "disparity_cache": "969d04e48eabfef4db53"
+    },
+    {
+      "config": "esikf_round2_calibrated",
+      "sequence": "20261015_112659_forward",
+      "source": "/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_104959_415573_forward_esikf",
+      "archive": "runs/20261030_104959_415573_forward_esikf",
+      "records": 80,
+      "valid": 80,
+      "local_full_matrix_files": {
+        "esikf_iterations.csv": {
+          "bytes": 1010822,
+          "sha256": "7e9805fb2a97fc81a43f6de92a42cd81a1fb2af8570c52ad1a581d67c47d0940"
+        },
+        "esikf.yml.gz": {
+          "bytes": 1284761,
+          "sha256": "1bb77da4ac5cc973437ac80a839dcba2c302de66cbddd73c69d4fcf18d117501"
+        }
+      },
+      "binary_sha256": "f98331fd1f19697299c462e396b6f3a1b75fbe8b263080abed5eb57cbc31d26e",
+      "frozen_cache": "51c0f6f96b0d1a71c1cb",
+      "disparity_cache": "8c2d58f193ea5a25dd04"
+    },
+    {
+      "config": "esikf_round2_calibrated",
+      "sequence": "20261015_112757_right",
+      "source": "/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_105107_688939_right_esikf",
+      "archive": "runs/20261030_105107_688939_right_esikf",
+      "records": 80,
+      "valid": 80,
+      "local_full_matrix_files": {
+        "esikf_iterations.csv": {
+          "bytes": 916120,
+          "sha256": "df4c12af13a4493da35d5aac2bfbd2430dc315ae1b39210a45c70a1b463c04bd"
+        },
+        "esikf.yml.gz": {
+          "bytes": 1232275,
+          "sha256": "9694d38e79b59f7709d3e3ba5ae6ff3aef80fd73ffd0151ff58afa7745395382"
+        }
+      },
+      "binary_sha256": "f98331fd1f19697299c462e396b6f3a1b75fbe8b263080abed5eb57cbc31d26e",
+      "frozen_cache": "d0f33701dae42daf5d72",
+      "disparity_cache": "fed5adcb84ae35e3b709"
+    },
+    {
+      "config": "esikf_round2_calibrated",
+      "sequence": "20261015_112845_yaw_left",
+      "source": "/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_105215_392301_yaw_left_esikf",
+      "archive": "runs/20261030_105215_392301_yaw_left_esikf",
+      "records": 80,
+      "valid": 80,
+      "local_full_matrix_files": {
+        "esikf_iterations.csv": {
+          "bytes": 878467,
+          "sha256": "8a3ef11daefe875d7420b10d0382b8d1a68fbdf16b5569d8fe01aaad721ff9d9"
+        },
+        "esikf.yml.gz": {
+          "bytes": 1211185,
+          "sha256": "45a1d110d8eb077582f18b031a16d85054650c0555cb9525a0eeb956b7ebedcf"
+        }
+      },
+      "binary_sha256": "f98331fd1f19697299c462e396b6f3a1b75fbe8b263080abed5eb57cbc31d26e",
+      "frozen_cache": "010d80541839e7f7cc16",
+      "disparity_cache": "5d4438969e8723d61c29"
+    },
+    {
+      "config": "esikf_round2_calibrated",
+      "sequence": "20261015_112940_pitch_up",
+      "source": "/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_105325_521489_pitch_up_esikf",
+      "archive": "runs/20261030_105325_521489_pitch_up_esikf",
+      "records": 80,
+      "valid": 80,
+      "local_full_matrix_files": {
+        "esikf_iterations.csv": {
+          "bytes": 951207,
+          "sha256": "246f3f481c3867eb8a97f502273c57c5f11284377ee83b2ca45138890be77c58"
+        },
+        "esikf.yml.gz": {
+          "bytes": 1249594,
+          "sha256": "8daf9645c297e94087fec14e0f0667f8b523b22a4b08f46fb3d6e71cb92328c9"
+        }
+      },
+      "binary_sha256": "f98331fd1f19697299c462e396b6f3a1b75fbe8b263080abed5eb57cbc31d26e",
+      "frozen_cache": "4f1e1d70d9746baef3d5",
+      "disparity_cache": "43f44fcdf1ee79efcdef"
+    },
+    {
+      "config": "esikf_round2_calibrated",
+      "sequence": "20261015_113028_roll_right",
+      "source": "/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_105431_872094_roll_right_esikf",
+      "archive": "runs/20261030_105431_872094_roll_right_esikf",
+      "records": 80,
+      "valid": 80,
+      "local_full_matrix_files": {
+        "esikf_iterations.csv": {
+          "bytes": 1011747,
+          "sha256": "a4ab98a6b9e0e093f903deeafddc9bb8d65567f78e790e10934853b8e85b426f"
+        },
+        "esikf.yml.gz": {
+          "bytes": 1283065,
+          "sha256": "379cb2c47cda4c218acb69570d0a854d2c314196fb59824c4470018b48cde0a3"
+        }
+      },
+      "binary_sha256": "f98331fd1f19697299c462e396b6f3a1b75fbe8b263080abed5eb57cbc31d26e",
+      "frozen_cache": "aa97ce74e9d1640e30c6",
+      "disparity_cache": "aad9490382a2dae6003e"
+    },
+    {
+      "config": "esikf_round2_prior_model",
+      "sequence": "20261015_112553_up",
+      "source": "/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_105530_975305_up_esikf",
+      "archive": "runs/20261030_105530_975305_up_esikf",
+      "records": 80,
+      "valid": 80,
+      "local_full_matrix_files": {
+        "esikf_iterations.csv": {
+          "bytes": 1000988,
+          "sha256": "9348a0ea3d60151ff80129aae2229c00fb05e96b5f7a35457dc698de2d79db28"
+        },
+        "esikf.yml.gz": {
+          "bytes": 1284922,
+          "sha256": "59618b5c22ec2faa679f2fb17be0b491925096fac6e579d792fb6b20ca8e4d63"
+        }
+      },
+      "binary_sha256": "f98331fd1f19697299c462e396b6f3a1b75fbe8b263080abed5eb57cbc31d26e",
+      "frozen_cache": "3c1f255f123ac8f2cbd6",
+      "disparity_cache": "969d04e48eabfef4db53"
+    },
+    {
+      "config": "esikf_round2_prior_model",
+      "sequence": "20261015_112659_forward",
+      "source": "/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_105620_916055_forward_esikf",
+      "archive": "runs/20261030_105620_916055_forward_esikf",
+      "records": 80,
+      "valid": 80,
+      "local_full_matrix_files": {
+        "esikf_iterations.csv": {
+          "bytes": 1014469,
+          "sha256": "e391c6101dc6c79de42a7273ca6fed831536acf4d8882829b2de678de2285836"
+        },
+        "esikf.yml.gz": {
+          "bytes": 1292876,
+          "sha256": "57c43b4daee434e3098305a4eac7a3d9a0deaa075627d3d679fbbff66715731d"
+        }
+      },
+      "binary_sha256": "f98331fd1f19697299c462e396b6f3a1b75fbe8b263080abed5eb57cbc31d26e",
+      "frozen_cache": "20c65507a779de881023",
+      "disparity_cache": "8c2d58f193ea5a25dd04"
+    },
+    {
+      "config": "esikf_round2_prior_model",
+      "sequence": "20261015_112757_right",
+      "source": "/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_105712_045031_right_esikf",
+      "archive": "runs/20261030_105712_045031_right_esikf",
+      "records": 80,
+      "valid": 80,
+      "local_full_matrix_files": {
+        "esikf_iterations.csv": {
+          "bytes": 945241,
+          "sha256": "63ac528176ccd3d7a2725448d1cd2224fc5be83e255815fd89059c9e1f373de3"
+        },
+        "esikf.yml.gz": {
+          "bytes": 1254412,
+          "sha256": "7737a0bb4cc075aaf3ece5aba49a4bb96ac260f5049120f2d10b522693125dc3"
+        }
+      },
+      "binary_sha256": "f98331fd1f19697299c462e396b6f3a1b75fbe8b263080abed5eb57cbc31d26e",
+      "frozen_cache": "36de05d559a88601f99a",
+      "disparity_cache": "fed5adcb84ae35e3b709"
+    },
+    {
+      "config": "esikf_round2_prior_model",
+      "sequence": "20261015_112845_yaw_left",
+      "source": "/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_105801_677957_yaw_left_esikf",
+      "archive": "runs/20261030_105801_677957_yaw_left_esikf",
+      "records": 80,
+      "valid": 80,
+      "local_full_matrix_files": {
+        "esikf_iterations.csv": {
+          "bytes": 1015189,
+          "sha256": "7b902b5192a26d2a8108e305157e91e5cb0aa2ecc8fcaff5d6697638a0d08252"
+        },
+        "esikf.yml.gz": {
+          "bytes": 1293493,
+          "sha256": "d745354c086f9cca52dcb043db5b49505fab4a9ba717a7eadabc9a4a3033b061"
+        }
+      },
+      "binary_sha256": "f98331fd1f19697299c462e396b6f3a1b75fbe8b263080abed5eb57cbc31d26e",
+      "frozen_cache": "05aca34fc0ffd9325af0",
+      "disparity_cache": "5d4438969e8723d61c29"
+    },
+    {
+      "config": "esikf_round2_prior_model",
+      "sequence": "20261015_112940_pitch_up",
+      "source": "/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_105852_582964_pitch_up_esikf",
+      "archive": "runs/20261030_105852_582964_pitch_up_esikf",
+      "records": 80,
+      "valid": 80,
+      "local_full_matrix_files": {
+        "esikf_iterations.csv": {
+          "bytes": 933255,
+          "sha256": "9cd35b02e5e8ee0768077261d986830cbaec7456d3887f0c2736b2b9de4da34d"
+        },
+        "esikf.yml.gz": {
+          "bytes": 1243974,
+          "sha256": "67db2c884e30abaaccd13042e1aa86cccb0a817b3e9ad83f52ff5a98599b4324"
+        }
+      },
+      "binary_sha256": "f98331fd1f19697299c462e396b6f3a1b75fbe8b263080abed5eb57cbc31d26e",
+      "frozen_cache": "caebdbbc1e013185c8aa",
+      "disparity_cache": "43f44fcdf1ee79efcdef"
+    },
+    {
+      "config": "esikf_round2_prior_model",
+      "sequence": "20261015_113028_roll_right",
+      "source": "/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_105936_843028_roll_right_esikf",
+      "archive": "runs/20261030_105936_843028_roll_right_esikf",
+      "records": 80,
+      "valid": 80,
+      "local_full_matrix_files": {
+        "esikf_iterations.csv": {
+          "bytes": 998506,
+          "sha256": "010e337f69ec173fda001282f3ec5107251e4035f42b5a310c4b1f7f234c7345"
+        },
+        "esikf.yml.gz": {
+          "bytes": 1279868,
+          "sha256": "bcd84085dbf2780211ad2d39f9969c8b53f01ab3bf783ddc7c5aec5cfb6af601"
+        }
+      },
+      "binary_sha256": "f98331fd1f19697299c462e396b6f3a1b75fbe8b263080abed5eb57cbc31d26e",
+      "frozen_cache": "2751612eea0a343ab704",
+      "disparity_cache": "aad9490382a2dae6003e"
+    }
+  ],
+  "additional_processing_sha256": {
+    "audit_esikf_round2.py": "7b17e7863f1ecf58a830022abf893110e24498cbd4a4f2333933018c67390f54",
+    "derive_esikf_metrics.py": "337c235aa59ba9235f2365242610c08467baf327a0f38eae13c20a68a3eb7db9",
+    "imu_rotation_check.py": "317f69e45170a10d893775b9b13555520ea6fa43cf44ebf6b093823f850fb7b2"
+  },
+  "stage_counts": {
+    "esikf_round2_calibrated": {
+      "records": 480,
+      "valid": 480,
+      "solver_status": {
+        "converged": 341,
+        "max_iterations": 139
+      },
+      "flagged_pairs": [
+        [
+          "20261015_113028_roll_right",
+          "static_end"
+        ]
+      ]
+    },
+    "esikf_round2_prior_model": {
+      "records": 480,
+      "valid": 480,
+      "solver_status": {
+        "converged": 323,
+        "max_iterations": 157
+      },
+      "flagged_pairs": [
+        [
+          "20261015_113028_roll_right",
+          "static_end"
+        ]
+      ]
+    },
+    "esikf_round2_static": {
+      "records": 132,
+      "valid": 132,
+      "solver_status": {
+        "converged": 90,
+        "max_iterations": 42
+      },
+      "flagged_pairs": []
+    }
+  },
+  "tests": {
+    "passed": 115,
+    "log": "logs/round2-tests115.log",
+    "preflight_records": 20,
+    "preflight_not_in_formal_total": true
+  },
+  "algorithm_worktree_patch": null,
+  "generated_calibration": {
+    "path": "experiments/fusion/configs/esikf_round2_calibrated.yaml",
+    "sha256": "a576112d6ff2f864930e3af0ccd259119563b913c8e2923b7217fd4c55116ccd"
+  },
+  "historical_round1_archive_sha256sums_sha256": "a39bba03e05d6a26688e9c33b356263d3ba4378f50aebe585d0b253af4063910"
+}

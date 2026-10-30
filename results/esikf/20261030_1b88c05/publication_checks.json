@@ -1,0 +1,13 @@
+{
+  "tested_commit": "1b88c05e0496f8e8790f79a26f857c7c5e54bf35",
+  "records": 1092,
+  "summary_groups": 34,
+  "formal_runs": 18,
+  "relative_html_markdown_links_checked": 221,
+  "broken_links": [],
+  "unit_tests_passed": 115,
+  "core_algorithm_diff_from_tested_commit": null,
+  "round1_archive_diff": null,
+  "report_script_hashes_match": true,
+  "generated_calibration_hash_matches": true
+}

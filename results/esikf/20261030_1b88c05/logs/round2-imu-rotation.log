@@ -1,0 +1,6 @@
+frame rotation X: 0.4810 deg, vector [-0.1287, 0.3799, -0.2656] deg
+scale S eigenvalues: [-1.574, -1.005, -0.179] %
+1_frames (3812 windows, median 33 ms): raw 0.0204 deg, bias only 0.0204, fitted 0.0193, time split 0.0194; along axis 0.0264 deg (-1.10% of rotation), across 0.0193 deg (1.08%), 168 windows over 1.0 deg
+6_frames (3782 windows, median 200 ms): raw 0.0435 deg, bias only 0.0432, fitted 0.0248, time split 0.0270; along axis 0.0608 deg (-1.04% of rotation), across 0.0478 deg (0.84%), 1032 windows over 1.0 deg
+time offset: best +1.0 ms, residual 0.0189 deg (at 0 ms 0.0192 deg)
+Wrote artifacts/imu_rotation_check/20261030_1b88c05/summary.json and windows.csv

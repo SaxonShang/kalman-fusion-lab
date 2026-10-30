@@ -1,0 +1,37 @@
+Building fusion targets (build/fusion-lab-build.log)
+Reusing model disparity: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/data/cache/model_disparity/20261015_112553_up/969d04e48eabfef4db53
+Freezing stereo inputs and pure-IMU priors; GT is reserved for reporting.
+Running ESIKF from the same priors and point clouds.
+Report generated: 80 records, 0 Stereo / 421 ESIKF iterations; 80/80 eligible/updated
+Results: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_105530_975305_up_esikf
+Report: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_105530_975305_up_esikf/report.html
+Reusing model disparity: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/data/cache/model_disparity/20261015_112659_forward/8c2d58f193ea5a25dd04
+Freezing stereo inputs and pure-IMU priors; GT is reserved for reporting.
+Running ESIKF from the same priors and point clouds.
+Report generated: 80 records, 0 Stereo / 427 ESIKF iterations; 80/80 eligible/updated
+Results: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_105620_916055_forward_esikf
+Report: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_105620_916055_forward_esikf/report.html
+Reusing model disparity: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/data/cache/model_disparity/20261015_112757_right/fed5adcb84ae35e3b709
+Freezing stereo inputs and pure-IMU priors; GT is reserved for reporting.
+Running ESIKF from the same priors and point clouds.
+Report generated: 80 records, 0 Stereo / 396 ESIKF iterations; 80/80 eligible/updated
+Results: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_105712_045031_right_esikf
+Report: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_105712_045031_right_esikf/report.html
+Reusing model disparity: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/data/cache/model_disparity/20261015_112845_yaw_left/5d4438969e8723d61c29
+Freezing stereo inputs and pure-IMU priors; GT is reserved for reporting.
+Running ESIKF from the same priors and point clouds.
+Report generated: 80 records, 0 Stereo / 428 ESIKF iterations; 80/80 eligible/updated
+Results: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_105801_677957_yaw_left_esikf
+Report: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_105801_677957_yaw_left_esikf/report.html
+Reusing model disparity: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/data/cache/model_disparity/20261015_112940_pitch_up/43f44fcdf1ee79efcdef
+Freezing stereo inputs and pure-IMU priors; GT is reserved for reporting.
+Running ESIKF from the same priors and point clouds.
+Report generated: 80 records, 0 Stereo / 393 ESIKF iterations; 80/80 eligible/updated
+Results: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_105852_582964_pitch_up_esikf
+Report: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_105852_582964_pitch_up_esikf/report.html
+Reusing model disparity: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/data/cache/model_disparity/20261015_113028_roll_right/aad9490382a2dae6003e
+Freezing stereo inputs and pure-IMU priors; GT is reserved for reporting.
+Running ESIKF from the same priors and point clouds.
+Report generated: 80 records, 0 Stereo / 422 ESIKF iterations; 80/80 eligible/updated
+Results: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_105936_843028_roll_right_esikf
+Report: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_105936_843028_roll_right_esikf/report.html

@@ -1,0 +1,339 @@
+sequence: 20261015_113028_roll_right
+pairs:
+- name: static_a096
+  anchor: 96
+  current: 97
+- name: static_a100
+  anchor: 100
+  current: 101
+- name: static_a104
+  anchor: 104
+  current: 105
+- name: static_a108
+  anchor: 108
+  current: 109
+- name: static_a112
+  anchor: 112
+  current: 113
+- name: static_a116
+  anchor: 116
+  current: 117
+- name: static_a120
+  anchor: 120
+  current: 121
+- name: static_a124
+  anchor: 124
+  current: 125
+- name: static_g128
+  anchor: 128
+  current: 134
+- name: static_g136
+  anchor: 136
+  current: 142
+- name: static_g144
+  anchor: 144
+  current: 150
+depth:
+  provider: disparity_cache
+  disparity_dir: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/data/cache/model_disparity/20261015_113028_roll_right/51b5dc8bcccf2994fc37
+  min_m: 0.5
+  max_m: 15.0
+  pixel_stride: 2
+  sgbm_num_disparities: 128
+  sgbm_block_size: 5
+  plan_file: models/tensorrt/disp_896x448_fp16.plan
+  onnx_file: models/disp.onnx
+  model_plan: /home/ubuntu22/slam/SIO_SLAM/models/tensorrt/disp_896x448_fp16.plan
+  model_plan_sha256: 604cf6ac1f705c877260711730dd5d2d58c2a21f3020c03c668401ef7fb1e768
+  model_origin:
+    onnx_file: /home/ubuntu22/slam/SIO_SLAM/models/disp.onnx
+    onnx_sha256: e9f49736a65d68d06681add463866b6defdf78fdd7f4f50f6cc941b682fdc0bc
+    graph_validation:
+      source: /home/ubuntu22/slam/SIO_SLAM/models/disp.onnx
+      source_sha256: e9f49736a65d68d06681add463866b6defdf78fdd7f4f50f6cc941b682fdc0bc
+      script_sha256: 44b3d40d191657f93c7c1463ba10ed7c4b107558b1698c5877272a8bef4eec81
+      output: /home/ubuntu22/slam/SIO_SLAM/models/onnx/disp_cost_volume.onnx
+      output_sha256: 684e5a91d34438a35977f3c7c30455c606be56a2107bd7ee1e9b0f4e1c8eec95
+      original_nodes: 48651
+      derived_nodes: 14202
+      transformation: ScatterND disparity planes to Pad/Concat; original update tensors
+        preserved
+      validation:
+        provider: ONNX Runtime CPU
+        seed: 20261029
+        output_shape:
+        - 1
+        - 32
+        - 104
+        - 112
+        - 224
+        max_abs_error: 0.0
+        rtol: 1.0e-06
+        atol: 1.0e-06
+  model_input: RGB float32 NCHW 0..255
+  model_output: raw disparity pixels
+gicp:
+  methods:
+  - small_gicp
+  - stereo
+  voxel_m: 0.05
+  max_correspondence_m: 0.1
+  max_iterations: 20
+  min_inliers: 20
+  require_convergence: false
+  stereo_solver:
+    gn_rot_eps: 1.0e-06
+    gn_trans_eps: 1.0e-06
+    cov_floor_trans_m: 0.0
+    cov_floor_rot_deg: 0.0
+  stereo_options:
+    stereo_point_plane: false
+    stereo_disparity_normals: false
+    stereo_source_voxel_representative: false
+    stereo_plane_gate_sigma: 0.0
+    stereo_measurement_scale: 1.0
+    stereo_robust_delta: 0.0
+eskf:
+  prior_covariance_scale: 1.0
+  covariance_scales:
+  - 0.1
+  - 1.0
+  - 10.0
+  fixed_rotation_sigma_deg: 0.5
+  fixed_position_sigma_m: 0.02
+esikf:
+  prior_covariance_scale: 1.0
+  geometry_weights:
+  - 1.0
+  - 0.5
+  voxel_m: 0.05
+  max_correspondence_m: 0.15
+  variants:
+  - name: obs_point_to_point
+    geometry_weight: 1.0
+    observation_only: true
+    stop_rotation_rad: 0.0001
+    stop_translation_m: 0.0001
+    max_iterations: 20
+  - name: obs_point_to_plane
+    geometry_weight: 1.0
+    observation_only: true
+    stop_rotation_rad: 0.0001
+    stop_translation_m: 0.0001
+    max_iterations: 20
+    geometry_residual: point_to_plane
+    attribute_max_distance_m: 0.05
+  calibrated_variants:
+  - name: e3_point_to_point
+    base: e2_e4_gyro_scale
+    from: obs_point_to_point
+  - name: e3_photometric_w05
+    base: e6_photometric_w05
+    from: obs_photometric_w05
+  - name: e3_ray
+    base: e7_ray
+    from: obs_ray
+  - name: e3_point_to_plane
+    base: e7_point_to_plane
+    from: obs_point_to_plane
+threads: 4
+prior:
+  require_static_init: true
+config_file: experiments/fusion/configs/esikf_round2_static.yaml
+dataset_dir: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/data/datasets/fr5_highspeed/20261015_113028_roll_right
+imu_file: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/data/datasets/fr5_highspeed/20261015_113028_roll_right/imu.csv
+groundtruth_file: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/data/datasets/fr5_highspeed/20261015_113028_roll_right/groundtruth_tum.txt
+registration_upstream:
+  repository: https://github.com/Ben-cpy/robotic-front
+  branch: main
+  commit: 744ac2d993ae629b0cc44a3b1d995e04ab4fad48
+  import_date: '2026-10-28'
+  default_registration: GICP
+  files:
+  - upstream: modules/registration/include/registration/color_icp.h
+    local: modules/registration/include/registration/color_icp.h
+    upstream_sha256: 959caf3d688ab3b80a7068b4dbaf0a786e1547e3203abd7cb3af930b653eeb00
+  - upstream: modules/registration/include/registration/stereo_gicp.h
+    local: modules/registration/include/registration/stereo_gicp.h
+    upstream_sha256: ad4c77960abcddb36c6b1d1d0ca370e77659cac80f775bd4acab5795ea482538
+  - upstream: modules/registration/src/color_icp.cpp
+    local: modules/registration/src/color_icp.cpp
+    upstream_sha256: afa607ec3c9087818b8af414321a48bea2501434a72852239ca763c53ebec53b
+  - upstream: modules/registration/src/stereo_gicp.cpp
+    local: modules/registration/src/stereo_gicp.cpp
+    upstream_sha256: 07b503255b84cf3bcbb6aa94b7db09122d71274363ee5e649abb8e0428313d68
+  - upstream: modules/registration/tests/test_stereo_gicp.cpp
+    local: modules/registration/tests/test_stereo_gicp.cpp
+    upstream_sha256: 1e92647cedd9d5a4253431203dc2bf7d45946cce2af9fd684507cfe4d5062749
+  local_adaptations:
+  - Use registration/ include paths and yaml-cpp; accept flat and nested color_icp
+    parameters.
+  - Retain Ubuntu OpenCV/FLANN header and PCL template compatibility.
+  - Initialize failed-result covariance; expose Hessian provenance, perturbation convention
+    and Stereo RMSE diagnostics.
+  - Preserve upstream registration math and convergence semantics; align right-source
+    GICP and left-target Stereo covariance at the local ESKF boundary.
+  - Keep legacy observation helpers for independent ESIKF; remove the previous duplicate
+    projective alignment solver.
+params_file: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_104752_090411_roll_right_esikf/params.yaml
+params_sha256: 7ae88a9315b8dac26e736645ceb915530bdd4d5acf68692a68d2d8be77815347
+completed_stages:
+- esikf
+cache_key: 3d0e1f08cf2bbbc7aa49
+cache_dir: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/data/cache/fusion/20261015_113028_roll_right/3d0e1f08cf2bbbc7aa49
+output_dir: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_104752_090411_roll_right_esikf
+source_hashes:
+  apps/export_disparity.cpp: 4df46794488e599197f6adbc4fafeefa9d9f8a949103a8e5fa0b99f3b40ad23b
+  experiments/fusion/src/lab.h: 80d0d6172761d5478b51dc152381e09f32327afa27af3dfdcd46af4d6932320c
+  experiments/fusion/src/lab_io.cpp: 12bd49693f250f33b0ff90f054a1c15f732a373e60cb75666ed086a083a75697
+  experiments/fusion/src/lab_prepare.cpp: f501a7e84db3a55c4f00874a4d2aaba1740226d1a95f7ad7bf6530856abd9a2c
+  experiments/fusion/src/lab_run.cpp: 9c8c9eb9ba0853e58966082d8ef243496fc5823241d52e0682d928d25d0b2d36
+  experiments/fusion/src/main.cpp: d472636d8c56f834dcd4ff4a38ca8ae97bff53488101e6af67f53ea98dea7065
+  include/TrtEngine.hpp: f1d97871940b686583cfab22883b09b947a63ab2b9ccd44b85a74dd164966a94
+  include/backend.h: 774528a1c24ce41e12d14ea455d131b89555b9c5aba0a7bd39dc92349a348db0
+  include/camera_intrinsics.h: d7544c92358b54b5b4ee695484e0ee0258fbcdb3f1a95ff4481cb63dd59e721e
+  include/color_icp/yaml.h: e645fe459683c91a61624527e9f460c1a62bf8a1ff9ea47cb663dc72d207ad9a
+  include/color_icp.h: ea423e9243ebfe81f2122af14e2a748db3e6cb9eb896163a39c7e268e7b58ba0
+  include/data.h: edcb47ba29a545954d382c83e54066906ece73e5d1344a9e1424378b1a002894
+  include/dataset_loader.h: 5226e14fa8759058b00c4180e88eb6b88743b176b7d9457614eeb8e90cf6b356
+  include/frontend.h: 34f2a4668862f3f93c94bf955c126221023621fbe24beee36cb4cb2c60d5cbc2
+  include/frontend_debug_visualizer.h: e4f199aed4a434d9256a6654438f8666bf35cccce66b836c7d7ee5fdc0315f60
+  include/fusion_debug.h: 22c2d5b79af5f0c18eb00a930c0a4a2f07e14d03ca4f9ac5e06548e01028aab2
+  include/gaussian_map_manager.h: 57289969f77cf9d05f2b0319b05d2b9e482aa974c1590e021580b8aa00b96429
+  include/image_preprocessor.h: 218afed2aa7324b6292c368d3eac86f1d814ff82900783ed49178f4aa25958e7
+  include/imu_debug.h: 1750dc3860b0527a74f92dfe9b383134ec61e352c5254bcc32339cd9247564b5
+  include/imu_integrator.h: 8657eb5ca380d0b7b7e1a0725edc92cd9bc21352b13135993e06e0ced53a59c5
+  include/imu_msg_utils.h: aee5c65776d66d69885efe5b5b7e42d1751f82d2b9368b353b0e99ee06d01b05
+  include/imu_preprocessor.h: e1e1997fad3639fdb5a8cf8834f58c4c292bf89d4722b5b42531f3766b558a13
+  include/internal/geo_flow_error.h: cb076570d557823eed4b5fb759e5ef4da6581627c4f522d78a7b7e446e7107f8
+  include/profiler/simple_profiler.h: e9c40f3aca1f089761aa092694a17f4bf6beec595231856bf533a2e3a7fe92fa
+  include/sio_backend_modules.h: 6abfcb2d259b36f14734897facd377fbc3c5ead732e18459118d4b20640fd5ff
+  include/sio_config.h: 379e546e3df7306e3863fe4f2e5b08acc93b525bfdffaaa3add850d3c7face14
+  include/sio_frontend_modules.h: ec263a7e2e0398d4720e4b41508317dd380c2090036e22002a2c5008c46f4076
+  include/sio_math.h: a2202a1c11d299a071001efdb42ef1c848cb46322841613a44ec2d445720b237
+  include/sio_pipeline_helpers.h: f3b497aec027700ce255fad7786476d9786dc5d3a1a580e80b9a63938ff1013b
+  include/sio_stereo_geometry.h: bce579c5130a36ce6a6cba750ff969650d9a97a51d8994e63002eac3ae22336b
+  include/stereo_gicp.h: feb19ebcd665798ce75b90eae53c1120084e2c4ce9083202636bdde4a0e06280
+  include/utils/types.h: db0d0e08d510a0cc06209f3a49ee7640c2fc4ca81abd7abdc80ddebd5f77285c
+  include/utils.h: 749607001212bd532b3a6f358e2eeba67ac180053488b9e61d85f326eac4b5ae
+  modules/registration/UPSTREAM.json: f85bf510d80974529eef3d61f3246fec5f2ada86947ddf74abf17cf01ed0d2c6
+  modules/registration/include/registration/color_icp.h: de0e9c00543b202851c2f16331ec0baec81a84ca2202504ce6cb8a1faaaca573
+  modules/registration/include/registration/stereo_gicp.h: e9b47f798a08bdc199e4d515771afa99cdd00c8df99693f4b282c95d2b4aae3f
+  modules/registration/src/color_icp.cpp: 65f3a1270b0e11522b290b67c38916422536d0ba2172315c94e946de34104ed7
+  modules/registration/src/stereo_gicp.cpp: d3c54415b638b195851eca48d8ba6be5a120d0a5ea0527535974cf36ab74c19f
+  scripts/fusion_lab.py: 2a657ad5e9734b694111fa15f3b476c98bbafec883cf357eb6ed0a8b55222323
+  src/backend.cpp: c1044abc0b554bb19b81aed6d699a8e12adb0e7dd7e631ddd1398c454f8b31d2
+  src/dataset_loader.cpp: 2d5b4f942404805da9bcd943b01db0c88c1a1bf8c3c6ac5682d7f12097efd3a5
+  src/dynamic_cloud_processor.cpp: 17fe204de0446f993391f2b6dd7c497493e2c071363116b1bfb5e11d3f3efa15
+  src/feature_processor.cpp: 2b1f0e438a0ee8e2e4ee8eff5e1632ca6d48f6540b4727b89e41a9cc52c2c93f
+  src/frontend.cpp: e2ed2ecccd9d7ed6f3bf499d7a01698bf61e6f0b28f5a99f19a41b5d9cd4c0b5
+  src/frontend_debug_visualizer.cpp: b993e8594b1299c89d0d20200a102bd0cbcaac2b6af1784d53d237a24641ee7e
+  src/fusion_debug_logger.cpp: 38ace341cb7bf74a37c85d3e5842fc069c19f75b6a0941990fce641c8a2464f4
+  src/gaussian_map_manager.cpp: 96600cf663c62f10b4c46336d9f25c3b57f297da93400b85cea98fe3e0d9d87c
+  src/image_preprocessor.cpp: 8945fe13447380ef1294ce7be25fb334b66de18431983dc71f2ef4f3da50aef4
+  src/imu_debug_logger.cpp: 6d265707d54d7e670ac5df553c6eac9786113e9aaed1d088441b79f4ece7ad3b
+  src/imu_integator.cpp: 0950b59d1f0e36e4869a3b3db33cdff0476ec17673b2bb751db74c063bf2cc8f
+  src/imu_preprocessor.cpp: 35d4084e06274acda9aff8426e9e8572650a4e9da628f48452c9b34443ddf871
+  src/keyframe_manager.cpp: 94eb39e7145c00752903157937237da5829ce28d61f1b57b65f624f7acc2ef77
+  src/learning_rate_scheduler_factory.cpp: c9c3062e6ff18b5564c9c494242b67feda572b02a969a5e94507e9f7a75f0f75
+  src/pose_3dgs_optimizer.cpp: 8b7e1a84383c71b6fe0fdc8f248f5ae71e592a4515905886892efcbbd6ec9b2d
+  src/sio_config.cpp: 2ee8d2120d8d592d5030514e059711a7d78a06c1cc3c1afef82955f7715115a6
+  src/sio_stereo_geometry.cpp: 46ee2e0b299af864856b554994563a8b75dd232d0f81723adde769db092b4e52
+  src/state_estimater.cpp: fac268b3a7a722cbc958c33768196af0f52e7b619b8c8efe9556cce8853c48f4
+  src/stereo_gicp.cpp: c0bc809e702adcd11e173c5a8887866f2ccc0494362b81893dfa77a4fb23dead
+  src/torch_pose_optimize.cpp: 3f843a450aa243dc407984f5ee1200ddf066ac72cb1660bf7d4471a1e19ffcdb
+  src/yaml.cpp: 8b77cd53c18c3ac2379f27ef98bc76c93c001e6ff301f755880c6a6d0d07ad2d
+input_hashes:
+  frames.csv: 8219725cc04aa5423ca98a0858434324193574103cdd70e1f85e37b72862c086
+  imu.csv: 2b27ea228373ba89ef1c4b6ae6042089413fb1d9159862ecfa275857f569fc0f
+  left/1792035045863.jpg: 930e8831111e46a63993f6d17f42bf21844ee5aa67fbba9074638f57eb939112
+  right/1792035045863.jpg: 7126483a8633b12dd18793bb1c75d4d1b10e73341cca0ecc61fae8fabd01d895
+  left/1792035045897.jpg: 6123c6582f69ad990d7bf71f80925956cbcabbce26ac3c486c162a51de7907f5
+  right/1792035045897.jpg: 7280faaa3a1daeda666f2040106ca2cc91a043c1216c1630a9edbc6343869d5d
+  left/1792035045997.jpg: d0bfcc558145ee690cea1c2cd7f35df8878591d731501803edff78cb7360d3f1
+  right/1792035045997.jpg: 5fa3372641f3a2b10c8510ae36e3201ee797296aa72f92f3ff73f374c4699a82
+  left/1792035046030.jpg: 5a9fe7a3ce6734442e5d48dc5d082a9b964ae5b35b9b5c4dc6908afea1708a10
+  right/1792035046030.jpg: bfa238d331006b6d5477fdc5617232825ab357f3e9411f551f526b1912d90135
+  left/1792035046130.jpg: 4526ba402dc75821847f2c16dab5f5d3e034d5cf8aecf74ba4d5f64f2b2bf694
+  right/1792035046130.jpg: e39277b209c6134992ff7479735dd8493fa8034fc7ec808c5ec421d7824ea14b
+  left/1792035046163.jpg: a03a57baa2055e92cfc9108c105743281b0a0ddd7626afe01cdd90336d80e4cd
+  right/1792035046163.jpg: 26c2a706fec0944ecbf7786db813a72c60b9482b96ec276887673ea899324182
+  left/1792035046263.jpg: 2d7c0415de78c1676b776b33f616f05fee93b646aa2a7e1814eecc776fc6c104
+  right/1792035046263.jpg: 311fe4f9f2473232abffda7bdde2878029df91ebef72d1a917485d207309d529
+  left/1792035046297.jpg: acb7a7715321de496a7e5acaf9abbb813b3b2e95960a062b853b0f0857cb7d94
+  right/1792035046297.jpg: 70762727fc21fe5e971b2aa86d95d8da5dbf3105007e72a7d154e8a2f7818583
+  left/1792035046397.jpg: 2cae042052afd3f4b9cc308b129d3cb6bd03b48382c57e38ef0ab67d1fd5dafa
+  right/1792035046397.jpg: b74edd48cd4ed361eeb8bcc1ac1b3c9da1c6953c248e4489c89daf069faa92c5
+  left/1792035046430.jpg: 7a0a38a5297dd4ac594cb43ce14edae89063990f77201ce10dcc21ee0b29954c
+  right/1792035046430.jpg: 8d9aa9e51d26575337bd614c9dda4b453ff4da908809a3e64e3579c823c83c1e
+  left/1792035046530.jpg: 60d9d875d9a0ff35a7935553e2ad60c9a2051b5b822e0ab0087cbb557d2760b2
+  right/1792035046530.jpg: 5a4419115a59d7d696f32449a53f55690d93a83787e475190f2c7217a2123084
+  left/1792035046563.jpg: 7b203911807c1408a3d5cc720f4ef0c38300630350750a9e058717206bb45425
+  right/1792035046563.jpg: 3d38ba08bc0ab41cfaa0a8180c1772d6424c134322f3bab449ac2edaa3913f48
+  left/1792035046663.jpg: 7059acb4b30acb051e4576fa69ae1c4e2b63e98073878b398ba429ff752722ef
+  right/1792035046663.jpg: e4b813031630450446677e01c5396b239b9fb76342162a0c20d140cd6b81bbde
+  left/1792035046697.jpg: 48a62dda760b37d8f07c1ba1f52b75af0f39fe4bcd354f7e736e8af5713706a7
+  right/1792035046697.jpg: 98758ca9c3f7b4ba0ae3415408dc5dc1674cf32469472aef306e598446a8bb9c
+  left/1792035046797.jpg: b80b8b35bfbdea760d86a3150f9aceaa09bcf8efd65d3d926eb5fef7ed495d33
+  right/1792035046797.jpg: 3439b240c4bfa5586055242d7866d623ab871d10d3d4a883d949a83e05ee76e9
+  left/1792035046830.jpg: 3960417b76bf46df5faf7eaca8c39108fab6fb4c8158c5848dfe2e17d3840cab
+  right/1792035046830.jpg: 669bb34a22b399842daf53e4a013b4a7b177aa8203973c2535c521c2ede1042f
+  left/1792035046930.jpg: a6f1ef7e4718ffa3f201ab13bf94ff07b0ede502dc03f419f16aee305e88c469
+  right/1792035046930.jpg: a14c4894d1ac4534a23184bed4ecdf8c160fb93463503a235f43260977a8af13
+  left/1792035047130.jpg: a381b49d92f80eee37475eaca53f823e48ebd82f88e18521dabd663a8a6904f6
+  right/1792035047130.jpg: 261999bff36cc95ecea76019fedfd62b97a8aaa25c731cd2174bbec9be69ce38
+  left/1792035047197.jpg: 9762e6912bc9fe88804611cb08ab57b5823919a6698929b27725338de178ac02
+  right/1792035047197.jpg: b1b8a40765fcac534d65f437eb168ffd54b491c4555c5715ccad0fc6fa6821ed
+  left/1792035047397.jpg: d8ba8f7226dce06d19881d993ed93b2ab058e1045b53f5720a3db54e6e42e9d6
+  right/1792035047397.jpg: bef27a35af9b3b2ba05be33d8845a4e5674beff4feb5a167d9749b71fc271d48
+  left/1792035047463.jpg: 67371acebffba05ff48686c12b7ef05155dd75c9721d8192edfecd8e1e78d44f
+  right/1792035047463.jpg: fb4e34fcbcc21a1f6acfe273d662512f7e78256fd34fec3e3912566270114ac0
+  left/1792035047663.jpg: 0d37930456899261baf0d9272f61a4389e4daacbe8e538a55eed159b05272c8c
+  right/1792035047663.jpg: eadff0e5aa695d4b6c214a3c960aca80f5e0a8244ca357ebf1c1c5373b51fec9
+  ? /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/data/cache/model_disparity/20261015_113028_roll_right/51b5dc8bcccf2994fc37/1792035045863.yml.gz
+  : e2b32963ba2add7e741377fca36006c1f86217cd506e8ebcbbb19c404e32016d
+  ? /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/data/cache/model_disparity/20261015_113028_roll_right/51b5dc8bcccf2994fc37/1792035045897.yml.gz
+  : 44c6ca04c564dad36692635f008e6bd677440c4d5c761107f3a1974f8399bad6
+  ? /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/data/cache/model_disparity/20261015_113028_roll_right/51b5dc8bcccf2994fc37/1792035045997.yml.gz
+  : c08d2b64c060a5f46958324497218894bcc1c63a086a65c47188bc3c28e69d68
+  ? /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/data/cache/model_disparity/20261015_113028_roll_right/51b5dc8bcccf2994fc37/1792035046030.yml.gz
+  : 74f55a7583cfc5b0277adf1fbd648b56b52ccb5409ab03aa92b441c45a59e105
+  ? /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/data/cache/model_disparity/20261015_113028_roll_right/51b5dc8bcccf2994fc37/1792035046130.yml.gz
+  : dd47db4e2b1f11fb6b1660dc8e34674cb7aa2e726242fabe5216aa96f2440d1b
+  ? /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/data/cache/model_disparity/20261015_113028_roll_right/51b5dc8bcccf2994fc37/1792035046163.yml.gz
+  : e2c40efbdc246b31e1e6ff17cfca0810f074dfa00a9907d67fa3df1004cc4b39
+  ? /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/data/cache/model_disparity/20261015_113028_roll_right/51b5dc8bcccf2994fc37/1792035046263.yml.gz
+  : 6cf6b5c0a6f3ea31089c04faea0f7b693b807878f8bc63933f47dc315a6e062d
+  ? /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/data/cache/model_disparity/20261015_113028_roll_right/51b5dc8bcccf2994fc37/1792035046297.yml.gz
+  : 309c66aa91cdf5d3bc55c5d1bfd80dbf204a62880489d21d7649e155832d3916
+  ? /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/data/cache/model_disparity/20261015_113028_roll_right/51b5dc8bcccf2994fc37/1792035046397.yml.gz
+  : eb21e16801e97dc627b3e0adc7af4cff7d0f637ba191db584c6bba0b35f6d01d
+  ? /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/data/cache/model_disparity/20261015_113028_roll_right/51b5dc8bcccf2994fc37/1792035046430.yml.gz
+  : 99b3240252ce54eb79be78a8c7e5ead7755ddc32d5c14fb0f516ae07dfc0eddf
+  ? /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/data/cache/model_disparity/20261015_113028_roll_right/51b5dc8bcccf2994fc37/1792035046530.yml.gz
+  : 24c22b188a1383fd5d00d6cb8f1bb17483e5eaf1ed80aa912029aec9c9bcc2d6
+  ? /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/data/cache/model_disparity/20261015_113028_roll_right/51b5dc8bcccf2994fc37/1792035046563.yml.gz
+  : 8b4e3de43e045d2bdf1fb04f3e34fd13463cd1964ca21696aa311e9db6c60495
+  ? /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/data/cache/model_disparity/20261015_113028_roll_right/51b5dc8bcccf2994fc37/1792035046663.yml.gz
+  : 7059005284d96bbe20706507d028094821e6c66d097432d0d4c5b2b945224f57
+  ? /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/data/cache/model_disparity/20261015_113028_roll_right/51b5dc8bcccf2994fc37/1792035046697.yml.gz
+  : ff18b5413a5cde76c83cdda0ca4d431f2daa802183488eccf508fda4d9f048d9
+  ? /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/data/cache/model_disparity/20261015_113028_roll_right/51b5dc8bcccf2994fc37/1792035046797.yml.gz
+  : 2d2c0a9ac982c0cc2f08873427a5aff0a3a246558e2b7f32bcf97921a0e34253
+  ? /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/data/cache/model_disparity/20261015_113028_roll_right/51b5dc8bcccf2994fc37/1792035046830.yml.gz
+  : c5b2fbc5faf9304b432c7e8faf08660ee362c09d07d20732cf8c110973174497
+  ? /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/data/cache/model_disparity/20261015_113028_roll_right/51b5dc8bcccf2994fc37/1792035046930.yml.gz
+  : 3875ba0431e59c9ff9238565d69dc3a3f48e9d2861a311b24f99e00200e32b07
+  ? /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/data/cache/model_disparity/20261015_113028_roll_right/51b5dc8bcccf2994fc37/1792035047130.yml.gz
+  : 5ec55e60e3092eb83ffd1f62e87cf801e836b9fce81d06c14be5f19c787058e2
+  ? /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/data/cache/model_disparity/20261015_113028_roll_right/51b5dc8bcccf2994fc37/1792035047197.yml.gz
+  : f27f4d614e1947ee36840264459a4ac4ef2921c0f3431e96b46adae849d4c010
+  ? /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/data/cache/model_disparity/20261015_113028_roll_right/51b5dc8bcccf2994fc37/1792035047397.yml.gz
+  : e567853636787fea918f4503373debfc5fe38f32050bd4e3d8a669eb8e0bff19
+  ? /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/data/cache/model_disparity/20261015_113028_roll_right/51b5dc8bcccf2994fc37/1792035047463.yml.gz
+  : d4acd95f07901dba9e37ceae0577f64f77649aba82461b3766e9219b79eafdb8
+  ? /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/data/cache/model_disparity/20261015_113028_roll_right/51b5dc8bcccf2994fc37/1792035047663.yml.gz
+  : 05ce1a11d9ec41095d76cb1faef7bc8a6f9859ed23dff38d8786fa1677bc5b24
+groundtruth_sha256: 29438605e63e3e11dc323c80a841bcd2c8de2527db128af805752af0c65c1531
+git_commit: 1b88c05e0496f8e8790f79a26f857c7c5e54bf35
+binary_sha256: f98331fd1f19697299c462e396b6f3a1b75fbe8b263080abed5eb57cbc31d26e
