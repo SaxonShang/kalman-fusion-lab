@@ -2,6 +2,7 @@
 #include "helpers/make_imu.h"
 
 #include "imu_integrator.h"
+#include "sio_math.h"
 #include "utils.h"
 
 #include <Eigen/Dense>
@@ -206,20 +207,51 @@ TEST(ImuIntegratorTest, AnchorConditionedPoseUncertaintyVanishesWithoutMotion) {
   EXPECT_GT((conditioned.block<3, 3>(6, 6).trace()), 1e-6);
 }
 
+TEST(ImuIntegratorTest, AnchorReferenceJacobianMatchesEvaluationReference) {
+  // 真值位姿与小的估计误差；估计 = 真值 ⊟ 误差：R̂ = R Exp(−δθ)，p̂ = p − δp
+  const Eigen::Matrix3d R_a = sio_utils::ExpSO3(Eigen::Vector3d(0.3, -0.2, 0.5));
+  const Eigen::Vector3d p_a(0.4, -0.1, 1.2);
+  const Eigen::Matrix3d R_b = R_a * sio_utils::ExpSO3(Eigen::Vector3d(0.05, 0.1, -0.08));
+  const Eigen::Vector3d p_b = p_a + Eigen::Vector3d(0.3, 0.2, -0.1);
+  Eigen::Matrix<double, 6, 1> da, db;
+  da << 2e-5, -1e-5, 3e-5, 1e-5, 2e-5, -1e-5;
+  db << -1e-5, 2e-5, 1e-5, 3e-5, -2e-5, 1e-5;
+  const Eigen::Matrix3d Rh_a = R_a * sio_utils::ExpSO3(-da.head<3>());
+  const Eigen::Vector3d ph_a = p_a - da.tail<3>();
+  const Eigen::Matrix3d Rh_b = R_b * sio_utils::ExpSO3(-db.head<3>());
+  const Eigen::Vector3d ph_b = p_b - db.tail<3>();
+
+  // 评价参照 x̂_a · (x_a⁻¹ x_b)，误差 = 参照 ⊟ 当前估计（与 fusion_report.py 相同）
+  const Eigen::Matrix3d R_ref = Rh_a * R_a.transpose() * R_b;
+  const Eigen::Vector3d p_ref = Rh_a * R_a.transpose() * (p_b - p_a) + ph_a;
+  Eigen::Matrix<double, 6, 1> error;
+  error.head<3>() = sio_utils::LogSO3(Rh_b.transpose() * R_ref);
+  error.tail<3>() = p_ref - ph_b;
+
+  const Eigen::Matrix<double, 6, 6> J = AnchorReferenceJacobian(Rh_a, ph_a, Rh_b, ph_b);
+  // 一阶相符，余项为误差的二次量（约 1e-9）；漏掉 J_pθ 杠杆项时差约 1e-5
+  sio_test::ExpectMatrixNear(error, db - J * da, 1e-8);
+  EXPECT_GT((J.block<3, 3>(3, 0)).norm(), 0.1);
+}
+
 TEST(ImuIntegratorTest, AnchorRelativeCovarianceMatchesRelativeErrorCovariance) {
   const Mat21 anchor = DeterministicSpd(0.3, 1e-3);
   const Mat21 noise = DeterministicSpd(1.1, 1e-4);
   const Mat21 phi = DeterministicTransition(2.0);
+  const Eigen::Matrix<double, 6, 6> J = AnchorReferenceJacobian(
+    sio_utils::ExpSO3(Eigen::Vector3d(0.1, 0.2, -0.3)), Eigen::Vector3d(0.2, 0.0, 1.0),
+    sio_utils::ExpSO3(Eigen::Vector3d(0.15, 0.1, -0.2)), Eigen::Vector3d(0.5, 0.1, 0.8));
 
-  // e = x_b − J x_a[0:6]，J = Φ[:,0:6]：锚点位姿误差经 Φ 进入当前状态的部分不计入相对误差
-  const Eigen::Matrix<double, DIM_STATE, 6> J = phi.leftCols<6>();
+  // e = x_b − J̃ x_a[0:6]，J̃ = [J; 0]：只有位姿行减去评价参照带走的锚点位姿误差
+  Eigen::Matrix<double, DIM_STATE, 6> J_full = Eigen::Matrix<double, DIM_STATE, 6>::Zero();
+  J_full.topRows<6>() = J;
   const Eigen::MatrixXd s_bb = phi * anchor * phi.transpose() + noise;
   const Eigen::MatrixXd s_ba = phi * anchor.leftCols<6>();
   const Eigen::MatrixXd s_aa = anchor.topLeftCorner<6, 6>();
   const Eigen::MatrixXd expected =
-    s_bb - s_ba * J.transpose() - J * s_ba.transpose() + J * s_aa * J.transpose();
+    s_bb - s_ba * J_full.transpose() - J_full * s_ba.transpose() + J_full * s_aa * J_full.transpose();
 
-  const Mat21 actual = RelativeToAnchorPose(anchor, phi, noise);
+  const Mat21 actual = RelativeToAnchorPose(anchor, phi, noise, J);
   sio_test::ExpectMatrixNear(actual, expected, 1e-10);
   sio_test::ExpectSymmetric(actual, 1e-14);
 }
@@ -227,21 +259,27 @@ TEST(ImuIntegratorTest, AnchorRelativeCovarianceMatchesRelativeErrorCovariance) 
 TEST(ImuIntegratorTest, AnchorRelativeCovarianceBoundsConditionedCovariance) {
   const Mat21 noise = DeterministicSpd(1.1, 1e-4);
   const Mat21 phi = DeterministicTransition(2.0);
+  const Eigen::Matrix<double, 6, 6> J = AnchorReferenceJacobian(
+    Eigen::Matrix3d::Identity(), Eigen::Vector3d::Zero(),
+    sio_utils::ExpSO3(Eigen::Vector3d(0.0, 0.1, 0.2)), Eigen::Vector3d(0.3, -0.2, 0.1));
 
-  // 锚点位姿与零偏相关：条件化会借这份相关缩小零偏，P_rel 不会，二者之差半正定且不为零
+  // 全方差公式：P_rel = P_b|a + Var(E[e | 锚点位姿]) ≥ P_b|a；锚点位姿与其余状态相关时严格更大
   const Mat21 correlated = DeterministicSpd(0.3, 1e-3);
   const Mat21 difference =
-    RelativeToAnchorPose(correlated, phi, noise) - ConditionOnAnchorPose(correlated, phi, noise);
+    RelativeToAnchorPose(correlated, phi, noise, J) - ConditionOnAnchorPose(correlated, phi, noise);
   const Eigen::SelfAdjointEigenSolver<Mat21> eig(0.5 * (difference + difference.transpose()));
   EXPECT_GT(eig.eigenvalues().minCoeff(), -1e-12);
   EXPECT_GT(difference.trace(), 1e-6);
 
-  // 锚点位姿与其余状态不相关时，两者相同
+  // 锚点位姿与其余状态不相关、且参照恰好带走 Φ 中锚点位姿的全部影响时，两者相同
   Mat21 independent = correlated;
   independent.block<6, DIM_STATE - 6>(0, 6).setZero();
   independent.block<DIM_STATE - 6, 6>(6, 0).setZero();
-  sio_test::ExpectMatrixNear(RelativeToAnchorPose(independent, phi, noise),
-                             ConditionOnAnchorPose(independent, phi, noise), 1e-12);
+  Mat21 pose_only = phi;
+  pose_only.block<DIM_STATE - 6, 6>(6, 0).setZero();
+  sio_test::ExpectMatrixNear(
+    RelativeToAnchorPose(independent, pose_only, noise, pose_only.topLeftCorner<6, 6>()),
+    ConditionOnAnchorPose(independent, pose_only, noise), 1e-12);
 }
 
 TEST(ImuIntegratorTest, GyroScaleUncertaintyGrowsWithRotationAngle) {

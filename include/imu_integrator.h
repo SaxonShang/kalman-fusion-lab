@@ -114,18 +114,31 @@ Eigen::Matrix<double, DIM_STATE, DIM_STATE> ConditionOnAnchorPose(
   const Eigen::Matrix<double, DIM_STATE, DIM_STATE> &process_noise);
 
 /**
- * @brief 以估计的锚点位姿为参照的当前状态协方差（相对误差协方差）。
+ * @brief 帧对评价参照的雅可比 J（6×6）：评价误差的位姿部分 e = δx_b[0:6] − J δx_a[0:6]。
  *
- * 相对误差 e = δx_b − Φ[:,0:6] δx_a[0:6] = Φ[:,6:] δx_a[6:] + w，故
- *   P_rel = Φ P_a' Φᵀ + Q，P_a' 为把 P_a 的位姿行、列置零后的矩阵。
- * 与 ConditionOnAnchorPose 不同，锚点速度、零偏保留边际不确定度：只把锚点当作参照，
- * 并不知道锚点位姿，因此不能借位姿与零偏的相关性缩小零偏。总有 P_rel ≥ P_b|a。
- * 帧对实验的评价误差以估计的锚点为参照，与 P_rel 对应。
+ * 评价把真值相对运动接到估计锚点上，参照为 x̂_a · (x_a⁻¹ x_b)。旋转为机体系右扰动、位置为世界系，一阶有
+ *   e_θ = δθ_b − R̂_bᵀ R̂_a δθ_a
+ *   e_p = δp_b − δp_a − [p̂_b − p̂_a]× R̂_a δθ_a
+ * 参数均为估计值：锚点与当前帧的先验位姿。
+ */
+Eigen::Matrix<double, 6, 6> AnchorReferenceJacobian(const Eigen::Matrix3d &R_anchor,
+                                                    const Eigen::Vector3d &p_anchor,
+                                                    const Eigen::Matrix3d &R_current,
+                                                    const Eigen::Vector3d &p_current);
+
+/**
+ * @brief 以估计的锚点位姿为参照的当前状态协方差，与帧对评价口径一致。
+ *
+ * δx_b = Φ δx_a + w，位姿部分换成评价误差 e = δx_b[0:6] − J δx_a[0:6]，其余状态不变，故
+ *   P_rel = M P_a Mᵀ + Q，M = Φ − J̃，J̃ 只在位姿行、位姿列等于 J（见 AnchorReferenceJacobian）。
+ * 与 ConditionOnAnchorPose 不同，锚点位姿并未已知：锚点速度、零偏保留边际不确定度，锚点姿态误差
+ * 经重力和速度造成的位移（Φ_pθ − J_pθ = [v̂_a T + ½ĝT²]× R̂_a）也保留。由全方差公式 P_rel ≥ P_b|a。
  */
 Eigen::Matrix<double, DIM_STATE, DIM_STATE> RelativeToAnchorPose(
   const Eigen::Matrix<double, DIM_STATE, DIM_STATE> &anchor_cov,
   const Eigen::Matrix<double, DIM_STATE, DIM_STATE> &transition,
-  const Eigen::Matrix<double, DIM_STATE, DIM_STATE> &process_noise);
+  const Eigen::Matrix<double, DIM_STATE, DIM_STATE> &process_noise,
+  const Eigen::Matrix<double, 6, 6> &reference_jacobian);
 
 /**
  * @brief 陀螺刻度误差：旋转方差加上 (scale_sigma · |Δθ|)²，Δθ 为锚点到当前的积分转角。

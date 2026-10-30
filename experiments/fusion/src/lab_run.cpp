@@ -209,6 +209,7 @@ std::vector<EsikfVariant> EsikfVariants(const YAML::Node &settings) {
       o.observation_scale_translation = node["observation_scale_translation"].as<double>(1.0);
       o.uniform_luminance = node["uniform_luminance"].as<bool>(false);
       o.attribute_max_distance_m = node["attribute_max_distance_m"].as<double>(0.0);
+      o.update_rotation = node["update_rotation"].as<bool>(true);
       const auto residual = node["geometry_residual"].as<std::string>("point_to_point");
       if (residual == "ray") {
         o.geometry_residual = ESIKFOptions::GeometryResidual::Ray;
@@ -286,10 +287,13 @@ void RunEsikf(const YAML::Node &cfg, const fs::path &output) {
         // Same mean; covariance of the current state given the anchor pose (see Prepare).
         r.prior.cov = ReadConditional(cache, anchor.id, current.id).covariance;
       } else if (variant.prior_covariance == "anchor_relative") {
-        // Same mean; covariance of the error relative to the estimated anchor pose.
+        // Same mean; covariance of the error against the evaluation reference, which places the
+        // true relative motion on the estimated anchor pose (see fusion_report.py).
         const auto conditional = ReadConditional(cache, anchor.id, current.id);
-        r.prior.cov = RelativeToAnchorPose(conditional.anchor_covariance, conditional.transition,
-                                           conditional.process_noise);
+        r.prior.cov = RelativeToAnchorPose(
+          conditional.anchor_covariance, conditional.transition, conditional.process_noise,
+          AnchorReferenceJacobian(anchor.prior.rot_end, anchor.prior.pos_end,
+                                  current.prior.rot_end, current.prior.pos_end));
       }
       r.prior.cov *= variant.prior_covariance_scale;
       AddGyroScaleUncertainty(r.prior.cov, anchor.prior.rot_end, current.prior.rot_end,

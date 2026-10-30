@@ -553,17 +553,30 @@ Eigen::Matrix<double, DIM_STATE, DIM_STATE> ConditionOnAnchorPose(
   return 0.5 * (current + current.transpose());
 }
 
+Eigen::Matrix<double, 6, 6> AnchorReferenceJacobian(const Eigen::Matrix3d &R_anchor,
+                                                    const Eigen::Vector3d &p_anchor,
+                                                    const Eigen::Matrix3d &R_current,
+                                                    const Eigen::Vector3d &p_current) {
+  Eigen::Matrix<double, 6, 6> J = Eigen::Matrix<double, 6, 6>::Zero();
+  J.block<3, 3>(0, 0) = R_current.transpose() * R_anchor;
+  J.block<3, 3>(3, 0) = -sio_utils::SkewSymmetric(p_current - p_anchor) * R_anchor;
+  J.block<3, 3>(3, 3).setIdentity();
+  return J;
+}
+
 Eigen::Matrix<double, DIM_STATE, DIM_STATE> RelativeToAnchorPose(
   const Eigen::Matrix<double, DIM_STATE, DIM_STATE> &anchor_cov,
   const Eigen::Matrix<double, DIM_STATE, DIM_STATE> &transition,
-  const Eigen::Matrix<double, DIM_STATE, DIM_STATE> &process_noise) {
-  // 锚点位姿只作参照：去掉位姿块及其相关项，速度、零偏等保留边际不确定度。没有减法，不会因抵消失去半正定
-  Eigen::Matrix<double, DIM_STATE, DIM_STATE> reference = 0.5 * (anchor_cov + anchor_cov.transpose());
-  reference.topRows<6>().setZero();
-  reference.leftCols<6>().setZero();
+  const Eigen::Matrix<double, DIM_STATE, DIM_STATE> &process_noise,
+  const Eigen::Matrix<double, 6, 6> &reference_jacobian) {
+  // e = (Φ − J̃) δx_a + w：锚点位姿误差中被评价参照带走的部分 J̃ δx_a 去掉，其余（含锚点姿态误差经重力、
+  // 速度造成的位移）保留。没有减法求逆，不会因数值抵消失去半正定
+  const Eigen::Matrix<double, DIM_STATE, DIM_STATE> P = 0.5 * (anchor_cov + anchor_cov.transpose());
+  Eigen::Matrix<double, DIM_STATE, DIM_STATE> shifted = transition;
+  shifted.block<6, 6>(0, 0) -= reference_jacobian;
 
   Eigen::Matrix<double, DIM_STATE, DIM_STATE> current =
-    transition * reference * transition.transpose() + process_noise;
+    shifted * P * shifted.transpose() + process_noise;
   return 0.5 * (current + current.transpose());
 }
 

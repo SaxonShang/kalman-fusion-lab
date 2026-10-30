@@ -355,6 +355,29 @@ TEST(StateEstimatorTest, EsikfObservationOnlyStepTakesVirtualPose) {
                              r_v.head<3>(), 1e-12);
 }
 
+TEST(StateEstimatorTest, EsikfFrozenRotationKeepsPriorRotationOnly) {
+  ImuStatesGroup prior = MakeCorrelatedPrior();
+  // 姿态与位置相关：只量位置也会经 P_θp 改动姿态，冻结旋转时不应改动
+  prior.cov.block<3, 3>(0, 3) = Eigen::Matrix3d::Identity() * 1e-4;
+  prior.cov.block<3, 3>(3, 0) = Eigen::Matrix3d::Identity() * 1e-4;
+  Eigen::Matrix<double, 6, 1> r_v;
+  r_v << 0.0, 0.0, 0.0, 0.02, -0.01, 0.005;
+  const Eigen::Matrix<double, 6, 6> R = Eigen::Matrix<double, 6, 6>::Identity() * 1e-4;
+
+  const EsikfStepResult full = EsikfIterationStep(prior, prior, r_v, R, true, false);
+  const EsikfStepResult frozen = EsikfIterationStep(prior, prior, r_v, R, true, false, false);
+  ASSERT_TRUE(full.ok);
+  ASSERT_TRUE(frozen.ok);
+  EXPECT_GT(sio_utils::LogSO3(prior.rot_end.transpose() * full.state.rot_end).norm(), 1e-6);
+  sio_test::ExpectMatrixNear(frozen.state.rot_end, prior.rot_end, 0.0);
+  sio_test::ExpectMatrixNear(frozen.gain.topRows<3>(), Eigen::Matrix<double, 3, 6>::Zero(), 0.0);
+  // 其余行仍是最优增益，位置、速度与正常更新相同
+  sio_test::ExpectMatrixNear(frozen.gain.bottomRows<DIM_STATE - 3>(),
+                             full.gain.bottomRows<DIM_STATE - 3>(), 0.0);
+  sio_test::ExpectMatrixNear(frozen.state.pos_end, full.state.pos_end, 1e-15);
+  sio_test::ExpectMatrixNear(frozen.state.vel_end, full.state.vel_end, 1e-15);
+}
+
 TEST(StateEstimatorTest, EsikfKeepsPriorWhenNoCorrespondences) {
   StateEstimator estimator;
   const auto target = sio_test::MakeGridCloud(20, 20);

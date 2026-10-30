@@ -681,7 +681,8 @@ void InjectErrorState(ImuStatesGroup &state, const ImuStatesGroup &base,
 EsikfStepResult EsikfIterationStep(const ImuStatesGroup &prior, const ImuStatesGroup &current,
                                    const Eigen::Matrix<double, 6, 1> &virtual_residual,
                                    const Eigen::Matrix<double, 6, 6> &observation_covariance,
-                                   bool prior_residual, bool observation_only) {
+                                   bool prior_residual, bool observation_only,
+                                   bool update_rotation) {
   EsikfStepResult out;
   out.state = current;
 
@@ -715,6 +716,10 @@ EsikfStepResult EsikfIterationStep(const ImuStatesGroup &prior, const ImuStatesG
     if (!out.gain.allFinite()) {
       return out;
     }
+  }
+  if (!update_rotation) {
+    // Schmidt：旋转不更新，其余行仍是最优增益
+    out.gain.topRows<3>().setZero();
   }
 
   if (prior_residual && !observation_only) {
@@ -1075,7 +1080,7 @@ void StateEstimator::ESIKF(
     {
       SIO_PROFILE((*sio_prof), sio_frame_id, "esikf", "inject_state");
       step = EsikfIterationStep(prior_state, state, r_v, R_obs, options.prior_residual,
-                                options.observation_only);
+                                options.observation_only, options.update_rotation);
     }
     if (!step.ok) {
       RCLCPP_WARN(logger, "ESIKF state update invalid at iter %d", iter);

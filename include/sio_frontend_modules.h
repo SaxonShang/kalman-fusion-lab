@@ -231,6 +231,9 @@ struct ESIKFOptions {
   /// 小于等于 0 时不检查（原实现）。
   double attribute_max_distance_m = 0.0;
   GeometryResidual geometry_residual = GeometryResidual::PointToPoint;
+  /// false：增益的旋转行置零，旋转保持先验（Schmidt 更新），其余状态的增益不变；协方差仍用 Joseph 形式，
+  /// 对这一非最优增益同样一致。用来单独衡量观测对平移的作用，不让平移创新经 P_θp 改动姿态。
+  bool update_rotation = true;
 };
 
 /** @brief ESIKF 单轮状态更新结果（协方差不在此更新，只在迭代结束时用最后一轮 K、R 更新）。 */
@@ -261,7 +264,8 @@ struct EsikfStepResult {
 EsikfStepResult EsikfIterationStep(const ImuStatesGroup &prior, const ImuStatesGroup &current,
                                    const Eigen::Matrix<double, 6, 1> &virtual_residual,
                                    const Eigen::Matrix<double, 6, 6> &observation_covariance,
-                                   bool prior_residual, bool observation_only);
+                                   bool prior_residual, bool observation_only,
+                                   bool update_rotation = true);
 
 /**
  * @brief 融合状态估计：关键帧紧耦合 ESIKF / 普通帧松耦合 ESKF。
