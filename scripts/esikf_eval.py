@@ -149,6 +149,13 @@ def summarize(args):
             "nis_rot_per_dof": mean(get(selected, "nis_rot_per_dof")),
             "nis_trans_per_dof": mean(get(selected, "nis_trans_per_dof")),
             "nis_dof_min": min(finite(get(selected, "nis_dof")), default=math.nan),
+            # Innovation at the last linearization point; the first-iteration value above is biased low
+            # when correspondences are re-associated every iteration.
+            "nis_final_per_dof": mean(get(selected, "nis_final_per_dof")),
+            "nis_final_over_chi2_median": median(get(selected, "nis_final_over_chi2_median")),
+            "nis_final_exceeds_95": mean(get(selected, "nis_final_exceeds_chi2_95")),
+            "nis_final_rot_per_dof": mean(get(selected, "nis_final_rot_per_dof")),
+            "nis_final_trans_per_dof": mean(get(selected, "nis_final_trans_per_dof")),
             "max_prior_offset_rot_deg": max(finite(get(selected, "max_prior_offset_rot_deg")), default=math.nan),
             "iterations_mean": mean(get(selected, "iterations")),
             "status": " ".join(f"{k}:{v}" for k, v in sorted(statuses.items())),
@@ -163,8 +170,9 @@ def summarize(args):
     shown = ["config", "variant", "valid", "total", "trans_rmse_mm", "trans_median_mm",
              "trans_rmse_unflagged_mm", "rot_rmse_deg", "rot_median_deg", "rot_rmse_unflagged_deg",
              "improved_trans", "improved_rot", "posterior_whitened_rot", "posterior_whitened_trans",
-             "prior_whitened_rot", "prior_whitened_trans", "nis_per_dof", "nis_over_chi2_median",
-             "nis_exceeds_95", "max_prior_offset_rot_deg", "iterations_mean", "status"]
+             "prior_whitened_rot", "prior_whitened_trans", "nis_per_dof", "nis_final_per_dof",
+             "nis_final_over_chi2_median", "nis_final_exceeds_95", "max_prior_offset_rot_deg",
+             "iterations_mean", "status"]
     def cell(value):
         return f"{value:.4g}" if isinstance(value, float) else str(value)
     table = [[cell(row[k]) for k in shown] for row in summary]

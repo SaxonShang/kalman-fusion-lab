@@ -8,6 +8,7 @@
 #include <fstream>
 #include <iostream>
 #include <map>
+#include <optional>
 #include <set>
 #include <sstream>
 
@@ -80,6 +81,20 @@ ImuNoiseParams NoiseFromConfig(const YAML::Node &prior, bool has_prior) {
   return noise;
 }
 
+// Optional offline gyro correction ω' = M ω (prior.gyro_correction.matrix, 9 values row-major).
+std::optional<Eigen::Matrix3d> GyroCorrectionFromConfig(const YAML::Node &prior, bool has_prior) {
+  if (!has_prior || !prior["gyro_correction"]) return std::nullopt;
+  const YAML::Node values = prior["gyro_correction"]["matrix"];
+  Require(values.IsSequence() && values.size() == 9, "prior.gyro_correction.matrix needs 9 values");
+  Eigen::Matrix3d correction;
+  for (int i = 0; i < 9; ++i) correction(i / 3, i % 3) = values[i].as<double>();
+  // A calibration of scale and axis alignment stays close to identity.
+  Require(correction.allFinite() && correction.determinant() > 0 &&
+          (correction - Eigen::Matrix3d::Identity()).norm() < 0.1,
+          "prior.gyro_correction.matrix must be finite and close to identity");
+  return correction;
+}
+
 InitialCovarianceParams CovarianceParamsFromConfig(const YAML::Node &prior, bool has_prior) {
   InitialCovarianceParams params;
   if (!has_prior || !prior["initial_covariance_params"]) return params;
@@ -140,6 +155,7 @@ void Prepare(const YAML::Node &cfg, const fs::path &output) {
   const YAML::Node prior_cfg = cfg["prior"];
   const bool has_prior = prior_cfg.IsDefined() && prior_cfg.IsMap();
   integrator.SetNoiseParams(NoiseFromConfig(prior_cfg, has_prior));
+  const auto gyro_correction = GyroCorrectionFromConfig(prior_cfg, has_prior);
   const auto covariance_params = CovarianceParamsFromConfig(prior_cfg, has_prior);
   const std::string initial_covariance = has_prior && prior_cfg["initial_covariance"]
     ? prior_cfg["initial_covariance"].as<std::string>() : "legacy";
@@ -162,6 +178,7 @@ void Prepare(const YAML::Node &cfg, const fs::path &output) {
     for (const auto &sample : input->imu) {
       auto processed = imu_preprocessor.Process(sample);
       if (!processed) continue;
+      if (gyro_correction) ApplyGyroCorrection(*gyro_correction, *processed);
       const double time = processed->header.stamp.sec + processed->header.stamp.nanosec * 1e-9;
       Require(!previous_imu_time || (time > previous_imu_time && time - previous_imu_time <= .010001),
               "IMU discontinuity during preparation");
@@ -265,6 +282,7 @@ void Prepare(const YAML::Node &cfg, const fs::path &output) {
           << ", accel_noise_density: " << noise.accel_noise_density
           << ", gyro_random_walk: " << noise.gyro_random_walk
           << ", accel_random_walk: " << noise.accel_random_walk << "}\n"
+          << "gyro_correction: " << (gyro_correction ? "applied" : "none") << '\n'
           << "init_window: {samples: " << init_report.samples
           << ", duration_s: " << init_report.duration_s
           << ", gravity_norm: " << init_report.gravity_norm

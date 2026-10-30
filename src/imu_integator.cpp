@@ -580,6 +580,15 @@ Eigen::Matrix<double, DIM_STATE, DIM_STATE> RelativeToAnchorPose(
   return 0.5 * (current + current.transpose());
 }
 
+void ApplyGyroCorrection(const Eigen::Matrix3d &correction, sensor_msgs::msg::Imu &sample) {
+  const Eigen::Vector3d corrected =
+    correction * Eigen::Vector3d(sample.angular_velocity.x, sample.angular_velocity.y,
+                                 sample.angular_velocity.z);
+  sample.angular_velocity.x = corrected.x();
+  sample.angular_velocity.y = corrected.y();
+  sample.angular_velocity.z = corrected.z();
+}
+
 void AddGyroScaleUncertainty(Eigen::Matrix<double, DIM_STATE, DIM_STATE> &cov,
                              const Eigen::Matrix3d &R_anchor, const Eigen::Matrix3d &R_current,
                              double scale_sigma) {

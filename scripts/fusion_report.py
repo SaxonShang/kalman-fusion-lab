@@ -184,20 +184,25 @@ def collect(directory, config):
             # Prior error against the prior P alone: separates P from R, which NIS sees only as P + R.
             prior_by_p = block_whitened(before, p0[:6, :6])
             # First ESIKF iteration is linearized at the prior, so its virtual residual is the
-            # innovation and S = P_pose + R.
+            # innovation and S = P_pose + R. With re-association every iteration the first step reaches
+            # only part of the observation, so nis_final uses the last linearization point x_j instead:
+            # innovation r_v + e_j (e_j = x_j ⊟ x_pred) with that iteration's R.
             items = n.getNode("esikf_iterations")
-            innovation_stats = (nis_columns("nis", math.nan, 0) | nis_columns("nis_rot", math.nan, 0) |
-                                nis_columns("nis_trans", math.nan, 0))
+            innovation_stats = {}
+            for prefix in ("nis", "nis_final"):
+                for part in ("", "_rot", "_trans"):
+                    innovation_stats |= nis_columns(prefix + part, math.nan, 0)
             offsets = []
             if stage == "esikf" and items.size() > 0:
-                first = items.at(0)
-                residual, first_noise = mat(first, "virtual_residual"), mat(first, "R")
-                if residual is not None and first_noise is not None:
-                    residual = residual.reshape(-1)
-                    innovation_stats = (
-                        nis_columns("nis", *nis(residual, p0[:6, :6], first_noise)) |
-                        nis_columns("nis_rot", *nis(residual[:3], p0[:3, :3], first_noise[:3, :3])) |
-                        nis_columns("nis_trans", *nis(residual[3:], p0[3:6, 3:6], first_noise[3:, 3:])))
+                for prefix, it in (("nis", items.at(0)), ("nis_final", items.at(items.size() - 1))):
+                    residual, it_noise, offset = mat(it, "virtual_residual"), mat(it, "R"), mat(it, "prior_offset")
+                    if residual is None or it_noise is None or (prefix == "nis_final" and offset is None):
+                        continue
+                    innovation = residual.reshape(-1) + (offset.reshape(-1) if prefix == "nis_final" else 0)
+                    innovation_stats |= (
+                        nis_columns(prefix, *nis(innovation, p0[:6, :6], it_noise)) |
+                        nis_columns(prefix + "_rot", *nis(innovation[:3], p0[:3, :3], it_noise[:3, :3])) |
+                        nis_columns(prefix + "_trans", *nis(innovation[3:], p0[3:6, 3:6], it_noise[3:, 3:])))
                 offsets = [mat(items.at(j), "prior_offset") for j in range(items.size())]
                 offsets = [o.reshape(-1) for o in offsets if o is not None]
             eig_min, eig_max, rot_trace, pos_trace = covariance_stats(noise)
@@ -324,6 +329,11 @@ def summarize(rows):
                         "nis_exceeds_chi2_95_fraction": mean("nis_exceeds_chi2_95", selected),
                         "nis_rot_per_dof_mean": mean("nis_rot_per_dof", selected),
                         "nis_trans_per_dof_mean": mean("nis_trans_per_dof", selected),
+                        "nis_final_per_dof_mean": mean("nis_final_per_dof", selected),
+                        "nis_final_over_chi2_median_median": median("nis_final_over_chi2_median", selected),
+                        "nis_final_exceeds_chi2_95_fraction": mean("nis_final_exceeds_chi2_95", selected),
+                        "nis_final_rot_per_dof_mean": mean("nis_final_rot_per_dof", selected),
+                        "nis_final_trans_per_dof_mean": mean("nis_final_trans_per_dof", selected),
                         "max_prior_offset_rot_deg": max((r["max_prior_offset_rot_deg"] for r in selected
                                                          if math.isfinite(r["max_prior_offset_rot_deg"])), default=None)})
     return summary
@@ -362,7 +372,8 @@ def html_report(directory, cfg, rows, summary):
             "prior_trans_error_m", "result_trans_error_m", "prior_rot_error_deg",
             "result_rot_error_deg", "prior_flagged", "R_rot_trace_rad2", "R_pos_trace_m2",
             "nis_regularized", "posterior_whitened_by_P_rot", "posterior_whitened_by_P_trans",
-            "prior_whitened_by_P_rot", "prior_whitened_by_P_trans", "nis_per_dof", "nis_dof"]
+            "prior_whitened_by_P_rot", "prior_whitened_by_P_trans", "nis_per_dof", "nis_dof",
+            "nis_final_per_dof", "nis_final_dof"]
     def value(v):
         return f"{v:.5g}" if isinstance(v, float) else html.escape(str(v))
     headers = "".join(f"<th>{html.escape(k)}</th>" for k in keys)
@@ -374,7 +385,8 @@ def html_report(directory, cfg, rows, summary):
                     "improved_translation", "improved_rotation",
                     "posterior_whitened_by_P_rot_mean", "posterior_whitened_by_P_trans_mean",
                     "prior_whitened_by_P_rot_mean", "prior_whitened_by_P_trans_mean",
-                    "nis_per_dof_mean", "nis_over_chi2_median_median", "nis_exceeds_chi2_95_fraction")
+                    "nis_per_dof_mean", "nis_over_chi2_median_median", "nis_exceeds_chi2_95_fraction",
+                    "nis_final_per_dof_mean", "nis_final_over_chi2_median_median", "nis_final_exceeds_chi2_95_fraction")
     summary_body = "".join("<tr>" + "".join(f"<td>{value(r[k])}</td>" for k in summary_keys) +
         "</tr>" for r in summary)
     page = """<!doctype html><html lang="zh-CN"><meta charset="utf-8">
@@ -410,7 +422,8 @@ img{width:100%;background:white}input,select{padding:8px;margin:10px 8px 10px 0}
              "prior_whitened 用真值误差只检验先验 P；NIS 为 ESIKF 首轮 rᵀ(P+R)⁻¹r，不用真值，检验的是 P+R 的总量，"
              "单靠它分不开 P 与 R，偏差、错误对应和线性化误差也会抬高它。观测方差超过先验方差 "
              f"{UNOBSERVED_VARIANCE_RATIO:.0e} 倍的方向视为不可观，从 NIS 及其自由度中去掉（nis_dof）。"
-             "一致时 nis_per_dof 均值约 1、nis_over_chi2_median 中位数约 1；帧对少且共享序列，超出 95% 分位的比例只作参考。</p>")
+             "一致时 nis_per_dof 均值约 1、nis_over_chi2_median 中位数约 1；帧对少且共享序列，超出 95% 分位的比例只作参考。"
+             "每轮重新关联时首轮只走到观测的一部分，nis 会偏小；nis_final 用最后一轮线性化点的创新 r_v + e_j，应以它为准。</p>")
     page += ("<h2>分组结果</h2><div class='scroll'><table><thead><tr>" +
              "".join(f"<th>{html.escape(k)}</th>" for k in summary_keys) +
              "</tr></thead><tbody>" + summary_body + "</tbody></table></div>")

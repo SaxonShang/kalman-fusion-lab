@@ -15,18 +15,30 @@ the part along the rotation axis (what a scale error produces) and the part perp
 (what a frame rotation or misalignment produces), and a residual IMU time offset is scanned.
 
     python3 scripts/imu_rotation_check.py --inputs results/inputs --output artifacts/imu_rotation_check
+
+G1 (gyro scale correction): with --write-config, A is refitted only on windows at least
+--margin-s away from every evaluation pair of --evaluation-config, and its symmetric part S is
+written as prior.gyro_correction (ω' = S ω) of a new configuration. The frame rotation X is not
+applied, because it may belong to the groundtruth hand-eye calibration. Windows near the evaluation
+pairs are held out and reported before and after the correction.
+
+    python3 scripts/imu_rotation_check.py --write-config experiments/fusion/configs/esikf_round3_gyro.yaml
 """
 
 import argparse
 import csv
 import json
 import math
+import os
 from pathlib import Path
+import sys
 
 import numpy as np
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from fusion_lab import load_config  # noqa: E402
 # One frame (sync/main_motion pairs) and six frames (main_motion_long pairs).
 WINDOW_FRAMES = (1, 6)
 FIT_WINDOW_FRAMES = 6  # longer windows rotate more and condition A better
@@ -95,6 +107,13 @@ class Sequence:
         r_bc = extrinsic_rotation(yaml.safe_load((directory / "params.yaml").read_text(encoding="utf-8")))
         self.gt_body = quaternion_rotation(gt[:, 4:8]) @ r_bc.T  # R_wb = R_wc R_bcᵀ
         self.frame_dt = float(np.median(np.diff(self.gt_time)))
+        # Groundtruth rows follow frames.csv; pairs in the configurations use source frame ids.
+        with (directory / "frames.csv").open(newline="") as stream:
+            frames = list(csv.DictReader(stream))
+        if len(frames) != len(gt) or max(abs(float(f["end_time"]) - self.origin - t)
+                                         for f, t in zip(frames, self.gt_time)) > 1e-3:
+            raise SystemExit(f"{self.name}: groundtruth rows do not match frames.csv")
+        self.time_of_source = {int(f["source_frame_id"]): t for f, t in zip(frames, self.gt_time)}
 
     def rotation_at(self, t):
         k = np.clip(np.searchsorted(self.tau, t, side="right") - 1, 0, len(self.rate) - 1)
@@ -115,8 +134,9 @@ class Sequence:
         return gt, np.transpose(a, (0, 2, 1)) @ b, self.gt_time[j] - self.gt_time[i]
 
 
-def collect(sequences, frames, offset_s=0.0):
-    theta_gt, theta_imu, error, length, index, half = [], [], [], [], [], []
+def collect(sequences, frames, offset_s=0.0, excluded=None):
+    """Window data of all sequences; near[k] marks windows overlapping an excluded interval."""
+    theta_gt, theta_imu, error, length, index, half, near = [], [], [], [], [], [], []
     for s, sequence in enumerate(sequences):
         i, j = sequence.windows(frames)
         gt, imu, L = sequence.relative(i, j, offset_s)
@@ -125,11 +145,31 @@ def collect(sequences, frames, offset_s=0.0):
         error.append(log_so3(np.transpose(imu, (0, 2, 1)) @ gt))  # same definition as the prior error
         length.append(L)
         index.append(np.full(len(L), s))
-        start = sequence.gt_time[i]
+        start, end = sequence.gt_time[i], sequence.gt_time[j]
         half.append((start >= np.median(start)).astype(int))
+        overlap = np.zeros(len(L), bool)
+        for low, high in (excluded or {}).get(sequence.name, []):
+            overlap |= (start < high) & (end > low)
+        near.append(overlap)
     return {k: np.concatenate(v) for k, v in
             (("gt", theta_gt), ("imu", theta_imu), ("error", error), ("length", length), ("seq", index),
-             ("half", half))}
+             ("half", half), ("near", near))}
+
+
+def subset(data, mask):
+    return {key: value[mask] for key, value in data.items()}
+
+
+def bias_rates(data, count, matrix):
+    """Per-sequence bias rate c minimising |θ_gt − M θ_imu − c L| with M fixed (rows of design())."""
+    target = data["gt"] - data["imu"] @ matrix.T
+    rates = np.zeros((count, 3))
+    for k in range(count):
+        mask = data["seq"] == k
+        length = data["length"][mask]
+        if length.size:
+            rates[k] = (length @ target[mask]) / (length @ length)
+    return np.vstack([matrix.T, rates])
 
 
 def design(data, count):
@@ -177,10 +217,81 @@ def polar(a):
     return x, s
 
 
+def gyro_calibration(sequences, count, args):
+    """G1: fit A away from the evaluation pairs; only its symmetric part S becomes the correction."""
+    cfg = load_config(args.evaluation_config.resolve())
+    excluded = {}
+    for sequence in sequences:
+        excluded[sequence.name] = [
+            (sequence.time_of_source[int(pair["anchor"])] - args.margin_s,
+             sequence.time_of_source[int(pair["current"])] + args.margin_s) for pair in cfg["pairs"]]
+    fit_data = collect(sequences, FIT_WINDOW_FRAMES, excluded=excluded)
+    calibration = subset(fit_data, ~fit_data["near"])
+    coefficients = fit(calibration, count)
+    x, s = polar(coefficients[:3].T)
+    x_vector = log_so3(x[None])[0]
+    evaluation_config = os.path.relpath(args.evaluation_config.resolve(), ROOT).replace(os.sep, "/")
+    result = {
+        "evaluation_config": evaluation_config,
+        "margin_s": args.margin_s,
+        "fit_window_frames": FIT_WINDOW_FRAMES,
+        "fit_windows": int(len(calibration["length"])),
+        "scale_matrix": s.tolist(),
+        "scale_eigenvalues_percent": [float(100 * (v - 1)) for v in np.linalg.eigvalsh((s + s.T) / 2)],
+        "frame_rotation_deg_not_applied": float(math.degrees(np.linalg.norm(x_vector))),
+        "held_out_near_evaluation": {},
+    }
+    for frames in WINDOW_FRAMES:
+        data = collect(sequences, frames, excluded=excluded)
+        held = subset(data, data["near"])
+        result["held_out_near_evaluation"][f"{frames}_frames"] = {
+            "windows": int(len(held["length"])),
+            # Bias rates refitted on the calibration windows with the matrix fixed.
+            "bias_only_rms_deg": residual_rms_deg(held, count, bias_rates(calibration, count, np.eye(3))),
+            "scale_corrected_rms_deg": residual_rms_deg(held, count, bias_rates(calibration, count, s)),
+            "full_fit_rms_deg": residual_rms_deg(held, count, coefficients),
+            "raw_axis_split": axis_split(held),
+        }
+    if args.write_config:
+        target = args.write_config.resolve()
+        try:
+            extends = os.path.relpath(args.evaluation_config.resolve(), target.parent).replace(os.sep, "/")
+        except ValueError:  # different drives on Windows
+            extends = str(args.evaluation_config.resolve())
+        output = {
+            "extends": extends,
+            "prior": {"gyro_correction": {
+                "matrix": [float(f"{v:.8g}") for v in s.reshape(-1)],
+                "generated_by": "scripts/imu_rotation_check.py --write-config",
+                "fit": {
+                    "model": "theta_gt = A theta_imu + c_seq L, A = X S; S applied, X not applied",
+                    "window_frames": FIT_WINDOW_FRAMES,
+                    "windows": result["fit_windows"],
+                    "excluded": f"windows within {args.margin_s} s of every pair in {evaluation_config}",
+                    "scale_eigenvalues_percent": [round(v, 4) for v in result["scale_eigenvalues_percent"]],
+                    "frame_rotation_deg_not_applied": round(result["frame_rotation_deg_not_applied"], 4),
+                },
+            }},
+        }
+        header = ("# 由 scripts/imu_rotation_check.py --write-config 生成（G1，实验记录.md）：陀螺读数 ω' = S ω。\n"
+                  "# S 为 θ_gt ≈ A θ_imu + c·L 拟合中 A = X·S 的对称部分，只用与评估帧对相隔 margin 以上的 6 帧窗口拟合；\n"
+                  "# 坐标系旋转 X 不施加（可能属于真值手眼标定）。请勿手改，重新生成即可复现。\n")
+        target.write_text(header + yaml.safe_dump(output, sort_keys=False, allow_unicode=True), encoding="utf-8")
+        result["written_config"] = str(target)
+    return result
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--inputs", type=Path, default=ROOT / "results/inputs")
     parser.add_argument("--output", type=Path, default=ROOT / "artifacts/imu_rotation_check")
+    parser.add_argument("--evaluation-config", type=Path,
+                        default=ROOT / "experiments/fusion/configs/esikf_round2_prior_model.yaml",
+                        help="G1: configuration whose pairs are excluded from the fit and which the output extends")
+    parser.add_argument("--margin-s", type=float, default=1.0,
+                        help="G1: windows closer than this to an evaluation pair are not used for the fit")
+    parser.add_argument("--write-config", type=Path,
+                        help="G1: write the scale correction as prior.gyro_correction of a new configuration")
     args = parser.parse_args()
     directories = sorted(d for d in args.inputs.iterdir() if (d / "imu.csv").is_file())
     if not directories:
@@ -250,6 +361,9 @@ def main():
         "curve": scan,
     }
 
+    if args.write_config:
+        summary["g1_gyro_correction"] = gyro_calibration(sequences, count, args)
+
     (args.output / "summary.json").write_text(json.dumps(summary, indent=2, ensure_ascii=False), encoding="utf-8")
     with (args.output / "windows.csv").open("w", newline="") as stream:
         writer = csv.DictWriter(stream, list(rows[0]))
@@ -269,6 +383,15 @@ def main():
     t = summary["time_offset_scan"]
     print(f"time offset: best {t['best_offset_ms']:+.1f} ms, residual {t['residual_rms_deg_at_best']:.4f} deg "
           f"(at 0 ms {t['residual_rms_deg_at_0_ms']:.4f} deg)")
+    if args.write_config:
+        g = summary["g1_gyro_correction"]
+        print(f"G1: fit on {g['fit_windows']} six-frame windows at least {g['margin_s']} s from the evaluation pairs; "
+              f"S eigenvalues {np.round(g['scale_eigenvalues_percent'], 3).tolist()} %, "
+              f"frame rotation {g['frame_rotation_deg_not_applied']:.4f} deg not applied")
+        for key, h in g["held_out_near_evaluation"].items():
+            print(f"  held out near evaluation, {key} ({h['windows']} windows): bias only {h['bias_only_rms_deg']:.4f} deg, "
+                  f"with S {h['scale_corrected_rms_deg']:.4f} deg, with full A {h['full_fit_rms_deg']:.4f} deg")
+        print(f"Wrote {g['written_config']}")
     print(f"Wrote {args.output / 'summary.json'} and windows.csv")
 
 

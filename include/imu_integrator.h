@@ -141,6 +141,12 @@ Eigen::Matrix<double, DIM_STATE, DIM_STATE> RelativeToAnchorPose(
   const Eigen::Matrix<double, 6, 6> &reference_jacobian);
 
 /**
+ * @brief 陀螺读数的线性校正 ω' = M ω（刻度与轴非正交），在预处理之后、积分之前对每个样本施加。
+ *        M 由离线标定给出，与机体系下的角速度相乘；单位不变。
+ */
+void ApplyGyroCorrection(const Eigen::Matrix3d &correction, sensor_msgs::msg::Imu &sample);
+
+/**
  * @brief 陀螺刻度误差：旋转方差加上 (scale_sigma · |Δθ|)²，Δθ 为锚点到当前的积分转角。
  *        刻度误差是系统误差，随转角线性增长，白噪声 Q 覆盖不到。
  * @param cov 当前状态协方差（就地修改旋转块）

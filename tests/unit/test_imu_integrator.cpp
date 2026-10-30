@@ -282,6 +282,26 @@ TEST(ImuIntegratorTest, AnchorRelativeCovarianceBoundsConditionedCovariance) {
     ConditionOnAnchorPose(independent, pose_only, noise), 1e-12);
 }
 
+TEST(ImuIntegratorTest, GyroCorrectionScalesIntegratedRotation) {
+  auto imu = sio_test::MakeImuSequence(
+    0.0, 101, 100.0, Eigen::Vector3d::Zero(), Eigen::Vector3d(0.0, 0.0, 1.0));
+  const Eigen::Matrix3d correction = Eigen::Vector3d(1.0, 1.0, 0.98).asDiagonal();
+  for (auto &sample : imu) {
+    ApplyGyroCorrection(correction, *sample);
+  }
+  EXPECT_DOUBLE_EQ(imu.front()->angular_velocity.z, 0.98);
+  EXPECT_DOUBLE_EQ(imu.front()->angular_velocity.x, 0.0);
+
+  // 校正后的读数照常积分：1 rad/s 积 1 s，转角按 0.98 缩小
+  ImuIntegrator integrator;
+  KeyFrameData keyframe;
+  keyframe.timestamp = 0.0;
+  keyframe.imu_states.gravity = Eigen::Vector3d::Zero();
+  const ImuStatesGroup state = integrator.ImuPreintegrationCov(keyframe, imu, 1.0);
+  const Eigen::Vector3d x_axis = state.rot_end * Eigen::Vector3d::UnitX();
+  EXPECT_NEAR(std::atan2(x_axis.y(), x_axis.x()), 0.98, 1e-3);
+}
+
 TEST(ImuIntegratorTest, GyroScaleUncertaintyGrowsWithRotationAngle) {
   Mat21 cov = Mat21::Zero();
   const Eigen::Matrix3d R_current =

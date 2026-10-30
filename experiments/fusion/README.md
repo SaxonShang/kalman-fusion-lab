@@ -125,7 +125,7 @@ Stereo 参数见 `gicp.stereo_options`；点面、视差法向和源体素代表
 
 ESIKF 使用相同图像对和 IMU 先验，从点云重新关联并建立点级观测，不使用 GICP 位姿、GICP 的 R 或 ESKF 后验。目标点云的体素、法向、颜色梯度与立体点协方差通过生产模块计算。
 
-默认比较几何权重 `1.0`（纯几何）与 `0.5`（几何 + 光度），在配置的 `esikf.geometry_weights` 中调整。`esikf.prior_covariance_scale` 可用于独立控制 P，默认为 1。配置里写 `esikf.variants` 时改为逐个变体运行，可打开迭代先验项、锚点先验（`prior_covariance: anchor_conditioned` 或 `anchor_relative`）、观测放大、亮度与残差模型等选项；各选项、配置文件和运行顺序见 [实验记录.md 第 6 节](../../实验记录.md#6-2026-10-29-关键帧-esikf-改进-e0e7已运行) 与 [第 7 节](../../实验记录.md#7-2026-10-30-第二轮-f0f5待运行)。
+默认比较几何权重 `1.0`（纯几何）与 `0.5`（几何 + 光度），在配置的 `esikf.geometry_weights` 中调整。`esikf.prior_covariance_scale` 可用于独立控制 P，默认为 1。配置里写 `esikf.variants` 时改为逐个变体运行，可打开迭代先验项、锚点先验（`prior_covariance: anchor_conditioned` 或 `anchor_relative`）、观测放大、亮度与残差模型等选项；各选项、配置文件和运行顺序见 [实验记录.md 第 6 节](../../实验记录.md#6-2026-10-29-关键帧-esikf-改进-e0e7已运行) 与 [第 7 节](../../实验记录.md#7-2026-10-30-第二轮-f0f5已运行)；先验陀螺校正 `prior.gyro_correction` 见 [第 8 节](../../实验记录.md#8-2026-10-30-第三轮-g1-陀螺刻度校正与末轮-nis待运行)。
 
 重点查看 `esikf_iterations.csv`：对应点是否充足、H 是否退化、虚拟观测 R 和 K 是否合理、每轮修正是否收敛、最终 P 是否对称且半正定，以及相同先验下误差是否减少。未发生有效更新的案例保留为 `no_valid_update`。
 
