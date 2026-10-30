@@ -1,0 +1,9 @@
+{
+  "script": "scripts/imu_rotation_check.py",
+  "script_sha256": "4565a3f704fc12a9ed38d9730bc8cb9580f9eea0bc327dc5d1229f1f32ae978f",
+  "tested_commit": "8f2355077f1d583b4c2699a62d8dabd017e57899",
+  "matrix_and_fit_metadata_match_committed_config": true,
+  "applied": "S only; X and fitted per-sequence bias rates are not applied",
+  "evaluation_margin_s": 1.0,
+  "independent_calibration_recording": false
+}

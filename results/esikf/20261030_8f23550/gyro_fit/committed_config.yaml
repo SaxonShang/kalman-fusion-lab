@@ -1,0 +1,27 @@
+# 由 scripts/imu_rotation_check.py --write-config 生成（G1，实验记录.md）：陀螺读数 ω' = S ω。
+# S 为 θ_gt ≈ A θ_imu + c·L 拟合中 A = X·S 的对称部分，只用与评估帧对相隔 margin 以上的 6 帧窗口拟合；
+# 坐标系旋转 X 不施加（可能属于真值手眼标定）。请勿手改，重新生成即可复现。
+extends: esikf_round2_prior_model.yaml
+prior:
+  gyro_correction:
+    matrix:
+    - 0.99391013
+    - -0.00497906
+    - -0.00040746299
+    - -0.00497906
+    - 0.9896617
+    - 0.0017874792
+    - -0.00040746299
+    - 0.0017874792
+    - 0.9856726
+    generated_by: scripts/imu_rotation_check.py --write-config
+    fit:
+      model: theta_gt = A theta_imu + c_seq L, A = X S; S applied, X not applied
+      window_frames: 6
+      windows: 2167
+      excluded: windows within 1.0 s of every pair in experiments/fusion/configs/esikf_round2_prior_model.yaml
+      scale_eigenvalues_percent:
+      - -1.5382
+      - -1.2725
+      - -0.2649
+      frame_rotation_deg_not_applied: 0.439

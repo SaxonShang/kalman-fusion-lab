@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Freeze completed ESIKF runs and make a review bundle; never rerun/tune the filter.
 
-Run after the six-sequence static, calibrated and prior-model experiments. Raw
+Run after each selected configuration has completed all six sequences. Raw
 numeric files retain their bytes and local paths; compact HTML reports point to
 the included iteration traces and final matrices. MANIFEST.json maps local paths
 to the portable archive and records the tested commit and input/cache identities.
@@ -48,21 +48,22 @@ def compact_report_links(path):
     path.write_text(text)
 
 
-def plot_summary(target, configs, title):
+def plot_summary(target, configs, title, summary_csv=None, labels=None, note=None):
     os.environ.setdefault("MPLCONFIGDIR", str(ROOT / "build/matplotlib-cache"))
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
     import numpy as np
 
-    rows = list(csv.DictReader((target / "summary.csv").open()))
+    rows = list(csv.DictReader((summary_csv or target / "summary.csv").open()))
+    labels = labels or ("Original IMU model", "SDK noise + observability P")
     calibrated, prior_model = configs[1:]
     variants = [r["variant"] for r in rows if r["config"] == calibrated]
     fig, axes = plt.subplots(1, 3, figsize=(19, max(6.5, len(variants) * .42)), layout="constrained")
     y = np.arange(len(variants))
     for config, offset, color, label in [
-        (calibrated, -0.17, "#3264a8", "Original IMU model"),
-        (prior_model, 0.17, "#cb7628", "SDK noise + observability P")]:
+        (calibrated, -0.17, "#3264a8", labels[0]),
+        (prior_model, 0.17, "#cb7628", labels[1])]:
         group = {r["variant"]: r for r in rows if r["config"] == config}
         for ax, key in zip(axes, ["trans_rmse_mm", "rot_rmse_deg", "trans_rmse_unflagged_mm"]):
             ax.barh(y + offset, [float(group[v][key]) for v in variants],
@@ -77,8 +78,8 @@ def plot_summary(target, configs, title):
         ax.grid(axis="x", alpha=0.25)
     handles, labels = axes[0].get_legend_handles_labels()
     fig.legend(handles, labels, fontsize=9, loc="lower center", bbox_to_anchor=(.5, -.035), ncol=2)
-    fig.suptitle(f"{title}: frozen pairs, conditional pose error (not trajectory ATE)\n"
-                 "Dashed lines: IMU prior. R scales fitted on separate static pairs without GT.", fontsize=12)
+    note = note or "Dashed lines: IMU prior. R scales fitted on separate static pairs without GT."
+    fig.suptitle(f"{title}: frozen pairs, conditional pose error (not trajectory ATE)\n{note}", fontsize=12)
     fig.savefig(target / "comparison.png", dpi=160, bbox_inches="tight")
     fig.savefig(target / "comparison.svg", bbox_inches="tight")
     plt.close(fig)
@@ -89,11 +90,12 @@ def archive(args):
     if target.exists():
         raise SystemExit(f"Refusing to overwrite existing archive: {target}")
     configs = args.config
-    if len(configs) != 3:
-        raise SystemExit("Supply static, calibrated and prior-model config stems in that order")
+    if not configs:
+        raise SystemExit("Supply at least one config stem")
     runs = find_runs([args.runs], configs)
-    if len(runs) != 18:
-        raise SystemExit(f"Expected 18 finished sequence runs, got {len(runs)}")
+    expected_runs = len(configs) * len(SEQUENCES)
+    if len(runs) != expected_runs:
+        raise SystemExit(f"Expected {expected_runs} finished sequence runs, got {len(runs)}")
     for config in configs:
         if {cfg["sequence"] for _, cfg, c in runs if c == config} != SEQUENCES:
             raise SystemExit(f"Missing or unexpected sequences for {config}")
@@ -166,7 +168,8 @@ def archive(args):
     (target / "metrics.csv").unlink()
     summarize(argparse.Namespace(directories=[target / "runs"], config=configs, csv=target / "summary.csv"))
     (target / "MANIFEST.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n")
-    plot_summary(target, configs, args.title)
+    if len(configs) == 3:
+        plot_summary(target, configs, args.title)
     logs = target / "logs"
     logs.mkdir()
     log_names = args.log if args.log is not None else ["fusion-lab-tests.log", "b9804c7-before-test-macro-fix.log", "esikf-gpu-configure.log",
@@ -190,7 +193,7 @@ if __name__ == "__main__":
     parser.add_argument("--destination", type=Path, required=True)
     parser.add_argument("--commit", required=True)
     parser.add_argument("--config", nargs="+", default=CONFIGS,
-                        help="Static, calibrated and prior-model config stems, in that order")
+                        help="Config stems to archive; each must contain all six sequences")
     parser.add_argument("--title", default="ESIKF E0–E7")
     parser.add_argument("--local-patch", default=None,
                         help="Describe any local patch to the tested commit (default: none)")

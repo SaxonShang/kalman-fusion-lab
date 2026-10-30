@@ -1,0 +1,15 @@
+{
+  "tested_commit": "8f2355077f1d583b4c2699a62d8dabd017e57899",
+  "runs": 6,
+  "records": 480,
+  "visual_frames_identical_to_round2": 54,
+  "checks": {
+    "relative_records": 120,
+    "f3s_records": 90,
+    "nis_cholesky_checks": 2338
+  },
+  "max_nis_scaled_absolute_error": 2.562777626553531e-07,
+  "round2_existing_first_nis_max_absolute_change": 0.0,
+  "negative_full_posterior_eigenvalues": 0,
+  "min_full_posterior_eigenvalue": 2.4408178192404913e-11
+}

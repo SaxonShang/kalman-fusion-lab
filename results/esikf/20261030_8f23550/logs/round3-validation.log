@@ -1,0 +1,21 @@
+using esikf_round3_gyro / 20261015_112553_up: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_114925_306642_up_esikf
+using esikf_round3_gyro / 20261015_112659_forward: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_115037_982577_forward_esikf
+using esikf_round3_gyro / 20261015_112757_right: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_115147_803305_right_esikf
+using esikf_round3_gyro / 20261015_112845_yaw_left: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_115257_881070_yaw_left_esikf
+using esikf_round3_gyro / 20261015_112940_pitch_up: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_115410_547772_pitch_up_esikf
+using esikf_round3_gyro / 20261015_113028_roll_right: /home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_115521_583212_roll_right_esikf
+{
+  "tested_commit": "8f2355077f1d583b4c2699a62d8dabd017e57899",
+  "runs": 6,
+  "records": 480,
+  "visual_frames_identical_to_round2": 54,
+  "checks": {
+    "relative_records": 120,
+    "f3s_records": 90,
+    "nis_cholesky_checks": 2338
+  },
+  "max_nis_scaled_absolute_error": 2.562777626553531e-07,
+  "round2_existing_first_nis_max_absolute_change": 0.0,
+  "negative_full_posterior_eigenvalues": 0,
+  "min_full_posterior_eigenvalue": 2.4408178192404913e-11
+}

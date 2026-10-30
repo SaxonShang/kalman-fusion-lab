@@ -8,6 +8,8 @@
 
 本机终端曾因直连 GitHub 卡住，当前仅在这个新仓库的 `.git/config` 设置 `http.https://github.com/.proxy=http://127.0.0.1:7897`，使用已运行的本地代理；该设置不随 Git 发布。后续在此仓库执行 `git pull --ff-only origin main`。不同机器按自己的网络配置，无需沿用此端口。
 
+2026-10-30 第三轮：`8f23550` 编译与 116 项单测通过，6 序列、480 条新记录完成；G1 矩阵在 Linux 复算与提交一致。视觉输入与第二轮完全相同，结果见 [第三轮审阅包](../results/esikf/20261030_8f23550/README.md)。
+
 ## 本机验证进度（2026-10-28）
 
 当前优先测试卡尔曼前端融合，专用入口见 [前端融合测试工作区](../experiments/fusion/README.md)。IDE 默认构建目录已切换为 `build/local/fusion/`，它独立于完整 GPU 前端。

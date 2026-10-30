@@ -1,0 +1,320 @@
+Running main() from /opt/ros/humble/src/gtest_vendor/src/gtest_main.cc
+[==========] Running 116 tests from 14 test suites.
+[----------] Global test environment set-up.
+[----------] 13 tests from StereoGicpTest
+[ RUN      ] StereoGicpTest.CovarianceMatchesAnalyticAtOpticalCenter
+[       OK ] StereoGicpTest.CovarianceMatchesAnalyticAtOpticalCenter (0 ms)
+[ RUN      ] StereoGicpTest.OffAxisHasXzCouplingAndSigmaZGrowsWithZ
+[       OK ] StereoGicpTest.OffAxisHasXzCouplingAndSigmaZGrowsWithZ (0 ms)
+[ RUN      ] StereoGicpTest.DepthFromDisparityInvertsTriangulation
+[       OK ] StereoGicpTest.DepthFromDisparityInvertsTriangulation (0 ms)
+[ RUN      ] StereoGicpTest.ProjectiveAssociateIdentityKeepsRay
+[       OK ] StereoGicpTest.ProjectiveAssociateIdentityKeepsRay (6 ms)
+[ RUN      ] StereoGicpTest.RecoversSmallYawFromImuLikeInit
+[       OK ] StereoGicpTest.RecoversSmallYawFromImuLikeInit (11 ms)
+[ RUN      ] StereoGicpTest.IdentityInitOnMatchingCloudStaysNearIdentity
+[       OK ] StereoGicpTest.IdentityInitOnMatchingCloudStaysNearIdentity (7 ms)
+[ RUN      ] StereoGicpTest.BodyCameraConjugationRoundtrip
+[       OK ] StereoGicpTest.BodyCameraConjugationRoundtrip (0 ms)
+[ RUN      ] StereoGicpTest.EmptyInputFailsGracefully
+[       OK ] StereoGicpTest.EmptyInputFailsGracefully (0 ms)
+[ RUN      ] StereoGicpTest.PrefersSameRayOverNearbySurface
+[       OK ] StereoGicpTest.PrefersSameRayOverNearbySurface (1 ms)
+[ RUN      ] StereoGicpTest.VoxelRepresentativeKeepsMeasuredPointAndItsCovariance
+[       OK ] StereoGicpTest.VoxelRepresentativeKeepsMeasuredPointAndItsCovariance (0 ms)
+[ RUN      ] StereoGicpTest.VoxelRepresentativeTieAndEmptyInputAreDeterministic
+[       OK ] StereoGicpTest.VoxelRepresentativeTieAndEmptyInputAreDeterministic (0 ms)
+[ RUN      ] StereoGicpTest.PointPlaneEmptyInputPreservesPredictionAndFails
+[       OK ] StereoGicpTest.PointPlaneEmptyInputPreservesPredictionAndFails (0 ms)
+[ RUN      ] StereoGicpTest.PointPlaneBudgetAndMissingSupportRemainFailures
+[       OK ] StereoGicpTest.PointPlaneBudgetAndMissingSupportRemainFailures (0 ms)
+[----------] 13 tests from StereoGicpTest (26 ms total)
+
+[----------] 5 tests from ColorIcpConfigTest
+[ RUN      ] ColorIcpConfigTest.LoadsStandardYamlBlockSequencesFromExplicitFile
+[       OK ] ColorIcpConfigTest.LoadsStandardYamlBlockSequencesFromExplicitFile (11 ms)
+[ RUN      ] ColorIcpConfigTest.UsesMainGicpDefaultAndAcceptsExplicitRegistrationType
+[       OK ] ColorIcpConfigTest.UsesMainGicpDefaultAndAcceptsExplicitRegistrationType (0 ms)
+[ RUN      ] ColorIcpConfigTest.InvalidInputsReturnDeterministicCovarianceAndConvention
+[       OK ] ColorIcpConfigTest.InvalidInputsReturnDeterministicCovarianceAndConvention (1 ms)
+[ RUN      ] ColorIcpConfigTest.RetainsLegacyFlatConfigurationSupport
+[       OK ] ColorIcpConfigTest.RetainsLegacyFlatConfigurationSupport (0 ms)
+[ RUN      ] ColorIcpConfigTest.MissingExplicitConfigurationDoesNotUseAnotherDataset
+[       OK ] ColorIcpConfigTest.MissingExplicitConfigurationDoesNotUseAnotherDataset (0 ms)
+[----------] 5 tests from ColorIcpConfigTest (12 ms total)
+
+[----------] 13 tests from UtilsTest
+[ RUN      ] UtilsTest.StereoCovarianceAlignmentMatchesLeftPerturbation
+[       OK ] UtilsTest.StereoCovarianceAlignmentMatchesLeftPerturbation (0 ms)
+[ RUN      ] UtilsTest.MsgTimeSecUsesRosHeaderStamp
+[       OK ] UtilsTest.MsgTimeSecUsesRosHeaderStamp (0 ms)
+[ RUN      ] UtilsTest.ExpSO3ReturnsIdentityForTinyRotation
+[       OK ] UtilsTest.ExpSO3ReturnsIdentityForTinyRotation (0 ms)
+[ RUN      ] UtilsTest.ExpSO3RotatesAroundZAxis
+[       OK ] UtilsTest.ExpSO3RotatesAroundZAxis (0 ms)
+[ RUN      ] UtilsTest.So3LogApproxMatchesSmallAngle
+[       OK ] UtilsTest.So3LogApproxMatchesSmallAngle (0 ms)
+[ RUN      ] UtilsTest.ImuStatesToMatrix4dCopiesPose
+[       OK ] UtilsTest.ImuStatesToMatrix4dCopiesPose (0 ms)
+[ RUN      ] UtilsTest.AlignGicpCovarianceUsesFullPoseJacobian
+[       OK ] UtilsTest.AlignGicpCovarianceUsesFullPoseJacobian (0 ms)
+[ RUN      ] UtilsTest.RightGicpRotationDoesNotMoveSourceOrigin
+[       OK ] UtilsTest.RightGicpRotationDoesNotMoveSourceOrigin (0 ms)
+[ RUN      ] UtilsTest.CurrPrevkfCamTransformMapsStaticPoint
+[       OK ] UtilsTest.CurrPrevkfCamTransformMapsStaticPoint (0 ms)
+[ RUN      ] UtilsTest.RelativeTransformMatchesManualComposition
+[       OK ] UtilsTest.RelativeTransformMatchesManualComposition (0 ms)
+[ RUN      ] UtilsTest.ImuStatePoseCovInCameraKeepsRotationPositionCross
+[       OK ] UtilsTest.ImuStatePoseCovInCameraKeepsRotationPositionCross (0 ms)
+[ RUN      ] UtilsTest.ImuStatePoseCovInCameraLeverArmCouplesYawToCameraTranslation
+[       OK ] UtilsTest.ImuStatePoseCovInCameraLeverArmCouplesYawToCameraTranslation (0 ms)
+[ RUN      ] UtilsTest.ImuStatePoseSigmaInCameraRotatesBodyAxes
+[       OK ] UtilsTest.ImuStatePoseSigmaInCameraRotatesBodyAxes (0 ms)
+[----------] 13 tests from UtilsTest (0 ms total)
+
+[----------] 19 tests from ImuIntegratorTest
+[ RUN      ] ImuIntegratorTest.DefaultPriorIsIsotropicWithinPhysicalStateBlocks
+[       OK ] ImuIntegratorTest.DefaultPriorIsIsotropicWithinPhysicalStateBlocks (1 ms)
+[ RUN      ] ImuIntegratorTest.EmptyInitReturnsDefaultState
+[ImuInit] imu_buffer is empty, returning default state.
+[       OK ] ImuIntegratorTest.EmptyInitReturnsDefaultState (0 ms)
+[ RUN      ] ImuIntegratorTest.StaticInitEstimatesGravityAndGyroBias
+[ImuInit] done. gyro_bias= 0.01 -0.02  0.03  gravity_norm=9.81  rot_end=
+1 0 0
+0 1 0
+0 0 1
+[       OK ] ImuIntegratorTest.StaticInitEstimatesGravityAndGyroBias (0 ms)
+[ RUN      ] ImuIntegratorTest.StaticPreintegrationStaysNearRest
+[       OK ] ImuIntegratorTest.StaticPreintegrationStaysNearRest (0 ms)
+[ RUN      ] ImuIntegratorTest.PreintegrationIncrementIsInAnchorBodyFrame
+[       OK ] ImuIntegratorTest.PreintegrationIncrementIsInAnchorBodyFrame (0 ms)
+[ RUN      ] ImuIntegratorTest.ParallelCovFollowsSameTransitionFromItsOwnPrior
+[       OK ] ImuIntegratorTest.ParallelCovFollowsSameTransitionFromItsOwnPrior (1 ms)
+[ RUN      ] ImuIntegratorTest.ConstantYawRateIntegratesRotation
+[       OK ] ImuIntegratorTest.ConstantYawRateIntegratesRotation (0 ms)
+[ RUN      ] ImuIntegratorTest.TransitionReproducesCovariancePropagation
+[       OK ] ImuIntegratorTest.TransitionReproducesCovariancePropagation (0 ms)
+[ RUN      ] ImuIntegratorTest.AnchorConditionedCovarianceMatchesGaussianConditioning
+[       OK ] ImuIntegratorTest.AnchorConditionedCovarianceMatchesGaussianConditioning (0 ms)
+[ RUN      ] ImuIntegratorTest.AnchorConditionedPoseUncertaintyVanishesWithoutMotion
+[       OK ] ImuIntegratorTest.AnchorConditionedPoseUncertaintyVanishesWithoutMotion (0 ms)
+[ RUN      ] ImuIntegratorTest.AnchorReferenceJacobianMatchesEvaluationReference
+[       OK ] ImuIntegratorTest.AnchorReferenceJacobianMatchesEvaluationReference (0 ms)
+[ RUN      ] ImuIntegratorTest.AnchorRelativeCovarianceMatchesRelativeErrorCovariance
+[       OK ] ImuIntegratorTest.AnchorRelativeCovarianceMatchesRelativeErrorCovariance (1 ms)
+[ RUN      ] ImuIntegratorTest.AnchorRelativeCovarianceBoundsConditionedCovariance
+[       OK ] ImuIntegratorTest.AnchorRelativeCovarianceBoundsConditionedCovariance (0 ms)
+[ RUN      ] ImuIntegratorTest.GyroCorrectionScalesIntegratedRotation
+[       OK ] ImuIntegratorTest.GyroCorrectionScalesIntegratedRotation (0 ms)
+[ RUN      ] ImuIntegratorTest.GyroScaleUncertaintyGrowsWithRotationAngle
+[       OK ] ImuIntegratorTest.GyroScaleUncertaintyGrowsWithRotationAngle (0 ms)
+[ RUN      ] ImuIntegratorTest.NoiseParamsDriveRotationVariance
+[       OK ] ImuIntegratorTest.NoiseParamsDriveRotationVariance (1 ms)
+[ RUN      ] ImuIntegratorTest.InitHandlesUpsideDownStaticSensor
+[ImuInit] done. gyro_bias=0 0 0  gravity_norm=9.81  rot_end=
+           1            0            0
+           0           -1 -1.22465e-16
+           0  1.22465e-16           -1
+[       OK ] ImuIntegratorTest.InitHandlesUpsideDownStaticSensor (0 ms)
+[ RUN      ] ImuIntegratorTest.InitReportFlagsRotatingWindow
+[ImuInit] done. gyro_bias=0 0 0  gravity_norm=9.81  rot_end=
+1 0 0
+0 1 0
+0 0 1
+[       OK ] ImuIntegratorTest.InitReportFlagsRotatingWindow (0 ms)
+[ RUN      ] ImuIntegratorTest.InitObservabilityCovarianceSeparatesTiltAndYaw
+[       OK ] ImuIntegratorTest.InitObservabilityCovarianceSeparatesTiltAndYaw (0 ms)
+[----------] 19 tests from ImuIntegratorTest (4 ms total)
+
+[----------] 5 tests from KeyframeManagerTest
+[ RUN      ] KeyframeManagerTest.FrontKeyframeTriggersOnMotionRotationOrTime
+[       OK ] KeyframeManagerTest.FrontKeyframeTriggersOnMotionRotationOrTime (0 ms)
+[ RUN      ] KeyframeManagerTest.BackendKeyframeLegacyQueueThresholdWorks
+[       OK ] KeyframeManagerTest.BackendKeyframeLegacyQueueThresholdWorks (0 ms)
+[ RUN      ] KeyframeManagerTest.BackendPromotionCopiesFrontendFrame
+[       OK ] KeyframeManagerTest.BackendPromotionCopiesFrontendFrame (0 ms)
+[ RUN      ] KeyframeManagerTest.ImuBufferAddExtractAndClear
+[       OK ] KeyframeManagerTest.ImuBufferAddExtractAndClear (0 ms)
+[ RUN      ] KeyframeManagerTest.CreatesKeyframesWithCopiedFrameData
+[       OK ] KeyframeManagerTest.CreatesKeyframesWithCopiedFrameData (0 ms)
+[----------] 5 tests from KeyframeManagerTest (0 ms total)
+
+[----------] 4 tests from FeatureProcessorTest
+[ RUN      ] FeatureProcessorTest.FindsNearestCorrespondencesWithinThreshold
+[       OK ] FeatureProcessorTest.FindsNearestCorrespondencesWithinThreshold (1 ms)
+[ RUN      ] FeatureProcessorTest.RejectsCorrespondencesBeyondThreshold
+[       OK ] FeatureProcessorTest.RejectsCorrespondencesBeyondThreshold (0 ms)
+[ RUN      ] FeatureProcessorTest.EstimatesFiniteCovariances
+[       OK ] FeatureProcessorTest.EstimatesFiniteCovariances (0 ms)
+[ RUN      ] FeatureProcessorTest.PreparesColorGradientForEveryPoint
+[       OK ] FeatureProcessorTest.PreparesColorGradientForEveryPoint (0 ms)
+[----------] 4 tests from FeatureProcessorTest (1 ms total)
+
+[----------] 21 tests from StateEstimatorTest
+[ RUN      ] StateEstimatorTest.BuildsFinitePointObservationFactor
+[       OK ] StateEstimatorTest.BuildsFinitePointObservationFactor (0 ms)
+[ RUN      ] StateEstimatorTest.RejectsInvalidObservationFactors
+[       OK ] StateEstimatorTest.RejectsInvalidObservationFactors (0 ms)
+[ RUN      ] StateEstimatorTest.BuildObservationSubcloudsFiltersDistanceAndNormals
+[       OK ] StateEstimatorTest.BuildObservationSubcloudsFiltersDistanceAndNormals (0 ms)
+[ RUN      ] StateEstimatorTest.EskfProducesFiniteSymmetricCovariance
+[       OK ] StateEstimatorTest.EskfProducesFiniteSymmetricCovariance (0 ms)
+[ RUN      ] StateEstimatorTest.EskfAngularGainIsIndependentOfUncorrelatedPositionVariance
+[       OK ] StateEstimatorTest.EskfAngularGainIsIndependentOfUncorrelatedPositionVariance (0 ms)
+[ RUN      ] StateEstimatorTest.EskfHandlesCorrelatedInnovationAtFloatingPointResolution
+[       OK ] StateEstimatorTest.EskfHandlesCorrelatedInnovationAtFloatingPointResolution (0 ms)
+[ RUN      ] StateEstimatorTest.EskfGainRespondsToObservationUncertainty
+[       OK ] StateEstimatorTest.EskfGainRespondsToObservationUncertainty (0 ms)
+[ RUN      ] StateEstimatorTest.EsikfUpdatesGeometryWithoutGicpPoseObservation
+[INFO] [1793332138.805857302] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793332138.805995739] [StateEstimator]: ESIKF iter 0: corr=400 r_v=1.999986e-02 delta_pose=1.999312e-02 delta_state=1.999312e-02
+[INFO] [1793332138.806092297] [StateEstimator]: ESIKF iter 1: corr=400 r_v=1.660451e-05 delta_pose=1.656913e-05 delta_state=1.656913e-05
+[INFO] [1793332138.806095663] [StateEstimator]: ESIKF successfully converged.
+[       OK ] StateEstimatorTest.EsikfUpdatesGeometryWithoutGicpPoseObservation (1 ms)
+[ RUN      ] StateEstimatorTest.EskfUsesAxisSpecificObservationUncertainty
+[       OK ] StateEstimatorTest.EskfUsesAxisSpecificObservationUncertainty (0 ms)
+[ RUN      ] StateEstimatorTest.EskfJosephOnParallelUsesMainGain
+[       OK ] StateEstimatorTest.EskfJosephOnParallelUsesMainGain (0 ms)
+[ RUN      ] StateEstimatorTest.EsikfPriorResidualStepMatchesClosedFormUpdate
+[       OK ] StateEstimatorTest.EsikfPriorResidualStepMatchesClosedFormUpdate (0 ms)
+[ RUN      ] StateEstimatorTest.EsikfLegacyStepDriftsToObservation
+[       OK ] StateEstimatorTest.EsikfLegacyStepDriftsToObservation (0 ms)
+[ RUN      ] StateEstimatorTest.EsikfObservationOnlyStepTakesVirtualPose
+[       OK ] StateEstimatorTest.EsikfObservationOnlyStepTakesVirtualPose (0 ms)
+[ RUN      ] StateEstimatorTest.EsikfFrozenRotationKeepsPriorRotationOnly
+[       OK ] StateEstimatorTest.EsikfFrozenRotationKeepsPriorRotationOnly (0 ms)
+[ RUN      ] StateEstimatorTest.EsikfKeepsPriorWhenNoCorrespondences
+[INFO] [1793332138.806321812] [StateEstimator]: Starting ESIKF fusion...
+[WARN] [1793332138.806361766] [StateEstimator]: ESIKF iter 0 skipped: too few correspondences (0 < 20).
+[WARN] [1793332138.806365182] [StateEstimator]: ESIKF stopped without convergence: too_few_correspondences (last_corr=0 last_r_v=inf last_delta_pose=inf last_delta_state=inf).
+[       OK ] StateEstimatorTest.EsikfKeepsPriorWhenNoCorrespondences (0 ms)
+[ RUN      ] StateEstimatorTest.EsikfObservationScaleInflatesVirtualCovariance
+[INFO] [1793332138.806405667] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793332138.806496685] [StateEstimator]: ESIKF iter 0: corr=400 r_v=1.999986e-02 delta_pose=1.999312e-02 delta_state=1.999312e-02
+[INFO] [1793332138.806590719] [StateEstimator]: ESIKF iter 1: corr=400 r_v=1.660451e-05 delta_pose=1.656913e-05 delta_state=1.656913e-05
+[INFO] [1793332138.806593605] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793332138.806600978] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793332138.806698318] [StateEstimator]: ESIKF iter 0: corr=400 r_v=1.999986e-02 delta_pose=1.994015e-02 delta_state=1.994015e-02
+[INFO] [1793332138.806791972] [StateEstimator]: ESIKF iter 1: corr=400 r_v=1.269205e-04 delta_pose=1.250944e-04 delta_state=1.250944e-04
+[INFO] [1793332138.806794867] [StateEstimator]: ESIKF successfully converged.
+[       OK ] StateEstimatorTest.EsikfObservationScaleInflatesVirtualCovariance (0 ms)
+[ RUN      ] StateEstimatorTest.EsikfPriorResidualKeepsPriorWeight
+[INFO] [1793332138.806833599] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793332138.806925909] [StateEstimator]: ESIKF iter 0: corr=400 r_v=1.999986e-02 delta_pose=9.749018e-03 delta_state=9.749018e-03
+[INFO] [1793332138.807018390] [StateEstimator]: ESIKF iter 1: corr=400 r_v=1.025095e-02 delta_pose=2.507247e-04 delta_state=5.125352e-03
+[INFO] [1793332138.807021095] [StateEstimator]: ESIKF successfully converged.
+[INFO] [1793332138.807028199] [StateEstimator]: Starting ESIKF fusion...
+[INFO] [1793332138.807120379] [StateEstimator]: ESIKF iter 0: corr=400 r_v=1.999986e-02 delta_pose=9.749018e-03 delta_state=9.749018e-03
+[INFO] [1793332138.807209614] [StateEstimator]: ESIKF iter 1: corr=400 r_v=1.025095e-02 delta_pose=5.125352e-03 delta_state=5.125352e-03
+[INFO] [1793332138.807302727] [StateEstimator]: ESIKF iter 2: corr=400 r_v=5.125551e-03 delta_pose=2.562725e-03 delta_state=2.562725e-03
+[INFO] [1793332138.807391501] [StateEstimator]: ESIKF iter 3: corr=400 r_v=2.562865e-03 delta_pose=1.281407e-03 delta_state=1.281407e-03
+[INFO] [1793332138.807479433] [StateEstimator]: ESIKF iter 4: corr=400 r_v=1.281505e-03 delta_pose=6.407138e-04 delta_state=6.407138e-04
+[INFO] [1793332138.807482128] [StateEstimator]: ESIKF successfully converged.
+[       OK ] StateEstimatorTest.EsikfPriorResidualKeepsPriorWeight (1 ms)
+[ RUN      ] StateEstimatorTest.ObservationFactorRayResidualIgnoresLateralError
+[       OK ] StateEstimatorTest.ObservationFactorRayResidualIgnoresLateralError (0 ms)
+[ RUN      ] StateEstimatorTest.ObservationFactorPointToPlaneUsesNormal
+[       OK ] StateEstimatorTest.ObservationFactorPointToPlaneUsesNormal (0 ms)
+[ RUN      ] StateEstimatorTest.ObservationFactorUniformLuminanceMatchesGradient
+[       OK ] StateEstimatorTest.ObservationFactorUniformLuminanceMatchesGradient (0 ms)
+[ RUN      ] StateEstimatorTest.ObservationAttributeGateDropsFarProperties
+[       OK ] StateEstimatorTest.ObservationAttributeGateDropsFarProperties (0 ms)
+[----------] 21 tests from StateEstimatorTest (2 ms total)
+
+[----------] 9 tests from ImagePreprocessorTest
+[ RUN      ] ImagePreprocessorTest.DefaultConstruction
+[       OK ] ImagePreprocessorTest.DefaultConstruction (0 ms)
+[ RUN      ] ImagePreprocessorTest.EmptyInputHandling
+[ImagePreprocessor] Input image is empty
+[       OK ] ImagePreprocessorTest.EmptyInputHandling (0 ms)
+[ RUN      ] ImagePreprocessorTest.DisabledPreprocessPassesThrough
+[       OK ] ImagePreprocessorTest.DisabledPreprocessPassesThrough (0 ms)
+[ RUN      ] ImagePreprocessorTest.ConfigValidationOddDenoiseKernel
+[       OK ] ImagePreprocessorTest.ConfigValidationOddDenoiseKernel (0 ms)
+[ RUN      ] ImagePreprocessorTest.AdaptiveLightingBrightensDarkImageOnYChannel
+[       OK ] ImagePreprocessorTest.AdaptiveLightingBrightensDarkImageOnYChannel (5 ms)
+[ RUN      ] ImagePreprocessorTest.AdaptiveSaturationScalesWithYGain
+[       OK ] ImagePreprocessorTest.AdaptiveSaturationScalesWithYGain (1 ms)
+[ RUN      ] ImagePreprocessorTest.SaturationDoesNotChangeYChannel
+[       OK ] ImagePreprocessorTest.SaturationDoesNotChangeYChannel (1 ms)
+[ RUN      ] ImagePreprocessorTest.AdaptiveLightingCompressesBrightHighlights
+[       OK ] ImagePreprocessorTest.AdaptiveLightingCompressesBrightHighlights (0 ms)
+[ RUN      ] ImagePreprocessorTest.StereoAdaptiveLightingPreservesDimensions
+[       OK ] ImagePreprocessorTest.StereoAdaptiveLightingPreservesDimensions (1 ms)
+[----------] 9 tests from ImagePreprocessorTest (8 ms total)
+
+[----------] 7 tests from StereoGeometryTest
+[ RUN      ] StereoGeometryTest.CenterCropRectFor1280x720To896x448
+[       OK ] StereoGeometryTest.CenterCropRectFor1280x720To896x448 (0 ms)
+[ RUN      ] StereoGeometryTest.AdjustIntrinsicsForCropOnlyOffsetsPrincipalPoint
+[       OK ] StereoGeometryTest.AdjustIntrinsicsForCropOnlyOffsetsPrincipalPoint (0 ms)
+[ RUN      ] StereoGeometryTest.CenterCropOutputSize
+[       OK ] StereoGeometryTest.CenterCropOutputSize (2 ms)
+[ RUN      ] StereoGeometryTest.DisparityToDepthAtCropResolutionMatchesUpscaledDepth
+[       OK ] StereoGeometryTest.DisparityToDepthAtCropResolutionMatchesUpscaledDepth (2 ms)
+[ RUN      ] StereoGeometryTest.AdjustIntrinsicsMatchesInferenceResolution
+[       OK ] StereoGeometryTest.AdjustIntrinsicsMatchesInferenceResolution (0 ms)
+[ RUN      ] StereoGeometryTest.CenterCropAndResizeOutputSize
+[       OK ] StereoGeometryTest.CenterCropAndResizeOutputSize (1 ms)
+[ RUN      ] StereoGeometryTest.FitImageToSourceGeometryDownscales1080pTo720p
+[       OK ] StereoGeometryTest.FitImageToSourceGeometryDownscales1080pTo720p (5 ms)
+[----------] 7 tests from StereoGeometryTest (10 ms total)
+
+[----------] 6 tests from StereoObservationCompatTest
+[ RUN      ] StereoObservationCompatTest.SearchRadiusGrowsAtNearRange
+[       OK ] StereoObservationCompatTest.SearchRadiusGrowsAtNearRange (0 ms)
+[ RUN      ] StereoObservationCompatTest.HuberWeightDownweightsLargeMahalanobis
+[       OK ] StereoObservationCompatTest.HuberWeightDownweightsLargeMahalanobis (0 ms)
+[ RUN      ] StereoObservationCompatTest.CovarianceHasLargerDepthVariance
+[       OK ] StereoObservationCompatTest.CovarianceHasLargerDepthVariance (0 ms)
+[ RUN      ] StereoObservationCompatTest.ProjectiveAssociateFindsSameRayTarget
+[       OK ] StereoObservationCompatTest.ProjectiveAssociateFindsSameRayTarget (0 ms)
+[ RUN      ] StereoObservationCompatTest.ProjectiveAssociateKeepsPixelOffset
+[       OK ] StereoObservationCompatTest.ProjectiveAssociateKeepsPixelOffset (0 ms)
+[ RUN      ] StereoObservationCompatTest.CameraPoseToBodyIsIdentityWhenExtrinsicIsIdentity
+[       OK ] StereoObservationCompatTest.CameraPoseToBodyIsIdentityWhenExtrinsicIsIdentity (0 ms)
+[----------] 6 tests from StereoObservationCompatTest (0 ms total)
+
+[----------] 8 tests from GeoFlowErrorTest
+[ RUN      ] GeoFlowErrorTest.MissingPoseSigmaUsesTransFloorAndZeroRotation
+[       OK ] GeoFlowErrorTest.MissingPoseSigmaUsesTransFloorAndZeroRotation (0 ms)
+[ RUN      ] GeoFlowErrorTest.PoseSigmaSetsRotationAndFloorsTranslation
+[       OK ] GeoFlowErrorTest.PoseSigmaSetsRotationAndFloorsTranslation (0 ms)
+[ RUN      ] GeoFlowErrorTest.YawUncertaintyIsMostlyHorizontalAtCenter
+[       OK ] GeoFlowErrorTest.YawUncertaintyIsMostlyHorizontalAtCenter (0 ms)
+[ RUN      ] GeoFlowErrorTest.TranslationInflatesNearMoreThanFar
+[       OK ] GeoFlowErrorTest.TranslationInflatesNearMoreThanFar (0 ms)
+[ RUN      ] GeoFlowErrorTest.MahalanobisIsAnisotropicForYaw
+[       OK ] GeoFlowErrorTest.MahalanobisIsAnisotropicForYaw (0 ms)
+[ RUN      ] GeoFlowErrorTest.MissingPoseCovUsesTransFloorAndZeroRotation
+[       OK ] GeoFlowErrorTest.MissingPoseCovUsesTransFloorAndZeroRotation (0 ms)
+[ RUN      ] GeoFlowErrorTest.PoseCovFloorsTranslationDiagAndKeepsCrossTerm
+[       OK ] GeoFlowErrorTest.PoseCovFloorsTranslationDiagAndKeepsCrossTerm (0 ms)
+[ RUN      ] GeoFlowErrorTest.PoseCrossTermTiltsFlowEllipseOffAxes
+[       OK ] GeoFlowErrorTest.PoseCrossTermTiltsFlowEllipseOffAxes (0 ms)
+[----------] 8 tests from GeoFlowErrorTest (0 ms total)
+
+[----------] 1 test from DynamicFilterDepthBoundsTest
+[ RUN      ] DynamicFilterDepthBoundsTest.DisparityBoundsMatch30mMaxDepth
+[       OK ] DynamicFilterDepthBoundsTest.DisparityBoundsMatch30mMaxDepth (0 ms)
+[----------] 1 test from DynamicFilterDepthBoundsTest (0 ms total)
+
+[----------] 3 tests from ImuPreprocessorTest
+[ RUN      ] ImuPreprocessorTest.DisabledReturnsClone
+[       OK ] ImuPreprocessorTest.DisabledReturnsClone (0 ms)
+[ RUN      ] ImuPreprocessorTest.OutlierReplaceKeepsSampleRate
+[       OK ] ImuPreprocessorTest.OutlierReplaceKeepsSampleRate (0 ms)
+[ RUN      ] ImuPreprocessorTest.ProcessBatchPreservesCount
+[       OK ] ImuPreprocessorTest.ProcessBatchPreservesCount (0 ms)
+[----------] 3 tests from ImuPreprocessorTest (0 ms total)
+
+[----------] 2 tests from DebugLoggerTest
+[ RUN      ] DebugLoggerTest.ImuDebugWritesCsvHeaderAndRow
+[       OK ] DebugLoggerTest.ImuDebugWritesCsvHeaderAndRow (1 ms)
+[ RUN      ] DebugLoggerTest.FusionDebugFormatsConsoleLine
+[       OK ] DebugLoggerTest.FusionDebugFormatsConsoleLine (0 ms)
+[----------] 2 tests from DebugLoggerTest (1 ms total)
+
+[----------] Global test environment tear-down
+[==========] 116 tests from 14 test suites ran. (65 ms total)
+[  PASSED  ] 116 tests.

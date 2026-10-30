@@ -1,0 +1,6 @@
+Building fusion targets (build/fusion-lab-build.log)
+[----------] 2 tests from DebugLoggerTest (1 ms total)
+
+[----------] Global test environment tear-down
+[==========] 116 tests from 14 test suites ran. (65 ms total)
+[  PASSED  ] 116 tests.

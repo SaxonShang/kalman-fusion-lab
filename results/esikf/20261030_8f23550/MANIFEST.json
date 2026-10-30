@@ -1,0 +1,170 @@
+{
+  "created_at": "2026-10-30T11:57:37+08:00",
+  "tested_commit": "8f2355077f1d583b4c2699a62d8dabd017e57899",
+  "configs": [
+    "esikf_round3_gyro"
+  ],
+  "full_matrices": false,
+  "html_links": "Compact reports link to included scalar traces and last-iteration matrices.",
+  "local_patch": null,
+  "report_processing_sha256": {
+    "fusion_report.py": "602de53cae75456396a39833f69ea4d737eb048887866aba20f2adfb1533fb59",
+    "esikf_eval.py": "feec08126d2bf266f81e0777569298947e0eacbfbe1a7095d9c41f3a8de85394",
+    "archive_esikf_results.py": "16b396c254dee0866c52043b4c17b99b21aa05bfbfd74e4b94cc85402f3f9e8a"
+  },
+  "evaluation": "Independent fixed pairs; anchor-conditioned relative pose errors, not trajectory ATE.",
+  "runs": [
+    {
+      "config": "esikf_round3_gyro",
+      "sequence": "20261015_112553_up",
+      "source": "/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_114925_306642_up_esikf",
+      "archive": "runs/20261030_114925_306642_up_esikf",
+      "records": 80,
+      "valid": 80,
+      "local_full_matrix_files": {
+        "esikf_iterations.csv": {
+          "bytes": 1018042,
+          "sha256": "d38611a553304753c4f7709f5566499b25ffa82bfd1e31858c872a0aa6d892e1"
+        },
+        "esikf.yml.gz": {
+          "bytes": 1294080,
+          "sha256": "c9c81c4cef668417ed7a8f497c2c06c117970e021107d362b6433e5dc98f6346"
+        }
+      },
+      "binary_sha256": "e1899d90e10855ed1cd2c6005c29dd8533370cbcf364b043b2e6ddfda60bd446",
+      "frozen_cache": "6ed395110be99ee52b48",
+      "disparity_cache": "2d7092a31405b41a8e6c"
+    },
+    {
+      "config": "esikf_round3_gyro",
+      "sequence": "20261015_112659_forward",
+      "source": "/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_115037_982577_forward_esikf",
+      "archive": "runs/20261030_115037_982577_forward_esikf",
+      "records": 80,
+      "valid": 80,
+      "local_full_matrix_files": {
+        "esikf_iterations.csv": {
+          "bytes": 1037700,
+          "sha256": "47e9afa23aebbe232bc8290854c00d42060d8263cb7e181df1554c38d39ad8b0"
+        },
+        "esikf.yml.gz": {
+          "bytes": 1305168,
+          "sha256": "ec96c573bdd73dbb576fa4fd18371f2f25ddacb0dd416197700dea77d9668430"
+        }
+      },
+      "binary_sha256": "e1899d90e10855ed1cd2c6005c29dd8533370cbcf364b043b2e6ddfda60bd446",
+      "frozen_cache": "2caa8b3a5415247f4d7e",
+      "disparity_cache": "0ce28909d90b2405d19a"
+    },
+    {
+      "config": "esikf_round3_gyro",
+      "sequence": "20261015_112757_right",
+      "source": "/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_115147_803305_right_esikf",
+      "archive": "runs/20261030_115147_803305_right_esikf",
+      "records": 80,
+      "valid": 80,
+      "local_full_matrix_files": {
+        "esikf_iterations.csv": {
+          "bytes": 984616,
+          "sha256": "08c34145e3cda3ad45cc8f61d42e0edfa21e3f3187f3f2549618e6b6b878ea6e"
+        },
+        "esikf.yml.gz": {
+          "bytes": 1274482,
+          "sha256": "4fc50a52978ba7eef499e8fad5140e29e5f9a7e153c3f42972e3d94c8e9491f3"
+        }
+      },
+      "binary_sha256": "e1899d90e10855ed1cd2c6005c29dd8533370cbcf364b043b2e6ddfda60bd446",
+      "frozen_cache": "453030a0618f8996dbbf",
+      "disparity_cache": "1be6338017eafcecba7a"
+    },
+    {
+      "config": "esikf_round3_gyro",
+      "sequence": "20261015_112845_yaw_left",
+      "source": "/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_115257_881070_yaw_left_esikf",
+      "archive": "runs/20261030_115257_881070_yaw_left_esikf",
+      "records": 80,
+      "valid": 80,
+      "local_full_matrix_files": {
+        "esikf_iterations.csv": {
+          "bytes": 1007882,
+          "sha256": "53db5121070343e5820392437b19dd1e2ed294241f8670b9b2f6b3838c4eed42"
+        },
+        "esikf.yml.gz": {
+          "bytes": 1289069,
+          "sha256": "dff967699d1508551a39e04846003b197991842167fe26d44959a88c6c0b2d5a"
+        }
+      },
+      "binary_sha256": "e1899d90e10855ed1cd2c6005c29dd8533370cbcf364b043b2e6ddfda60bd446",
+      "frozen_cache": "1545dcdb2154bcdc1d61",
+      "disparity_cache": "320f3887fec559ac94a5"
+    },
+    {
+      "config": "esikf_round3_gyro",
+      "sequence": "20261015_112940_pitch_up",
+      "source": "/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_115410_547772_pitch_up_esikf",
+      "archive": "runs/20261030_115410_547772_pitch_up_esikf",
+      "records": 80,
+      "valid": 80,
+      "local_full_matrix_files": {
+        "esikf_iterations.csv": {
+          "bytes": 1022449,
+          "sha256": "609675e9015484bc4e5c0e4d6534a3a64654d253e82395281fea06995d729e35"
+        },
+        "esikf.yml.gz": {
+          "bytes": 1293100,
+          "sha256": "b4912786e862a2b5338746eaf3cd75e8c5cc894b6b6f3d9806f08eff860ff775"
+        }
+      },
+      "binary_sha256": "e1899d90e10855ed1cd2c6005c29dd8533370cbcf364b043b2e6ddfda60bd446",
+      "frozen_cache": "1c8588915031544c1d49",
+      "disparity_cache": "b7eb2e5c8c664fb3b711"
+    },
+    {
+      "config": "esikf_round3_gyro",
+      "sequence": "20261015_113028_roll_right",
+      "source": "/home/ubuntu22/slam/SIO_SLAM/build/github-export/kalman-fusion-lab/artifacts/fusion/20261030_115521_583212_roll_right_esikf",
+      "archive": "runs/20261030_115521_583212_roll_right_esikf",
+      "records": 80,
+      "valid": 80,
+      "local_full_matrix_files": {
+        "esikf_iterations.csv": {
+          "bytes": 969525,
+          "sha256": "61a47f2d8432ef48ec099627aaa7cefcafe3242400d6915501cdbda5b51af5ed"
+        },
+        "esikf.yml.gz": {
+          "bytes": 1263623,
+          "sha256": "86f63f19b150c56c4d2b297c5ef0ed14203fc3b665f9e50afb129e942a727765"
+        }
+      },
+      "binary_sha256": "e1899d90e10855ed1cd2c6005c29dd8533370cbcf364b043b2e6ddfda60bd446",
+      "frozen_cache": "f5a9d2b5fed051810fe4",
+      "disparity_cache": "68daf1423ca7ea382351"
+    }
+  ],
+  "tests": {
+    "passed": 116,
+    "log": "logs/round3-tests116.log"
+  },
+  "additional_processing_sha256": {
+    "audit_esikf_round3.py": "1e1803f37ff026ab70535b873596d2806a8fe08802c19171678837026d9c67c4",
+    "derive_esikf_metrics.py": "337c235aa59ba9235f2365242610c08467baf327a0f38eae13c20a68a3eb7db9",
+    "imu_rotation_check.py": "4565a3f704fc12a9ed38d9730bc8cb9580f9eea0bc327dc5d1229f1f32ae978f",
+    "audit_esikf_round2.py": "7b17e7863f1ecf58a830022abf893110e24498cbd4a4f2333933018c67390f54"
+  },
+  "counts": {
+    "records": 480,
+    "valid": 480,
+    "solver_status": {
+      "converged": 319,
+      "max_iterations": 161
+    },
+    "flagged_pairs": [
+      [
+        "20261015_113028_roll_right",
+        "static_end"
+      ]
+    ]
+  },
+  "calibration_config_sha256": "a8bb4fae34beb4784ce46d802306648147fe3d47876d6ab0baa0c2651964153c",
+  "parent_round2_archive_checksum_manifest_sha256": "56c4f79f63571163bd30b1eaba55d6847277e65ecb024d70155b806801c81e8b"
+}

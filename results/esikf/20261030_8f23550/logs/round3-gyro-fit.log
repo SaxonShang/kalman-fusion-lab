@@ -1,0 +1,10 @@
+frame rotation X: 0.4810 deg, vector [-0.1287, 0.3799, -0.2656] deg
+scale S eigenvalues: [-1.574, -1.005, -0.179] %
+1_frames (3812 windows, median 33 ms): raw 0.0204 deg, bias only 0.0204, fitted 0.0193, time split 0.0194; along axis 0.0264 deg (-1.10% of rotation), across 0.0193 deg (1.08%), 168 windows over 1.0 deg
+6_frames (3782 windows, median 200 ms): raw 0.0435 deg, bias only 0.0432, fitted 0.0248, time split 0.0270; along axis 0.0608 deg (-1.04% of rotation), across 0.0478 deg (0.84%), 1032 windows over 1.0 deg
+time offset: best +1.0 ms, residual 0.0189 deg (at 0 ms 0.0192 deg)
+G1: fit on 2167 six-frame windows at least 1.0 s from the evaluation pairs; S eigenvalues [-1.538, -1.273, -0.265] %, frame rotation 0.4390 deg not applied
+  held out near evaluation, 1_frames (1495 windows): bias only 0.0228 deg, with S 0.0220 deg, with full A 0.0216 deg
+  held out near evaluation, 6_frames (1615 windows): bias only 0.0489 deg, with S 0.0371 deg, with full A 0.0292 deg
+Wrote /tmp/esikf_round3_gyro_8f23550_check.yaml
+Wrote artifacts/imu_rotation_check/20261030_8f23550/summary.json and windows.csv
