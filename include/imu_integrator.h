@@ -114,6 +114,20 @@ Eigen::Matrix<double, DIM_STATE, DIM_STATE> ConditionOnAnchorPose(
   const Eigen::Matrix<double, DIM_STATE, DIM_STATE> &process_noise);
 
 /**
+ * @brief 以估计的锚点位姿为参照的当前状态协方差（相对误差协方差）。
+ *
+ * 相对误差 e = δx_b − Φ[:,0:6] δx_a[0:6] = Φ[:,6:] δx_a[6:] + w，故
+ *   P_rel = Φ P_a' Φᵀ + Q，P_a' 为把 P_a 的位姿行、列置零后的矩阵。
+ * 与 ConditionOnAnchorPose 不同，锚点速度、零偏保留边际不确定度：只把锚点当作参照，
+ * 并不知道锚点位姿，因此不能借位姿与零偏的相关性缩小零偏。总有 P_rel ≥ P_b|a。
+ * 帧对实验的评价误差以估计的锚点为参照，与 P_rel 对应。
+ */
+Eigen::Matrix<double, DIM_STATE, DIM_STATE> RelativeToAnchorPose(
+  const Eigen::Matrix<double, DIM_STATE, DIM_STATE> &anchor_cov,
+  const Eigen::Matrix<double, DIM_STATE, DIM_STATE> &transition,
+  const Eigen::Matrix<double, DIM_STATE, DIM_STATE> &process_noise);
+
+/**
  * @brief 陀螺刻度误差：旋转方差加上 (scale_sigma · |Δθ|)²，Δθ 为锚点到当前的积分转角。
  *        刻度误差是系统误差，随转角线性增长，白噪声 Q 覆盖不到。
  * @param cov 当前状态协方差（就地修改旋转块）

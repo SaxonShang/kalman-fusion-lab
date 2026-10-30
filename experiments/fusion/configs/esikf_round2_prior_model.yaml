@@ -1,0 +1,20 @@
+# 第二轮的新先验模型对照：与第一轮 esikf_prior_model.yaml 相同的 SDK IMU 噪声和可观性初始 P，
+# 变体与观测放大倍数沿用 esikf_round2_calibrated.yaml（先运行 esikf_eval.py calibrate 生成）。
+extends: esikf_round2_calibrated.yaml
+
+prior:
+  require_static_init: true
+  # calib/camera_imu.yaml 的 SDK 标称值换成 SI：陀螺 0.004721 °/s/√Hz、0.0038 °/s²/√Hz
+  imu_noise:
+    gyro_noise_density: 8.2397e-5   # rad/s/√Hz
+    accel_noise_density: 1.35e-3    # m/s²/√Hz
+    gyro_random_walk: 6.6323e-5     # rad/s²/√Hz
+    accel_random_walk: 4.2e-3       # m/s³/√Hz
+  initial_covariance: observability
+  # 事先设定的先验，不由真值调出
+  initial_covariance_params:
+    accel_bias_sigma: 0.05          # m/s²，对应横滚/俯仰约 0.29°
+    yaw_sigma_rad: 1.0e-4           # 航向由初始化定义
+    position_sigma_m: 1.0e-4        # 位置原点由初始化定义
+    velocity_sigma_mps: 0.01        # 静止起步
+    gyro_bias_floor_rad_s: 1.75e-4  # 0.01°/s

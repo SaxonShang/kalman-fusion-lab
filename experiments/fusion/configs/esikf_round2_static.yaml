@@ -1,0 +1,14 @@
+# 第二轮 F1b + F4：用第一轮同样的 66 组静止帧对重新标定观测 R，纯观测迭代上限 8 → 20。
+# 第一轮点对点纯观测 45/66 次达到 8 轮上限，这些记录的零运动误差（8.7 mm / 0.216°）远大于收敛的
+# 21 次（2.0 mm / 0.036°），R 倍数主要由未收敛的解决定。变体名与第一轮相同，供 esikf_round2.yaml 的
+# calibrated_variants 引用；按配置文件名（esikf_round2_static）与第一轮的运行区分。
+# ray 与光度不在本轮：ray 纯观测必然发散，光度与点对点等价（见 esikf_round2.yaml）。
+extends: esikf_static.yaml
+
+esikf:
+  variants:
+    - {name: obs_point_to_point, geometry_weight: 1.0, observation_only: true,
+       stop_rotation_rad: 1.0e-4, stop_translation_m: 1.0e-4, max_iterations: 20}
+    - {name: obs_point_to_plane, geometry_weight: 1.0, observation_only: true,
+       stop_rotation_rad: 1.0e-4, stop_translation_m: 1.0e-4, max_iterations: 20,
+       geometry_residual: point_to_plane, attribute_max_distance_m: 0.05}

@@ -11,12 +11,20 @@ from those configuration files are used, and only the latest run per (config, se
 
     python3 scripts/esikf_eval.py calibrate artifacts/fusion --config esikf_static
     python3 scripts/esikf_eval.py summarize artifacts/fusion --config esikf_calibrated esikf_prior_model
+
+Round 2 calibrates from static runs with a higher iteration cap, without failed records, and
+extends its own base:
+
+    python3 scripts/esikf_eval.py calibrate artifacts/fusion --config esikf_round2_static --samples usable \
+        --base experiments/fusion/configs/esikf_round2.yaml \
+        --write experiments/fusion/configs/esikf_round2_calibrated.yaml
 """
 
 import argparse
 import csv
 from datetime import datetime
 import math
+import os
 from pathlib import Path
 import statistics
 import sys
@@ -130,6 +138,18 @@ def summarize(args):
                                 for r in valid),
             "posterior_whitened_rot": mean(get(valid, "posterior_whitened_by_P_rot")),
             "posterior_whitened_trans": mean(get(valid, "posterior_whitened_by_P_trans")),
+            # Prior and first innovation do not depend on whether the update succeeded.
+            "prior_whitened_rot": mean(get(selected, "prior_whitened_by_P_rot")),
+            "prior_whitened_trans": mean(get(selected, "prior_whitened_by_P_trans")),
+            "prior_whitened_rot_median": median(get(selected, "prior_whitened_by_P_rot")),
+            "prior_whitened_trans_median": median(get(selected, "prior_whitened_by_P_trans")),
+            "nis_per_dof": mean(get(selected, "nis_per_dof")),
+            "nis_over_chi2_median": median(get(selected, "nis_over_chi2_median")),
+            "nis_exceeds_95": mean(get(selected, "nis_exceeds_chi2_95")),
+            "nis_rot_per_dof": mean(get(selected, "nis_rot_per_dof")),
+            "nis_trans_per_dof": mean(get(selected, "nis_trans_per_dof")),
+            "nis_dof_min": min(finite(get(selected, "nis_dof")), default=math.nan),
+            "max_prior_offset_rot_deg": max(finite(get(selected, "max_prior_offset_rot_deg")), default=math.nan),
             "iterations_mean": mean(get(selected, "iterations")),
             "status": " ".join(f"{k}:{v}" for k, v in sorted(statuses.items())),
         })
@@ -143,7 +163,8 @@ def summarize(args):
     shown = ["config", "variant", "valid", "total", "trans_rmse_mm", "trans_median_mm",
              "trans_rmse_unflagged_mm", "rot_rmse_deg", "rot_median_deg", "rot_rmse_unflagged_deg",
              "improved_trans", "improved_rot", "posterior_whitened_rot", "posterior_whitened_trans",
-             "iterations_mean", "status"]
+             "prior_whitened_rot", "prior_whitened_trans", "nis_per_dof", "nis_over_chi2_median",
+             "nis_exceeds_95", "max_prior_offset_rot_deg", "iterations_mean", "status"]
     def cell(value):
         return f"{value:.4g}" if isinstance(value, float) else str(value)
     table = [[cell(row[k]) for k in shown] for row in summary]
@@ -152,65 +173,106 @@ def summarize(args):
     for t in table:
         print("  ".join(v.ljust(w) for v, w in zip(t, widths)))
     print("\nwhitened: mean e^T C^-1 e per degree of freedom; about 1 when the covariance matches the "
-          "actual error. unflagged excludes pairs whose pure-IMU prior is off by more than 50 mm.")
+          "actual error. unflagged excludes pairs whose pure-IMU prior is off by more than 50 mm.\n"
+          "prior_whitened checks the prior P alone against groundtruth. nis is the first-iteration "
+          "r^T (P + R)^-1 r without groundtruth; it tests P + R together (mean per dof and median over the "
+          "chi-square median both about 1 when consistent) and is also raised by bias, wrong correspondences "
+          "and linearization. Unobserved directions are dropped from nis and its degrees of freedom.")
+
+
+# Records that stopped this way are not an observation of the static pose (e.g. ray residuals
+# lose their correspondences after a partial update) and must not enter the calibration.
+FAILED_STATUSES = {"correspondences_lost", "numerical_failure", "too_few_correspondences", "skipped"}
+SAMPLE_SETS = {
+    "all": lambda r: r["valid"] == "1",
+    "usable": lambda r: r["valid"] == "1" and r["solver_status"] not in FAILED_STATUSES,
+    "converged": lambda r: r["valid"] == "1" and r["solver_status"] == "converged",
+}
+
+
+def scale_estimates(records):
+    rot = finite(number(r, "zero_motion_whitened_by_R_rot") for r in records)
+    trans = finite(number(r, "zero_motion_whitened_by_R_trans") for r in records)
+    if not rot or not trans:
+        return None
+    # Unbiased: E[e^T R^-1 e / 3] = s. Robust: median of chi2(3)/3 is 0.7887, so s = median / 0.7887.
+    return {"mean": (mean(rot), mean(trans)),
+            "median": (median(rot) / CHI2_3_MEDIAN_PER_DOF, median(trans) / CHI2_3_MEDIAN_PER_DOF)}
 
 
 def calibrate(args):
     rows = read_runs(args.directories, args.config)
-    base_path = CONFIGS / "esikf_improvements.yaml"
+    base_path = Path(args.base).resolve()
     base = load_config(base_path)
     variants = base["esikf"]["variants"]
     templates = base["esikf"]["calibrated_variants"]
     calibration = {}
     for source in sorted({t["from"] for t in templates}):
-        selected = [r for r in rows if r["variant"] == source and r["valid"] == "1"]
-        if not selected:
-            raise SystemExit(f"No valid static-pair records for {source}; run esikf_static.yaml first")
-        rot = finite(number(r, "zero_motion_whitened_by_R_rot") for r in selected)
-        trans = finite(number(r, "zero_motion_whitened_by_R_trans") for r in selected)
-        if not rot or not trans:
-            raise SystemExit(f"{source}: no finite whitened errors; regenerate the reports")
-        # Unbiased: E[e^T R^-1 e / 3] = s. Robust: median of chi2(3)/3 is 0.7887, so s = median / 0.7887.
-        estimates = {"mean": (mean(rot), mean(trans)),
-                     "median": (median(rot) / CHI2_3_MEDIAN_PER_DOF, median(trans) / CHI2_3_MEDIAN_PER_DOF)}
-        chosen = estimates[args.statistic]
-        calibration[source] = {
-            "rotation": float(f"{chosen[0]:.4g}"), "translation": float(f"{chosen[1]:.4g}"),
-            "statistic": args.statistic,
-            "mean_estimate": [float(f"{v:.4g}") for v in estimates["mean"]],
-            "median_estimate": [float(f"{v:.4g}") for v in estimates["median"]],
-            "pairs": len(selected),
-            "sequences": sorted({r["sequence"] for r in selected}),
-        }
-        print(f"{source}: {len(selected)} static pairs; rotation scale {calibration[source]['rotation']}, "
-              f"translation scale {calibration[source]['translation']} ({args.statistic}); "
-              f"mean estimate {calibration[source]['mean_estimate']}, "
-              f"median estimate {calibration[source]['median_estimate']}")
+        records = [r for r in rows if r["variant"] == source]
+        if not records:
+            raise SystemExit(f"No static-pair records for {source}; run esikf_static.yaml first")
+        by_set = {}
+        for name, keep in SAMPLE_SETS.items():
+            chosen = [r for r in records if keep(r)]
+            by_set[name] = (len(chosen), scale_estimates(chosen))
+            estimate = by_set[name][1]
+            shown = (f"mean {[round(v, 2) for v in estimate['mean']]}, median {[round(v, 2) for v in estimate['median']]}"
+                     if estimate else "no samples")
+            print(f"{source} [{name}]: {len(chosen)}/{len(records)} pairs; rotation/translation scale {shown}")
+        count, estimate = by_set[args.samples]
+        statuses = {}
+        for r in records:
+            statuses[r["solver_status"]] = statuses.get(r["solver_status"], 0) + 1
+        entry = {"samples": args.samples, "statistic": args.statistic, "pairs": count,
+                 "records": len(records), "solver_status": statuses,
+                 "sequences": sorted({r["sequence"] for r in records if SAMPLE_SETS[args.samples](r)})}
+        for name, (n, e) in by_set.items():
+            if e:
+                entry[f"{name}_mean_estimate"] = [float(f"{v:.4g}") for v in e["mean"]]
+                entry[f"{name}_median_estimate"] = [float(f"{v:.4g}") for v in e["median"]]
+        if estimate is None:
+            entry["excluded"] = f"no {args.samples} static-pair records; calibrated variants from it are not generated"
+            print(f"{source}: excluded ({entry['excluded']})")
+        else:
+            entry["rotation"] = float(f"{estimate[args.statistic][0]:.4g}")
+            entry["translation"] = float(f"{estimate[args.statistic][1]:.4g}")
+        calibration[source] = entry
     by_name = {v["name"]: v for v in variants}
     calibrated = []
     for template in templates:
-        variant = dict(by_name[template["base"]])
         scales = calibration[template["from"]]
+        if "excluded" in scales:
+            print(f"skipped {template['name']}: {template['from']} has no usable calibration")
+            continue
+        variant = dict(by_name[template["base"]])
         variant["name"] = template["name"]
         variant["observation_scale_rotation"] = scales["rotation"]
         variant["observation_scale_translation"] = scales["translation"]
+        # Any other template key overrides the calibrated variant (e.g. a fixed rotation scale).
+        variant.update({k: v for k, v in template.items() if k not in ("name", "base", "from")})
         calibrated.append(variant)
+    target = Path(args.write).resolve()
+    try:
+        extends = os.path.relpath(base_path, target.parent).replace(os.sep, "/")
+    except ValueError:  # different drives on Windows
+        extends = str(base_path)
     output = {
-        "extends": "esikf_improvements.yaml",
+        "extends": extends,
         "esikf": {
             "observation_calibration": {
                 "generated_by": "scripts/esikf_eval.py calibrate",
                 "generated_at": datetime.now().isoformat(timespec="seconds"),
-                "statistic": f"{args.statistic} of zero-motion e^T R^-1 e per degree of freedom on static pairs",
+                "statistic": (f"{args.statistic} of zero-motion e^T R^-1 e per degree of freedom on "
+                              f"{args.samples} static pairs (failed statuses: {sorted(FAILED_STATUSES)})"),
                 "runs": sorted({r["directory"] for r in rows}),
                 "models": calibration,
             },
             "variants": variants + calibrated,
         },
     }
-    target = Path(args.write)
     header = ("# 由 scripts/esikf_eval.py calibrate 生成：静止帧对（真实运动为零，不用真值）上\n"
-              "# 每种观测模型的 mean(eᵀR⁻¹e/3) 作为旋转 / 平移观测协方差的放大倍数，追加 e3_* 变体。\n")
+              f"# 每种观测模型的 {args.statistic}(eᵀR⁻¹e/3) 作为旋转 / 平移观测协方差的放大倍数，"
+              f"样本为 {args.samples}，追加 calibrated_variants。\n")
     target.write_text(header + yaml.safe_dump(output, sort_keys=False, allow_unicode=True), encoding="utf-8")
     print(f"Wrote {target}")
 
@@ -226,9 +288,14 @@ def main():
     c.add_argument("directories", nargs="+", type=Path)
     c.add_argument("--config", nargs="+", default=["esikf_static"],
                    help="Configuration file stems of the static-pair runs")
+    c.add_argument("--base", type=Path, default=CONFIGS / "esikf_improvements.yaml",
+                   help="Configuration whose variants and calibrated_variants the output extends")
     c.add_argument("--write", type=Path, default=CONFIGS / "esikf_calibrated.yaml")
     c.add_argument("--statistic", choices=("mean", "median"), default="mean",
                    help="mean is unbiased; median (scaled by the chi-square median) resists outliers")
+    c.add_argument("--samples", choices=tuple(SAMPLE_SETS), default="all",
+                   help="all: every valid record (default, reproduces round 1); usable: drop failed solver "
+                        "statuses; converged: converged records only. All three estimates are printed and stored")
     args = parser.parse_args()
     summarize(args) if args.command == "summarize" else calibrate(args)
 

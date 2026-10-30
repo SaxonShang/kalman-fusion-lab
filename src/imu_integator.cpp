@@ -553,6 +553,20 @@ Eigen::Matrix<double, DIM_STATE, DIM_STATE> ConditionOnAnchorPose(
   return 0.5 * (current + current.transpose());
 }
 
+Eigen::Matrix<double, DIM_STATE, DIM_STATE> RelativeToAnchorPose(
+  const Eigen::Matrix<double, DIM_STATE, DIM_STATE> &anchor_cov,
+  const Eigen::Matrix<double, DIM_STATE, DIM_STATE> &transition,
+  const Eigen::Matrix<double, DIM_STATE, DIM_STATE> &process_noise) {
+  // 锚点位姿只作参照：去掉位姿块及其相关项，速度、零偏等保留边际不确定度。没有减法，不会因抵消失去半正定
+  Eigen::Matrix<double, DIM_STATE, DIM_STATE> reference = 0.5 * (anchor_cov + anchor_cov.transpose());
+  reference.topRows<6>().setZero();
+  reference.leftCols<6>().setZero();
+
+  Eigen::Matrix<double, DIM_STATE, DIM_STATE> current =
+    transition * reference * transition.transpose() + process_noise;
+  return 0.5 * (current + current.transpose());
+}
+
 void AddGyroScaleUncertainty(Eigen::Matrix<double, DIM_STATE, DIM_STATE> &cov,
                              const Eigen::Matrix3d &R_anchor, const Eigen::Matrix3d &R_current,
                              double scale_sigma) {

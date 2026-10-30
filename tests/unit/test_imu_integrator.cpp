@@ -206,6 +206,44 @@ TEST(ImuIntegratorTest, AnchorConditionedPoseUncertaintyVanishesWithoutMotion) {
   EXPECT_GT((conditioned.block<3, 3>(6, 6).trace()), 1e-6);
 }
 
+TEST(ImuIntegratorTest, AnchorRelativeCovarianceMatchesRelativeErrorCovariance) {
+  const Mat21 anchor = DeterministicSpd(0.3, 1e-3);
+  const Mat21 noise = DeterministicSpd(1.1, 1e-4);
+  const Mat21 phi = DeterministicTransition(2.0);
+
+  // e = x_b − J x_a[0:6]，J = Φ[:,0:6]：锚点位姿误差经 Φ 进入当前状态的部分不计入相对误差
+  const Eigen::Matrix<double, DIM_STATE, 6> J = phi.leftCols<6>();
+  const Eigen::MatrixXd s_bb = phi * anchor * phi.transpose() + noise;
+  const Eigen::MatrixXd s_ba = phi * anchor.leftCols<6>();
+  const Eigen::MatrixXd s_aa = anchor.topLeftCorner<6, 6>();
+  const Eigen::MatrixXd expected =
+    s_bb - s_ba * J.transpose() - J * s_ba.transpose() + J * s_aa * J.transpose();
+
+  const Mat21 actual = RelativeToAnchorPose(anchor, phi, noise);
+  sio_test::ExpectMatrixNear(actual, expected, 1e-10);
+  sio_test::ExpectSymmetric(actual, 1e-14);
+}
+
+TEST(ImuIntegratorTest, AnchorRelativeCovarianceBoundsConditionedCovariance) {
+  const Mat21 noise = DeterministicSpd(1.1, 1e-4);
+  const Mat21 phi = DeterministicTransition(2.0);
+
+  // 锚点位姿与零偏相关：条件化会借这份相关缩小零偏，P_rel 不会，二者之差半正定且不为零
+  const Mat21 correlated = DeterministicSpd(0.3, 1e-3);
+  const Mat21 difference =
+    RelativeToAnchorPose(correlated, phi, noise) - ConditionOnAnchorPose(correlated, phi, noise);
+  const Eigen::SelfAdjointEigenSolver<Mat21> eig(0.5 * (difference + difference.transpose()));
+  EXPECT_GT(eig.eigenvalues().minCoeff(), -1e-12);
+  EXPECT_GT(difference.trace(), 1e-6);
+
+  // 锚点位姿与其余状态不相关时，两者相同
+  Mat21 independent = correlated;
+  independent.block<6, DIM_STATE - 6>(0, 6).setZero();
+  independent.block<DIM_STATE - 6, 6>(6, 0).setZero();
+  sio_test::ExpectMatrixNear(RelativeToAnchorPose(independent, phi, noise),
+                             ConditionOnAnchorPose(independent, phi, noise), 1e-12);
+}
+
 TEST(ImuIntegratorTest, GyroScaleUncertaintyGrowsWithRotationAngle) {
   Mat21 cov = Mat21::Zero();
   const Eigen::Matrix3d R_current =

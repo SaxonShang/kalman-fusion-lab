@@ -1,0 +1,61 @@
+# 第二轮 F0–F4（实验记录.md 第 7 节），与第一轮同样的 30 组帧对和冻结先验。
+#   F0：两种锚点先验对照：anchor_conditioned（已知锚点位姿，即 E2）与 anchor_relative（以估计锚点为参照，
+#       与评价的相对误差对应），原始 R 与标定 R 各一组。
+#   F2：所有变体都不加 E4（陀螺刻度 1.5%），重做观测模型对照。
+#   F3：观测只用于平移：旋转观测方差放大 1e6；只放大旋转块不改变平移信息（Schur 补与它无关）。
+#   F4：迭代上限 8 → 20（ROVIO 默认 20）。
+# 光度项不在本轮：第一轮中它的标定倍数恰为点对点的一半，结果与点对点相同，说明当前形式几乎没有信息。
+# ray 没有 calibrated 变体：第一轮静止段纯观测 66/66 次丢失对应点，usable 样本为零。
+# 观测放大倍数由 esikf_eval.py calibrate --samples usable 从 esikf_round2_static.yaml 的静止帧对
+# （纯观测迭代上限 20）生成 esikf_round2_calibrated.yaml。
+extends: model.yaml
+
+prior:
+  # 与第一轮 esikf_calibrated 相同，冻结缓存与先验误差不变
+  require_static_init: true
+
+esikf:
+  variants:
+    # 参照：与第一轮 e2_anchor_prior 相同
+    - {name: e2_anchor_prior, geometry_weight: 1.0, prior_residual: true,
+       stop_rotation_rad: 1.0e-4, stop_translation_m: 1.0e-4, max_iterations: 8,
+       prior_covariance: anchor_conditioned}
+    # F0：以估计锚点为参照的先验
+    - {name: f0_relative_prior, geometry_weight: 1.0, prior_residual: true,
+       stop_rotation_rad: 1.0e-4, stop_translation_m: 1.0e-4, max_iterations: 8,
+       prior_covariance: anchor_relative}
+    # F2：不加 E4 的其余观测模型
+    - {name: f2_point_to_plane, geometry_weight: 1.0, prior_residual: true,
+       stop_rotation_rad: 1.0e-4, stop_translation_m: 1.0e-4, max_iterations: 8,
+       prior_covariance: anchor_conditioned,
+       geometry_residual: point_to_plane, attribute_max_distance_m: 0.05}
+    - {name: f2_ray, geometry_weight: 1.0, prior_residual: true,
+       stop_rotation_rad: 1.0e-4, stop_translation_m: 1.0e-4, max_iterations: 8,
+       prior_covariance: anchor_conditioned, geometry_residual: ray}
+    # F3：观测只用于平移，平移 R 为原始值
+    - {name: f3_point_to_point_trans, geometry_weight: 1.0, prior_residual: true,
+       stop_rotation_rad: 1.0e-4, stop_translation_m: 1.0e-4, max_iterations: 8,
+       prior_covariance: anchor_conditioned, observation_scale_rotation: 1.0e6}
+    - {name: f3_point_to_plane_trans, geometry_weight: 1.0, prior_residual: true,
+       stop_rotation_rad: 1.0e-4, stop_translation_m: 1.0e-4, max_iterations: 8,
+       prior_covariance: anchor_conditioned, observation_scale_rotation: 1.0e6,
+       geometry_residual: point_to_plane, attribute_max_distance_m: 0.05}
+    - {name: f0_f3_point_to_plane_trans, geometry_weight: 1.0, prior_residual: true,
+       stop_rotation_rad: 1.0e-4, stop_translation_m: 1.0e-4, max_iterations: 8,
+       prior_covariance: anchor_relative, observation_scale_rotation: 1.0e6,
+       geometry_residual: point_to_plane, attribute_max_distance_m: 0.05}
+    # F4：迭代上限 20
+    - {name: f4_point_to_plane_iter20, geometry_weight: 1.0, prior_residual: true,
+       stop_rotation_rad: 1.0e-4, stop_translation_m: 1.0e-4, max_iterations: 20,
+       prior_covariance: anchor_conditioned,
+       geometry_residual: point_to_plane, attribute_max_distance_m: 0.05}
+
+  # calibrate 按 from 的静止帧对标定结果，给 base 变体加上观测放大倍数；其余键覆盖标定结果
+  calibrated_variants:
+    - {name: f2_e3_point_to_point, base: e2_anchor_prior, from: obs_point_to_point}
+    - {name: f0_e3_point_to_point, base: f0_relative_prior, from: obs_point_to_point}
+    - {name: f2_e3_point_to_plane, base: f2_point_to_plane, from: obs_point_to_plane}
+    - {name: f3_e3_point_to_plane_trans, base: f3_point_to_plane_trans, from: obs_point_to_plane,
+       observation_scale_rotation: 1.0e6}
+    - {name: f4_e3_point_to_point_iter20, base: e2_anchor_prior, from: obs_point_to_point,
+       max_iterations: 20}

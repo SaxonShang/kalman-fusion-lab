@@ -172,7 +172,7 @@ namespace {
 struct EsikfVariant {
   std::string name;
   double geometry_weight = 1.0;
-  std::string prior_covariance = "absolute"; // absolute | anchor_conditioned
+  std::string prior_covariance = "absolute"; // absolute | anchor_conditioned | anchor_relative
   double prior_covariance_scale = 1.0;
   double gyro_scale_sigma = 0.0;
   ESIKFOptions options;
@@ -219,8 +219,9 @@ std::vector<EsikfVariant> EsikfVariants(const YAML::Node &settings) {
                 "geometry_residual must be point_to_point, ray or point_to_plane");
       }
       Require(variant.prior_covariance == "absolute" ||
-              variant.prior_covariance == "anchor_conditioned",
-              "prior_covariance must be absolute or anchor_conditioned");
+              variant.prior_covariance == "anchor_conditioned" ||
+              variant.prior_covariance == "anchor_relative",
+              "prior_covariance must be absolute, anchor_conditioned or anchor_relative");
       Require(std::isfinite(variant.prior_covariance_scale) && variant.prior_covariance_scale > 0,
               "Prior covariance scale must be positive");
       Require(variant.gyro_scale_sigma >= 0, "gyro_scale_sigma must be non-negative");
@@ -284,6 +285,11 @@ void RunEsikf(const YAML::Node &cfg, const fs::path &output) {
       if (variant.prior_covariance == "anchor_conditioned") {
         // Same mean; covariance of the current state given the anchor pose (see Prepare).
         r.prior.cov = ReadConditional(cache, anchor.id, current.id).covariance;
+      } else if (variant.prior_covariance == "anchor_relative") {
+        // Same mean; covariance of the error relative to the estimated anchor pose.
+        const auto conditional = ReadConditional(cache, anchor.id, current.id);
+        r.prior.cov = RelativeToAnchorPose(conditional.anchor_covariance, conditional.transition,
+                                           conditional.process_noise);
       }
       r.prior.cov *= variant.prior_covariance_scale;
       AddGyroScaleUncertainty(r.prior.cov, anchor.prior.rot_end, current.prior.rot_end,

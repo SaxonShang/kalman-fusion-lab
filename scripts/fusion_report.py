@@ -87,6 +87,42 @@ def block_whitened(error, covariance):
             whitened_per_dof(error[3:], covariance[3:6, 3:6]))
 
 
+# Chi-square median and 95% quantile by degrees of freedom (1..6).
+CHI2_MEDIAN = {1: 0.4549, 2: 1.3863, 3: 2.3660, 4: 3.3567, 5: 4.3515, 6: 5.3481}
+CHI2_95 = {1: 3.8415, 2: 5.9915, 3: 7.8147, 4: 9.4877, 5: 11.0705, 6: 12.5916}
+# A direction whose observation variance exceeds the prior variance by this factor carries no
+# information (e.g. rotation for ray residuals); it is dropped from NIS and from its degrees of freedom.
+UNOBSERVED_VARIANCE_RATIO = 1e4
+
+
+def nis(innovation, prior, noise):
+    """r^T (P + R)^-1 r over the observed directions, and their count.
+
+    Computed in prior-whitened coordinates z = P^-1/2 r, where P + R becomes I + P^-1/2 R P^-1/2.
+    """
+    if (innovation is None or prior is None or noise is None or not np.isfinite(innovation).all()
+            or not np.isfinite(prior).all() or not np.isfinite(noise).all()):
+        return math.nan, 0
+    values, vectors = np.linalg.eigh((prior + prior.T) / 2)
+    if values.min() <= 0:
+        return math.nan, 0
+    whiten = vectors @ np.diag(values ** -0.5) @ vectors.T
+    ratio, basis = np.linalg.eigh(whiten @ ((noise + noise.T) / 2) @ whiten)
+    z = basis.T @ whiten @ innovation
+    observed = ratio < UNOBSERVED_VARIANCE_RATIO
+    return float(np.sum(z[observed] ** 2 / (1 + ratio[observed]))), int(observed.sum())
+
+
+def nis_columns(prefix, value, dof):
+    """Per-record NIS summaries; consistent P and R give per_dof about 1 and over_chi2_median about 1."""
+    if dof == 0 or not math.isfinite(value):
+        return {f"{prefix}": math.nan, f"{prefix}_dof": dof, f"{prefix}_per_dof": math.nan,
+                f"{prefix}_over_chi2_median": math.nan, f"{prefix}_exceeds_chi2_95": math.nan}
+    return {f"{prefix}": value, f"{prefix}_dof": dof, f"{prefix}_per_dof": value / dof,
+            f"{prefix}_over_chi2_median": value / CHI2_MEDIAN[dof],
+            f"{prefix}_exceeds_chi2_95": float(value > CHI2_95[dof])}
+
+
 def flatten(prefix, matrix):
     if matrix is None:
         return {}
@@ -145,6 +181,25 @@ def collect(directory, config):
             result_by_r = block_whitened(after, noise) if observed else (math.nan, math.nan)
             zero_by_r = block_whitened(zero_motion, noise) if observed else (math.nan, math.nan)
             result_by_p = block_whitened(after, p1[:6, :6]) if stage != "gicp" else (math.nan, math.nan)
+            # Prior error against the prior P alone: separates P from R, which NIS sees only as P + R.
+            prior_by_p = block_whitened(before, p0[:6, :6])
+            # First ESIKF iteration is linearized at the prior, so its virtual residual is the
+            # innovation and S = P_pose + R.
+            items = n.getNode("esikf_iterations")
+            innovation_stats = (nis_columns("nis", math.nan, 0) | nis_columns("nis_rot", math.nan, 0) |
+                                nis_columns("nis_trans", math.nan, 0))
+            offsets = []
+            if stage == "esikf" and items.size() > 0:
+                first = items.at(0)
+                residual, first_noise = mat(first, "virtual_residual"), mat(first, "R")
+                if residual is not None and first_noise is not None:
+                    residual = residual.reshape(-1)
+                    innovation_stats = (
+                        nis_columns("nis", *nis(residual, p0[:6, :6], first_noise)) |
+                        nis_columns("nis_rot", *nis(residual[:3], p0[:3, :3], first_noise[:3, :3])) |
+                        nis_columns("nis_trans", *nis(residual[3:], p0[3:6, 3:6], first_noise[3:, 3:])))
+                offsets = [mat(items.at(j), "prior_offset") for j in range(items.size())]
+                offsets = [o.reshape(-1) for o in offsets if o is not None]
             eig_min, eig_max, rot_trace, pos_trace = covariance_stats(noise)
             covariance = noise if stage == "gicp" else p1[:6, :6]
             conditional_mahalanobis = math.nan
@@ -185,7 +240,11 @@ def collect(directory, config):
                    "zero_motion_whitened_by_R_rot": zero_by_r[0],
                    "zero_motion_whitened_by_R_trans": zero_by_r[1],
                    "posterior_whitened_by_P_rot": result_by_p[0],
-                   "posterior_whitened_by_P_trans": result_by_p[1]}
+                   "posterior_whitened_by_P_trans": result_by_p[1],
+                   "prior_whitened_by_P_rot": prior_by_p[0],
+                   "prior_whitened_by_P_trans": prior_by_p[1],
+                   "max_prior_offset_rot_deg": max((math.degrees(np.linalg.norm(o[:3])) for o in offsets), default=math.nan),
+                   "max_prior_offset_trans_m": max((float(np.linalg.norm(o[3:])) for o in offsets), default=math.nan)} | innovation_stats
             rows.append(row)
             matrices.append({k: row[k] for k in ("stage", "case", "method", "variant")} |
                 flatten("R", noise) | flatten("P_prior_pose", p0[:6, :6]) |
@@ -233,8 +292,8 @@ def summarize(rows):
         def median(key, rows=valid):
             values = [r[key] for r in rows if math.isfinite(r[key])]
             return statistics.median(values) if values else None
-        def mean(key):
-            values = [r[key] for r in valid if math.isfinite(r[key])]
+        def mean(key, rows=valid):
+            values = [r[key] for r in rows if math.isfinite(r[key])]
             return sum(values) / len(values) if values else None
         summary.append({"stage": stage, "method": method, "variant": variant,
                         "valid": len(valid), "total": len(selected),
@@ -254,7 +313,19 @@ def summarize(rows):
                         "result_whitened_by_R_rot_mean": mean("result_whitened_by_R_rot"),
                         "result_whitened_by_R_trans_mean": mean("result_whitened_by_R_trans"),
                         "posterior_whitened_by_P_rot_mean": mean("posterior_whitened_by_P_rot"),
-                        "posterior_whitened_by_P_trans_mean": mean("posterior_whitened_by_P_trans")})
+                        "posterior_whitened_by_P_trans_mean": mean("posterior_whitened_by_P_trans"),
+                        # Prior and first innovation do not depend on whether the update succeeded.
+                        "prior_whitened_by_P_rot_mean": mean("prior_whitened_by_P_rot", selected),
+                        "prior_whitened_by_P_trans_mean": mean("prior_whitened_by_P_trans", selected),
+                        "prior_whitened_by_P_rot_median": median("prior_whitened_by_P_rot", selected),
+                        "prior_whitened_by_P_trans_median": median("prior_whitened_by_P_trans", selected),
+                        "nis_per_dof_mean": mean("nis_per_dof", selected),
+                        "nis_over_chi2_median_median": median("nis_over_chi2_median", selected),
+                        "nis_exceeds_chi2_95_fraction": mean("nis_exceeds_chi2_95", selected),
+                        "nis_rot_per_dof_mean": mean("nis_rot_per_dof", selected),
+                        "nis_trans_per_dof_mean": mean("nis_trans_per_dof", selected),
+                        "max_prior_offset_rot_deg": max((r["max_prior_offset_rot_deg"] for r in selected
+                                                         if math.isfinite(r["max_prior_offset_rot_deg"])), default=None)})
     return summary
 
 
@@ -290,7 +361,8 @@ def html_report(directory, cfg, rows, summary):
             "covariance_convention", "covariance_from_hessian", "fitness", "registration_rmse_m",
             "prior_trans_error_m", "result_trans_error_m", "prior_rot_error_deg",
             "result_rot_error_deg", "prior_flagged", "R_rot_trace_rad2", "R_pos_trace_m2",
-            "nis_regularized", "posterior_whitened_by_P_rot", "posterior_whitened_by_P_trans"]
+            "nis_regularized", "posterior_whitened_by_P_rot", "posterior_whitened_by_P_trans",
+            "prior_whitened_by_P_rot", "prior_whitened_by_P_trans", "nis_per_dof", "nis_dof"]
     def value(v):
         return f"{v:.5g}" if isinstance(v, float) else html.escape(str(v))
     headers = "".join(f"<th>{html.escape(k)}</th>" for k in keys)
@@ -300,7 +372,9 @@ def html_report(directory, cfg, rows, summary):
                     "result_rotation_rmse_deg", "result_translation_median_m", "result_rotation_median_deg",
                     "result_translation_rmse_unflagged_m", "result_rotation_rmse_unflagged_deg",
                     "improved_translation", "improved_rotation",
-                    "posterior_whitened_by_P_rot_mean", "posterior_whitened_by_P_trans_mean")
+                    "posterior_whitened_by_P_rot_mean", "posterior_whitened_by_P_trans_mean",
+                    "prior_whitened_by_P_rot_mean", "prior_whitened_by_P_trans_mean",
+                    "nis_per_dof_mean", "nis_over_chi2_median_median", "nis_exceeds_chi2_95_fraction")
     summary_body = "".join("<tr>" + "".join(f"<td>{value(r[k])}</td>" for k in summary_keys) +
         "</tr>" for r in summary)
     page = """<!doctype html><html lang="zh-CN"><meta charset="utf-8">
@@ -332,7 +406,11 @@ img{width:100%;background:white}input,select{padding:8px;margin:10px 8px 10px 0}
     page += "<p>误差按每对图像的锚点计算，单位 m / degrees。此处 RMSE 不是全序列 ATE；末帧受同一锚点条件约束。NIS 与条件马氏距离是诊断量，少量相关图像对不能用于宣称协方差已校准。</p>"
     page += "<p><a href='metrics.csv'>全部指标 CSV</a> · <a href='covariances.csv'>R / P / K 矩阵 CSV</a> · <a href='gicp_iterations.csv'>Stereo 求解逐轮 CSV</a> · <a href='esikf_iterations.csv'>ESIKF 逐轮 CSV</a> · <a href='resolved.yaml'>配置快照</a> · <a href='errors.svg'>矢量图</a></p>"
     page += (f"<p>unflagged 排除纯惯性先验平移误差超过 {FLAG_PRIOR_TRANSLATION_M * 1000:.0f} mm 的图像对；"
-             "whitened 为误差按协方差白化后的每自由度均值，协方差与实际误差相符时约为 1。</p>")
+             "whitened 为误差按协方差白化后的每自由度均值，协方差与实际误差相符时约为 1。"
+             "prior_whitened 用真值误差只检验先验 P；NIS 为 ESIKF 首轮 rᵀ(P+R)⁻¹r，不用真值，检验的是 P+R 的总量，"
+             "单靠它分不开 P 与 R，偏差、错误对应和线性化误差也会抬高它。观测方差超过先验方差 "
+             f"{UNOBSERVED_VARIANCE_RATIO:.0e} 倍的方向视为不可观，从 NIS 及其自由度中去掉（nis_dof）。"
+             "一致时 nis_per_dof 均值约 1、nis_over_chi2_median 中位数约 1；帧对少且共享序列，超出 95% 分位的比例只作参考。</p>")
     page += ("<h2>分组结果</h2><div class='scroll'><table><thead><tr>" +
              "".join(f"<th>{html.escape(k)}</th>" for k in summary_keys) +
              "</tr></thead><tbody>" + summary_body + "</tbody></table></div>")
@@ -342,7 +420,7 @@ img{width:100%;background:white}input,select{padding:8px;margin:10px 8px 10px 0}
 function filter(){const q=document.querySelector('#search').value.toLowerCase(),s=document.querySelector('#stage').value,f=document.querySelector('#failed').checked;
 document.querySelectorAll('#metrics tbody tr').forEach(r=>{r.hidden=!(r.textContent.toLowerCase().includes(q)&&(!s||r.dataset.stage===s)&&(!f||r.classList.contains('failed')))});}
 document.querySelectorAll('input,select').forEach(e=>e.addEventListener('input',filter));</script></html>"""
-    (directory / "report.html").write_text(page)
+    (directory / "report.html").write_text(page, encoding="utf-8")
 
 
 def report_index(directory):
